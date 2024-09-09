@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.768,=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.174,=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.067,=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.378,=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2024.09.09 19:48:31.369,=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2024.09.09 19:48:31.585,=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Unit3.cpp</Transaction>
+    <Transaction>2024.09.09 19:48:58.532,E:\Course\CP\Project1PCH1.h=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2024.09.09 19:48:58.564,E:\Course\CP\Unit3.h=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Unit3.h</Transaction>
+    <Transaction>2024.09.09 19:48:58.564,E:\Course\CP\Unit3.dfm=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Unit3.dfm</Transaction>
+    <Transaction>2024.09.09 19:48:58.564,E:\Course\CP\Unit3.cpp=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Unit3.cpp</Transaction>
+    <Transaction>2024.09.09 19:48:58.601,E:\Course\CP\Project1.cbproj=C:\Users\HucketaMeowUA\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>
