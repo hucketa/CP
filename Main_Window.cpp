@@ -3,7 +3,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include <SysUtils.hpp>
-#include "Unit3.h"
+#include "Main_Window.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"

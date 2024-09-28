@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef Unit3H
-#define Unit3H
+#ifndef Main_WindowH
+#define Main_WindowH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
