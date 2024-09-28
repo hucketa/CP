@@ -2,30 +2,21 @@
 
 #include <vcl.h>
 #pragma hdrstop
-#include <SysUtils.hpp>
-#include "Main_Window.h"
+
+#include "Student_change.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TForm3 *Form3;
+TForm2 *Form2;
 //---------------------------------------------------------------------------
-__fastcall TForm3::TForm3(TComponent* Owner)
+__fastcall TForm2::TForm2(TComponent* Owner)
 	: TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
-
-void __fastcall TForm3::Timer1Timer(TObject *Sender)
+void __fastcall TForm2::FormCreate(TObject *Sender)
 {
-	 StatusBar1->Panels->Items[1]->Text = DateTimeToStr(Now());
+    ComboBox1->ItemIndex = 0;
 }
-//---------------------------------------------------------------------------
-
-void __fastcall TForm3::FormCreate(TObject *Sender)
-{
-    StatusBar1->Panels->Items[1]->Text = DateTimeToStr(Now());
-}
-
-
 //---------------------------------------------------------------------------
 

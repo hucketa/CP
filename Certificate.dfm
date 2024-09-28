@@ -1,9 +1,9 @@
-object Form3: TForm3
+object Form15: TForm15
   Left = 0
   Top = 0
-  Caption = #1054#1073#1083#1110#1082' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1110#1074' '#1085#1084#1090
-  ClientHeight = 353
-  ClientWidth = 754
+  Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080
+  ClientHeight = 419
+  ClientWidth = 902
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,13 +11,12 @@ object Form3: TForm3
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
-  OnCreate = FormCreate
   TextHeight = 15
   object DBGrid1: TDBGrid
-    Left = 0
-    Top = 53
-    Width = 513
-    Height = 281
+    Left = 8
+    Top = 16
+    Width = 441
+    Height = 169
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -25,55 +24,79 @@ object Form3: TForm3
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
   end
-  object RadioGroup1: TRadioGroup
-    Left = 0
-    Top = 0
-    Width = 513
-    Height = 49
-    Hint = #1054#1073#1077#1088#1110#1090#1100' '#1087#1091#1085#1082#1090' '#1079#1072' '#1103#1082#1080#1084' '#1087#1086#1090#1088#1110#1073#1085#1086' '#1074#1110#1076#1089#1086#1088#1090#1091#1074#1072#1090#1080' '#1079#1072#1087#1080#1089#1080
-    Caption = #1057#1086#1088#1090#1091#1074#1072#1085#1085#1103' '#1091' '#1087#1086#1088#1103#1076#1082#1091' '#1079#1088#1086#1089#1090#1072#1085#1085#1103' '#1079#1072':'
-    Columns = 3
-    Items.Strings = (
-      #1057#1090#1072#1090#1091#1089' '#1079#1076#1072#1095#1110
-      #1044#1072#1090#1072' '#1079#1076#1072#1095#1110
-      #1055#1088#1110#1079#1074#1080#1097#1077' '#1091#1095#1085#1103)
-    TabOrder = 1
-  end
-  object StatusBar1: TStatusBar
-    Left = 0
-    Top = 334
-    Width = 754
-    Height = 19
-    Panels = <
-      item
-        Alignment = taCenter
-        Text = #1043#1091#1085#1077#1085#1082#1086' '#1071#1088#1086#1089#1083#1072#1074' '#1052#1072#1082#1089#1080#1084#1086#1074#1080#1095
-        Width = 200
-      end
-      item
-        Alignment = taCenter
-        BiDiMode = bdLeftToRight
-        ParentBiDiMode = False
-        Width = 200
-      end
-      item
-        Alignment = taCenter
-        Text = #1051#1086#1075#1110#1085' '#1091#1095#1072#1089#1085#1080#1082#1072
-        Width = 200
-      end>
-    ExplicitTop = 333
-    ExplicitWidth = 750
-  end
   object GroupBox1: TGroupBox
-    Left = 519
-    Top = 0
-    Width = 227
-    Height = 328
-    Caption = #1060#1110#1083#1100#1090#1088#1072#1094#1110#1103
-    TabOrder = 3
+    Left = 8
+    Top = 191
+    Width = 441
+    Height = 202
+    Hint = #1055#1086#1083#1103' '#1076#1083#1103' '#1074#1074#1077#1076#1077#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1090#1091#1076#1077#1085#1090#1072
+    Caption = #1055#1086#1083#1103' '#1076#1083#1103' '#1074#1074#1077#1076#1077#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1077#1088#1090#1080#1092#1110#1082#1090#1072#1090#1080
+    TabOrder = 1
+    object Label2: TLabel
+      Left = 38
+      Top = 135
+      Width = 85
+      Height = 15
+      Caption = #1044#1072#1090#1072' '#1089#1090#1074#1086#1088#1077#1085#1085#1103
+    end
+    object Label3: TLabel
+      Left = 38
+      Top = 25
+      Width = 81
+      Height = 15
+      Caption = 'ID '#1085#1072#1082#1072#1079#1091' '#1091#1084#1086#1074
+    end
+    object Label4: TLabel
+      Left = 192
+      Top = 25
+      Width = 43
+      Height = 15
+      Caption = 'PIN-'#1082#1086#1076
+      WordWrap = True
+    end
+    object Label5: TLabel
+      Left = 191
+      Top = 56
+      Width = 54
+      Height = 15
+      Caption = #1058#1077#1088#1084#1110#1085' '#1076#1110#1111
+      WordWrap = True
+    end
+    object Label1: TLabel
+      Left = 46
+      Top = 75
+      Width = 61
+      Height = 15
+      Caption = 'ID '#1089#1090#1091#1076#1077#1085#1090#1072
+    end
+    object Edit1: TEdit
+      Left = 16
+      Top = 46
+      Width = 121
+      Height = 23
+      NumbersOnly = True
+      TabOrder = 0
+      Text = '0'
+    end
+    object Edit2: TEdit
+      Left = 279
+      Top = 22
+      Width = 132
+      Height = 23
+      NumbersOnly = True
+      TabOrder = 1
+    end
+    object UpDown1: TUpDown
+      Left = 137
+      Top = 46
+      Width = 16
+      Height = 23
+      Associate = Edit1
+      TabOrder = 2
+    end
     object DatePicker1: TDatePicker
-      Left = 32
-      Top = 23
+      Left = 16
+      Top = 156
       Date = 45563.000000000000000000
       DateFormat = 'dd/mm/yyyy'
       Font.Charset = DEFAULT_CHARSET
@@ -81,79 +104,109 @@ object Form3: TForm3
       Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = []
-      TabOrder = 0
-    end
-    object CheckBox1: TCheckBox
-      Left = 20
-      Top = 63
-      Width = 97
-      Height = 17
-      Caption = #1056#1072#1085#1110#1096#1077' '#1079#1072
-      TabOrder = 1
-    end
-    object CheckBox2: TCheckBox
-      Left = 20
-      Top = 86
-      Width = 97
-      Height = 17
-      Caption = #1062#1103' '#1076#1072#1090#1072
-      TabOrder = 2
-    end
-    object CheckBox3: TCheckBox
-      Left = 113
-      Top = 63
-      Width = 97
-      Height = 17
-      Caption = #1055#1110#1079#1085#1110#1096#1077
       TabOrder = 3
     end
-    object GroupBox2: TGroupBox
-      Left = 16
-      Top = 109
-      Width = 185
-      Height = 84
-      Caption = #1057#1090#1072#1090#1091#1089' '#1079#1076#1072#1095#1110
+    object Edit4: TEdit
+      Left = 279
+      Top = 51
+      Width = 132
+      Height = 23
+      NumbersOnly = True
       TabOrder = 4
-      object RadioGroup2: TRadioGroup
-        Left = 8
-        Top = 14
-        Width = 134
-        Height = 55
-        Margins.Top = 0
-        Margins.Bottom = 0
-        Items.Strings = (
-          #1047#1076#1072#1085#1086
-          #1053#1077' '#1079#1076#1072#1085#1086)
-        TabOrder = 0
-      end
-    end
-    object GroupBox3: TGroupBox
-      Left = 16
-      Top = 207
-      Width = 185
-      Height = 66
-      Caption = #1055#1088#1110#1079#1074#1080#1097#1077' '#1091#1095#1085#1103
-      TabOrder = 5
-      object Edit1: TEdit
-        Left = 11
-        Top = 24
-        Width = 166
-        Height = 23
-        TabOrder = 0
-      end
     end
     object Button1: TButton
-      Left = 16
-      Top = 279
-      Width = 185
-      Height = 34
-      Caption = #1047#1072#1089#1090#1086#1089#1091#1074#1072#1090#1080
+      Left = 191
+      Top = 128
+      Width = 230
+      Height = 52
+      Caption = #1044#1086#1076#1072#1090#1080
+      TabOrder = 5
+    end
+    object RadioGroup1: TRadioGroup
+      Left = 192
+      Top = 75
+      Width = 230
+      Height = 38
+      Columns = 2
+      Items.Strings = (
+        #1044#1110#1081#1089#1085#1080#1081
+        #1053#1077' '#1076#1110#1081#1089#1085#1080#1081)
       TabOrder = 6
     end
   end
+  object Edit3: TEdit
+    Left = 24
+    Top = 287
+    Width = 121
+    Height = 23
+    NumbersOnly = True
+    TabOrder = 2
+    Text = '0'
+  end
+  object UpDown2: TUpDown
+    Left = 145
+    Top = 287
+    Width = 16
+    Height = 23
+    Associate = Edit3
+    TabOrder = 3
+  end
+  object DBGrid2: TDBGrid
+    Left = 455
+    Top = 16
+    Width = 434
+    Height = 265
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
+  end
+  object GroupBox2: TGroupBox
+    Left = 455
+    Top = 296
+    Width = 441
+    Height = 97
+    Hint = #1055#1086#1083#1103' '#1076#1083#1103' '#1074#1074#1077#1076#1077#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1090#1091#1076#1077#1085#1090#1072
+    Caption = #1057#1075#1077#1085#1077#1088#1091#1074#1072#1090#1080' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090
+    TabOrder = 5
+    object Label10: TLabel
+      Left = 46
+      Top = 25
+      Width = 61
+      Height = 15
+      Caption = 'ID '#1089#1090#1091#1076#1077#1085#1090#1072
+    end
+    object Button2: TButton
+      Left = 175
+      Top = 24
+      Width = 230
+      Height = 52
+      Caption = #1047#1075#1077#1085#1077#1088#1091#1074#1072#1090#1080
+      TabOrder = 0
+    end
+  end
+  object Edit5: TEdit
+    Left = 471
+    Top = 342
+    Width = 121
+    Height = 23
+    NumbersOnly = True
+    TabOrder = 6
+    Text = '0'
+  end
+  object UpDown3: TUpDown
+    Left = 592
+    Top = 342
+    Width = 16
+    Height = 23
+    Associate = Edit5
+    TabOrder = 7
+  end
   object MainMenu1: TMainMenu
-    Left = 360
-    Top = 64
+    Left = 240
+    Top = 80
     object N1: TMenuItem
       Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080
       object N22: TMenuItem
@@ -223,10 +276,5 @@ object Form3: TForm3
     object Lj1: TMenuItem
       Caption = #1055#1088#1086' '#1076#1086#1076#1072#1090#1086#1082
     end
-  end
-  object Timer1: TTimer
-    OnTimer = Timer1Timer
-    Left = 424
-    Top = 64
   end
 end
