@@ -2,8 +2,8 @@ object Form15: TForm15
   Left = 0
   Top = 0
   Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080
-  ClientHeight = 419
-  ClientWidth = 902
+  ClientHeight = 418
+  ClientWidth = 898
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,7 @@ object Form15: TForm15
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
+  Position = poDesigned
   TextHeight = 15
   object DBGrid1: TDBGrid
     Left = 8
