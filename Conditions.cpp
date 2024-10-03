@@ -3,13 +3,13 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include "Subject_add.h"
+#include "Conditions.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TForm7 *Form7;
+TForm4 *Form4;
 //---------------------------------------------------------------------------
-__fastcall TForm7::TForm7(TComponent* Owner)
+__fastcall TForm4::TForm4(TComponent* Owner)
 	: TForm(Owner)
 {
 }

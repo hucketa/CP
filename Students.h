@@ -1,37 +1,42 @@
 //---------------------------------------------------------------------------
 
-#ifndef Subject_addH
-#define Subject_addH
+#ifndef StudentsH
+#define StudentsH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include <Data.DB.hpp>
 #include <Vcl.ComCtrls.hpp>
-#include <Vcl.DBGrids.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include <Vcl.Grids.hpp>
-#include <Vcl.Menus.hpp>
 #include <Vcl.WinXPickers.hpp>
+#include <Vcl.Menus.hpp>
+#include <Data.DB.hpp>
+#include <Vcl.DBGrids.hpp>
+#include <Vcl.Grids.hpp>
 //---------------------------------------------------------------------------
-class TForm7 : public TForm
+class TForm14 : public TForm
 {
 __published:	// IDE-managed Components
 	TGroupBox *GroupBox1;
-	TLabel *Label3;
+	TEdit *Edit2;
+	TComboBox *ComboBox1;
+	TDatePicker *DatePicker1;
+	TRadioGroup *RadioGroup1;
+	TEdit *Edit3;
+	TEdit *Edit4;
+	TEdit *Edit5;
+	TEdit *Edit6;
+	TEdit *Edit7;
+	TLabel *Label1;
+	TLabel *Label2;
 	TLabel *Label4;
 	TLabel *Label5;
 	TLabel *Label6;
-	TEdit *Edit1;
-	TEdit *Edit2;
-	TUpDown *UpDown1;
-	TEdit *Edit4;
-	TButton *Button1;
-	TDBGrid *DBGrid1;
+	TLabel *Label7;
+	TLabel *Label8;
 	TMainMenu *MainMenu1;
 	TMenuItem *N1;
-	TMenuItem *N22;
 	TMenuItem *N2;
 	TMenuItem *N6;
 	TMenuItem *N7;
@@ -53,11 +58,15 @@ __published:	// IDE-managed Components
 	TMenuItem *N17;
 	TMenuItem *N21;
 	TMenuItem *Lj1;
+	TDBGrid *DBGrid1;
+	TButton *Button1;
+	TMenuItem *N22;
+	void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
-	__fastcall TForm7(TComponent* Owner);
+	__fastcall TForm14(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm7 *Form7;
+extern PACKAGE TForm14 *Form14;
 //---------------------------------------------------------------------------
 #endif

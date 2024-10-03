@@ -23,7 +23,6 @@ __published:	// IDE-managed Components
 	TMainMenu *MainMenu1;
 	TMenuItem *N1;
 	TMenuItem *N2;
-	TMenuItem *N3;
 	TMenuItem *N4;
 	TMenuItem *N5;
 	TStatusBar *StatusBar1;
@@ -41,21 +40,18 @@ __published:	// IDE-managed Components
 	TButton *Button1;
 	TMenuItem *N6;
 	TMenuItem *N7;
-	TMenuItem *N8;
-	TMenuItem *N9;
-	TMenuItem *N10;
-	TMenuItem *N11;
 	TMenuItem *N12;
 	TMenuItem *N13;
-	TMenuItem *N14;
 	TMenuItem *N15;
 	TMenuItem *N16;
-	TMenuItem *N17;
 	TMenuItem *N18;
-	TMenuItem *N19;
 	TMenuItem *N20;
 	TMenuItem *N21;
 	TMenuItem *N22;
+	TMenuItem *N3;
+	TMenuItem *N8;
+	TMenuItem *N9;
+	TMenuItem *N10;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations

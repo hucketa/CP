@@ -125,23 +125,11 @@
             <DependentOn>Certificate.h</DependentOn>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Conditions_add.cpp">
+        <CppCompile Include="Conditions.cpp">
             <Form>Form4</Form>
             <FormType>dfm</FormType>
-            <DependentOn>Conditions_add.h</DependentOn>
+            <DependentOn>Conditions.h</DependentOn>
             <BuildOrder>5</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Condition_change.cpp">
-            <Form>Form5</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Condition_change.h</DependentOn>
-            <BuildOrder>6</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Condition_delete.cpp">
-            <Form>Form6</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Condition_delete.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
         </CppCompile>
         <CppCompile Include="Help.cpp">
             <Form>Form1</Form>
@@ -162,75 +150,31 @@
             <BuildOrder>1</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
-        <CppCompile Include="Result_add.cpp">
+        <CppCompile Include="Results.cpp">
             <Form>Form11</Form>
             <FormType>dfm</FormType>
-            <DependentOn>Result_add.h</DependentOn>
+            <DependentOn>Results.h</DependentOn>
             <BuildOrder>12</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Result_change.cpp">
-            <Form>Form12</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Result_change.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Result_delete.cpp">
-            <Form>Form13</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Result_delete.h</DependentOn>
-            <BuildOrder>14</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Student_add.cpp">
+        <CppCompile Include="Students.cpp">
             <Form>Form14</Form>
             <FormType>dfm</FormType>
-            <DependentOn>Student_add.h</DependentOn>
+            <DependentOn>Students.h</DependentOn>
             <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Student_change.cpp">
-            <Form>Form2</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Student_change.h</DependentOn>
-            <BuildOrder>4</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Student_delete.cpp">
-            <Form>Form10</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Student_delete.h</DependentOn>
-            <BuildOrder>11</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Subject_add.cpp">
+        <CppCompile Include="Subjects.cpp">
             <Form>Form7</Form>
             <FormType>dfm</FormType>
-            <DependentOn>Subject_add.h</DependentOn>
+            <DependentOn>Subjects.h</DependentOn>
             <BuildOrder>8</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Subject_change.cpp">
-            <Form>Form8</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Subject_change.h</DependentOn>
-            <BuildOrder>9</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Subject_delete.cpp">
-            <Form>Form9</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Subject_delete.h</DependentOn>
-            <BuildOrder>10</BuildOrder>
-        </CppCompile>
-        <FormResources Include="Condition_change.dfm"/>
-        <FormResources Include="Conditions_add.dfm"/>
-        <FormResources Include="Result_delete.dfm"/>
-        <FormResources Include="Result_change.dfm"/>
-        <FormResources Include="Subject_delete.dfm"/>
-        <FormResources Include="Subject_change.dfm"/>
-        <FormResources Include="Subject_add.dfm"/>
-        <FormResources Include="Condition_delete.dfm"/>
+        <FormResources Include="Students.dfm"/>
+        <FormResources Include="Subjects.dfm"/>
+        <FormResources Include="Results.dfm"/>
+        <FormResources Include="Conditions.dfm"/>
+        <FormResources Include="Certificate.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
         <FormResources Include="Help.dfm"/>
-        <FormResources Include="Result_add.dfm"/>
-        <FormResources Include="Student_delete.dfm"/>
-        <FormResources Include="Student_change.dfm"/>
-        <FormResources Include="Student_add.dfm"/>
-        <FormResources Include="Certificate.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

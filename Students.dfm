@@ -1,9 +1,9 @@
-object Form11: TForm11
+object Form14: TForm14
   Left = 0
   Top = 0
-  Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080
-  ClientHeight = 497
-  ClientWidth = 829
+  Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1091#1095#1085#1103
+  ClientHeight = 291
+  ClientWidth = 910
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,193 +11,165 @@ object Form11: TForm11
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
-  Position = poDesigned
+  OnCreate = FormCreate
   TextHeight = 15
-  object Label4: TLabel
-    Left = 206
-    Top = 180
-    Width = 91
-    Height = 15
-    Caption = #1044#1072#1090#1072' '#1089#1082#1072#1083#1072#1076#1072#1085#1085#1103
-  end
   object GroupBox1: TGroupBox
     Left = 8
-    Top = 3
-    Width = 361
-    Height = 246
+    Top = 8
+    Width = 441
+    Height = 275
     Hint = #1055#1086#1083#1103' '#1076#1083#1103' '#1074#1074#1077#1076#1077#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1090#1091#1076#1077#1085#1090#1072
-    Caption = #1055#1086#1083#1103' '#1076#1083#1103' '#1074#1074#1077#1076#1077#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080
+    Caption = #1055#1086#1083#1103' '#1076#1083#1103' '#1074#1074#1077#1076#1077#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1090#1091#1076#1077#1085#1090#1072
     TabOrder = 0
-    object Label3: TLabel
-      Left = 38
-      Top = 25
-      Width = 73
+    object Label1: TLabel
+      Left = 16
+      Top = 208
+      Width = 58
       Height = 15
-      Caption = 'ID '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1091
+      Caption = #1055#1086#1084#1110#1090#1082#1072'(*)'
     end
     object Label2: TLabel
       Left = 38
-      Top = 75
+      Top = 122
+      Width = 96
+      Height = 15
+      Caption = #1044#1072#1090#1072' '#1085#1072#1088#1086#1076#1078#1077#1085#1085#1103
+    end
+    object Label4: TLabel
+      Left = 192
+      Top = 52
+      Width = 92
+      Height = 15
+      Caption = #1053#1086#1084#1077#1088' '#1087#1072#1089#1087#1086#1088#1090#1091
+    end
+    object Label5: TLabel
+      Left = 192
+      Top = 83
+      Width = 21
+      Height = 15
+      Caption = #1030#1055#1053
+    end
+    object Label6: TLabel
+      Left = 192
+      Top = 104
       Width = 95
-      Height = 15
-      Caption = 'ID '#1091#1095#1085#1103'('#1089#1090#1091#1076#1077#1085#1090#1072')'
+      Height = 30
+      Caption = #1053#1086#1084#1077#1088' '#1089#1074#1110#1076#1086#1089#1090#1074#1072' '#1087#1088#1086' '#1086#1089#1074#1110#1090#1091
+      WordWrap = True
     end
-    object Label9: TLabel
-      Left = 176
-      Top = 25
-      Width = 66
+    object Label7: TLabel
+      Left = 192
+      Top = 143
+      Width = 34
       Height = 15
-      Caption = 'ID '#1087#1088#1077#1076#1084#1077#1090#1091
+      Caption = 'E-mail'
     end
-    object Label10: TLabel
-      Left = 176
-      Top = 75
-      Width = 42
-      Height = 15
-      Caption = 'ID '#1091#1084#1086#1074
+    object Label8: TLabel
+      Left = 192
+      Top = 164
+      Width = 67
+      Height = 30
+      Caption = #1050#1086#1085#1090#1072#1082#1090#1085#1080#1081' '#1090#1077#1083#1077#1092#1086#1085
+      WordWrap = True
     end
-    object Label1: TLabel
-      Left = 30
-      Top = 125
-      Width = 95
-      Height = 15
-      Caption = 'ID '#1091#1095#1085#1103'('#1089#1090#1091#1076#1077#1085#1090#1072')'
-    end
-    object Edit1: TEdit
-      Left = 16
-      Top = 46
-      Width = 121
+    object Edit2: TEdit
+      Left = 290
+      Top = 49
+      Width = 132
       Height = 23
       NumbersOnly = True
       TabOrder = 0
-      Text = '0'
     end
-    object UpDown1: TUpDown
-      Left = 137
+    object ComboBox1: TComboBox
+      Left = 16
       Top = 46
-      Width = 16
+      Width = 170
       Height = 23
-      Associate = Edit1
+      CanUndoSelText = True
       TabOrder = 1
+      Items.Strings = (
+        #1055#1072#1087#1077#1088#1086#1074#1080#1081
+        'ID '#1082#1072#1088#1090#1072)
+    end
+    object DatePicker1: TDatePicker
+      Left = 16
+      Top = 142
+      Date = 45563.000000000000000000
+      DateFormat = 'dd/mm/yyyy'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      TabOrder = 2
+    end
+    object RadioGroup1: TRadioGroup
+      Left = 16
+      Top = 75
+      Width = 161
+      Height = 41
+      Caption = #1057#1090#1072#1090#1100
+      Columns = 2
+      Items.Strings = (
+        #1063#1086#1083#1086#1074#1110#1095#1072
+        #1046#1110#1085#1086#1095#1072)
+      TabOrder = 3
+    end
+    object Edit3: TEdit
+      Left = 288
+      Top = 165
+      Width = 132
+      Height = 23
+      NumbersOnly = True
+      TabOrder = 4
+    end
+    object Edit4: TEdit
+      Left = 288
+      Top = 78
+      Width = 132
+      Height = 23
+      NumbersOnly = True
+      TabOrder = 5
+    end
+    object Edit5: TEdit
+      Left = 288
+      Top = 136
+      Width = 132
+      Height = 23
+      NumbersOnly = True
+      TabOrder = 6
+    end
+    object Edit6: TEdit
+      Left = 290
+      Top = 107
+      Width = 132
+      Height = 23
+      NumbersOnly = True
+      TabOrder = 7
+    end
+    object Edit7: TEdit
+      Left = 80
+      Top = 205
+      Width = 340
+      Height = 23
+      NumbersOnly = True
+      TabOrder = 8
     end
     object Button1: TButton
       Left = 16
-      Top = 196
-      Width = 137
-      Height = 32
+      Top = 234
+      Width = 404
+      Height = 25
       Caption = #1044#1086#1076#1072#1090#1080
-      TabOrder = 2
-    end
-    object Edit8: TEdit
-      Left = 16
-      Top = 96
-      Width = 121
-      Height = 23
-      NumbersOnly = True
-      TabOrder = 3
-      Text = '0'
-    end
-    object UpDown2: TUpDown
-      Left = 137
-      Top = 96
-      Width = 16
-      Height = 23
-      Associate = Edit8
-      TabOrder = 4
+      TabOrder = 9
     end
   end
   object DBGrid1: TDBGrid
-    Left = 375
-    Top = 8
+    Left = 455
+    Top = 18
     Width = 447
-    Height = 465
+    Height = 265
     TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -12
-    TitleFont.Name = 'Segoe UI'
-    TitleFont.Style = []
-  end
-  object Edit9: TEdit
-    Left = 184
-    Top = 54
-    Width = 121
-    Height = 23
-    NumbersOnly = True
-    TabOrder = 2
-    Text = '0'
-  end
-  object UpDown3: TUpDown
-    Left = 305
-    Top = 54
-    Width = 16
-    Height = 23
-    Associate = Edit9
-    TabOrder = 3
-  end
-  object Edit10: TEdit
-    Left = 184
-    Top = 104
-    Width = 121
-    Height = 23
-    NumbersOnly = True
-    TabOrder = 4
-    Text = '0'
-  end
-  object UpDown4: TUpDown
-    Left = 305
-    Top = 104
-    Width = 16
-    Height = 23
-    Associate = Edit10
-    TabOrder = 5
-  end
-  object Edit2: TEdit
-    Left = 24
-    Top = 152
-    Width = 121
-    Height = 23
-    NumbersOnly = True
-    TabOrder = 6
-    Text = '0'
-  end
-  object UpDown5: TUpDown
-    Left = 145
-    Top = 152
-    Width = 16
-    Height = 23
-    Associate = Edit2
-    TabOrder = 7
-  end
-  object DatePicker1: TDatePicker
-    Left = 184
-    Top = 199
-    Date = 45563.000000000000000000
-    DateFormat = 'dd/mm/yyyy'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    TabOrder = 8
-  end
-  object RadioGroup1: TRadioGroup
-    Left = 184
-    Top = 133
-    Width = 161
-    Height = 41
-    Columns = 2
-    Items.Strings = (
-      #1047#1076#1072#1085#1086
-      #1053#1077' '#1079#1076#1072#1085#1086)
-    TabOrder = 9
-  end
-  object DBGrid2: TDBGrid
-    Left = 8
-    Top = 255
-    Width = 361
-    Height = 218
-    TabOrder = 10
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12

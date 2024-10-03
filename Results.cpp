@@ -3,19 +3,16 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include "Student_add.h"
+#include "Results.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TForm14 *Form14;
+TForm11 *Form11;
 //---------------------------------------------------------------------------
-__fastcall TForm14::TForm14(TComponent* Owner)
+__fastcall TForm11::TForm11(TComponent* Owner)
 	: TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm14::FormCreate(TObject *Sender)
-{
-    ComboBox1->ItemIndex = 0;
-}
-//---------------------------------------------------------------------------
+
+
