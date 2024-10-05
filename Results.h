@@ -25,7 +25,6 @@ __published:	// IDE-managed Components
 	TRadioGroup *RadioGroup1;
 	TLabel *Label1;
 	TLabeledEdit *LabeledEdit1;
-	TLabeledEdit *LabeledEdit2;
 	TLabeledEdit *LabeledEdit3;
 	TDatePicker *DatePicker2;
 	TLabel *Label2;
@@ -52,6 +51,8 @@ __published:	// IDE-managed Components
 	TMenuItem *N8;
 	TMenuItem *N9;
 	TMenuItem *N10;
+	TComboBox *ComboBox1;
+	TLabel *Label3;
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm11(TComponent* Owner);

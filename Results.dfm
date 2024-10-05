@@ -35,6 +35,13 @@ object Form11: TForm11
       Height = 15
       Caption = #1044#1072#1090#1072' '#1091#1082#1083#1072#1076#1072#1085#1085#1103' '#1091#1084#1086#1074
     end
+    object Label3: TLabel
+      Left = 25
+      Top = 69
+      Width = 126
+      Height = 15
+      Caption = #1053#1072#1074#1095#1072#1083#1100#1085#1072' '#1076#1080#1089#1094#1080#1087#1083#1110#1085#1072
+    end
     object Button1: TButton
       Left = 25
       Top = 223
@@ -54,17 +61,6 @@ object Form11: TForm11
       TabOrder = 1
       Text = ''
     end
-    object LabeledEdit2: TLabeledEdit
-      Left = 30
-      Top = 88
-      Width = 121
-      Height = 23
-      EditLabel.Width = 87
-      EditLabel.Height = 15
-      EditLabel.Caption = #1053#1072#1079#1074#1072' '#1087#1088#1077#1076#1084#1077#1090#1091
-      TabOrder = 2
-      Text = ''
-    end
     object LabeledEdit4: TLabeledEdit
       Left = 30
       Top = 143
@@ -73,8 +69,15 @@ object Form11: TForm11
       EditLabel.Width = 96
       EditLabel.Height = 15
       EditLabel.Caption = #1056#1077#1079#1091#1083#1100#1090#1072#1090' '#1091' '#1073#1072#1083#1072#1093
-      TabOrder = 3
+      TabOrder = 2
       Text = ''
+    end
+    object ComboBox1: TComboBox
+      Left = 16
+      Top = 87
+      Width = 145
+      Height = 23
+      TabOrder = 3
     end
   end
   object DatePicker1: TDatePicker

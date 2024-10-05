@@ -177,8 +177,8 @@ object Form14: TForm14
     TitleFont.Style = []
   end
   object MainMenu1: TMainMenu
-    Left = 240
-    Top = 80
+    Left = 288
+    Top = 16
     object N1: TMenuItem
       Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080
       object N22: TMenuItem

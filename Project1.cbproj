@@ -168,13 +168,13 @@
             <DependentOn>Subjects.h</DependentOn>
             <BuildOrder>8</BuildOrder>
         </CppCompile>
+        <FormResources Include="Results.dfm"/>
         <FormResources Include="Students.dfm"/>
         <FormResources Include="Subjects.dfm"/>
-        <FormResources Include="Results.dfm"/>
-        <FormResources Include="Conditions.dfm"/>
         <FormResources Include="Certificate.dfm"/>
-        <FormResources Include="Main_Window.dfm"/>
+        <FormResources Include="Conditions.dfm"/>
         <FormResources Include="Help.dfm"/>
+        <FormResources Include="Main_Window.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

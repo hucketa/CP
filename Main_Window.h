@@ -22,8 +22,6 @@ __published:	// IDE-managed Components
 	TRadioGroup *RadioGroup1;
 	TMainMenu *MainMenu1;
 	TMenuItem *N1;
-	TMenuItem *N2;
-	TMenuItem *N4;
 	TMenuItem *N5;
 	TStatusBar *StatusBar1;
 	TTimer *Timer1;
@@ -38,20 +36,12 @@ __published:	// IDE-managed Components
 	TRadioGroup *RadioGroup2;
 	TEdit *Edit1;
 	TButton *Button1;
-	TMenuItem *N6;
-	TMenuItem *N7;
-	TMenuItem *N12;
-	TMenuItem *N13;
 	TMenuItem *N15;
 	TMenuItem *N16;
-	TMenuItem *N18;
-	TMenuItem *N20;
-	TMenuItem *N21;
-	TMenuItem *N22;
 	TMenuItem *N3;
 	TMenuItem *N8;
 	TMenuItem *N9;
-	TMenuItem *N10;
+	TMenuItem *N11;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
