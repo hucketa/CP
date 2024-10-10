@@ -1,9 +1,10 @@
 object Form3: TForm3
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = #1054#1073#1083#1110#1082' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1110#1074' '#1085#1084#1090
-  ClientHeight = 353
-  ClientWidth = 754
+  ClientHeight = 357
+  ClientWidth = 801
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,36 +14,10 @@ object Form3: TForm3
   Menu = MainMenu1
   OnCreate = FormCreate
   TextHeight = 15
-  object DBGrid1: TDBGrid
-    Left = 0
-    Top = 53
-    Width = 513
-    Height = 281
-    TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -12
-    TitleFont.Name = 'Segoe UI'
-    TitleFont.Style = []
-  end
-  object RadioGroup1: TRadioGroup
-    Left = 0
-    Top = 0
-    Width = 513
-    Height = 49
-    Hint = #1054#1073#1077#1088#1110#1090#1100' '#1087#1091#1085#1082#1090' '#1079#1072' '#1103#1082#1080#1084' '#1087#1086#1090#1088#1110#1073#1085#1086' '#1074#1110#1076#1089#1086#1088#1090#1091#1074#1072#1090#1080' '#1079#1072#1087#1080#1089#1080
-    Caption = #1057#1086#1088#1090#1091#1074#1072#1085#1085#1103' '#1091' '#1087#1086#1088#1103#1076#1082#1091' '#1079#1088#1086#1089#1090#1072#1085#1085#1103' '#1079#1072':'
-    Columns = 3
-    Items.Strings = (
-      #1057#1090#1072#1090#1091#1089' '#1079#1076#1072#1095#1110
-      #1044#1072#1090#1072' '#1079#1076#1072#1095#1110
-      #1055#1088#1110#1079#1074#1080#1097#1077' '#1091#1095#1085#1103)
-    TabOrder = 1
-  end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 334
-    Width = 754
+    Top = 338
+    Width = 801
     Height = 19
     Panels = <
       item
@@ -65,12 +40,12 @@ object Form3: TForm3
     ExplicitWidth = 750
   end
   object GroupBox1: TGroupBox
-    Left = 519
-    Top = 0
+    Left = 566
+    Top = 4
     Width = 227
     Height = 328
     Caption = #1060#1110#1083#1100#1090#1088#1072#1094#1110#1103
-    TabOrder = 3
+    TabOrder = 1
     object DatePicker1: TDatePicker
       Left = 32
       Top = 23
@@ -151,11 +126,26 @@ object Form3: TForm3
       TabOrder = 6
     end
   end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 8
+    Width = 560
+    Height = 328
+    DataSource = DataModule1.DataSource1
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
+    OnTitleClick = DBGrid1TitleClick
+  end
   object MainMenu1: TMainMenu
-    Left = 360
-    Top = 64
+    Left = 264
+    Top = 256
     object N1: TMenuItem
       Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080
+      OnClick = N1Click
     end
     object N5: TMenuItem
       Caption = #1056#1077#1079#1091#1083#1100#1090#1072#1090#1080' '#1090#1077#1089#1090#1091#1074#1072#1085#1085#1103
@@ -184,7 +174,7 @@ object Form3: TForm3
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 424
-    Top = 64
+    Left = 312
+    Top = 256
   end
 end

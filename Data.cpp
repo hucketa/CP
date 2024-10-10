@@ -1,16 +1,17 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
+
 #pragma hdrstop
 
-#include "Certificate.h"
+#include "Data.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma classgroup "Vcl.Controls.TControl"
 #pragma resource "*.dfm"
-TCertificates *Certificates;
+TDataModule1 *DataModule1;
 //---------------------------------------------------------------------------
-__fastcall TCertificates::TCertificates(TComponent* Owner)
-	: TForm(Owner)
+__fastcall TDataModule1::TDataModule1(TComponent* Owner)
+	: TDataModule(Owner)
 {
 }
 //---------------------------------------------------------------------------

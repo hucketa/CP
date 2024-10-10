@@ -1,0 +1,155 @@
+CREATE DATABASE NMT_results;
+USE NMT_results;
+
+-- Створення таблиці "Student"
+CREATE TABLE Student (
+    Student_id INT PRIMARY KEY AUTO_INCREMENT,
+    Passport_num VARCHAR(20),
+    Passport_type VARCHAR(15) CHECK (Passport_type IN ('ID-карта', 'Паперовий')),
+    PIB VARCHAR(100),
+    Birth_date DATE,
+    Gender CHAR(1) CHECK (Gender IN ('M', 'F')),
+    Email VARCHAR(100),
+    Phone_num VARCHAR(15) CHECK (Phone_num REGEXP '^[0-9]+$'),
+    EduCerf_num VARCHAR(30),
+    PN VARCHAR(10),
+    Additional TEXT
+);
+
+-- Створення таблиці "Users" з новими ролями
+CREATE TABLE Users (
+    Login VARCHAR(50) PRIMARY KEY,
+    Password VARCHAR(50),
+    Role VARCHAR(30) CHECK (Role IN ('користувач', 'менеджер предметів', 'менеджер результатів', 'менеджер учнів'))
+);
+
+-- Створення таблиці "School" з новими типами
+CREATE TABLE School (
+    School_id INT PRIMARY KEY AUTO_INCREMENT,
+    City VARCHAR(50),
+    Region VARCHAR(50),
+    Type VARCHAR(20) CHECK (Type IN ('ВНЗ', 'СЗШ', 'Гімназія', 'Ліцей')),
+    Email VARCHAR(100),
+    Teacher_PIB VARCHAR(100)
+);
+
+-- Створення таблиці "Subject" з додатковим полем "Image_name"
+CREATE TABLE Subject (
+    Subject_id INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100),
+    Description TEXT,
+    Image_name VARCHAR(255)
+);
+
+CREATE TABLE Conditions (
+    Condition_id INT PRIMARY KEY AUTO_INCREMENT,
+    Subject_id INT,
+    Max_point INT,
+    Min_r_point INT,
+    Min_point INT,
+    Status BOOLEAN,
+    Date DATE,
+    FOREIGN KEY (Subject_id) REFERENCES Subject(Subject_id),
+    CHECK (Max_point > Min_point AND Min_r_point < Max_point AND Min_r_point > Min_point)
+);
+
+-- Створення таблиці "Result"
+CREATE TABLE Result (
+    Res_id INT PRIMARY KEY AUTO_INCREMENT,
+    Subj_id INT,
+    Condition_id INT,
+    Student_id INT,
+    Reached_score INT,
+    Status BOOLEAN,
+    School_id INT,
+    Attemp_date DATE,
+    FOREIGN KEY (Subj_id) REFERENCES Subject(Subject_id),
+    FOREIGN KEY (Condition_id) REFERENCES Conditions(Condition_id),
+    FOREIGN KEY (Student_id) REFERENCES Student(Student_id),
+    FOREIGN KEY (School_id) REFERENCES School(School_id)
+);
+
+-- Створення таблиці "Certificate"
+CREATE TABLE Certificate (
+    Cerf_num INT PRIMARY KEY AUTO_INCREMENT,
+    Student_id INT,
+    PIN VARCHAR(15) CHECK (PIN REGEXP '^[0-9]+$'),
+    Creation_date DATE,
+    Effect_time DATE,
+    Status BOOLEAN,
+    FOREIGN KEY (Student_id) REFERENCES Student(Student_id)
+);
+
+-- Заповнення таблиці "Student"
+INSERT INTO Student (Passport_num, Passport_type, PIB, Birth_date, Gender, Email, Phone_num, EduCerf_num, PN, Additional) VALUES
+('AB123456', 'ID-карта', 'Іван Петров', '2002-04-15', 'M', 'ivan.petrov@example.com', '1234567890', 'EC1234', '9876543210', 'Без додаткової інформації'),
+('BC654321', 'Паперовий', 'Марія Іванова', '2003-11-22', 'F', 'maria.ivanova@example.com', '0987654321', 'EC5678', '1234567891', 'Без додаткової інформації');
+
+INSERT INTO Users (Login, Password, Role) VALUES
+    ('koristuvach1', 'user1pass', 'менеджер предметів'),
+    ('koristuvach2', 'user2pass', 'менеджер результатів'),
+    ('koristuvach3', 'user3pass', 'менеджер учнів');
+
+-- Заповнення таблиці "School"
+INSERT INTO School (City, Region, Type, Email, Teacher_PIB) VALUES
+('Київ', 'Київська область', 'Ліцей', 'school1@example.com', 'Ольга Коваль'),
+('Львів', 'Львівська область', 'СЗШ', 'school2@example.com', 'Андрій Шевченко'),
+('Одеса', 'Одеська область', 'Гімназія', 'school3@example.com', 'Наталія Бондар'),
+('Харків', 'Харківська область', 'ВНЗ', 'school4@example.com', 'Дмитро Савченко');
+
+-- Заповнення таблиці "Subject" з новими предметами
+INSERT INTO Subject (Name, Description, Image_name) VALUES
+('Математика', 'Вивчення чисел, кількостей і форм.', 'matematika.jpg'),
+('Хімія', 'Вивчення речовин і їх реакцій.', 'khimiya.jpg'),
+('Англійська', 'Вивчення англійської мови.', 'angliyska.jpg'),
+('Українська', 'Вивчення української мови.', 'ukrainska.jpg'),
+('Біологія', 'Вивчення живих організмів і процесів життя.', 'biologiya.jpg'),
+('Фізика', 'Вивчення законів природи.', 'fizyka.jpg'),
+('Географія', 'Вивчення земної поверхні і клімату.', 'geografiya.jpg'),
+('Історія', 'Вивчення минулих подій і епох.', 'istoriya.jpg');
+
+INSERT INTO Conditions (Subject_id, Max_point, Min_r_point, Min_point, Status, Date) VALUES
+    (1, 100, 60, 30, TRUE, '2024-01-01'),
+    (2, 90, 70, 50, TRUE, '2024-01-01'),
+    (3, 85, 65, 55, TRUE, '2024-01-01'),
+    (4, 95, 80, 70, FALSE, '2024-02-01'),
+    (5, 88, 75, 60, TRUE, '2024-03-01');
+
+-- Заповнення таблиці "Result"
+INSERT INTO Result (Subj_id, Condition_id, Student_id, Reached_score, Status, School_id, Attemp_date) VALUES
+(1, 1, 1, 85, TRUE, 1, '2024-06-15'),
+(2, 2, 2, 75, TRUE, 2, '2024-06-16'),
+(3, 3, 1, 60, FALSE, 3, '2024-06-17');
+
+-- Заповнення таблиці "Certificate" з числовими значеннями в PIN
+INSERT INTO Certificate (Student_id, PIN, Creation_date, Effect_time, Status) VALUES
+(1, '123456', '2024-07-01', '2025-07-01', TRUE),
+(2, '789012', '2024-07-02', '2025-07-02', TRUE);
+
+-- Зміна типу поля Description на VARCHAR(40)
+ALTER TABLE Subject MODIFY COLUMN Description VARCHAR(40);
+
+-- Оновлення таблиці Subject з укороченим описом
+UPDATE Subject SET Description = 'Вивчення чисел, кількостей і форм.' WHERE Name = 'Математика';
+UPDATE Subject SET Description = 'Вивчення речовин і їх реакцій.' WHERE Name = 'Хімія';
+UPDATE Subject SET Description = 'Вивчення англійської мови.' WHERE Name = 'Англійська';
+UPDATE Subject SET Description = 'Вивчення української мови.' WHERE Name = 'Українська';
+UPDATE Subject SET Description = 'Вивчення живих організмів і процесів.' WHERE Name = 'Біологія';
+UPDATE Subject SET Description = 'Вивчення законів природи.' WHERE Name = 'Фізика';
+UPDATE Subject SET Description = 'Вивчення земної поверхні і клімату.' WHERE Name = 'Географія';
+UPDATE Subject SET Description = 'Вивчення минулих подій і епох.' WHERE Name = 'Історія';
+
+
+Запити:
+SELECT 
+    s.PIB AS "ПІБ студента",
+    r.Attemp_date AS "Дата складання",
+    r.Status AS "Статус",
+    subj.Name AS "Назва предмета"
+FROM 
+    Result r
+JOIN 
+    Student s ON r.Student_id = s.Student_id
+JOIN 
+    Subject subj ON r.Subj_id = subj.Subject_id;
+

@@ -14,12 +14,11 @@
 #include <Vcl.Menus.hpp>
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.WinXPickers.hpp>
+#include <Data.Win.ADODB.hpp>
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
 __published:	// IDE-managed Components
-	TDBGrid *DBGrid1;
-	TRadioGroup *RadioGroup1;
 	TMainMenu *MainMenu1;
 	TMenuItem *N1;
 	TMenuItem *N5;
@@ -42,8 +41,11 @@ __published:	// IDE-managed Components
 	TMenuItem *N8;
 	TMenuItem *N9;
 	TMenuItem *N11;
+	TDBGrid *DBGrid1;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall DBGrid1TitleClick(TColumn *Column);
+	void __fastcall N1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);

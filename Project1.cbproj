@@ -57,7 +57,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ProjectType>CppVCLApplication</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <AllPackageLibs>rtl.lib;vcl.lib;dbrtl.lib;vcldb.lib;vclwinx.lib;vclimg.lib;bindengine.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;vcl.lib;dbrtl.lib;vcldb.lib;vclwinx.lib;vclimg.lib;bindengine.lib;adortl.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
@@ -107,7 +107,7 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;dbrtl.bpi;vcldb.bpi;vclwinx.bpi;vclimg.bpi;bindengine.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;dbrtl.bpi;vcldb.bpi;vclwinx.bpi;vclimg.bpi;bindengine.bpi;adortl.bpi</LinkPackageImports>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -120,7 +120,7 @@
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="Certificate.cpp">
-            <Form>Form15</Form>
+            <Form>Certificates</Form>
             <FormType>dfm</FormType>
             <DependentOn>Certificate.h</DependentOn>
             <BuildOrder>16</BuildOrder>
@@ -130,6 +130,13 @@
             <FormType>dfm</FormType>
             <DependentOn>Conditions.h</DependentOn>
             <BuildOrder>5</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Data.cpp">
+            <Form>DataModule1</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+            <DependentOn>Data.h</DependentOn>
+            <BuildOrder>9</BuildOrder>
         </CppCompile>
         <CppCompile Include="Help.cpp">
             <Form>Form1</Form>
@@ -175,6 +182,7 @@
         <FormResources Include="Conditions.dfm"/>
         <FormResources Include="Help.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
+        <FormResources Include="Data.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

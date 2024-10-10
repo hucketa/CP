@@ -16,7 +16,7 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Mask.hpp>
 //---------------------------------------------------------------------------
-class TForm15 : public TForm
+class TCertificates : public TForm
 {
 __published:	// IDE-managed Components
 	TDBGrid *DBGrid1;
@@ -35,29 +35,17 @@ __published:	// IDE-managed Components
 	TLabel *Label1;
 	TMainMenu *MainMenu1;
 	TMenuItem *N1;
-	TMenuItem *N22;
 	TMenuItem *N4;
-	TMenuItem *N12;
-	TMenuItem *N13;
-	TMenuItem *N20;
 	TMenuItem *N5;
-	TMenuItem *N15;
-	TMenuItem *N16;
-	TMenuItem *N21;
 	TMenuItem *Lj1;
 	TMenuItem *N2;
-	TMenuItem *N6;
-	TMenuItem *N7;
-	TMenuItem *N18;
 	TMenuItem *N3;
-	TMenuItem *N8;
-	TMenuItem *N9;
-	TMenuItem *N10;
+	TMenuItem *N11;
 private:	// User declarations
 public:		// User declarations
-	__fastcall TForm15(TComponent* Owner);
+	__fastcall TCertificates(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm15 *Form15;
+extern PACKAGE TCertificates *Certificates;
 //---------------------------------------------------------------------------
 #endif
