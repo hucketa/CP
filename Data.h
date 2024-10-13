@@ -10,10 +10,9 @@
 class TDataModule1 : public TDataModule
 {
 __published:	// IDE-managed Components
-	TADOTable *ADOTable1;
-	TDataSource *DataSource1;
+	TDataSource *MainFormSource;
 	TADOConnection *ADOConnection1;
-	TADOQuery *ADOQuery1;
+	TADOQuery *MainQuery;
 private:	// User declarations
 public:		// User declarations
 	__fastcall TDataModule1(TComponent* Owner);

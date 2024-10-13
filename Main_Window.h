@@ -15,6 +15,7 @@
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.WinXPickers.hpp>
 #include <Data.Win.ADODB.hpp>
+#include <Vcl.Buttons.hpp>
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -27,14 +28,13 @@ __published:	// IDE-managed Components
 	TMenuItem *Lj1;
 	TGroupBox *GroupBox1;
 	TDatePicker *DatePicker1;
-	TCheckBox *CheckBox1;
-	TCheckBox *CheckBox2;
-	TCheckBox *CheckBox3;
-	TGroupBox *GroupBox2;
-	TGroupBox *GroupBox3;
-	TRadioGroup *RadioGroup2;
+	TCheckBox *Earlier;
+	TCheckBox *ThisDate;
+	TCheckBox *Later;
+	TGroupBox *Status;
+	TGroupBox *Surname_student;
+	TRadioGroup *Status_check;
 	TEdit *Edit1;
-	TButton *Button1;
 	TMenuItem *N15;
 	TMenuItem *N16;
 	TMenuItem *N3;
@@ -42,11 +42,19 @@ __published:	// IDE-managed Components
 	TMenuItem *N9;
 	TMenuItem *N11;
 	TDBGrid *DBGrid1;
+	TBitBtn *Clear;
+	TBitBtn *Execute;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
-	void __fastcall N1Click(TObject *Sender);
-private:	// User declarations
+	void __fastcall FormShow(TObject *Sender);
+	//void __fastcall ExecuteClick(TObject *Sender);
+	void __fastcall CheckFiltersFilled(TObject *Sender);
+	//void __fastcall ClearClick(TObject *Sender);
+	void __fastcall ClearClick(TObject *Sender);
+	void __fastcall ExecuteClick(TObject *Sender);
+private:
+	void DBColumnSizes();	// User declarations
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
 };

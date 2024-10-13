@@ -180,9 +180,9 @@
         <FormResources Include="Subjects.dfm"/>
         <FormResources Include="Certificate.dfm"/>
         <FormResources Include="Conditions.dfm"/>
+        <FormResources Include="Data.dfm"/>
         <FormResources Include="Help.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
-        <FormResources Include="Data.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
