@@ -44,6 +44,8 @@ __published:	// IDE-managed Components
 	TDBGrid *DBGrid1;
 	TBitBtn *Clear;
 	TBitBtn *Execute;
+	TMenuItem *N2;
+	TMenuItem *N4;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
@@ -53,6 +55,7 @@ __published:	// IDE-managed Components
 	//void __fastcall ClearClick(TObject *Sender);
 	void __fastcall ClearClick(TObject *Sender);
 	void __fastcall ExecuteClick(TObject *Sender);
+	void __fastcall Lj1Click(TObject *Sender);
 private:
 	void DBColumnSizes();	// User declarations
 public:		// User declarations

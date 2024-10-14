@@ -17,7 +17,6 @@ object DataModule1: TDataModule1
     Top = 8
   end
   object MainQuery: TADOQuery
-    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
     Parameters = <>

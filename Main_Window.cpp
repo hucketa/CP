@@ -5,6 +5,7 @@
 #include <SysUtils.hpp>
 #include "Main_Window.h"
 #include "Data.h"
+#include "Help.h"
 #include "Certificate.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -104,138 +105,6 @@ void __fastcall TForm3::FormShow(TObject *Sender)
 }
 //встановлення при запуску форми
 //---------------------------------------------------------------------------
-
-/*void __fastcall TForm3::ExecuteClick(TObject *Sender)
-{
-	String query = "SELECT s.PIB, "
-				   "r.Attemp_date, "
-                   "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
-                   "subj.Name, "
-				   "r.Reached_score "
-				   "FROM Result r "
-                   "JOIN Student s ON r.Student_id = s.Student_id "
-				   "JOIN Subject subj ON r.Subj_id = subj.Subject_id ";
-	String conditions = "";
-
-	if (Earlier->Checked || Later->Checked || ThisDate->Checked)
-	{
-		if (ThisDate->Checked)
-		{
-			conditions += "r.Attemp_date = :Date ";
-		}
-		else if (Earlier->Checked && Later->Checked)
-		{
-			conditions += "r.Attemp_date BETWEEN :DateStart AND :DateEnd ";
-		}
-		else if (Earlier->Checked)
-		{
-			conditions += "r.Attemp_date < :Date ";
-		}
-		else if (Later->Checked)
-		{
-			conditions += "r.Attemp_date > :Date ";
-		}
-	}
-
-	if (Status_check->ItemIndex == 0)
-	{
-		if (!conditions.IsEmpty()) conditions += " AND ";
-		conditions += "r.Status = 1 ";
-	}
-	else if (Status_check->ItemIndex == 1)
-	{
-		if (!conditions.IsEmpty()) conditions += " AND ";
-		conditions += "r.Status = 0 ";
-	}
-
-	if (!Edit1->Text.Trim().IsEmpty())
-	{
-		if (!conditions.IsEmpty()) conditions += " AND ";
-		conditions += "s.PIB LIKE :Surname ";
-	}
-
-	if (!conditions.IsEmpty())
-	{
-		query += " WHERE " + conditions;
-	}
-
-	query += " ORDER BY r.Attemp_date DESC";
-
-	try
-	{
-		DataModule1->MainQuery->Close();
-		DataModule1->MainQuery->SQL->Clear();
-		DataModule1->MainQuery->SQL->Add(query);
-
-		if (ThisDate->Checked || Earlier->Checked || Later->Checked)
-		{
-			TDateTime selectedDate = DatePicker1->Date;
-			if (ThisDate->Checked)
-			{
-				DataModule1->MainQuery->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
-			}
-			else if (Earlier->Checked && Later->Checked)
-			{
-				DataModule1->MainQuery->Parameters->ParamByName("DateStart")->Value = selectedDate - 1;
-				DataModule1->MainQuery->Parameters->ParamByName("DateEnd")->Value = selectedDate + 1;
-			}
-			else
-			{
-				DataModule1->MainQuery->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
-			}
-		}
-
-		if (!Edit1->Text.Trim().IsEmpty())
-		{
-			DataModule1->MainQuery->Parameters->ParamByName("Surname")->Value = "%" + Edit1->Text.Trim() + "%";
-		}
-
-		DataModule1->MainQuery->Open();
-		DBColumnSizes();
-	}
-	catch (Exception &e)
-	{
-		ShowMessage("Помилка при фільтрації: " + e.Message);
-	}
-}
-
-
-
-void __fastcall TForm3::ClearClick(TObject *Sender)
-{
-	DatePicker1->Date = Now();
-	Earlier->Checked = false;
-	Later->Checked = false;
-	ThisDate->Checked = false;
-	Status_check->ItemIndex = -1;
-	Edit1->Text = "";
-	Execute->Enabled = false;
-	Clear->Enabled = false;
-	String query = "SELECT s.PIB, "
-				   "r.Attemp_date, "
-				   "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
-				   "subj.Name, "
-				   "r.Reached_score "
-				   "FROM Result r "
-				   "JOIN Student s ON r.Student_id = s.Student_id "
-				   "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
-				   "ORDER BY r.Attemp_date DESC";
-
-	try
-	{
-		DataModule1->MainQuery->Close();
-		DataModule1->MainQuery->SQL->Clear();
-		DataModule1->MainQuery->SQL->Add(query);
-		DataModule1->MainQuery->Open();
-		DBColumnSizes();
-	}
-	catch (Exception &e)
-	{
-		ShowMessage("Помилка при скиданні фільтрів: " + e.Message);
-	}
-}
-//Очистка фільтрів(працює на 100%)*/
-
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::ClearClick(TObject *Sender)
@@ -366,5 +235,14 @@ void __fastcall TForm3::ExecuteClick(TObject *Sender)
 		ShowMessage("Помилка при фільтрації: " + e.Message);
 	}
 }
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Lj1Click(TObject *Sender)
+{
+   Help_m = new THelp_m(this);
+   Help_m->ShowModal();
+   delete Help_m;
+}
+
 //---------------------------------------------------------------------------
 

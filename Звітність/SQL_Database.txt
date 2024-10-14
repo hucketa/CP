@@ -141,15 +141,13 @@ UPDATE Subject SET Description = 'Вивчення минулих подій і епох.' WHERE Name = '
 
 
 Запити:
-SELECT 
-    s.PIB AS "ПІБ студента",
-    r.Attemp_date AS "Дата складання",
-    r.Status AS "Статус",
-    subj.Name AS "Назва предмета"
-FROM 
-    Result r
-JOIN 
-    Student s ON r.Student_id = s.Student_id
-JOIN 
-    Subject subj ON r.Subj_id = subj.Subject_id;
+SELECT s.PIB,
+       r.Attemp_date,
+       CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END,
+       subj.Name,
+       r.Reached_score
+FROM Result r
+JOIN Student s ON r.Student_id = s.Student_id
+JOIN Subject subj ON r.Subj_id = subj.Subject_id
+
 

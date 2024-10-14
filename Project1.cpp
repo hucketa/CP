@@ -9,9 +9,9 @@ USEFORM("Students.cpp", Form14);
 USEFORM("Subjects.cpp", Form7);
 USEFORM("Certificate.cpp", Certificates);
 USEFORM("Conditions.cpp", Form4);
-USEFORM("Help.cpp", Form1);
-USEFORM("Main_Window.cpp", Form3);
 USEFORM("Data.cpp", DataModule1); /* TDataModule: File Type */
+USEFORM("Help.cpp", Help_m);
+USEFORM("Main_Window.cpp", Form3);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -24,7 +24,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TForm7), &Form7);
 		Application->CreateForm(__classid(TForm4), &Form4);
 		Application->CreateForm(__classid(TForm14), &Form14);
-		Application->CreateForm(__classid(TForm1), &Form1);
+		Application->CreateForm(__classid(THelp_m), &Help_m);
 		Application->CreateForm(__classid(TCertificates), &Certificates);
 		Application->CreateForm(__classid(TDataModule1), &DataModule1);
 		Application->Run();
