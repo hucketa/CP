@@ -14,57 +14,50 @@
 #include <Data.DB.hpp>
 #include <Vcl.DBGrids.hpp>
 #include <Vcl.Grids.hpp>
+#include <Vcl.Buttons.hpp>
+#include <Vcl.DBCtrls.hpp>
 //---------------------------------------------------------------------------
 class TForm14 : public TForm
 {
 __published:	// IDE-managed Components
-	TGroupBox *GroupBox1;
-	TEdit *Edit2;
-	TComboBox *ComboBox1;
-	TDatePicker *DatePicker1;
-	TRadioGroup *RadioGroup1;
-	TEdit *Edit3;
-	TEdit *Edit4;
-	TEdit *Edit5;
-	TEdit *Edit6;
-	TEdit *Edit7;
-	TLabel *Label1;
-	TLabel *Label2;
-	TLabel *Label4;
-	TLabel *Label5;
-	TLabel *Label6;
-	TLabel *Label7;
-	TLabel *Label8;
 	TMainMenu *MainMenu1;
-	TMenuItem *N1;
-	TMenuItem *N2;
-	TMenuItem *N6;
-	TMenuItem *N7;
-	TMenuItem *N8;
-	TMenuItem *N18;
-	TMenuItem *N3;
-	TMenuItem *N9;
-	TMenuItem *N10;
-	TMenuItem *N11;
-	TMenuItem *N19;
-	TMenuItem *N4;
-	TMenuItem *N12;
-	TMenuItem *N13;
-	TMenuItem *N14;
-	TMenuItem *N20;
-	TMenuItem *N5;
-	TMenuItem *N15;
-	TMenuItem *N16;
-	TMenuItem *N17;
-	TMenuItem *N21;
 	TMenuItem *Lj1;
 	TDBGrid *DBGrid1;
+	TMenuItem *N6;
+	TPopupMenu *PopupMenu1;
+	TMenuItem *N1;
+	TMenuItem *N2;
+	TGroupBox *GroupBox1;
+	TLabel *Label1;
+	TLabel *Label2;
+	TDatePicker *DatePicker1;
+	TRadioGroup *RadioGroup1;
 	TButton *Button1;
-	TMenuItem *N22;
+	TLabel *Label3;
+	TLabel *Label7;
+	TEdit *Edit5;
+	TBitBtn *Clear;
+	TBitBtn *Execute;
+	TCheckBox *Earlier;
+	TCheckBox *Later;
+	TCheckBox *ThisDate;
+	TComboBox *ComboBox1;
 	void __fastcall FormCreate(TObject *Sender);
-private:	// User declarations
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall N6Click(TObject *Sender);
+	void __fastcall Lj1Click(TObject *Sender);
+	void __fastcall N1Click(TObject *Sender);
+	void __fastcall DBGrid1TitleClick(TColumn *Column);
+	void __fastcall N2Click(TObject *Sender);
+	void __fastcall ExecuteClick(TObject *Sender);
+	void __fastcall ClearClick(TObject *Sender);
+
+private:
+	bool SortAscending;	// User declarations
+	void __fastcall CheckFiltersFilled(TObject *Sender);
 public:		// User declarations
 	__fastcall TForm14(TComponent* Owner);
+	void __fastcall TForm14::DBColumnSizes();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm14 *Form14;

@@ -10,13 +10,14 @@ object DataModule1: TDataModule1
     Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Persist Security Info=False;Extended Properti' +
-      'es="DSN=Course_project;DESCRIPTION=NMT_Results;SERVER=localhost;' +
-      'UID=root;DATABASE=nmt_results;PORT=3306"'
+      'es="DSN=12;SERVER=localhost;UID=root;DATABASE=nmt_results;PORT=3' +
+      '306"'
     LoginPrompt = False
     Left = 96
     Top = 8
   end
   object MainQuery: TADOQuery
+    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
     Parameters = <>
@@ -33,5 +34,18 @@ object DataModule1: TDataModule1
       '')
     Left = 32
     Top = 8
+  end
+  object ADOTable1: TADOTable
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    TableName = 'student'
+    Left = 248
+    Top = 16
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOTable1
+    Left = 312
+    Top = 16
   end
 end

@@ -12,6 +12,7 @@ object Form3: TForm3
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
@@ -125,6 +126,12 @@ object Form3: TForm3
     Width = 560
     Height = 323
     DataSource = DataModule1.MainFormSource
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -243,6 +250,7 @@ object Form3: TForm3
     end
     object N2: TMenuItem
       Caption = #1059#1095#1085#1110
+      OnClick = N2Click
     end
     object N3: TMenuItem
       Caption = #1059#1084#1086#1074#1080' '#1087#1088#1086#1093#1086#1076#1078#1077#1085#1085#1103
@@ -255,6 +263,7 @@ object Form3: TForm3
     end
     object N11: TMenuItem
       Caption = #1042#1080#1093#1110#1076
+      OnClick = N11Click
     end
     object Lj1: TMenuItem
       Caption = #1055#1088#1086' '#1076#1086#1076#1072#1090#1086#1082

@@ -178,9 +178,16 @@
             <DependentOn>Subjects.h</DependentOn>
             <BuildOrder>8</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Unit1.cpp">
+            <Form>Form1</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Unit1.h</DependentOn>
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
         <FormResources Include="Results.dfm"/>
         <FormResources Include="Students.dfm"/>
         <FormResources Include="Subjects.dfm"/>
+        <FormResources Include="Unit1.dfm"/>
         <FormResources Include="Certificate.dfm"/>
         <FormResources Include="Conditions.dfm"/>
         <FormResources Include="Data.dfm"/>

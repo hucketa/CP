@@ -6,6 +6,7 @@
 #include "Main_Window.h"
 #include "Data.h"
 #include "Help.h"
+#include "Students.h"
 #include "Certificate.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -26,6 +27,7 @@ void __fastcall TForm3::Timer1Timer(TObject *Sender)
 
 void __fastcall TForm3::FormCreate(TObject *Sender)
 {
+
 	StatusBar1->Panels->Items[1]->Text = DateTimeToStr(Now());
 	Clear->Enabled = false;
 	Execute->Enabled = false;
@@ -33,7 +35,7 @@ void __fastcall TForm3::FormCreate(TObject *Sender)
     Earlier->OnClick = CheckFiltersFilled;
     Later->OnClick = CheckFiltersFilled;
     ThisDate->OnClick = CheckFiltersFilled;
-    Status_check->OnClick = CheckFiltersFilled;
+	Status_check->OnClick = CheckFiltersFilled;
 	Edit1->OnChange = CheckFiltersFilled;
 }
 
@@ -47,14 +49,14 @@ void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
    sortAsc = !sortAsc;
 
    String query = "SELECT s.PIB, "
-                  "r.Attemp_date, "
-                  "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
-                  "subj.Name, "
-                  "r.Reached_score "
-                  "FROM Result r "
-                  "JOIN Student s ON r.Student_id = s.Student_id "
-                  "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
-                  "ORDER BY `" + columnName + "` " + sortOrder;
+				  "r.Attemp_date, "
+				  "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
+				  "subj.Name, "
+				  "r.Reached_score "
+				  "FROM Result r "
+				  "JOIN Student s ON r.Student_id = s.Student_id "
+				  "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
+				  "ORDER BY `" + columnName + "` " + sortOrder;
 
    try
    {
@@ -74,7 +76,7 @@ void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
 //---------------------------------------------------------------------------
 
 void TForm3::DBColumnSizes(){
-    DBGrid1->Columns->Items[0]->Width = 150;
+	DBGrid1->Columns->Items[0]->Width = 150;
 	DBGrid1->Columns->Items[0]->Title->Caption = "ПІБ";
 	DBGrid1->Columns->Items[1]->Width = 100;
 	DBGrid1->Columns->Items[1]->Title->Caption = "Дата складання";
@@ -244,5 +246,26 @@ void __fastcall TForm3::Lj1Click(TObject *Sender)
    delete Help_m;
 }
 
+
+
+void __fastcall TForm3::N11Click(TObject *Sender)
+{
+    this->Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::N2Click(TObject *Sender)
+{
+	Form3->Hide();
+	Form14 = new TForm14(this);
+	Form14->ShowModal();
+}
+
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::FormClose(TObject *Sender, TCloseAction &Action)
+{
+	Action = caFree;
+}
 //---------------------------------------------------------------------------
 

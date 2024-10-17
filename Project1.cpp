@@ -12,6 +12,7 @@ USEFORM("Conditions.cpp", Form4);
 USEFORM("Data.cpp", DataModule1); /* TDataModule: File Type */
 USEFORM("Help.cpp", Help_m);
 USEFORM("Main_Window.cpp", Form3);
+USEFORM("Unit1.cpp", Form1);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -27,6 +28,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(THelp_m), &Help_m);
 		Application->CreateForm(__classid(TCertificates), &Certificates);
 		Application->CreateForm(__classid(TDataModule1), &DataModule1);
+		Application->CreateForm(__classid(TForm1), &Form1);
 		Application->Run();
 	}
 	catch (Exception &exception)
