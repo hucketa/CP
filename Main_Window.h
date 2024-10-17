@@ -35,8 +35,6 @@ __published:	// IDE-managed Components
 	TGroupBox *Surname_student;
 	TRadioGroup *Status_check;
 	TEdit *Edit1;
-	TMenuItem *N15;
-	TMenuItem *N16;
 	TMenuItem *N3;
 	TMenuItem *N8;
 	TMenuItem *N9;
@@ -59,6 +57,7 @@ __published:	// IDE-managed Components
 	void __fastcall N11Click(TObject *Sender);
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall N4Click(TObject *Sender);
 private:
 	void DBColumnSizes();	// User declarations
 public:		// User declarations

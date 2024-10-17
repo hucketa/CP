@@ -1,9 +1,11 @@
 object Form14: TForm14
   Left = 0
   Top = 0
+  AutoSize = True
+  BorderStyle = bsSingle
   Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1108#1102' '#1087#1088#1086' '#1091#1095#1085#1110#1074
-  ClientHeight = 381
-  ClientWidth = 910
+  ClientHeight = 370
+  ClientWidth = 901
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +17,8 @@ object Form14: TForm14
   OnCreate = FormCreate
   TextHeight = 15
   object DBGrid1: TDBGrid
-    Left = 8
-    Top = 8
+    Left = 0
+    Top = 0
     Width = 897
     Height = 239
     DataSource = DataModule1.DataSource1
@@ -82,8 +84,8 @@ object Form14: TForm14
       end>
   end
   object GroupBox1: TGroupBox
-    Left = 8
-    Top = 253
+    Left = 0
+    Top = 245
     Width = 894
     Height = 124
     Hint = #1055#1086#1083#1103' '#1076#1083#1103' '#1074#1074#1077#1076#1077#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1090#1091#1076#1077#1085#1090#1072

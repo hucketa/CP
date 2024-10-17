@@ -7,6 +7,7 @@
 #include "Data.h"
 #include "Help.h"
 #include "Students.h"
+#include "Subjects.h"
 #include "Certificate.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -266,6 +267,14 @@ void __fastcall TForm3::N2Click(TObject *Sender)
 void __fastcall TForm3::FormClose(TObject *Sender, TCloseAction &Action)
 {
 	Action = caFree;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::N4Click(TObject *Sender)
+{
+   Form3->Hide();
+   Form7 = new TForm7(this);
+   Form7->ShowModal();
 }
 //---------------------------------------------------------------------------
 

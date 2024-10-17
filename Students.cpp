@@ -128,9 +128,7 @@ void __fastcall TForm14::CheckFiltersFilled(TObject *Sender)
     Execute->Enabled = isAnyFilterFilled;
     Clear->Enabled = isAnyFilterFilled;
 }
-
 //---------------------------------------------------------------------------
-
 void __fastcall TForm14::ExecuteClick(TObject *Sender)
 {
 	DataModule1->ADOTable1->Filtered = false;
@@ -167,9 +165,7 @@ void __fastcall TForm14::ExecuteClick(TObject *Sender)
 	}
 	DataModule1->ADOTable1->Filtered = true;
 }
-
 //---------------------------------------------------------------------------
-
 void __fastcall TForm14::ClearClick(TObject *Sender)
 {
     Earlier->Checked = false;

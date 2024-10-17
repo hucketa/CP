@@ -48,4 +48,23 @@ object DataModule1: TDataModule1
     Left = 312
     Top = 16
   end
+  object ADOTable2: TADOTable
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    TableName = 'subject'
+    Left = 376
+    Top = 16
+  end
+  object DataSource2: TDataSource
+    DataSet = ADOTable2
+    Left = 440
+    Top = 24
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 72
+    Top = 72
+  end
 end
