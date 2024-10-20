@@ -100,6 +100,10 @@ void __fastcall TForm3::CheckFiltersFilled(TObject *Sender)
 void __fastcall TForm3::FormShow(TObject *Sender)
 {
 	DBColumnSizes();
+	Application->MainFormOnTaskBar = true;
+Application->UpdateFormatSettings = false;
+Application->DefaultFont->Charset = DEFAULT_CHARSET;
+
 }
 //встановлення при запуску форми
 //---------------------------------------------------------------------------

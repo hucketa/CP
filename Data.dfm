@@ -10,8 +10,8 @@ object DataModule1: TDataModule1
     Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Persist Security Info=False;Extended Properti' +
-      'es="DSN=12;SERVER=localhost;UID=root;DATABASE=nmt_results;PORT=3' +
-      '306"'
+      'es="DSN=coursach;SERVER=localhost;UID=root;DATABASE=nmt_results;' +
+      'PORT=3306"'
     LoginPrompt = False
     Left = 96
     Top = 8

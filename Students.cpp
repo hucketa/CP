@@ -83,30 +83,6 @@ void __fastcall TForm14::DBColumnSizes(){
 
 void __fastcall TForm14::N1Click(TObject *Sender)
 {
-	int id = DBGrid1->DataSource->DataSet->RecNo;
-	Form1 = new TForm1(this);
-	Form1->set_id(id);
-	Form1->ShowModal();
-	DataModule1->DataSource1->DataSet->Refresh();
-	delete Form1;
-}
-
-
-
-//---------------------------------------------------------------------------
-
-void __fastcall TForm14::DBGrid1TitleClick(TColumn *Column)
-{
-	String sortOrder = SortAscending ? " ASC" : " DESC";
-	DataModule1->ADOTable1->Sort = Column->Field->FieldName + sortOrder;
-	SortAscending = !SortAscending;
-
-}
-//---------------------------------------------------------------------------
-
-
-void __fastcall TForm14::N2Click(TObject *Sender)
-{
 	DataModule1->DataSource1->DataSet->Refresh();
 	String passport_num = DBGrid1->DataSource->DataSet->FieldByName("Passport_num")->AsString;
 	TADOQuery *query = new TADOQuery(this);
@@ -127,6 +103,30 @@ void __fastcall TForm14::N2Click(TObject *Sender)
 	}
 	delete Form1;
 	delete query;
+}
+
+
+
+//---------------------------------------------------------------------------
+
+void __fastcall TForm14::DBGrid1TitleClick(TColumn *Column)
+{
+	String sortOrder = SortAscending ? " ASC" : " DESC";
+	DataModule1->ADOTable1->Sort = Column->Field->FieldName + sortOrder;
+	SortAscending = !SortAscending;
+
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm14::N2Click(TObject *Sender)
+{
+	Form1 = new TForm1(this);
+	Form1->Caption = "Додавання даних";
+	Form1->set_id(0);
+	Form1->ShowModal();
+	DataModule1->DataSource1->DataSet->Refresh();
+	delete Form1;
 }
 
 
