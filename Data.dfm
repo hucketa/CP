@@ -67,4 +67,28 @@ object DataModule1: TDataModule1
     Left = 72
     Top = 72
   end
+  object DataSource3: TDataSource
+    DataSet = ADOQuery2
+    Left = 192
+    Top = 96
+  end
+  object ADOQuery2: TADOQuery
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'SELECT c.Condition_id, s.Name AS Subject_Name, c.Max_point, c.Mi' +
+        'n_r_point, c.Min_point, '
+      '       CASE '
+      '           WHEN c.Status = 1 THEN '#39#1086#1073#1086#1074'\'#39#1103#1079#1082#1086#1074#1086#39
+      '           ELSE '#39#1085#1077' '#1086#1073#1086#1074'\'#39#1103#1079#1082#1086#1074#1086#39
+      '       END AS Status,'
+      '       c.Date'
+      'FROM conditions c'
+      'JOIN subject s ON c.Subject_id = s.Subject_id;')
+    Left = 72
+    Top = 136
+  end
 end

@@ -190,16 +190,23 @@
             <DependentOn>Unit2.h</DependentOn>
             <BuildOrder>11</BuildOrder>
         </CppCompile>
-        <FormResources Include="Results.dfm"/>
+        <CppCompile Include="Unit5.cpp">
+            <Form>Form5</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Unit5.h</DependentOn>
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
         <FormResources Include="Students.dfm"/>
-        <FormResources Include="Subjects.dfm"/>
-        <FormResources Include="Unit1.dfm"/>
-        <FormResources Include="Certificate.dfm"/>
-        <FormResources Include="Conditions.dfm"/>
-        <FormResources Include="Data.dfm"/>
-        <FormResources Include="Help.dfm"/>
-        <FormResources Include="Main_Window.dfm"/>
+        <FormResources Include="Results.dfm"/>
         <FormResources Include="Unit2.dfm"/>
+        <FormResources Include="Unit1.dfm"/>
+        <FormResources Include="Subjects.dfm"/>
+        <FormResources Include="Data.dfm"/>
+        <FormResources Include="Conditions.dfm"/>
+        <FormResources Include="Certificate.dfm"/>
+        <FormResources Include="Main_Window.dfm"/>
+        <FormResources Include="Help.dfm"/>
+        <FormResources Include="Unit5.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

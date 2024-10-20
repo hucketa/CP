@@ -101,14 +101,22 @@ void __fastcall TForm7::N1Click(TObject *Sender)
 
 void __fastcall TForm7::N2Click(TObject *Sender)
 {
-	int id = DBGrid1->DataSource->DataSet->RecNo;
+	String name = DBGrid1->DataSource->DataSet->FieldByName("Name")->AsString;
+	TADOQuery *query = new TADOQuery(this);
+	query->Connection = DataModule1->ADOConnection1;
+	query->SQL->Text = "SELECT Subject_id FROM subject WHERE Name = :Name";
+	query->Parameters->ParamByName("Name")->Value = name;
+	query->Open();
+	int id = query->FieldByName("Subject_id")->AsInteger;
 	Form2 = new TForm2(this);
 	Form2->Caption = "Редагування даних";
 	Form2->set_id(id);
 	Form2->ShowModal();
 	DataModule1->DataSource2->DataSet->Refresh();
 	delete Form2;
+	delete query;
 }
+
 //---------------------------------------------------------------------------
 
 void __fastcall TForm7::N3Click(TObject *Sender)

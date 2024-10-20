@@ -4,11 +4,6 @@
 #pragma hdrstop
 #include <SysUtils.hpp>
 #include "Main_Window.h"
-#include "Data.h"
-#include "Help.h"
-#include "Students.h"
-#include "Subjects.h"
-#include "Certificate.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -276,5 +271,48 @@ void __fastcall TForm3::N4Click(TObject *Sender)
    Form7 = new TForm7(this);
    Form7->ShowModal();
 }
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::N3Click(TObject *Sender)
+{
+   Form3->Hide();
+   Form4 = new TForm4(this);
+   Form4->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::DatePicker1CloseUp(TObject *Sender)
+{
+    try
+	{
+		TDateTime selectedDate = DatePicker1->Date;
+		TDateTime currentDate = Now();
+		if (selectedDate > currentDate)
+		{
+			throw Exception("Дата не може бути в майбутньому!");
+		}
+		else if(selectedDate < EncodeDate(1925, 1, 1))
+		{
+			throw Exception("Дата занадто стара! Виберіть пізнішу дату.");
+		}
+	}
+	catch (const Exception &e)
+	{
+		ShowMessage(e.Message);
+		DatePicker1->Date = Now();
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Edit1Exit(TObject *Sender)
+{
+    String pib = Edit1->Text;
+    UnicodeString pattern = "^[А-Яа-яЁёІіЇїЄєҐґ'\\s-]+$";
+	if (!TRegEx::IsMatch(pib, pattern)) {
+		ShowMessage("Введіть дійсний PIB українською мовою повністю.");
+        Edit1->SetFocus();
+    }
+}
+
 //---------------------------------------------------------------------------
 

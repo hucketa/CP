@@ -3,7 +3,7 @@
 
 #include "Unit1.h"
 #include "Data.h"
-#include <System.RegularExpressions.hpp> // Підключення бібліотеки для регулярних виразів
+#include <System.RegularExpressions.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -106,11 +106,23 @@ void __fastcall TForm1::Edit6Exit(TObject *Sender) // Перевірка сертифікату осві
 
 void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender) // Перевірка дати народження
 {
-	TDate birthDate = DatePicker1->Date;
-	TDate currentDate = Date();
-	if (birthDate > currentDate) {
-		ShowMessage("Дата народження не може бути в майбутньому.");
-		DatePicker1->SetFocus();
+  try
+	{
+		TDateTime selectedDate = DatePicker1->Date;
+		TDateTime currentDate = Now();
+		if (selectedDate > currentDate)
+		{
+			throw Exception("Дата не може бути в майбутньому!");
+		}
+		else if(selectedDate < EncodeDate(1925, 1, 1))
+		{
+			throw Exception("Дата занадто стара! Виберіть пізнішу дату.");
+		}
+	}
+	catch (const Exception &e)
+	{
+		ShowMessage(e.Message);
+		DatePicker1->Date = Now();
 	}
 }
 

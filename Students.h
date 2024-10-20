@@ -16,6 +16,12 @@
 #include <Vcl.Grids.hpp>
 #include <Vcl.Buttons.hpp>
 #include <Vcl.DBCtrls.hpp>
+#include "Main_Window.h"
+#include "Help.h"
+#include <String.h>
+#include <System.RegularExpressions.hpp>
+#include "Data.h"
+#include "Unit1.h"
 //---------------------------------------------------------------------------
 class TForm14 : public TForm
 {
@@ -51,6 +57,8 @@ __published:	// IDE-managed Components
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall ExecuteClick(TObject *Sender);
 	void __fastcall ClearClick(TObject *Sender);
+	void __fastcall DatePicker1CloseUp(TObject *Sender);
+	void __fastcall Edit5Exit(TObject *Sender);
 
 private:
 	bool SortAscending;	// User declarations

@@ -4,8 +4,8 @@ object Form14: TForm14
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1108#1102' '#1087#1088#1086' '#1091#1095#1085#1110#1074
-  ClientHeight = 370
-  ClientWidth = 901
+  ClientHeight = 369
+  ClientWidth = 897
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -32,6 +32,11 @@ object Form14: TForm14
     TitleFont.Style = []
     OnTitleClick = DBGrid1TitleClick
     Columns = <
+      item
+        Expanded = False
+        FieldName = 'Student_id'
+        Visible = True
+      end
       item
         Expanded = False
         FieldName = 'Passport_num'
@@ -130,6 +135,7 @@ object Form14: TForm14
       Font.Name = 'Segoe UI'
       Font.Style = []
       TabOrder = 0
+      OnCloseUp = DatePicker1CloseUp
     end
     object RadioGroup1: TRadioGroup
       Left = 208
@@ -157,6 +163,7 @@ object Form14: TForm14
       Width = 132
       Height = 23
       TabOrder = 3
+      OnExit = Edit5Exit
     end
     object Clear: TBitBtn
       Left = 125

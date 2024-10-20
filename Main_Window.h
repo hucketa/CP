@@ -16,6 +16,13 @@
 #include <Vcl.WinXPickers.hpp>
 #include <Data.Win.ADODB.hpp>
 #include <Vcl.Buttons.hpp>
+#include <System.RegularExpressions.hpp>
+#include "Data.h"
+#include "Help.h"
+#include "Conditions.h"
+#include "Students.h"
+#include "Subjects.h"
+#include "Certificate.h"
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -36,8 +43,6 @@ __published:	// IDE-managed Components
 	TRadioGroup *Status_check;
 	TEdit *Edit1;
 	TMenuItem *N3;
-	TMenuItem *N8;
-	TMenuItem *N9;
 	TMenuItem *N11;
 	TDBGrid *DBGrid1;
 	TBitBtn *Clear;
@@ -58,6 +63,9 @@ __published:	// IDE-managed Components
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall N4Click(TObject *Sender);
+	void __fastcall N3Click(TObject *Sender);
+	void __fastcall DatePicker1CloseUp(TObject *Sender);
+	void __fastcall Edit1Exit(TObject *Sender);
 private:
 	void DBColumnSizes();	// User declarations
 public:		// User declarations

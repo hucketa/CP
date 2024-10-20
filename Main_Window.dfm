@@ -5,7 +5,7 @@ object Form3: TForm3
   BorderStyle = bsSingle
   Caption = #1054#1073#1083#1110#1082' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1110#1074' '#1085#1084#1090
   ClientHeight = 350
-  ClientWidth = 793
+  ClientWidth = 797
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object Form3: TForm3
   object StatusBar1: TStatusBar
     Left = 0
     Top = 331
-    Width = 793
+    Width = 797
     Height = 19
     Panels = <
       item
@@ -39,7 +39,8 @@ object Form3: TForm3
         Text = #1051#1086#1075#1110#1085' '#1091#1095#1072#1089#1085#1080#1082#1072
         Width = 200
       end>
-    ExplicitWidth = 789
+    ExplicitTop = 330
+    ExplicitWidth = 793
   end
   object GroupBox1: TGroupBox
     Left = 566
@@ -59,6 +60,7 @@ object Form3: TForm3
       Font.Name = 'Segoe UI'
       Font.Style = []
       TabOrder = 0
+      OnCloseUp = DatePicker1CloseUp
     end
     object Earlier: TCheckBox
       Left = 20
@@ -117,6 +119,7 @@ object Form3: TForm3
         Width = 166
         Height = 23
         TabOrder = 0
+        OnExit = Edit1Exit
       end
     end
   end
@@ -241,20 +244,15 @@ object Form3: TForm3
       Caption = #1053#1072#1074#1095#1072#1083#1100#1085#1110' '#1076#1080#1089#1094#1080#1087#1083#1110#1085#1080
       OnClick = N4Click
     end
-    object N1: TMenuItem
-      Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080
+    object N3: TMenuItem
+      Caption = #1059#1084#1086#1074#1080' '#1087#1088#1086#1093#1086#1076#1078#1077#1085#1085#1103
+      OnClick = N3Click
     end
     object N5: TMenuItem
       Caption = #1056#1077#1079#1091#1083#1100#1090#1072#1090#1080' '#1090#1077#1089#1090#1091#1074#1072#1085#1085#1103
     end
-    object N3: TMenuItem
-      Caption = #1059#1084#1086#1074#1080' '#1087#1088#1086#1093#1086#1076#1078#1077#1085#1085#1103
-      object N8: TMenuItem
-        Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111
-      end
-      object N9: TMenuItem
-        Caption = #1056#1077#1076#1072#1075#1091#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111
-      end
+    object N1: TMenuItem
+      Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080
     end
     object N11: TMenuItem
       Caption = #1042#1080#1093#1110#1076

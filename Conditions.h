@@ -8,49 +8,59 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Data.DB.hpp>
+#include <Vcl.Buttons.hpp>
+#include <Vcl.DBGrids.hpp>
+#include <Vcl.Grids.hpp>
+#include <Vcl.Menus.hpp>
+#include <Vcl.WinXPickers.hpp>
+#include "Help.h"
+#include <Data.DB.hpp>
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.DBGrids.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Grids.hpp>
+#include "Data.h"
+#include "Unit5.h"
 #include <Vcl.Menus.hpp>
 #include <Vcl.WinXPickers.hpp>
+#include <Vcl.Buttons.hpp>
+#include "Main_Window.h"
 //---------------------------------------------------------------------------
 class TForm4 : public TForm
 {
 __published:	// IDE-managed Components
-	TGroupBox *GroupBox1;
-	TLabel *Label2;
-	TLabel *Label4;
-	TLabel *Label5;
-	TLabel *Label6;
-	TEdit *Edit2;
-	TDatePicker *DatePicker1;
-	TRadioGroup *RadioGroup1;
-	TEdit *Edit4;
-	TEdit *Edit6;
-	TButton *Button1;
 	TDBGrid *DBGrid1;
 	TMainMenu *MainMenu1;
-	TMenuItem *N1;
-	TMenuItem *N22;
-	TMenuItem *N4;
-	TMenuItem *N12;
-	TMenuItem *N13;
-	TMenuItem *N20;
-	TMenuItem *N5;
-	TMenuItem *N15;
-	TMenuItem *N16;
-	TMenuItem *N21;
 	TMenuItem *Lj1;
+	TMenuItem *N1;
+	TGroupBox *GroupBox1;
+	TComboBox *ComboBox2;
+	TLabel *Label3;
+	TDatePicker *DatePicker2;
+	TLabel *Label4;
+	TBitBtn *Execute;
+	TBitBtn *Clear;
+	TCheckBox *Earlier;
+	TCheckBox *Later;
+	TCheckBox *ThisDate;
+	TPopupMenu *PopupMenu1;
 	TMenuItem *N2;
-	TMenuItem *N6;
-	TMenuItem *N7;
-	TMenuItem *N18;
 	TMenuItem *N3;
-	TMenuItem *N8;
-	TMenuItem *N9;
-	TMenuItem *N10;
-private:	// User declarations
+	void __fastcall FormShow(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall Lj1Click(TObject *Sender);
+	void __fastcall N1Click(TObject *Sender);
+	void __fastcall DBGrid1TitleClick(TColumn *Column);
+	void __fastcall DatePicker2CloseUp(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall ExecuteClick(TObject *Sender);
+	void __fastcall ClearClick(TObject *Sender);
+	void __fastcall N2Click(TObject *Sender);
+	void __fastcall N3Click(TObject *Sender);
+private:
+	bool SortAscending;
+	void DBColumnSizes();
+	void __fastcall CheckFiltersFilled(TObject *Sender);
 public:		// User declarations
 	__fastcall TForm4(TComponent* Owner);
 };

@@ -1,9 +1,6 @@
 ﻿[MainMenu1]
 Coordinates=97,393,81,36
 
-[N9]
-Coordinates=48,393,40,36
-
 [N1]
 Coordinates=0,357,40,36
 
@@ -15,9 +12,6 @@ Coordinates=396,10,79,58
 
 [N5]
 Coordinates=457,133,40,36
-
-[N8]
-Coordinates=457,188,40,36
 
 [Edit1]
 Coordinates=347,188,44,58
@@ -42,7 +36,7 @@ Coordinates=308,10,78,58
 Coordinates=339,489,40,36
 
 []
-Coordinates=457,298,40,36
+Coordinates=457,188,40,36
 
 [DataModule1.MainQuery]
 Coordinates=10,10,164,168
