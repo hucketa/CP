@@ -3,8 +3,8 @@ object Form4: TForm4
   Top = 0
   AutoSize = True
   Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1108#1102' '#1087#1088#1086' '#1091#1084#1086#1074#1080' '#1087#1088#1086#1093#1086#1076#1078#1077#1085#1085#1103' '#1053#1052#1058
-  ClientHeight = 241
-  ClientWidth = 777
+  ClientHeight = 242
+  ClientWidth = 781
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,7 +12,6 @@ object Form4: TForm4
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
-  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
@@ -41,8 +40,8 @@ object Form4: TForm4
     object Label3: TLabel
       Left = 334
       Top = 24
-      Width = 136
-      Height = 17
+      Width = 126
+      Height = 15
       Caption = #1053#1072#1074#1095#1072#1083#1100#1085#1072' '#1076#1080#1089#1094#1080#1087#1083#1110#1085#1072
       WordWrap = True
     end

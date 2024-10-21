@@ -31,7 +31,6 @@ __published:	// IDE-managed Components
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
 	void __fastcall DBGrid1CellClick(TColumn *Column);
-	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall N1Click(TObject *Sender);
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall N3Click(TObject *Sender);

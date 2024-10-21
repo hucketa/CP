@@ -43,7 +43,6 @@ void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
    static bool sortAsc = true;
    String sortOrder = sortAsc ? "ASC" : "DESC";
    sortAsc = !sortAsc;
-
    String query = "SELECT s.PIB, "
 				  "r.Attemp_date, "
 				  "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
@@ -53,7 +52,6 @@ void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
 				  "JOIN Student s ON r.Student_id = s.Student_id "
 				  "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
 				  "ORDER BY `" + columnName + "` " + sortOrder;
-
    try
    {
        DataModule1->MainQuery->Close();
@@ -67,7 +65,6 @@ void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
        ShowMessage("Помилка сортування: " + e.Message);
    }
 }
-//Працює на 100% (сортування по кліку назва колонки)
 
 //---------------------------------------------------------------------------
 
@@ -83,7 +80,6 @@ void TForm3::DBColumnSizes(){
 	DBGrid1->Columns->Items[4]->Width = 85;
 	DBGrid1->Columns->Items[4]->Title->Caption = "Результат";
 }
-//функція для оформлення таблиці
 
 void __fastcall TForm3::CheckFiltersFilled(TObject *Sender)
 {
@@ -94,20 +90,14 @@ void __fastcall TForm3::CheckFiltersFilled(TObject *Sender)
 	Execute->Enabled = isAnyFilterFilled;
 	Clear->Enabled = isAnyFilterFilled;
 }
-//активація і деактивація кнопок
-
 
 void __fastcall TForm3::FormShow(TObject *Sender)
 {
 	DBColumnSizes();
-	Application->MainFormOnTaskBar = true;
-Application->UpdateFormatSettings = false;
-Application->DefaultFont->Charset = DEFAULT_CHARSET;
-
+	//Application->MainFormOnTaskBar = true;
+	//Application->UpdateFormatSettings = false;
+	//Application->DefaultFont->Charset = DEFAULT_CHARSET;
 }
-//встановлення при запуску форми
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
 
 void __fastcall TForm3::ClearClick(TObject *Sender)
 {
@@ -155,7 +145,6 @@ void __fastcall TForm3::ExecuteClick(TObject *Sender)
                    "JOIN Student s ON r.Student_id = s.Student_id "
                    "JOIN Subject subj ON r.Subj_id = subj.Subject_id ";
 	String conditions = "";
-
 	if (Earlier->Checked || Later->Checked || ThisDate->Checked)
 	{
 		if (ThisDate->Checked)
@@ -199,7 +188,6 @@ void __fastcall TForm3::ExecuteClick(TObject *Sender)
 	}
 
 	query += " ORDER BY r.Attemp_date DESC";
-
 	try
 	{
 		DataModule1->MainQuery->Close();
@@ -241,46 +229,30 @@ void __fastcall TForm3::ExecuteClick(TObject *Sender)
 
 void __fastcall TForm3::Lj1Click(TObject *Sender)
 {
-   Help_m = new THelp_m(this);
    Help_m->ShowModal();
-   delete Help_m;
 }
 
 
 
 void __fastcall TForm3::N11Click(TObject *Sender)
 {
-    this->Close();
+	Application->Terminate();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::N2Click(TObject *Sender)
 {
-	Form3->Hide();
-	Form14 = new TForm14(this);
-	Form14->ShowModal();
+	Form14->ShowModal();;
 }
-
-//---------------------------------------------------------------------------
-
-void __fastcall TForm3::FormClose(TObject *Sender, TCloseAction &Action)
-{
-	Action = caFree;
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TForm3::N4Click(TObject *Sender)
 {
-   Form3->Hide();
-   Form7 = new TForm7(this);
    Form7->ShowModal();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::N3Click(TObject *Sender)
 {
-   Form3->Hide();
-   Form4 = new TForm4(this);
    Form4->ShowModal();
 }
 //---------------------------------------------------------------------------
@@ -313,7 +285,7 @@ void __fastcall TForm3::Edit1Exit(TObject *Sender)
     String pib = Edit1->Text;
     UnicodeString pattern = "^[А-Яа-яЁёІіЇїЄєҐґ'\\s-]+$";
 	if (!TRegEx::IsMatch(pib, pattern)) {
-		ShowMessage("Введіть дійсний PIB українською мовою повністю.");
+		ShowMessage("Введіть дійсний ПІБ українською мовою повністю.");
         Edit1->SetFocus();
     }
 }

@@ -47,7 +47,6 @@ __published:	// IDE-managed Components
 	TMenuItem *N2;
 	TMenuItem *N3;
 	void __fastcall FormShow(TObject *Sender);
-	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall Lj1Click(TObject *Sender);
 	void __fastcall N1Click(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);

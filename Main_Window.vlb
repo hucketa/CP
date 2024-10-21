@@ -16,9 +16,6 @@ Coordinates=457,133,40,36
 [Edit1]
 Coordinates=347,188,44,58
 
-[N11]
-Coordinates=457,243,40,36
-
 [Lj1]
 Coordinates=457,408,40,36
 
@@ -36,7 +33,7 @@ Coordinates=308,10,78,58
 Coordinates=339,489,40,36
 
 []
-Coordinates=457,188,40,36
+Coordinates=457,243,40,36
 
 [DataModule1.MainQuery]
 Coordinates=10,10,164,168

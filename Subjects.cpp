@@ -76,26 +76,12 @@ void __fastcall TForm7::DBGrid1CellClick(TColumn *Column)
     }
 }
 
-//---------------------------------------------------------------------------
-
-void __fastcall TForm7::FormClose(TObject *Sender, TCloseAction &Action)
-{
-    Action = caFree;
-	Application->Terminate();
-}
-//---------------------------------------------------------------------------
-
-
-
-
 void __fastcall TForm7::N1Click(TObject *Sender)
 {
-	Form2 = new TForm2(this);
 	Form2->set_id(0);
 	Form2->Caption = "Додавання даних";
 	Form2->ShowModal();
 	DataModule1->DataSource2->DataSet->Refresh();
-	delete Form2;
 }
 //---------------------------------------------------------------------------
 
@@ -108,12 +94,10 @@ void __fastcall TForm7::N2Click(TObject *Sender)
 	query->Parameters->ParamByName("Name")->Value = name;
 	query->Open();
 	int id = query->FieldByName("Subject_id")->AsInteger;
-	Form2 = new TForm2(this);
 	Form2->Caption = "Редагування даних";
 	Form2->set_id(id);
 	Form2->ShowModal();
 	DataModule1->DataSource2->DataSet->Refresh();
-	delete Form2;
 	delete query;
 }
 
@@ -121,51 +105,35 @@ void __fastcall TForm7::N2Click(TObject *Sender)
 
 void __fastcall TForm7::N3Click(TObject *Sender)
 {
-    try
-    {
-        // Отримання ID поточного запису в DBGrid
-        int id = DataModule1->DataSource2->DataSet->FieldByName("Subject_id")->AsInteger;
-
-        // Перевірка, чи існує ID
+	try
+	{
+		int id = DataModule1->DataSource2->DataSet->FieldByName("Subject_id")->AsInteger;
         if (id <= 0)
         {
             ShowMessage("Виберіть запис для видалення.");
-            return;
-        }
-
-        // Перевірка наявності залежних записів у таблиці 'result'
+			return;
+		}
         DataModule1->ADOQuery1->Close();
         DataModule1->ADOQuery1->SQL->Text = "SELECT COUNT(*) AS Count FROM result WHERE Subj_id = :id";
         DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
-        DataModule1->ADOQuery1->Open();
-
-        int resultDependentCount = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
-
-        // Перевірка наявності залежних записів у таблиці 'conditions'
+		DataModule1->ADOQuery1->Open();
+		int resultDependentCount = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
         DataModule1->ADOQuery1->Close();
         DataModule1->ADOQuery1->SQL->Text = "SELECT COUNT(*) AS Count FROM conditions WHERE Subject_id = :id";
         DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
-        DataModule1->ADOQuery1->Open();
-
-        int conditionsDependentCount = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
-
-        // Якщо є залежні записи, відображаємо повідомлення та припиняємо видалення
-        if (resultDependentCount > 0 || conditionsDependentCount > 0)
+		DataModule1->ADOQuery1->Open();
+		int conditionsDependentCount = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
+		if (resultDependentCount > 0 || conditionsDependentCount > 0)
         {
             ShowMessage("Цей запис не може бути видалений, оскільки він використовується в інших таблицях.");
             return;
-        }
-
-        // Підтвердження від користувача
+		}
         if (MessageDlg("Ви впевнені, що хочете видалити цей запис?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo, 0) == mrYes)
-        {
-            // Виконання SQL-запиту на видалення
+		{
             DataModule1->ADOQuery1->Close();
             DataModule1->ADOQuery1->SQL->Text = "DELETE FROM subject WHERE Subject_id = :id";
             DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
-            DataModule1->ADOQuery1->ExecSQL();
-
-            // Оновлення DataSet для відображення змін
+			DataModule1->ADOQuery1->ExecSQL();
             DataModule1->DataSource2->DataSet->Refresh();
 
             ShowMessage("Запис успішно видалено.");
@@ -182,16 +150,13 @@ void __fastcall TForm7::N3Click(TObject *Sender)
 
 void __fastcall TForm7::Lj1Click(TObject *Sender)
 {
-   Help_m = new THelp_m(this);
    Help_m->ShowModal();
-   delete Help_m;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm7::N6Click(TObject *Sender)
 {
-   this->Hide();
-   Form3 = new TForm3(this);
+    this->Close();
    Form3->Show();
 }
 //---------------------------------------------------------------------------

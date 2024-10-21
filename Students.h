@@ -49,7 +49,6 @@ __published:	// IDE-managed Components
 	TCheckBox *ThisDate;
 	TComboBox *ComboBox1;
 	void __fastcall FormCreate(TObject *Sender);
-	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall N6Click(TObject *Sender);
 	void __fastcall Lj1Click(TObject *Sender);
 	void __fastcall N1Click(TObject *Sender);

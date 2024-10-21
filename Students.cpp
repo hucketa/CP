@@ -34,26 +34,19 @@ void __fastcall TForm14::FormCreate(TObject *Sender)
 
 
 //---------------------------------------------------------------------------
-void __fastcall TForm14::FormClose(TObject *Sender, TCloseAction &Action)
-{
-	Action = caFree;
-	Application->Terminate();
-}
+
 //---------------------------------------------------------------------------
 
 void __fastcall TForm14::N6Click(TObject *Sender)
 {
-   this->Hide();
-   Form3 = new TForm3(this);
+   this->Close();
    Form3->Show();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm14::Lj1Click(TObject *Sender)
 {
-  Help_m = new THelp_m(this);
    Help_m->ShowModal();
-   delete Help_m;
 }
 //---------------------------------------------------------------------------
 
@@ -92,7 +85,6 @@ void __fastcall TForm14::N1Click(TObject *Sender)
 	query->Open();
 	if (!query->Eof) {
 		int student_id = query->FieldByName("Student_id")->AsInteger;
-		Form1 = new TForm1(this);
 		Form1->Caption = "Редагування даних";
 		Form1->set_id(student_id);
 		Form1->ShowModal();
@@ -101,7 +93,6 @@ void __fastcall TForm14::N1Click(TObject *Sender)
 	else {
 		ShowMessage("Студента з таким паспортом не знайдено.");
 	}
-	delete Form1;
 	delete query;
 }
 
@@ -121,12 +112,10 @@ void __fastcall TForm14::DBGrid1TitleClick(TColumn *Column)
 
 void __fastcall TForm14::N2Click(TObject *Sender)
 {
-	Form1 = new TForm1(this);
 	Form1->Caption = "Додавання даних";
 	Form1->set_id(0);
 	Form1->ShowModal();
 	DataModule1->DataSource1->DataSet->Refresh();
-	delete Form1;
 }
 
 

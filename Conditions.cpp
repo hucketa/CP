@@ -49,24 +49,17 @@ void __fastcall TForm4::FormShow(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm4::FormClose(TObject *Sender, TCloseAction &Action)
-{
-	Application->Terminate();
-}
 //---------------------------------------------------------------------------
 
 void __fastcall TForm4::Lj1Click(TObject *Sender)
 {
-   Help_m = new THelp_m(this);
    Help_m->ShowModal();
-   delete Help_m;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm4::N1Click(TObject *Sender)
 {
-   this->Hide();
-   Form3 = new TForm3(this);
+   this->Close();
    Form3->Show();
 }
 //---------------------------------------------------------------------------
@@ -246,21 +239,16 @@ void __fastcall TForm4::ClearClick(TObject *Sender)
 
 void __fastcall TForm4::N2Click(TObject *Sender)
 {
-   Form5 = new TForm5(this);
-   //Form5->set_id(0);
    Form5->ShowModal();
    DataModule1->DataSource3->DataSet->Refresh();
-   delete Form5;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm4::N3Click(TObject *Sender)
 {
-   Form5 = new TForm5(this);
-   //Form5->set_id(0);
    Form5->ShowModal();
    DataModule1->DataSource3->DataSet->Refresh();
-   delete Form5;
 }
 //---------------------------------------------------------------------------
+
 

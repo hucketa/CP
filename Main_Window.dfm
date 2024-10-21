@@ -4,8 +4,8 @@ object Form3: TForm3
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1054#1073#1083#1110#1082' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1110#1074' '#1085#1084#1090
-  ClientHeight = 351
-  ClientWidth = 801
+  ClientHeight = 352
+  ClientWidth = 805
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,14 +13,13 @@ object Form3: TForm3
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
-  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 332
-    Width = 801
+    Top = 333
+    Width = 805
     Height = 19
     Panels = <
       item
@@ -39,8 +38,8 @@ object Form3: TForm3
         Text = #1051#1086#1075#1110#1085' '#1091#1095#1072#1089#1085#1080#1082#1072
         Width = 200
       end>
-    ExplicitTop = 331
-    ExplicitWidth = 797
+    ExplicitTop = 332
+    ExplicitWidth = 801
   end
   object GroupBox1: TGroupBox
     Left = 566
@@ -240,6 +239,10 @@ object Form3: TForm3
       Caption = #1059#1095#1085#1110
       OnClick = N2Click
     end
+    object N6: TMenuItem
+      Caption = '|'
+      Enabled = False
+    end
     object N4: TMenuItem
       Caption = #1053#1072#1074#1095#1072#1083#1100#1085#1110' '#1076#1080#1089#1094#1080#1087#1083#1110#1085#1080
       OnClick = N4Click
@@ -248,15 +251,19 @@ object Form3: TForm3
       Caption = #1059#1084#1086#1074#1080' '#1087#1088#1086#1093#1086#1076#1078#1077#1085#1085#1103
       OnClick = N3Click
     end
+    object N7: TMenuItem
+      Caption = '|'
+      Enabled = False
+    end
     object N5: TMenuItem
       Caption = #1056#1077#1079#1091#1083#1100#1090#1072#1090#1080' '#1090#1077#1089#1090#1091#1074#1072#1085#1085#1103
     end
     object N1: TMenuItem
       Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080
     end
-    object N11: TMenuItem
-      Caption = #1042#1080#1093#1110#1076
-      OnClick = N11Click
+    object N8: TMenuItem
+      Caption = '|'
+      Enabled = False
     end
     object Lj1: TMenuItem
       Caption = #1055#1088#1086' '#1076#1086#1076#1072#1090#1086#1082

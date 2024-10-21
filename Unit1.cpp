@@ -55,6 +55,7 @@ void __fastcall TForm1::FormShow(TObject *Sender)
     if (id == 0) {
 		Form1->Caption = "Додавання даних";
 		Button1->Caption = "Додати";
+		ClearFields();
     } else {
         Form1->Caption = "Редагування даних";
         LoadStudentData(id);
@@ -69,7 +70,7 @@ void __fastcall TForm1::Edit2Exit(TObject *Sender) // Перевірка номера паспорту
 	}
 }
 
-void __fastcall TForm1::Edit3Exit(TObject *Sender) // Перевірка номеру телефону
+void __fastcall TForm1::Edit3Exit(TObject *Sender)
 {
 	if (Edit3->Text.Length() < 10 || Edit3->Text.Length() > 15) {
 		ShowMessage("Номер телефону повинен бути від 10 до 15 символів.");
@@ -77,7 +78,7 @@ void __fastcall TForm1::Edit3Exit(TObject *Sender) // Перевірка номеру телефону
     }
 }
 
-void __fastcall TForm1::Edit4Exit(TObject *Sender) // Перевірка ІПН (Ідентифікаційний код)
+void __fastcall TForm1::Edit4Exit(TObject *Sender)
 {
     if (Edit4->Text.Length() != 10) {
 		ShowMessage("ІПН повинен містити 10 цифр.");
@@ -85,7 +86,7 @@ void __fastcall TForm1::Edit4Exit(TObject *Sender) // Перевірка ІПН (Ідентифікац
 	}
 }
 
-void __fastcall TForm1::Edit5Exit(TObject *Sender) // Перевірка e-mail
+void __fastcall TForm1::Edit5Exit(TObject *Sender)
 {
     String email = Edit5->Text;
     UnicodeString pattern = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
@@ -96,7 +97,7 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender) // Перевірка e-mail
 	}
 }
 
-void __fastcall TForm1::Edit6Exit(TObject *Sender) // Перевірка сертифікату освіти
+void __fastcall TForm1::Edit6Exit(TObject *Sender)
 {
     if (Edit6->Text.IsEmpty()) {
         ShowMessage("Поле сертифікату освіти не може бути пустим.");
@@ -104,7 +105,7 @@ void __fastcall TForm1::Edit6Exit(TObject *Sender) // Перевірка сертифікату осві
     }
 }
 
-void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender) // Перевірка дати народження
+void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender)
 {
   try
 	{
@@ -126,7 +127,7 @@ void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender) // Перевірка дати на
 	}
 }
 
-void __fastcall TForm1::ComboBox1CloseUp(TObject *Sender) // Перевірка ComboBox на вибір
+void __fastcall TForm1::ComboBox1CloseUp(TObject *Sender)
 {
     if (ComboBox1->Text.IsEmpty() || ComboBox1->ItemIndex == -1) {
         ShowMessage("Будь ласка, оберіть тип паспорта.");
@@ -134,7 +135,7 @@ void __fastcall TForm1::ComboBox1CloseUp(TObject *Sender) // Перевірка ComboBox 
     }
 }
 
-void __fastcall TForm1::RadioGroup1Exit(TObject *Sender) // Перевірка RadioGroup на вибір
+void __fastcall TForm1::RadioGroup1Exit(TObject *Sender)
 {
 	if (RadioGroup1->ItemIndex == -1) {
 		ShowMessage("Будь ласка, оберіть стать.");
@@ -144,7 +145,6 @@ void __fastcall TForm1::RadioGroup1Exit(TObject *Sender) // Перевірка RadioGroup
 
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
-	// Перевірка обов'язкових полів
 	if (Edit2->Text.IsEmpty() || ComboBox1->Text.IsEmpty() || Edit1->Text.IsEmpty() ||
 		DatePicker1->Date > Date() || Edit5->Text.IsEmpty() || Edit3->Text.IsEmpty() ||
 		Edit6->Text.IsEmpty() || Edit4->Text.IsEmpty() || RadioGroup1->ItemIndex == -1)
@@ -152,10 +152,8 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		ShowMessage("Не всі обов'язкові поля заповнені.");
 		return;
 	}
-
 	TADOQuery *query = new TADOQuery(this);
 	query->Connection = DataModule1->ADOConnection1;
-
 	try {
 		if(id == 0) {
 			query->SQL->Text = "INSERT INTO student (Passport_num, Passport_type, PIB, Birth_date, Gender, Email, Phone_num, EduCerf_num, PN, Additional) "
@@ -166,7 +164,6 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 			                   "EduCerf_num = :EduCerf_num, PN = :PN, Additional = :Additional WHERE Student_id = :Student_id";
 			query->Parameters->ParamByName("Student_id")->Value = id;
 		}
-
 		query->Parameters->ParamByName("Passport_num")->Value = Edit2->Text;
 		query->Parameters->ParamByName("Passport_type")->Value = ComboBox1->Text;
 		query->Parameters->ParamByName("PIB")->Value = Edit1->Text;
@@ -188,4 +185,16 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	}
 }
 
-
+ void TForm1::ClearFields()
+{
+    Edit1->Text = "";
+    Edit2->Text = "";
+    Edit3->Text = "";
+    Edit4->Text = "";
+    Edit5->Text = "";
+    Edit6->Text = "";
+	Edit7->Text = "";
+	ComboBox1->ItemIndex = -1;
+	DatePicker1->Date = Now();
+    RadioGroup1->ItemIndex = -1;
+}
