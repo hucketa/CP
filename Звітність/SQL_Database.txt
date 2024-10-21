@@ -150,4 +150,52 @@ FROM Result r
 JOIN Student s ON r.Student_id = s.Student_id
 JOIN Subject subj ON r.Subj_id = subj.Subject_id
 
+UPDATE subject
+SET Name = 'Математика', Description = 'Вивчення чисел, кількостей і форм.'
+WHERE Subject_id = 1;
+
+UPDATE subject
+SET Name = 'Хімія', Description = 'Вивчення речовин і їх реакцій.'
+WHERE Subject_id = 2;
+
+UPDATE subject
+SET Name = 'Англійська', Description = 'Вивчення англійської мови.'
+WHERE Subject_id = 3;
+
+UPDATE subject
+SET Name = 'Українська', Description = 'Вивчення української мови.'
+WHERE Subject_id = 4;
+
+UPDATE subject
+SET Name = 'Біологія', Description = 'Вивчення живих організмів і процесів.'
+WHERE Subject_id = 5;
+
+UPDATE subject
+SET Name = 'Фізика', Description = 'Вивчення законів природи.'
+WHERE Subject_id = 6;
+
+UPDATE subject
+SET Name = 'Географія', Description = 'Вивчення земної поверхні і клімату.'
+WHERE Subject_id = 7;
+
+UPDATE subject
+SET Name = 'Історія', Description = 'Вивчення минулих подій і епох.'
+WHERE Subject_id = 8;
+
+UPDATE student
+SET PIB = 'Іван Петров'
+WHERE Student_id = 1;
+
+UPDATE student
+SET PIB = 'Марія Іванова'
+WHERE Student_id = 2;
+
+UPDATE student
+SET PIB = 'Petrenko Petro'
+WHERE Student_id = 3;
+
+UPDATE student
+SET PIB = 'Петренко Петро'
+WHERE Student_id = 3;
+
 
