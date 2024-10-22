@@ -17,6 +17,7 @@ USEFORM("Conditions.cpp", Form4);
 USEFORM("Certificate.cpp", Certificates);
 USEFORM("Help.cpp", Help_m);
 USEFORM("Main_Window.cpp", Form3);
+USEFORM("Unit9.cpp", Form9);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -37,6 +38,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TForm5), &Form5);
 		Application->CreateForm(__classid(TForm6), &Form6);
 		Application->CreateForm(__classid(TForm8), &Form8);
+		Application->CreateForm(__classid(TForm9), &Form9);
 		Application->Run();
 	}
 	catch (Exception &exception)
