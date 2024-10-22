@@ -44,7 +44,6 @@ __published:	// IDE-managed Components
 	void __fastcall ComboBox1CloseUp(TObject *Sender);
 	void __fastcall RadioGroup1Exit(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
-	void __fastcall Edit1Exit(TObject *Sender);
 private:
 	int id;
 	void ClearFields();

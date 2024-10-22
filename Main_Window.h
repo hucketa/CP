@@ -24,7 +24,6 @@
 #include "Subjects.h"
 #include "Certificate.h"
 #include "School.h"
-#include "Results.h"
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -69,9 +68,7 @@ __published:	// IDE-managed Components
 	void __fastcall DatePicker1CloseUp(TObject *Sender);
 	void __fastcall Edit1Exit(TObject *Sender);
 	void __fastcall N9Click(TObject *Sender);
-	void __fastcall N5Click(TObject *Sender);
 private:
-    bool SortAscending;
 	void DBColumnSizes();	// User declarations
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
