@@ -41,7 +41,34 @@ void __fastcall TForm2::Edit2Exit(TObject *Sender)
         ShowMessage("Назва предмету не може перевищувати 100 символів.");
         Edit2->SetFocus();
     }
+    else
+    {
+        try
+        {
+            String subjectName = Edit2->Text.Trim();
+
+            // Перевірка на унікальність Name
+            DataModule1->ADOQuery1->Close();
+            DataModule1->ADOQuery1->SQL->Text = "SELECT COUNT(*) AS Count FROM subject WHERE Name = :subjectName";
+            DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
+            DataModule1->ADOQuery1->Open();
+
+            int count = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
+
+            if (count > 0 && id == 0)  // Перевірка для нового запису (id == 0)
+            {
+                ShowMessage("Назва предмету вже існує. Будь ласка, виберіть іншу назву.");
+                Edit2->SetFocus();
+            }
+        }
+        catch (const Exception &e)
+        {
+            ShowMessage("Помилка перевірки унікальності: " + e.Message);
+            Edit2->SetFocus();
+        }
+    }
 }
+
 
 void __fastcall TForm2::Edit4Exit(TObject *Sender)
 {
@@ -106,7 +133,7 @@ void __fastcall TForm2::Button1Click(TObject *Sender)
     {
         if (Edit1->Text.Trim().IsEmpty() || Edit2->Text.Trim().IsEmpty() || Edit4->Text.Trim().IsEmpty())
         {
-            ShowMessage("Усі поля повинні бути заповнені перед додаванням.");
+            ShowMessage("Усі поля повинні бути заповнені перед додаванням або оновленням.");
             return;
         }
 
@@ -114,24 +141,41 @@ void __fastcall TForm2::Button1Click(TObject *Sender)
         String subjectName = Edit2->Text.Trim();
         String description = Edit4->Text.Trim();
 
-		DataModule1->ADOQuery1->Close();
-        DataModule1->ADOQuery1->SQL->Text = "INSERT INTO subject (Image_name, Name, Description) VALUES (:imagePath, :subjectName, :description)";
-        DataModule1->ADOQuery1->Parameters->ParamByName("imagePath")->Value = imagePath;
-        DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
-        DataModule1->ADOQuery1->Parameters->ParamByName("description")->Value = description;
-        DataModule1->ADOQuery1->ExecSQL();
+        if (id > 0)  // Якщо id більше 0, то оновлюємо запис
+        {
+            DataModule1->ADOQuery1->Close();
+            DataModule1->ADOQuery1->SQL->Text = "UPDATE subject SET Image_name = :imagePath, Name = :subjectName, Description = :description WHERE Subject_id = :id";
+            DataModule1->ADOQuery1->Parameters->ParamByName("imagePath")->Value = imagePath;
+            DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
+            DataModule1->ADOQuery1->Parameters->ParamByName("description")->Value = description;
+            DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
+            DataModule1->ADOQuery1->ExecSQL();
 
-        DataModule1->DataSource2->DataSet->Refresh();
-        ShowMessage("Новий запис успішно додано до бази даних.");
-        Edit1->Clear();
-        Edit2->Clear();
-        Edit4->Clear();
-    }
-    catch (const Exception &e)
+            ShowMessage("Запис успішно оновлено.");
+        }
+        else  // Якщо id дорівнює 0, додаємо новий запис
+        {
+            DataModule1->ADOQuery1->Close();
+            DataModule1->ADOQuery1->SQL->Text = "INSERT INTO subject (Image_name, Name, Description) VALUES (:imagePath, :subjectName, :description)";
+            DataModule1->ADOQuery1->Parameters->ParamByName("imagePath")->Value = imagePath;
+            DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
+            DataModule1->ADOQuery1->Parameters->ParamByName("description")->Value = description;
+            DataModule1->ADOQuery1->ExecSQL();
+
+            ShowMessage("Новий запис успішно додано до бази даних.");
+        }
+
+		DataModule1->DataSource2->DataSet->Close();
+		DataModule1->DataSource2->DataSet->Open();
+
+		Close();
+	}
+	catch (const Exception &e)
     {
-        ShowMessage("Помилка додавання запису: " + e.Message);
+        ShowMessage("Помилка обробки запису: " + e.Message);
     }
 }
+
 
 void __fastcall TForm2::FormShow(TObject *Sender)
 {

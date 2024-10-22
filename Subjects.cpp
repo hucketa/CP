@@ -108,42 +108,63 @@ void __fastcall TForm7::N3Click(TObject *Sender)
 	try
 	{
 		int id = DataModule1->DataSource2->DataSet->FieldByName("Subject_id")->AsInteger;
-        if (id <= 0)
-        {
-            ShowMessage("Виберіть запис для видалення.");
+		if (id <= 0)
+		{
+			ShowMessage("Виберіть запис для видалення.");
 			return;
 		}
-        DataModule1->ADOQuery1->Close();
-        DataModule1->ADOQuery1->SQL->Text = "SELECT COUNT(*) AS Count FROM result WHERE Subj_id = :id";
-        DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
+
+		// Перевіряємо на наявність залежностей в інших таблицях
+		DataModule1->ADOQuery1->Close();
+		DataModule1->ADOQuery1->SQL->Text = "SELECT COUNT(*) AS Count FROM result WHERE Subj_id = :id";
+		DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
 		DataModule1->ADOQuery1->Open();
 		int resultDependentCount = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
-        DataModule1->ADOQuery1->Close();
-        DataModule1->ADOQuery1->SQL->Text = "SELECT COUNT(*) AS Count FROM conditions WHERE Subject_id = :id";
-        DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
+		DataModule1->ADOQuery1->Close();
+
+		DataModule1->ADOQuery1->SQL->Text = "SELECT COUNT(*) AS Count FROM conditions WHERE Subject_id = :id";
+		DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
 		DataModule1->ADOQuery1->Open();
 		int conditionsDependentCount = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
-		if (resultDependentCount > 0 || conditionsDependentCount > 0)
-        {
-            ShowMessage("Цей запис не може бути видалений, оскільки він використовується в інших таблицях.");
-            return;
-		}
-        if (MessageDlg("Ви впевнені, що хочете видалити цей запис?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo, 0) == mrYes)
-		{
-            DataModule1->ADOQuery1->Close();
-            DataModule1->ADOQuery1->SQL->Text = "DELETE FROM subject WHERE Subject_id = :id";
-            DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
-			DataModule1->ADOQuery1->ExecSQL();
-            DataModule1->DataSource2->DataSet->Refresh();
+		DataModule1->ADOQuery1->Close();
 
-            ShowMessage("Запис успішно видалено.");
-        }
-    }
-    catch (const Exception &e)
-    {
-        ShowMessage("Помилка видалення запису: " + e.Message);
-    }
+		// Якщо є залежні записи, показуємо повідомлення
+		if (resultDependentCount > 0 || conditionsDependentCount > 0)
+		{
+			ShowMessage("Цей запис не може бути видалений, оскільки він використовується в інших таблицях.");
+			return;
+		}
+
+		// Підтвердження видалення
+		if (MessageDlg("Ви впевнені, що хочете видалити цей запис?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo, 0) == mrYes)
+		{
+			try
+			{
+				// Видалення запису
+				DataModule1->ADOQuery1->Close();
+				DataModule1->ADOQuery1->SQL->Text = "DELETE FROM subject WHERE Subject_id = :id";
+				DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
+				DataModule1->ADOQuery1->ExecSQL();
+
+				// Оновлюємо дані після видалення
+				DataModule1->DataSource2->DataSet->Close();
+				DataModule1->DataSource2->DataSet->Open();
+
+				ShowMessage("Запис успішно видалено.");
+			}
+			catch (const Exception &e)
+			{
+				ShowMessage("Помилка при видаленні запису: " + e.Message);
+			}
+		}
+	}
+	catch (const Exception &e)
+	{
+		ShowMessage("Помилка видалення запису: " + e.Message);
+	}
 }
+
+
 
 
 

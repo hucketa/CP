@@ -3,6 +3,7 @@
 
 #include "Unit1.h"
 #include "Data.h"
+#include <DateUtils.hpp>
 #include <System.RegularExpressions.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -62,12 +63,26 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	}
 }
 
-void __fastcall TForm1::Edit2Exit(TObject *Sender) // Перевірка номера паспорту
+void __fastcall TForm1::Edit2Exit(TObject *Sender)
 {
 	if (Edit2->Text.Length() < 8 || Edit2->Text.Length() > 20) {
 		ShowMessage("Номер паспорта повинен бути від 8 до 20 символів.");
 		Edit2->SetFocus();
+		return;
 	}
+	TADOQuery *checkQuery = new TADOQuery(this);
+	checkQuery->Connection = DataModule1->ADOConnection1;
+	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Passport_num = :Passport_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+	checkQuery->Parameters->ParamByName("Passport_num")->Value = Edit2->Text;
+	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+	checkQuery->Open();
+	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+	{
+		ShowMessage("Цей номер паспорта вже існує.");
+		Edit2->SetFocus();
+	}
+	checkQuery->Close();
+	delete checkQuery;
 }
 
 void __fastcall TForm1::Edit3Exit(TObject *Sender)
@@ -75,16 +90,45 @@ void __fastcall TForm1::Edit3Exit(TObject *Sender)
 	if (Edit3->Text.Length() < 10 || Edit3->Text.Length() > 15) {
 		ShowMessage("Номер телефону повинен бути від 10 до 15 символів.");
 		Edit3->SetFocus();
-    }
+		return;
+	}
+	TADOQuery *checkQuery = new TADOQuery(this);
+	checkQuery->Connection = DataModule1->ADOConnection1;
+	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Phone_num = :Phone_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+	checkQuery->Parameters->ParamByName("Phone_num")->Value = Edit3->Text;
+	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+	checkQuery->Open();
+	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+	{
+		ShowMessage("Цей номер телефону вже існує.");
+		Edit3->SetFocus();
+	}
+	checkQuery->Close();
+	delete checkQuery;
 }
 
 void __fastcall TForm1::Edit4Exit(TObject *Sender)
 {
-    if (Edit4->Text.Length() != 10) {
+	if (Edit4->Text.Length() != 10) {
 		ShowMessage("ІПН повинен містити 10 цифр.");
-        Edit4->SetFocus();
+		Edit4->SetFocus();
+		return;
 	}
+	TADOQuery *checkQuery = new TADOQuery(this);
+	checkQuery->Connection = DataModule1->ADOConnection1;
+	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE PN = :PN AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+	checkQuery->Parameters->ParamByName("PN")->Value = Edit4->Text;
+	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+	checkQuery->Open();
+	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+	{
+		ShowMessage("Цей ІПН вже існує.");
+		Edit4->SetFocus();
+	}
+	checkQuery->Close();
+	delete checkQuery;
 }
+
 
 void __fastcall TForm1::Edit5Exit(TObject *Sender)
 {
@@ -94,20 +138,49 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender)
     if (!TRegEx::IsMatch(email, pattern)) {
         ShowMessage("Введіть дійсний e-mail.");
 		Edit5->SetFocus();
+		return;
 	}
+	TADOQuery *checkQuery = new TADOQuery(this);
+	checkQuery->Connection = DataModule1->ADOConnection1;
+	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Email = :Email AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+	checkQuery->Parameters->ParamByName("Email")->Value = Edit5->Text;
+	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+	checkQuery->Open();
+	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+	{
+		ShowMessage("Цей e-mail вже існує.");
+		Edit5->SetFocus();
+	}
+	checkQuery->Close();
+	delete checkQuery;
 }
 
 void __fastcall TForm1::Edit6Exit(TObject *Sender)
 {
-    if (Edit6->Text.IsEmpty()) {
+	if (Edit6->Text.IsEmpty()) {
         ShowMessage("Поле сертифікату освіти не може бути пустим.");
         Edit6->SetFocus();
-    }
+        return;
+	}
+	TADOQuery *checkQuery = new TADOQuery(this);
+	checkQuery->Connection = DataModule1->ADOConnection1;
+	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE EduCerf_num = :EduCerf_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+	checkQuery->Parameters->ParamByName("EduCerf_num")->Value = Edit6->Text;
+	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+	checkQuery->Open();
+	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+	{
+		ShowMessage("Цей номер сертифіката про освіту вже існує.");
+		Edit6->SetFocus();
+	}
+	checkQuery->Close();
+	delete checkQuery;
 }
+
 
 void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender)
 {
-  try
+	try
 	{
 		TDateTime selectedDate = DatePicker1->Date;
 		TDateTime currentDate = Now();
@@ -115,9 +188,20 @@ void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender)
 		{
 			throw Exception("Дата не може бути в майбутньому!");
 		}
-		else if(selectedDate < EncodeDate(1925, 1, 1))
+		else if (selectedDate < EncodeDate(1925, 1, 1))
 		{
 			throw Exception("Дата занадто стара! Виберіть пізнішу дату.");
+		}
+		int birthYear = YearOf(selectedDate);
+		int currentYear = YearOf(currentDate);
+		int yearsDiff = currentYear - birthYear;
+		if (currentDate < EncodeDate(currentYear, MonthOf(selectedDate), DayOf(selectedDate)))
+		{
+			yearsDiff--;
+		}
+		if (yearsDiff < 16)
+		{
+			throw Exception("Для здачі НМТ потрібно мати мінімум 16 років.");
 		}
 	}
 	catch (const Exception &e)
@@ -127,10 +211,12 @@ void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender)
 	}
 }
 
+
+
 void __fastcall TForm1::ComboBox1CloseUp(TObject *Sender)
 {
-    if (ComboBox1->Text.IsEmpty() || ComboBox1->ItemIndex == -1) {
-        ShowMessage("Будь ласка, оберіть тип паспорта.");
+	if (ComboBox1->Text.IsEmpty() || ComboBox1->ItemIndex == -1) {
+		ShowMessage("Будь ласка, оберіть тип паспорта.");
         ComboBox1->SetFocus();
     }
 }
@@ -143,6 +229,16 @@ void __fastcall TForm1::RadioGroup1Exit(TObject *Sender)
 	}
 }
 
+bool TForm1::IsAllDigits(const String& str)
+{
+    for (int i = 1; i <= str.Length(); ++i)
+    {
+		if (!isdigit(str[i]))
+            return false;
+	}
+    return true;
+}
+
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
 	if (Edit2->Text.IsEmpty() || ComboBox1->Text.IsEmpty() || Edit1->Text.IsEmpty() ||
@@ -152,18 +248,29 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		ShowMessage("Не всі обов'язкові поля заповнені.");
 		return;
 	}
+	if (ComboBox1->Text != "ID-карта" && ComboBox1->Text != "Паперовий")
+	{
+		ShowMessage("Невірний тип паспорта. Допустимі значення: 'ID-карта' або 'Паперовий'.");
+        return;
+	}
+	if (!Edit3->Text.IsEmpty() && !IsAllDigits(Edit3->Text))
+    {
+		ShowMessage("Телефонний номер повинен містити тільки цифри.");
+        return;
+	}
 	TADOQuery *query = new TADOQuery(this);
 	query->Connection = DataModule1->ADOConnection1;
 	try {
 		if(id == 0) {
 			query->SQL->Text = "INSERT INTO student (Passport_num, Passport_type, PIB, Birth_date, Gender, Email, Phone_num, EduCerf_num, PN, Additional) "
-			                   "VALUES (:Passport_num, :Passport_type, :PIB, :Birth_date, :Gender, :Email, :Phone_num, :EduCerf_num, :PN, :Additional)";
+							   "VALUES (:Passport_num, :Passport_type, :PIB, :Birth_date, :Gender, :Email, :Phone_num, :EduCerf_num, :PN, :Additional)";
 		} else {
 			query->SQL->Text = "UPDATE student SET Passport_num = :Passport_num, Passport_type = :Passport_type, PIB = :PIB, "
 			                   "Birth_date = :Birth_date, Gender = :Gender, Email = :Email, Phone_num = :Phone_num, "
-			                   "EduCerf_num = :EduCerf_num, PN = :PN, Additional = :Additional WHERE Student_id = :Student_id";
+							   "EduCerf_num = :EduCerf_num, PN = :PN, Additional = :Additional WHERE Student_id = :Student_id";
 			query->Parameters->ParamByName("Student_id")->Value = id;
 		}
+
 		query->Parameters->ParamByName("Passport_num")->Value = Edit2->Text;
 		query->Parameters->ParamByName("Passport_type")->Value = ComboBox1->Text;
 		query->Parameters->ParamByName("PIB")->Value = Edit1->Text;
@@ -183,16 +290,21 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	__finally {
 		delete query;
 	}
+	DataModule1->DataSource1->DataSet->Close();
+	DataModule1->DataSource1->DataSet->Open();
+	Close();
 }
+
+
 
  void TForm1::ClearFields()
 {
-    Edit1->Text = "";
-    Edit2->Text = "";
-    Edit3->Text = "";
-    Edit4->Text = "";
+	Edit1->Text = "";
+	Edit2->Text = "";
+	Edit3->Text = "";
+	Edit4->Text = "";
     Edit5->Text = "";
-    Edit6->Text = "";
+	Edit6->Text = "";
 	Edit7->Text = "";
 	ComboBox1->ItemIndex = -1;
 	DatePicker1->Date = Now();

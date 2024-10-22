@@ -46,7 +46,8 @@ __published:	// IDE-managed Components
 	void __fastcall Button1Click(TObject *Sender);
 private:
 	int id;
-	void ClearFields();	// User declarations
+	void ClearFields();
+	bool IsAllDigits(const String& str);	// User declarations
 public:
 	  void set_id(int k);		// User declarations
 	__fastcall TForm1(TComponent* Owner);
