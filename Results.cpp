@@ -103,8 +103,8 @@ void __fastcall TForm11::DatePicker1CloseUp(TObject *Sender)
 void __fastcall TForm11::LabeledEdit1Exit(TObject *Sender)
 {
 	String pib = LabeledEdit1->Text;
-    UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
-    if (!TRegEx::IsMatch(pib, pattern)) {
+	UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
+	if (!TRegEx::IsMatch(pib, pattern)) {
 		ShowMessage("ПІБ повинен містити лише українські літери.");
 		LabeledEdit1->SetFocus();
 		return;
@@ -115,10 +115,10 @@ void __fastcall TForm11::LabeledEdit1Exit(TObject *Sender)
 
 void __fastcall TForm11::CheckFiltersFilled(TObject *Sender)
 {
-    bool isAnyFilterFilled = false;
+	bool isAnyFilterFilled = false;
     if (Earlier->Checked || Later->Checked || ThisDate->Checked) isAnyFilterFilled = true;
     if (!LabeledEdit1->Text.Trim().IsEmpty()) isAnyFilterFilled = true;
-    if (ComboBox2->ItemIndex >= 0) isAnyFilterFilled = true;
+	if (ComboBox2->ItemIndex >= 0) isAnyFilterFilled = true;
     Execute->Enabled = isAnyFilterFilled;
     Clear->Enabled = isAnyFilterFilled;
 }
@@ -127,85 +127,204 @@ void __fastcall TForm11::DBGrid2TitleClick(TColumn *Column)
 {
     String columnName = Column->FieldName;
     static bool sortAsc = true;
-    String sortOrder = sortAsc ? "ASC" : "DESC";
+	String sortOrder = sortAsc ? "ASC" : "DESC";
     sortAsc = !sortAsc;
 
-    String query =
-        "SELECT r.Res_id, st.PIB, sub.Name, r.Reached_score, c.Max_point, c.Min_r_point, "
+	String query =
+		"SELECT r.Res_id, st.PIB, sub.Name, r.Reached_score, c.Max_point, c.Min_r_point, "
         "CASE WHEN r.Status = 1 THEN 'Зараховано' ELSE 'Не зараховано' END AS Status, "
-        "r.Attemp_date, c.Date, school.Email "
-        "FROM result r "
-        "JOIN student st ON r.Student_id = st.Student_id "
-        "JOIN subject sub ON r.Subj_id = sub.Subject_id "
-        "JOIN conditions c ON r.Condition_id = c.Condition_id "
-        "JOIN school ON r.School_id = school.School_id "
-        "ORDER BY `" + columnName + "` " + sortOrder;
+		"r.Attemp_date, c.Date, school.Email "
+		"FROM result r "
+		"JOIN student st ON r.Student_id = st.Student_id "
+		"JOIN subject sub ON r.Subj_id = sub.Subject_id "
+		"JOIN conditions c ON r.Condition_id = c.Condition_id "
+		"JOIN school ON r.School_id = school.School_id "
+		"ORDER BY `" + columnName + "` " + sortOrder;
 
-    try
-    {
+	try
+	{
 		DataModule1->ADOQuery3->Close();
-        DataModule1->ADOQuery3->SQL->Clear();
-        DataModule1->ADOQuery3->SQL->Add(query);
-        DataModule1->ADOQuery3->Open();
-        DBColumnSizes();
-    }
-    catch (Exception &e)
-    {
-        ShowMessage("Помилка сортування: " + e.Message);
-    }
+		DataModule1->ADOQuery3->SQL->Clear();
+		DataModule1->ADOQuery3->SQL->Add(query);
+		DataModule1->ADOQuery3->Open();
+		DBColumnSizes();
+	}
+	catch (Exception &e)
+	{
+		ShowMessage("Помилка сортування: " + e.Message);
+	}
 }
 
 void __fastcall TForm11::ClearClick(TObject *Sender)
 {
-	LabeledEdit1->Clear();
+    // Очищення полів
+    LabeledEdit1->Clear();
     ComboBox2->ItemIndex = -1;
-    DatePicker1->Date = TDateTime();
+	DatePicker1->Date = Now();
     Earlier->Checked = false;
     Later->Checked = false;
-    ThisDate->Checked = false;
-	DataModule1->ADOQuery3->Filtered = false;
-	DataModule1->ADOQuery3->Filter = "";
+	ThisDate->Checked = false;
+
+    // Скидання фільтра
+    DataModule1->ADOQuery3->Filtered = false;
+    DataModule1->ADOQuery3->Filter = "";
+
+    // Очищення та перезавантаження даних
+    DataModule1->ADOQuery3->Close();
+    DataModule1->ADOQuery3->SQL->Clear();
+
+    // Запит для завантаження всіх записів без фільтрів
+    DataModule1->ADOQuery3->SQL->Add(
+        "SELECT r.Res_id, "
+        "st.PIB, "
+		"sub.Name, "
+		"r.Reached_score, "
+        "c.Max_point, "
+		"c.Min_r_point, "
+        "CASE WHEN r.Status = 1 THEN 'Зараховано' ELSE 'Не зараховано' END AS Status, "
+		"r.Attemp_date, "
+        "c.Date, "
+		"school.Email "
+        "FROM result r "
+        "JOIN student st ON r.Student_id = st.Student_id "
+		"JOIN subject sub ON r.Subj_id = sub.Subject_id "
+		"JOIN conditions c ON r.Condition_id = c.Condition_id "
+		"JOIN school ON r.School_id = school.School_id "
+		"ORDER BY r.Attemp_date DESC");
+
+	DataModule1->ADOQuery3->Open();
+
+    // Деактивація кнопок "Виконати" і "Очистити", оскільки всі поля пусті
 	Execute->Enabled = false;
 	Clear->Enabled = false;
 }
+
+
+
 void __fastcall TForm11::ExecuteClick(TObject *Sender)
 {
-	DataModule1->ADOQuery3->Filtered = false;
-    String filterText = "";
-    if (Earlier->Checked) {
-        filterText += "Attemp_date < '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
-    } else if (Later->Checked) {
-        filterText += "Attemp_date > '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
-    } else if (ThisDate->Checked) {
-        filterText += "Attemp_date = '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
+    String query = "SELECT r.Res_id, "
+                   "st.PIB, "
+                   "sub.Name, "
+                   "r.Reached_score, "
+                   "c.Max_point, "
+                   "c.Min_r_point, "
+                   "CASE WHEN r.Status = 1 THEN 'Зараховано' ELSE 'Не зараховано' END AS Status, "
+                   "r.Attemp_date, "
+                   "c.Date, "
+                   "school.Email "
+                   "FROM result r "
+                   "JOIN student st ON r.Student_id = st.Student_id "
+                   "JOIN subject sub ON r.Subj_id = sub.Subject_id "
+                   "JOIN conditions c ON r.Condition_id = c.Condition_id "
+                   "JOIN school ON r.School_id = school.School_id ";
+
+    String conditions = "";
+
+    // Фільтрація за датою
+    if (Earlier->Checked || Later->Checked || ThisDate->Checked)
+    {
+        if (ThisDate->Checked)
+        {
+            conditions += "r.Attemp_date = :Date ";
+        }
+        else if (Earlier->Checked && Later->Checked)
+        {
+            conditions += "r.Attemp_date BETWEEN :DateStart AND :DateEnd ";
+        }
+        else if (Earlier->Checked)
+        {
+            conditions += "r.Attemp_date < :Date ";
+        }
+        else if (Later->Checked)
+        {
+            conditions += "r.Attemp_date > :Date ";
+        }
     }
-    if (!LabeledEdit1->Text.Trim().IsEmpty()) {
-        if (!filterText.IsEmpty()) filterText += " AND ";
-        filterText += "Student_id IN (SELECT Student_id FROM student WHERE PIB LIKE '%" + LabeledEdit1->Text.Trim() + "%')";
+
+    // Фільтрація за ПІБ студента
+    if (!LabeledEdit1->Text.Trim().IsEmpty())
+    {
+        if (!conditions.IsEmpty()) conditions += " AND ";
+        conditions += "st.PIB LIKE :PIB ";  // Використовуємо правильне поле 'PIB'
     }
-    if (ComboBox2->ItemIndex >= 0) {
-        if (!filterText.IsEmpty()) filterText += " AND ";
-        filterText += "Subj_id IN (SELECT Subject_id FROM subject WHERE Name = '" + ComboBox2->Text + "')";
+
+    // Фільтрація за предметом
+    if (ComboBox2->ItemIndex >= 0)
+    {
+        if (!conditions.IsEmpty()) conditions += " AND ";
+        conditions += "sub.Name = :Subject ";
     }
-    if (!filterText.IsEmpty()) {
-        DataModule1->ADOQuery3->Filter = filterText;
-        DataModule1->ADOQuery3->Filtered = true;
-    } else {
-        DataModule1->ADOQuery3->Filtered = false;
-	}
+
+    // Додавання умов до запиту
+    if (!conditions.IsEmpty())
+    {
+        query += " WHERE " + conditions;
+    }
+
+    query += " ORDER BY r.Attemp_date DESC";
+
+    try
+    {
+        DataModule1->ADOQuery3->Close();
+        DataModule1->ADOQuery3->SQL->Clear();
+        DataModule1->ADOQuery3->SQL->Add(query);
+
+        // Передача параметрів для дати
+        if (ThisDate->Checked || Earlier->Checked || Later->Checked)
+        {
+            TDateTime selectedDate = DatePicker1->Date;
+            if (ThisDate->Checked)
+            {
+                DataModule1->ADOQuery3->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
+            }
+            else if (Earlier->Checked && Later->Checked)
+            {
+                DataModule1->ADOQuery3->Parameters->ParamByName("DateStart")->Value = selectedDate - 1;
+                DataModule1->ADOQuery3->Parameters->ParamByName("DateEnd")->Value = selectedDate + 1;
+            }
+            else
+            {
+                DataModule1->ADOQuery3->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
+            }
+        }
+
+        // Передача параметра для ПІБ
+        if (!LabeledEdit1->Text.Trim().IsEmpty())
+        {
+            String pibFilter = "%" + LabeledEdit1->Text.Trim() + "%";  // Додаємо символи % для LIKE
+            DataModule1->ADOQuery3->Parameters->ParamByName("PIB")->Value = pibFilter;  // Використовуємо 'PIB'
+        }
+
+        // Передача параметра для предмету
+        if (ComboBox2->ItemIndex >= 0)
+        {
+            DataModule1->ADOQuery3->Parameters->ParamByName("Subject")->Value = ComboBox2->Text;
+        }
+
+        DataModule1->ADOQuery3->Open();
+        DBColumnSizes();  // Якщо є метод для налаштування розмірів колонок
+    }
+    catch (Exception &e)
+    {
+        ShowMessage("Помилка при фільтрації: " + e.Message);
+    }
 }
+
+
 
 void __fastcall TForm11::FormCreate(TObject *Sender)
 {
-    DBColumnSizes();
+	DBColumnSizes();
+	DatePicker1->Date = Now();
 	Clear->Enabled = false;
-    Execute->Enabled = false;
+	Execute->Enabled = false;
 	ComboBox2->OnChange = CheckFiltersFilled;
-    DatePicker1->OnChange = CheckFiltersFilled;
-    Earlier->OnClick = CheckFiltersFilled;
-    Later->OnClick = CheckFiltersFilled;
-    ThisDate->OnClick = CheckFiltersFilled;
-    LabeledEdit1->OnChange = CheckFiltersFilled;
+	DatePicker1->OnChange = CheckFiltersFilled;
+	Earlier->OnClick = CheckFiltersFilled;
+	Later->OnClick = CheckFiltersFilled;
+	ThisDate->OnClick = CheckFiltersFilled;
+	LabeledEdit1->OnChange = CheckFiltersFilled;
 }
 //---------------------------------------------------------------------------
 

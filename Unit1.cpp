@@ -310,3 +310,40 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	DatePicker1->Date = Now();
     RadioGroup1->ItemIndex = -1;
 }
+
+void __fastcall TForm1::Edit1Exit(TObject *Sender)
+{
+	String pib = Edit1->Text;
+    UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
+
+    // Перевірка на коректність введених даних
+    if (!TRegEx::IsMatch(pib, pattern)) {
+        ShowMessage("ПІБ повинен містити лише українські літери.");
+		Edit1->SetFocus();
+        return;
+    }
+
+    // Перевірка на унікальність ПІБ
+    TADOQuery *checkQuery = new TADOQuery(this);
+    checkQuery->Connection = DataModule1->ADOConnection1;
+
+    // SQL-запит для перевірки наявності ПІБ в базі, виключаючи поточного студента
+    checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE PIB = :PIB AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+	checkQuery->Parameters->ParamByName("PIB")->Value = Edit1->Text;
+    checkQuery->Parameters->ParamByName("Student_id")->Value = id; // Виключаємо поточного студента
+
+    try {
+        checkQuery->Open();
+        if (checkQuery->FieldByName("Cnt")->AsInteger > 0) {
+            ShowMessage("Студент з таким ПІБ вже існує.");
+            Edit1->SetFocus();
+        }
+    }
+    __finally {
+        checkQuery->Close();
+        delete checkQuery;
+    }
+}
+
+//---------------------------------------------------------------------------
+
