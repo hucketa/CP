@@ -67,7 +67,7 @@ void __fastcall TForm11::FormShow(TObject *Sender)
 
 void __fastcall TForm11::N2Click(TObject *Sender)
 {
-    //Form9->ShowModal();
+    Form9->ShowModal();
 }
 //---------------------------------------------------------------------------
 
