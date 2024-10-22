@@ -239,16 +239,24 @@ void __fastcall TForm4::ClearClick(TObject *Sender)
 
 void __fastcall TForm4::N2Click(TObject *Sender)
 {
+   Form5->set_id(0);
    Form5->ShowModal();
-   DataModule1->DataSource3->DataSet->Refresh();
+   DBColumnSizes();
 }
 //---------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------
+
 
 void __fastcall TForm4::N3Click(TObject *Sender)
 {
+   int selected_id = 0;
+   if (!DataModule1->DataSource3->DataSet->FieldByName("Condition_id")->IsNull) {
+	   selected_id = DataModule1->DataSource3->DataSet->FieldByName("Condition_id")->AsInteger;
+   }
+   Form5->set_id(selected_id);
    Form5->ShowModal();
-   DataModule1->DataSource3->DataSet->Refresh();
+   DBColumnSizes();
 }
 //---------------------------------------------------------------------------
-
 

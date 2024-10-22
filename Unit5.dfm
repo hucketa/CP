@@ -3,14 +3,15 @@ object Form5: TForm5
   Top = 0
   AutoSize = True
   Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1091#1084#1086#1074#1072#1084#1080' '#1087#1088#1086#1074#1077#1076#1077#1085#1085#1103
-  ClientHeight = 178
-  ClientWidth = 445
+  ClientHeight = 177
+  ClientWidth = 441
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 15
   object GroupBox1: TGroupBox
     Left = 0
@@ -113,6 +114,7 @@ object Form5: TForm5
       Height = 25
       Caption = #1044#1086#1076#1072#1090#1080
       TabOrder = 5
+      OnClick = Button1Click
     end
     object ComboBox1: TComboBox
       Left = 280
