@@ -23,7 +23,6 @@
 class TForm11 : public TForm
 {
 __published:	// IDE-managed Components
-	TDBGrid *DBGrid2;
 	TMainMenu *MainMenu1;
 	TMenuItem *N1;
 	TMenuItem *Lj1;
@@ -41,6 +40,7 @@ __published:	// IDE-managed Components
 	TCheckBox *ThisDate;
 	TDatePicker *DatePicker1;
 	TLabeledEdit *LabeledEdit1;
+	TDBGrid *DBGrid1;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall DatePicker1CloseUp(TObject *Sender);

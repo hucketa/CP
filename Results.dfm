@@ -1,10 +1,9 @@
 object Form11: TForm11
   Left = 0
   Top = 0
-  AutoSize = True
   Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080
-  ClientHeight = 325
-  ClientWidth = 673
+  ClientHeight = 305
+  ClientWidth = 664
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,28 +15,13 @@ object Form11: TForm11
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
-  object DBGrid2: TDBGrid
-    Left = 0
-    Top = 0
-    Width = 665
-    Height = 202
-    DataSource = DataModule1.DataSource5
-    PopupMenu = PopupMenu1
-    TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -12
-    TitleFont.Name = 'Segoe UI'
-    TitleFont.Style = []
-    OnTitleClick = DBGrid2TitleClick
-  end
   object GroupBox1: TGroupBox
-    Left = 4
-    Top = 208
-    Width = 665
+    Left = 7
+    Top = 181
+    Width = 634
     Height = 116
     Caption = #1060#1110#1083#1100#1090#1088#1080' '#1076#1083#1103' '#1090#1072#1073#1083#1080#1094#1110
-    TabOrder = 1
+    TabOrder = 0
     object Label3: TLabel
       Left = 302
       Top = 18
@@ -62,7 +46,7 @@ object Form11: TForm11
       TextHint = #1055#1088#1077#1076#1084#1077#1090' '#1087#1086#1074'`'#1103#1079#1072#1085#1080#1081' '#1079' '#1074#1080#1084#1086#1075#1086#1102
     end
     object Execute: TBitBtn
-      Left = 479
+      Left = 455
       Top = 30
       Width = 163
       Height = 34
@@ -108,7 +92,7 @@ object Form11: TForm11
       OnClick = ExecuteClick
     end
     object Clear: TBitBtn
-      Left = 479
+      Left = 455
       Top = 70
       Width = 163
       Height = 33
@@ -200,6 +184,70 @@ object Form11: TForm11
       Text = ''
       OnExit = LabeledEdit1Exit
     end
+  end
+  object DBGrid1: TDBGrid
+    Left = 8
+    Top = 8
+    Width = 633
+    Height = 167
+    DataSource = DataModule1.DataSource5
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'Res_id'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'PIB'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Name'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Reached_score'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Max_point'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Min_r_point'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Status'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Attemp_date'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Date'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Email'
+        Visible = True
+      end>
   end
   object MainMenu1: TMainMenu
     Left = 544

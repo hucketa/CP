@@ -25,9 +25,7 @@ object DataModule1: TDataModule1
     SQL.Strings = (
       'SELECT s.PIB,'
       '       r.Attemp_date,'
-      
-        '       CASE WHEN r.Status = 1 THEN '#39#1047#1072#1088#1072#1093#1086#1074#1072#1085#1086#39' ELSE '#39#1053#1077' '#1079#1072#1088#1072#1093#1086#1074 +
-        #1072#1085#1086#39' END,'
+      '       CASE WHEN r.Status = 1 THEN '#39#1047#1076#1072#1085#1086#39' ELSE '#39#1053#1077#1079#1076#1072#1085#1086#39' END,'
       '       subj.Name,'
       '       r.Reached_score'
       'FROM Result r'

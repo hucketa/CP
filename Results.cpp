@@ -16,27 +16,33 @@ __fastcall TForm11::TForm11(TComponent* Owner)
 //---------------------------------------------------------------------------
 
 
-void __fastcall TForm11::DBColumnSizes(){
-	DBGrid2->Columns->Items[0]->Visible = false;
-	DBGrid2->Columns->Items[1]->Width = 150;
-	DBGrid2->Columns->Items[1]->Title->Caption = "ПІБ студента";
-	DBGrid2->Columns->Items[2]->Width = 90;
-	DBGrid2->Columns->Items[2]->Title->Caption = "Предмет";
-	DBGrid2->Columns->Items[3]->Width = 82;
-	DBGrid2->Columns->Items[3]->Title->Caption = "Результат";
-	DBGrid2->Columns->Items[4]->Width = 82;
-	DBGrid2->Columns->Items[4]->Title->Caption = "Максимально";
-	DBGrid2->Columns->Items[5]->Width = 82;
-	DBGrid2->Columns->Items[5]->Title->Caption = "Прохідний";
-	DBGrid2->Columns->Items[6]->Width = 82;
-	DBGrid2->Columns->Items[6]->Title->Caption = "Статус";
-	DBGrid2->Columns->Items[7]->Width = 82;
-	DBGrid2->Columns->Items[7]->Title->Caption = "Дата складання";
-	DBGrid2->Columns->Items[8]->Width = 82;
-	DBGrid2->Columns->Items[8]->Title->Caption = "Дата укладання умов";
-	DBGrid2->Columns->Items[9]->Width = 175;
-	DBGrid2->Columns->Items[9]->Title->Caption = "E-mail навчального закладу";
+void __fastcall TForm11::DBColumnSizes() {
+	if (DBGrid1->Columns->Count >= 10) {
+		DBGrid1->Columns->Items[0]->Visible = false;
+		DBGrid1->Columns->Items[1]->Width = 150;
+		DBGrid1->Columns->Items[1]->Title->Caption = "ПІБ студента";
+		DBGrid1->Columns->Items[2]->Width = 90;
+		DBGrid1->Columns->Items[2]->Title->Caption = "Предмет";
+		DBGrid1->Columns->Items[3]->Width = 82;
+		DBGrid1->Columns->Items[3]->Title->Caption = "Результат";
+		DBGrid1->Columns->Items[4]->Width = 82;
+		DBGrid1->Columns->Items[4]->Title->Caption = "Максимально";
+		DBGrid1->Columns->Items[5]->Width = 82;
+		DBGrid1->Columns->Items[5]->Title->Caption = "Прохідний";
+		DBGrid1->Columns->Items[6]->Width = 82;
+		DBGrid1->Columns->Items[6]->Title->Caption = "Статус";
+		DBGrid1->Columns->Items[7]->Width = 82;
+		DBGrid1->Columns->Items[7]->Title->Caption = "Дата складання";
+		DBGrid1->Columns->Items[8]->Width = 82;
+		DBGrid1->Columns->Items[8]->Title->Caption = "Дата укладання умов";
+		DBGrid1->Columns->Items[9]->Width = 175;
+		DBGrid1->Columns->Items[9]->Title->Caption = "E-mail навчального закладу";
+	} else {
+		ShowMessage("Недостатньо стовпців у таблиці.");
+	}
 }
+
+
 
 
 void __fastcall TForm11::FormShow(TObject *Sender)

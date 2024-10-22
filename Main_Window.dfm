@@ -38,8 +38,6 @@ object Form3: TForm3
         Text = #1051#1086#1075#1110#1085' '#1091#1095#1072#1089#1085#1080#1082#1072
         Width = 200
       end>
-    ExplicitTop = 334
-    ExplicitWidth = 809
   end
   object GroupBox1: TGroupBox
     Left = 566
@@ -122,26 +120,6 @@ object Form3: TForm3
       end
     end
   end
-  object DBGrid1: TDBGrid
-    Left = 0
-    Top = 4
-    Width = 560
-    Height = 323
-    DataSource = DataModule1.MainFormSource
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -12
-    TitleFont.Name = 'Segoe UI'
-    TitleFont.Style = []
-    OnTitleClick = DBGrid1TitleClick
-  end
   object Clear: TBitBtn
     Left = 691
     Top = 279
@@ -183,7 +161,7 @@ object Form3: TForm3
       CEFF7A7A7AFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FEFEFEFFFFFF
       FF00D9D9D9FFC9C9C9FFFAFAFAFFE5E5E5FF737373FF828282FF797979FF8282
       82FFD4D4D4FFFDFDFDFFFCFCFCFFFEFEFEFFFFFFFF00FFFFFF00}
-    TabOrder = 3
+    TabOrder = 2
     OnClick = ClearClick
   end
   object Execute: TBitBtn
@@ -229,8 +207,21 @@ object Form3: TForm3
       00034C7047004C7047004C7047004C7047004C7047004C7047004C7047004C70
       47004C7047004C7047004C7047004C7047004C7047004C7047004C7047004C70
       47004C704700}
-    TabOrder = 4
+    TabOrder = 3
     OnClick = ExecuteClick
+  end
+  object DBGrid1: TDBGrid
+    Left = 8
+    Top = 8
+    Width = 552
+    Height = 319
+    DataSource = DataModule1.MainFormSource
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
   end
   object MainMenu1: TMainMenu
     Left = 264

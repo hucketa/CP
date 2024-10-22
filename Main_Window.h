@@ -45,7 +45,6 @@ __published:	// IDE-managed Components
 	TRadioGroup *Status_check;
 	TEdit *Edit1;
 	TMenuItem *N3;
-	TDBGrid *DBGrid1;
 	TBitBtn *Clear;
 	TBitBtn *Execute;
 	TMenuItem *N2;
@@ -54,6 +53,7 @@ __published:	// IDE-managed Components
 	TMenuItem *N7;
 	TMenuItem *N8;
 	TMenuItem *N9;
+	TDBGrid *DBGrid1;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);

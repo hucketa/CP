@@ -22,10 +22,6 @@ Coordinates=457,408,40,36
 [DatePicker1]
 Coordinates=173,256,85,36
 
-[DBGrid1]
-Coordinates=99,256,64,36
-Visible=True
-
 [StatusBar1]
 Coordinates=308,10,78,58
 
@@ -33,7 +29,8 @@ Coordinates=308,10,78,58
 Coordinates=339,489,40,36
 
 []
-Coordinates=457,243,40,36
+Coordinates=99,256,64,36
+Visible=True
 
 [DataModule1.MainQuery]
 Coordinates=10,10,164,168
