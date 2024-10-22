@@ -4,8 +4,8 @@ object Form3: TForm3
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1054#1073#1083#1110#1082' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1110#1074' '#1085#1084#1090
-  ClientHeight = 353
-  ClientWidth = 809
+  ClientHeight = 352
+  ClientWidth = 805
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object Form3: TForm3
   TextHeight = 15
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 334
-    Width = 809
+    Top = 333
+    Width = 805
     Height = 19
     Panels = <
       item
@@ -38,8 +38,8 @@ object Form3: TForm3
         Text = #1051#1086#1075#1110#1085' '#1091#1095#1072#1089#1085#1080#1082#1072
         Width = 200
       end>
-    ExplicitTop = 333
-    ExplicitWidth = 805
+    ExplicitTop = 334
+    ExplicitWidth = 809
   end
   object GroupBox1: TGroupBox
     Left = 566
@@ -261,6 +261,7 @@ object Form3: TForm3
     end
     object N5: TMenuItem
       Caption = #1056#1077#1079#1091#1083#1100#1090#1072#1090#1080' '#1090#1077#1089#1090#1091#1074#1072#1085#1085#1103
+      OnClick = N5Click
     end
     object N1: TMenuItem
       Caption = #1057#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080

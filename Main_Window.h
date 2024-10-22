@@ -22,6 +22,7 @@
 #include "Conditions.h"
 #include "Students.h"
 #include "Subjects.h"
+#include "Results.h"
 #include "Certificate.h"
 #include "School.h"
 //---------------------------------------------------------------------------
@@ -68,6 +69,7 @@ __published:	// IDE-managed Components
 	void __fastcall DatePicker1CloseUp(TObject *Sender);
 	void __fastcall Edit1Exit(TObject *Sender);
 	void __fastcall N9Click(TObject *Sender);
+	void __fastcall N5Click(TObject *Sender);
 private:
 	void DBColumnSizes();	// User declarations
 public:		// User declarations

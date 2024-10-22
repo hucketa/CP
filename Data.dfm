@@ -107,6 +107,7 @@ object DataModule1: TDataModule1
     Top = 288
   end
   object ADOQuery3: TADOQuery
+    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
     Parameters = <>
