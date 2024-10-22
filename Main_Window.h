@@ -23,6 +23,7 @@
 #include "Students.h"
 #include "Subjects.h"
 #include "Certificate.h"
+#include "School.h"
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -51,6 +52,7 @@ __published:	// IDE-managed Components
 	TMenuItem *N6;
 	TMenuItem *N7;
 	TMenuItem *N8;
+	TMenuItem *N9;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
@@ -65,6 +67,7 @@ __published:	// IDE-managed Components
 	void __fastcall N3Click(TObject *Sender);
 	void __fastcall DatePicker1CloseUp(TObject *Sender);
 	void __fastcall Edit1Exit(TObject *Sender);
+	void __fastcall N9Click(TObject *Sender);
 private:
 	void DBColumnSizes();	// User declarations
 public:		// User declarations

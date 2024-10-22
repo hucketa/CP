@@ -28,6 +28,7 @@ void __fastcall TForm7::DBColumnSizes(){
 	DBGrid1->Columns->Items[3]->Width = 240;
 	DBGrid1->Columns->Items[3]->Title->Caption = "Посилання на зразок";
 }
+
 void __fastcall TForm7::FormCreate(TObject *Sender)
 {
    DBColumnSizes();

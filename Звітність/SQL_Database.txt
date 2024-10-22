@@ -198,4 +198,14 @@ UPDATE student
 SET PIB = 'Петренко Петро'
 WHERE Student_id = 3;
 
+ALTER TABLE school DROP CHECK school_chk_1;
+
+INSERT INTO school (City, Region, Type, Email, Teacher_PIB) 
+VALUES
+('Київ', 'Київська область', 'Ліцей', 'school1@example.com', 'Ольга Коваль'),
+('Львів', 'Львівська область', 'СЗШ', 'school2@example.com', 'Андрій Шевченко'),
+('Одеса', 'Одеська область', 'Гімназія', 'school3@example.com', 'Наталія Бондар'),
+('Харків', 'Харківська область', 'ВНЗ', 'school4@example.com', 'Дмитро Савченко');
+
+
 

@@ -166,6 +166,12 @@
             <DependentOn>Results.h</DependentOn>
             <BuildOrder>12</BuildOrder>
         </CppCompile>
+        <CppCompile Include="School.cpp">
+            <Form>Form6</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>School.h</DependentOn>
+            <BuildOrder>13</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Students.cpp">
             <Form>Form14</Form>
             <FormType>dfm</FormType>
@@ -196,6 +202,12 @@
             <DependentOn>Unit5.h</DependentOn>
             <BuildOrder>12</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Unit8.cpp">
+            <Form>Form8</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Unit8.h</DependentOn>
+            <BuildOrder>14</BuildOrder>
+        </CppCompile>
         <FormResources Include="Subjects.dfm"/>
         <FormResources Include="Students.dfm"/>
         <FormResources Include="Results.dfm"/>
@@ -207,6 +219,8 @@
         <FormResources Include="Certificate.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
         <FormResources Include="Help.dfm"/>
+        <FormResources Include="School.dfm"/>
+        <FormResources Include="Unit8.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
