@@ -208,19 +208,19 @@
             <DependentOn>Unit8.h</DependentOn>
             <BuildOrder>14</BuildOrder>
         </CppCompile>
+        <FormResources Include="Unit1.dfm"/>
         <FormResources Include="Subjects.dfm"/>
         <FormResources Include="Students.dfm"/>
-        <FormResources Include="Results.dfm"/>
+        <FormResources Include="School.dfm"/>
+        <FormResources Include="Unit8.dfm"/>
         <FormResources Include="Unit5.dfm"/>
         <FormResources Include="Unit2.dfm"/>
-        <FormResources Include="Unit1.dfm"/>
+        <FormResources Include="Help.dfm"/>
         <FormResources Include="Data.dfm"/>
         <FormResources Include="Conditions.dfm"/>
         <FormResources Include="Certificate.dfm"/>
+        <FormResources Include="Results.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
-        <FormResources Include="Help.dfm"/>
-        <FormResources Include="School.dfm"/>
-        <FormResources Include="Unit8.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
