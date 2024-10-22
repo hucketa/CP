@@ -6,17 +6,18 @@
 //---------------------------------------------------------------------------
 USEFORM("Subjects.cpp", Form7);
 USEFORM("Students.cpp", Form14);
-USEFORM("Results.cpp", Form11);
+USEFORM("School.cpp", Form6);
+USEFORM("Unit1.cpp", Form1);
+USEFORM("Unit8.cpp", Form8);
 USEFORM("Unit5.cpp", Form5);
 USEFORM("Unit2.cpp", Form2);
-USEFORM("Unit1.cpp", Form1);
+USEFORM("Results.cpp", Form11);
 USEFORM("Data.cpp", DataModule1); /* TDataModule: File Type */
 USEFORM("Conditions.cpp", Form4);
 USEFORM("Certificate.cpp", Certificates);
-USEFORM("Main_Window.cpp", Form3);
 USEFORM("Help.cpp", Help_m);
-USEFORM("School.cpp", Form6);
-USEFORM("Unit8.cpp", Form8);
+USEFORM("Main_Window.cpp", Form3);
+USEFORM("Unit9.cpp", Form9);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -37,6 +38,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TForm5), &Form5);
 		Application->CreateForm(__classid(TForm6), &Form6);
 		Application->CreateForm(__classid(TForm8), &Form8);
+		Application->CreateForm(__classid(TForm9), &Form9);
 		Application->Run();
 	}
 	catch (Exception &exception)

@@ -39,32 +39,45 @@ void __fastcall TForm3::FormCreate(TObject *Sender)
 
 void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
 {
-   String columnName = Column->FieldName;
-   static bool sortAsc = true;
-   String sortOrder = sortAsc ? "ASC" : "DESC";
-   sortAsc = !sortAsc;
-   String query = "SELECT s.PIB, "
-				  "r.Attemp_date, "
-				  "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
-				  "subj.Name, "
-				  "r.Reached_score "
-				  "FROM Result r "
-				  "JOIN Student s ON r.Student_id = s.Student_id "
-				  "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
-				  "ORDER BY `" + columnName + "` " + sortOrder;
-   try
-   {
-       DataModule1->MainQuery->Close();
-       DataModule1->MainQuery->SQL->Clear();
-       DataModule1->MainQuery->SQL->Add(query);
-       DataModule1->MainQuery->Open();
-       DBColumnSizes();
-   }
-   catch (Exception &e)
-   {
-       ShowMessage("Помилка сортування: " + e.Message);
-   }
+    // Отримуємо ім'я стовпця для сортування
+    String columnName = Column->FieldName;
+
+    // Визначаємо порядок сортування
+    static bool sortAsc = true;
+    String sortOrder = sortAsc ? "ASC" : "DESC";
+    sortAsc = !sortAsc;
+
+    // Формуємо SQL-запит із сортуванням
+    String query =
+        "SELECT s.PIB, "
+        "r.Attemp_date, "
+        "CASE WHEN r.Status = 1 THEN 'Зараховано' ELSE 'Не зараховано' END AS Status, "
+        "subj.Name AS Subject, "
+        "r.Reached_score "
+        "FROM Result r "
+        "JOIN Student s ON r.Student_id = s.Student_id "
+        "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
+        "ORDER BY `" + columnName + "` " + sortOrder;
+
+    try
+    {
+        // Виконуємо запит
+        DataModule1->MainQuery->Close();
+        DataModule1->MainQuery->SQL->Clear();
+        DataModule1->MainQuery->SQL->Add(query);
+        DataModule1->MainQuery->Open();
+
+        // Викликаємо метод для налаштування розміру стовпців
+        DBColumnSizes();
+    }
+    catch (Exception &e)
+    {
+        // Виведення повідомлення про помилку
+        ShowMessage("Помилка сортування: " + e.Message);
+    }
 }
+
+
 
 //---------------------------------------------------------------------------
 
@@ -73,7 +86,7 @@ void TForm3::DBColumnSizes(){
 	DBGrid1->Columns->Items[0]->Title->Caption = "ПІБ";
 	DBGrid1->Columns->Items[1]->Width = 100;
 	DBGrid1->Columns->Items[1]->Title->Caption = "Дата складання";
-	DBGrid1->Columns->Items[2]->Width = 60;
+	DBGrid1->Columns->Items[2]->Width = 90;
 	DBGrid1->Columns->Items[2]->Title->Caption = "Статус";
 	DBGrid1->Columns->Items[3]->Width = 125;
 	DBGrid1->Columns->Items[3]->Title->Caption = "Предмет";
@@ -94,9 +107,6 @@ void __fastcall TForm3::CheckFiltersFilled(TObject *Sender)
 void __fastcall TForm3::FormShow(TObject *Sender)
 {
 	DBColumnSizes();
-	//Application->MainFormOnTaskBar = true;
-	//Application->UpdateFormatSettings = false;
-	//Application->DefaultFont->Charset = DEFAULT_CHARSET;
 }
 
 void __fastcall TForm3::ClearClick(TObject *Sender)
@@ -111,7 +121,7 @@ void __fastcall TForm3::ClearClick(TObject *Sender)
 	Clear->Enabled = false;
 	String query = "SELECT s.PIB, "
 				   "r.Attemp_date, "
-				   "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
+				   "CASE WHEN r.Status = 1 THEN 'Зараховано' ELSE 'Не зараховано' END, "
 				   "subj.Name, "
 				   "r.Reached_score "
 				   "FROM Result r "
@@ -138,8 +148,8 @@ void __fastcall TForm3::ExecuteClick(TObject *Sender)
 {
   String query = "SELECT s.PIB, "
 				   "r.Attemp_date, "
-                   "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
-                   "subj.Name, "
+				   "CASE WHEN r.Status = 1 THEN 'Зараховано' ELSE 'Не зараховано' END, "
+				   "subj.Name, "
                    "r.Reached_score "
 				   "FROM Result r "
                    "JOIN Student s ON r.Student_id = s.Student_id "
@@ -224,6 +234,7 @@ void __fastcall TForm3::ExecuteClick(TObject *Sender)
 	{
 		ShowMessage("Помилка при фільтрації: " + e.Message);
 	}
+	DBColumnSizes();
 }
 //---------------------------------------------------------------------------
 
@@ -296,7 +307,13 @@ void __fastcall TForm3::Edit1Exit(TObject *Sender)
 
 void __fastcall TForm3::N9Click(TObject *Sender)
 {
-    Form6->ShowModal();
+	Form6->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::N5Click(TObject *Sender)
+{
+   Form11->ShowModal();
 }
 //---------------------------------------------------------------------------
 

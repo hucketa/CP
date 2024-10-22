@@ -22,6 +22,8 @@ __published:	// IDE-managed Components
 	TADOQuery *ADOQuery2;
 	TADOTable *ADOTable3;
 	TDataSource *DataSource4;
+	TADOQuery *ADOQuery3;
+	TDataSource *DataSource5;
 private:	// User declarations
 public:		// User declarations
 	__fastcall TDataModule1(TComponent* Owner);

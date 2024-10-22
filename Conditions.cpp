@@ -83,7 +83,7 @@ void __fastcall TForm4::DatePicker2CloseUp(TObject *Sender)
 		{
 			throw Exception("Дата не може бути в майбутньому!");
 		}
-		else if (selectedDate < EncodeDate(1925, 1, 1))
+		else if (selectedDate < EncodeDate(1990, 1, 1))
 		{
 			throw Exception("Дата занадто стара! Виберіть пізнішу дату.");
 		}

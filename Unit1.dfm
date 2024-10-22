@@ -183,6 +183,7 @@ object Form1: TForm1
       Width = 364
       Height = 23
       TabOrder = 10
+      OnExit = Edit1Exit
     end
   end
 end
