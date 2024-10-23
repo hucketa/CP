@@ -308,3 +308,9 @@ void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
 }
 
 
+void __fastcall TForm3::N1Click(TObject *Sender)
+{
+    Certificates->ShowModal();
+}
+//---------------------------------------------------------------------------
+

@@ -15,35 +15,49 @@
 #include <Vcl.WinXPickers.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Mask.hpp>
+#include <Vcl.Buttons.hpp>
+#include "Help.h"
+#include "Main_Window.h"
+#include "Data.h"
+#include "Unit10.h"
 //---------------------------------------------------------------------------
 class TCertificates : public TForm
 {
 __published:	// IDE-managed Components
-	TDBGrid *DBGrid1;
-	TGroupBox *GroupBox1;
-	TLabel *Label2;
-	TLabel *Label4;
-	TLabel *Label5;
-	TEdit *Edit2;
-	TDatePicker *DatePicker1;
-	TEdit *Edit4;
-	TButton *Button1;
-	TRadioGroup *RadioGroup1;
 	TDBGrid *DBGrid2;
-	TLabeledEdit *LabeledEdit1;
-	TDatePicker *DatePicker2;
-	TLabel *Label1;
-	TMainMenu *MainMenu1;
-	TMenuItem *N1;
-	TMenuItem *N4;
-	TMenuItem *N5;
-	TMenuItem *Lj1;
+	TPopupMenu *PopupMenu1;
 	TMenuItem *N2;
 	TMenuItem *N3;
-	TMenuItem *N11;
-private:	// User declarations
+	TMainMenu *MainMenu1;
+	TMenuItem *N1;
+	TMenuItem *Lj1;
+	TGroupBox *GroupBox1;
+	TLabeledEdit *LabeledEdit1;
+	TDatePicker *DatePicker1;
+	TCheckBox *Later;
+	TCheckBox *ThisDate;
+	TCheckBox *Earlier;
+	TLabel *Label4;
+	TBitBtn *Execute;
+	TBitBtn *Clear;
+	TBitBtn *BitBtn1;
+	void __fastcall N1Click(TObject *Sender);
+	void __fastcall Lj1Click(TObject *Sender);
+	void __fastcall FormShow(TObject *Sender);
+	void __fastcall DatePicker1CloseUp(TObject *Sender);
+	void __fastcall LabeledEdit1Exit(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall ExecuteClick(TObject *Sender);
+	void __fastcall ClearClick(TObject *Sender);
+	void __fastcall DBGrid2TitleClick(TColumn *Column);
+	void __fastcall N3Click(TObject *Sender);
+	void __fastcall N2Click(TObject *Sender);
+private:
+	void DBColumnSizes();
+	bool SortAscending;	// User declarations
 public:		// User declarations
 	__fastcall TCertificates(TComponent* Owner);
+	void __fastcall CheckFiltersFilled(TObject *Sender);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TCertificates *Certificates;

@@ -141,4 +141,27 @@ object DataModule1: TDataModule1
     Left = 88
     Top = 288
   end
+  object DataSource6: TDataSource
+    DataSet = ADOQuery4
+    Left = 88
+    Top = 352
+  end
+  object ADOQuery4: TADOQuery
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'SELECT certificate.Cerf_num, student.PIB, certificate.PIN, certi' +
+        'ficate.Creation_date, certificate.Effect_time,'
+      '       CASE'
+      '           WHEN certificate.Status = 1 THEN '#39#1044#1110#1081#1089#1085#1080#1081#39
+      '           ELSE '#39#1053#1077' '#1076#1110#1081#1089#1085#1080#1081#39
+      '       END AS Status'
+      'FROM certificate'
+      'JOIN student ON certificate.Student_id = student.Student_id;')
+    Left = 232
+    Top = 136
+  end
 end

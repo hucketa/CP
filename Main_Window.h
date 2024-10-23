@@ -70,6 +70,7 @@ __published:	// IDE-managed Components
 	void __fastcall N9Click(TObject *Sender);
 	void __fastcall N5Click(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
+	void __fastcall N1Click(TObject *Sender);
 private:
 	void DBColumnSizes();
 	//bool sortAsc;	// User declarations

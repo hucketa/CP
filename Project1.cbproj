@@ -190,6 +190,12 @@
             <DependentOn>Unit1.h</DependentOn>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Unit10.cpp">
+            <Form>Form10</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Unit10.h</DependentOn>
+            <BuildOrder>16</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Unit2.cpp">
             <Form>Form2</Form>
             <FormType>dfm</FormType>
@@ -228,6 +234,7 @@
         <FormResources Include="Certificate.dfm"/>
         <FormResources Include="Results.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
+        <FormResources Include="Unit10.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
