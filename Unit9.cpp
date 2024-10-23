@@ -48,6 +48,7 @@ void TForm9::set_id(int k) {
 
 		query->Close();
 		delete query;
+		Form9->Caption = "Редагування даних";
 	} else {
 		Button1->Caption = "Додати";
 		LabeledEdit1->Text = "";
@@ -59,6 +60,7 @@ void TForm9::set_id(int k) {
 		Label5->Caption = "Максимальний: -";
 		Label7->Caption = "Прохідний: -";
 		Label6->Caption = "Мінімальний: -";
+		Form9->Caption = "Додавання даних";
 	}
 }
 
