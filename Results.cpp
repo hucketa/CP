@@ -341,3 +341,16 @@ void __fastcall TForm11::N3Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm11::N6Click(TObject *Sender)
+{
+   this->Close();
+   Form3->Show();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm11::Lj1Click(TObject *Sender)
+{
+    Help_m->ShowModal();
+}
+//---------------------------------------------------------------------------
+

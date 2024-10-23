@@ -207,8 +207,6 @@ void __fastcall TForm9::LabeledEdit4Exit(TObject *Sender) {
 		int maxPoint = query->FieldByName("Max_point")->AsInteger;
 		int minPassPoint = query->FieldByName("Min_r_point")->AsInteger;
 		int minPoint = query->FieldByName("Min_point")->AsInteger;
-
-		// Виведення значень для відладки
 		ShowMessage("Max Point: " + IntToStr(maxPoint) + ", Min Passing Point: " + IntToStr(minPassPoint) + ", Min Point: " + IntToStr(minPoint));
 
 		if (enteredScore < minPoint) {
@@ -244,8 +242,6 @@ void __fastcall TForm9::ComboBox1CloseUp(TObject *Sender) {
 	int subject_id = ComboBox1->ItemIndex + 1;
 	TDateTime selectedDate = DatePicker2->Date;
 	String formattedDate = selectedDate.FormatString("yyyy-mm-dd");
-
-	// Виведення значень для відладки
 	ShowMessage("Selected Subject ID: " + IntToStr(subject_id) + ", Selected Date: " + formattedDate);
 
 	TADOQuery *query = new TADOQuery(NULL);
@@ -259,8 +255,6 @@ void __fastcall TForm9::ComboBox1CloseUp(TObject *Sender) {
 		int maxPoint = query->FieldByName("Max_point")->AsInteger;
 		int minPassPoint = query->FieldByName("Min_r_point")->AsInteger;
 		int minPoint = query->FieldByName("Min_point")->AsInteger;
-
-		// Виведення значень для відладки
 		ShowMessage("Max Point: " + IntToStr(maxPoint) + ", Min Passing Point: " + IntToStr(minPassPoint) + ", Min Point: " + IntToStr(minPoint));
 
 		Label5->Caption = "Максимальний: " + IntToStr(maxPoint);
@@ -279,7 +273,6 @@ void __fastcall TForm9::ComboBox1CloseUp(TObject *Sender) {
 
 void __fastcall TForm9::Button1Click(TObject *Sender)
 {
-	// Перевіряємо заповненість полів
 	if (LabeledEdit1->Text.Trim() == "") {
 		ShowMessage("Будь ласка, введіть ПІБ.");
 		LabeledEdit1->SetFocus();
@@ -300,14 +293,11 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 		DatePicker2->SetFocus();
 		return;
 	}
-
 	int subject_id = ComboBox1->ItemIndex + 1;
 	TDateTime selectedDate = DatePicker2->Date;
 	String formattedDate = selectedDate.FormatString("yyyy-mm-dd");
 	int reachedScore = LabeledEdit4->Text.ToIntDef(-1);
-	int status = RadioGroup1->ItemIndex == 0 ? 1 : 0; // Зараховано/Не зараховано
-
-	// Одержуємо student_id на основі ПІБ
+	int status = RadioGroup1->ItemIndex == 0 ? 1 : 0;
 	TADOQuery *studentQuery = new TADOQuery(NULL);
 	studentQuery->Connection = DataModule1->ADOConnection1;
 	studentQuery->SQL->Text = "SELECT Student_id FROM student WHERE PIB = :pib";
@@ -324,8 +314,6 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 	}
 	studentQuery->Close();
 	delete studentQuery;
-
-	// Одержуємо school_id на основі Email
 	TADOQuery *schoolQuery = new TADOQuery(NULL);
 	schoolQuery->Connection = DataModule1->ADOConnection1;
 	schoolQuery->SQL->Text = "SELECT School_id FROM school WHERE Email = :email";
@@ -361,26 +349,20 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 	}
 	conditionQuery->Close();
 	delete conditionQuery;
-
-	// Визначаємо чи додаємо новий запис або редагуємо існуючий
 	TADOQuery *query = new TADOQuery(NULL);
 	query->Connection = DataModule1->ADOConnection1;
 
 	if (id > 0) {
-		// Оновлення існуючого запису
 		query->SQL->Text = "UPDATE result SET Subj_id = :subj_id, Reached_score = :reached_score, Status = :status, Attemp_date = :attemp_date "
 						   "WHERE Res_id = :id";
 		query->Parameters->ParamByName("id")->Value = id;
 	} else {
-		// Додавання нового запису
 		query->SQL->Text = "INSERT INTO result (Subj_id, Condition_id, Student_id, Reached_score, Status, School_id, Attemp_date) "
 						   "VALUES (:subj_id, :condition_id, :student_id, :reached_score, :status, :school_id, :attemp_date)";
 		query->Parameters->ParamByName("student_id")->Value = student_id;
 		query->Parameters->ParamByName("school_id")->Value = school_id;
 		query->Parameters->ParamByName("condition_id")->Value = condition_id;
 	}
-
-	// Спільні параметри для обох операцій
 	query->Parameters->ParamByName("subj_id")->Value = subject_id;
 	query->Parameters->ParamByName("reached_score")->Value = reachedScore;
 	query->Parameters->ParamByName("status")->Value = status;
@@ -400,5 +382,38 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 
 
 
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::LabeledEdit1SubLabelClick(TObject *Sender)
+{
+	Form14->isMinimalView = true;
+	Form14->ToggleView();
+	Form14->Update();
+	Form14->ShowModal();
+	Form14->isMinimalView = false;
+	Form14->ToggleView();
+	Form14->AutoSize = true;
+	Form14->Update();
+}
+
+
+
+
+//---------------------------------------------------------------------------
+
+
+
+
+void __fastcall TForm9::Label2Click(TObject *Sender)
+{
+	Form4->isMinimalView = true;
+	Form4->ToggleView();
+	Form4->Update();
+	Form4->ShowModal();
+	Form4->isMinimalView = false;
+	Form4->ToggleView();
+	Form4->AutoSize = true;
+	Form4->Update();
+}
 //---------------------------------------------------------------------------
 

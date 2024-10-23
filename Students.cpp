@@ -12,23 +12,28 @@ TForm14 *Form14;
 __fastcall TForm14::TForm14(TComponent* Owner)
 	: TForm(Owner)
 {
+    isMinimalView = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm14::FormCreate(TObject *Sender)
 {
-    DBColumnSizes();
-    Clear->Enabled = false;
+	if(!isMinimalView){
+	Clear->Enabled = false;
 	Execute->Enabled = false;
-    ComboBox1->Items->Clear();
-    ComboBox1->Items->Add("ID-карта");
+	ComboBox1->Items->Clear();
+	ComboBox1->Items->Add("ID-карта");
 	ComboBox1->Items->Add("Паперовий");
 	DatePicker1->OnChange = CheckFiltersFilled;
 	Earlier->OnClick = CheckFiltersFilled;
-    Later->OnClick = CheckFiltersFilled;
-    ThisDate->OnClick = CheckFiltersFilled;
-    Edit5->OnChange = CheckFiltersFilled;
-    ComboBox1->OnChange = CheckFiltersFilled;
-    RadioGroup1->OnClick = CheckFiltersFilled;
+	Later->OnClick = CheckFiltersFilled;
+	ThisDate->OnClick = CheckFiltersFilled;
+	Edit5->OnChange = CheckFiltersFilled;
+	ComboBox1->OnChange = CheckFiltersFilled;
+	RadioGroup1->OnClick = CheckFiltersFilled;
+	}
+	ToggleView();
+	DBColumnSizes();
+
 }
 
 
@@ -221,4 +226,46 @@ void __fastcall TForm14::Edit5Exit(TObject *Sender)
 	}
 }
 //---------------------------------------------------------------------------
+
+void TForm14::ToggleView()
+{
+	if (isMinimalView)
+	{
+		// Вмикаємо AutoSize та залишаємо лише DBGrid, відключаємо меню
+		Form14->AutoSize = true;
+		for (int i = 0; i < Form14->MainMenu1->Items->Count; i++)
+		{
+			Form14->MainMenu1->Items->Items[i]->Enabled = false; // Вимикаємо всі пункти меню
+		}
+		Form14->Caption = "Студенти";
+
+        for (int i = 0; i < Form14->ControlCount; i++)
+		{
+            if (Form14->Controls[i] != Form14->DBGrid1)
+			{
+				Form14->Controls[i]->Visible = false;
+            }
+        }
+    }
+    else
+	{
+		// Вимикаємо AutoSize, повертаємо всі компоненти та включаємо меню
+		Form14->AutoSize = false;
+		for (int i = 0; i < Form14->MainMenu1->Items->Count; i++)
+		{
+			Form14->MainMenu1->Items->Items[i]->Enabled = true; // Вмикаємо всі пункти меню
+		}
+		Form14->Caption = "Робота з інформацією про учнів";
+
+        for (int i = 0; i < Form14->ControlCount; i++)
+        {
+			Form14->Controls[i]->Visible = true;
+		}
+	}
+}
+
+
+
+
+
 

@@ -12,6 +12,7 @@ TForm4 *Form4;
 __fastcall TForm4::TForm4(TComponent* Owner)
 	: TForm(Owner)
 {
+    isMinimalView = false;
 }
 //---------------------------------------------------------------------------
 
@@ -19,7 +20,7 @@ void TForm4::DBColumnSizes(){
 	DBGrid1->Columns->Items[0]->Visible = false;
 	DBGrid1->Columns->Items[1]->Width = 150;
 	DBGrid1->Columns->Items[1]->Title->Caption = "Назва предмету";
-	DBGrid1->Columns->Items[2]->Width = 100;
+	DBGrid1->Columns->Items[2]->Width = 125;
 	DBGrid1->Columns->Items[2]->Title->Caption = "Максимальний бал";
 	DBGrid1->Columns->Items[3]->Width = 170;
 	DBGrid1->Columns->Items[3]->Title->Caption = "Мінімальний прохідний бал";
@@ -259,4 +260,40 @@ void __fastcall TForm4::N3Click(TObject *Sender)
    DBColumnSizes();
 }
 //---------------------------------------------------------------------------
+
+void TForm4::ToggleView()
+{
+	if (isMinimalView)
+	{
+		Form4->AutoSize = true;
+		for (int i = 0; i < Form4->MainMenu1->Items->Count; i++)
+		{
+			Form4->MainMenu1->Items->Items[i]->Enabled = false;
+		}
+		Form4->Caption = "Умови складання НМТ";
+
+        for (int i = 0; i < Form4->ControlCount; i++)
+		{
+            if (Form4->Controls[i] != Form4->DBGrid1)
+			{
+				Form4->Controls[i]->Visible = false;
+            }
+        }
+    }
+	else
+	{
+		Form4->AutoSize = false;
+		for (int i = 0; i < Form4->MainMenu1->Items->Count; i++)
+		{
+			Form4->MainMenu1->Items->Items[i]->Enabled = true;
+		}
+		Form4->Caption = "Робота з інформацією про умови складання НМТ";
+
+        for (int i = 0; i < Form4->ControlCount; i++)
+        {
+			Form4->Controls[i]->Visible = true;
+		}
+	}
+}
+
 

@@ -4,8 +4,8 @@ object Form9: TForm9
   AutoSize = True
   BorderStyle = bsSingle
   Caption = 'Form9'
-  ClientHeight = 273
-  ClientWidth = 353
+  ClientHeight = 274
+  ClientWidth = 357
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -36,6 +36,7 @@ object Form9: TForm9
       Width = 116
       Height = 15
       Caption = #1044#1072#1090#1072' '#1091#1082#1083#1072#1076#1072#1085#1085#1103' '#1091#1084#1086#1074
+      OnClick = Label2Click
     end
     object Label3: TLabel
       Left = 25
@@ -89,6 +90,7 @@ object Form9: TForm9
       EditLabel.Width = 48
       EditLabel.Height = 15
       EditLabel.Caption = #1055#1030#1041' '#1091#1095#1085#1103
+      EditLabel.OnClick = LabeledEdit1SubLabelClick
       TabOrder = 1
       Text = ''
       OnExit = LabeledEdit1Exit

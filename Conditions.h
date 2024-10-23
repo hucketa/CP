@@ -62,6 +62,8 @@ private:
 	void __fastcall CheckFiltersFilled(TObject *Sender);
 public:		// User declarations
 	__fastcall TForm4(TComponent* Owner);
+	bool isMinimalView;
+	void TForm4::ToggleView();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm4 *Form4;

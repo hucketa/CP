@@ -4,8 +4,8 @@ object Form11: TForm11
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080
-  ClientHeight = 290
-  ClientWidth = 638
+  ClientHeight = 289
+  ClientWidth = 634
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -253,16 +253,6 @@ object Form11: TForm11
         Visible = True
       end>
   end
-  object MainMenu1: TMainMenu
-    Left = 544
-    Top = 104
-    object N1: TMenuItem
-      Caption = #1043#1086#1083#1086#1074#1085#1077' '#1084#1077#1085#1102
-    end
-    object Lj1: TMenuItem
-      Caption = #1055#1088#1086' '#1076#1086#1076#1072#1090#1086#1082
-    end
-  end
   object PopupMenu1: TPopupMenu
     Left = 480
     Top = 112
@@ -273,6 +263,18 @@ object Form11: TForm11
     object N3: TMenuItem
       Caption = #1056#1077#1076#1072#1075#1091#1074#1072#1090#1080
       OnClick = N3Click
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 376
+    Top = 96
+    object N6: TMenuItem
+      Caption = #1043#1086#1083#1086#1074#1085#1077' '#1084#1077#1085#1102
+      OnClick = N6Click
+    end
+    object Lj1: TMenuItem
+      Caption = #1055#1088#1086' '#1076#1086#1076#1072#1090#1086#1082
+      OnClick = Lj1Click
     end
   end
 end

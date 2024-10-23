@@ -11,6 +11,8 @@
 #include <Vcl.Mask.hpp>
 #include <Vcl.WinXPickers.hpp>
 #include "Data.h"
+#include "Students.h"
+#include "Conditions.h"
 //---------------------------------------------------------------------------
 class TForm9 : public TForm
 {
@@ -38,8 +40,11 @@ __published:	// IDE-managed Components
 	void __fastcall LabeledEdit4Exit(TObject *Sender);
 	void __fastcall ComboBox1CloseUp(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall LabeledEdit1SubLabelClick(TObject *Sender);
+	void __fastcall Label2Click(TObject *Sender);
 private:
-	int id;	// User declarations
+	int id;
+	void __fastcall ShowForm14Modal();	// User declarations
 public:		// User declarations
 	__fastcall TForm9(TComponent* Owner);
     void set_id(int k);

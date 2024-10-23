@@ -23,9 +23,6 @@
 class TForm11 : public TForm
 {
 __published:	// IDE-managed Components
-	TMainMenu *MainMenu1;
-	TMenuItem *N1;
-	TMenuItem *Lj1;
 	TPopupMenu *PopupMenu1;
 	TMenuItem *N2;
 	TMenuItem *N3;
@@ -41,6 +38,9 @@ __published:	// IDE-managed Components
 	TDatePicker *DatePicker1;
 	TLabeledEdit *LabeledEdit1;
 	TDBGrid *DBGrid1;
+	TMainMenu *MainMenu1;
+	TMenuItem *N6;
+	TMenuItem *Lj1;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall DatePicker1CloseUp(TObject *Sender);
@@ -50,6 +50,8 @@ __published:	// IDE-managed Components
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
 	void __fastcall N3Click(TObject *Sender);
+	void __fastcall N6Click(TObject *Sender);
+	void __fastcall Lj1Click(TObject *Sender);
 private:
 	void __fastcall DBColumnSizes();
 	//bool SortAscending;

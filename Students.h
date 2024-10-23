@@ -64,7 +64,9 @@ private:
 	void __fastcall CheckFiltersFilled(TObject *Sender);
 public:		// User declarations
 	__fastcall TForm14(TComponent* Owner);
-	void __fastcall TForm14::DBColumnSizes();
+	void __fastcall DBColumnSizes();
+	void ToggleView();
+	bool isMinimalView;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm14 *Form14;
