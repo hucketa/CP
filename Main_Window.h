@@ -56,7 +56,6 @@ __published:	// IDE-managed Components
 	TDBGrid *DBGrid1;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
-	void __fastcall DBGrid1TitleClick(TColumn *Column);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall CheckFiltersFilled(TObject *Sender);
 	void __fastcall ClearClick(TObject *Sender);
@@ -70,8 +69,11 @@ __published:	// IDE-managed Components
 	void __fastcall Edit1Exit(TObject *Sender);
 	void __fastcall N9Click(TObject *Sender);
 	void __fastcall N5Click(TObject *Sender);
+	void __fastcall DBGrid1TitleClick(TColumn *Column);
 private:
-	void DBColumnSizes();	// User declarations
+	void DBColumnSizes();
+	//bool sortAsc;	// User declarations
+	//bool SortAscending;
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
 };

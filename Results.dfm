@@ -2,8 +2,8 @@ object Form11: TForm11
   Left = 0
   Top = 0
   Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080
-  ClientHeight = 305
-  ClientWidth = 664
+  ClientHeight = 304
+  ClientWidth = 660
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -197,6 +197,7 @@ object Form11: TForm11
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+    OnTitleClick = DBGrid1TitleClick
     Columns = <
       item
         Expanded = False

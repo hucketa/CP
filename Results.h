@@ -45,13 +45,13 @@ __published:	// IDE-managed Components
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall DatePicker1CloseUp(TObject *Sender);
 	void __fastcall LabeledEdit1Exit(TObject *Sender);
-	void __fastcall DBGrid2TitleClick(TColumn *Column);
 	void __fastcall ExecuteClick(TObject *Sender);
 	void __fastcall ClearClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall DBGrid1TitleClick(TColumn *Column);
 private:
 	void __fastcall DBColumnSizes();
-    bool SortAscending;
+	//bool SortAscending;
 	void __fastcall CheckFiltersFilled(TObject *Sender);	// User declarations
 public:		// User declarations
 	__fastcall TForm11(TComponent* Owner);

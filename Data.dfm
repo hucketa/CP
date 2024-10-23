@@ -30,8 +30,7 @@ object DataModule1: TDataModule1
       '       r.Reached_score'
       'FROM Result r'
       'JOIN Student s ON r.Student_id = s.Student_id'
-      'JOIN Subject subj ON r.Subj_id = subj.Subject_id'
-      '')
+      'JOIN Subject subj ON r.Subj_id = subj.Subject_id')
     Left = 376
     Top = 136
   end

@@ -116,43 +116,11 @@ void __fastcall TForm11::LabeledEdit1Exit(TObject *Sender)
 void __fastcall TForm11::CheckFiltersFilled(TObject *Sender)
 {
 	bool isAnyFilterFilled = false;
-    if (Earlier->Checked || Later->Checked || ThisDate->Checked) isAnyFilterFilled = true;
-    if (!LabeledEdit1->Text.Trim().IsEmpty()) isAnyFilterFilled = true;
+	if (Earlier->Checked || Later->Checked || ThisDate->Checked) isAnyFilterFilled = true;
+	if (!LabeledEdit1->Text.Trim().IsEmpty()) isAnyFilterFilled = true;
 	if (ComboBox2->ItemIndex >= 0) isAnyFilterFilled = true;
-    Execute->Enabled = isAnyFilterFilled;
-    Clear->Enabled = isAnyFilterFilled;
-}
-
-void __fastcall TForm11::DBGrid2TitleClick(TColumn *Column)
-{
-    String columnName = Column->FieldName;
-    static bool sortAsc = true;
-	String sortOrder = sortAsc ? "ASC" : "DESC";
-    sortAsc = !sortAsc;
-
-	String query =
-		"SELECT r.Res_id, st.PIB, sub.Name, r.Reached_score, c.Max_point, c.Min_r_point, "
-        "CASE WHEN r.Status = 1 THEN 'Зараховано' ELSE 'Не зараховано' END AS Status, "
-		"r.Attemp_date, c.Date, school.Email "
-		"FROM result r "
-		"JOIN student st ON r.Student_id = st.Student_id "
-		"JOIN subject sub ON r.Subj_id = sub.Subject_id "
-		"JOIN conditions c ON r.Condition_id = c.Condition_id "
-		"JOIN school ON r.School_id = school.School_id "
-		"ORDER BY `" + columnName + "` " + sortOrder;
-
-	try
-	{
-		DataModule1->ADOQuery3->Close();
-		DataModule1->ADOQuery3->SQL->Clear();
-		DataModule1->ADOQuery3->SQL->Add(query);
-		DataModule1->ADOQuery3->Open();
-		DBColumnSizes();
-	}
-	catch (Exception &e)
-	{
-		ShowMessage("Помилка сортування: " + e.Message);
-	}
+	Execute->Enabled = isAnyFilterFilled;
+	Clear->Enabled = isAnyFilterFilled;
 }
 
 void __fastcall TForm11::ClearClick(TObject *Sender)
@@ -325,6 +293,37 @@ void __fastcall TForm11::FormCreate(TObject *Sender)
 	Later->OnClick = CheckFiltersFilled;
 	ThisDate->OnClick = CheckFiltersFilled;
 	LabeledEdit1->OnChange = CheckFiltersFilled;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm11::DBGrid1TitleClick(TColumn *Column)
+{
+	String columnName = Column->FieldName;
+	static bool sortAsc = true;
+	String sortOrder = sortAsc ? "ASC" : "DESC";
+	sortAsc = !sortAsc;
+	String query =
+		"SELECT r.Res_id, st.PIB, sub.Name, r.Reached_score, c.Max_point, c.Min_r_point, "
+		"CASE WHEN r.Status = 1 THEN 'Зараховано' ELSE 'Не зараховано' END AS Status, "
+		"r.Attemp_date, c.Date, school.Email "
+		"FROM result r "
+		"JOIN student st ON r.Student_id = st.Student_id "
+		"JOIN subject sub ON r.Subj_id = sub.Subject_id "
+		"JOIN conditions c ON r.Condition_id = c.Condition_id "
+		"JOIN school ON r.School_id = school.School_id "
+		"ORDER BY " + columnName + " " + sortOrder;
+	try
+	{
+		DataModule1->ADOQuery3->Close();
+		DataModule1->ADOQuery3->SQL->Clear();
+		DataModule1->ADOQuery3->SQL->Add(query);
+		DataModule1->ADOQuery3->Open();
+		DBColumnSizes(); // Оновлюємо розмір колонок, якщо потрібно
+	}
+	catch (Exception &e)
+	{
+		ShowMessage("Помилка сортування: " + e.Message);
+	}
 }
 //---------------------------------------------------------------------------
 

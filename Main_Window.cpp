@@ -28,42 +28,11 @@ void __fastcall TForm3::FormCreate(TObject *Sender)
 	Clear->Enabled = false;
 	Execute->Enabled = false;
 	DatePicker1->OnChange = CheckFiltersFilled;
-    Earlier->OnClick = CheckFiltersFilled;
+	Earlier->OnClick = CheckFiltersFilled;
     Later->OnClick = CheckFiltersFilled;
-    ThisDate->OnClick = CheckFiltersFilled;
+	ThisDate->OnClick = CheckFiltersFilled;
 	Status_check->OnClick = CheckFiltersFilled;
 	Edit1->OnChange = CheckFiltersFilled;
-}
-
-//---------------------------------------------------------------------------
-
-void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
-{
-   String columnName = Column->FieldName;
-   static bool sortAsc = true;
-   String sortOrder = sortAsc ? "ASC" : "DESC";
-   sortAsc = !sortAsc;
-   String query = "SELECT s.PIB, "
-				  "r.Attemp_date, "
-				  "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
-				  "subj.Name, "
-				  "r.Reached_score "
-				  "FROM Result r "
-				  "JOIN Student s ON r.Student_id = s.Student_id "
-				  "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
-				  "ORDER BY `" + columnName + "` " + sortOrder;
-   try
-   {
-       DataModule1->MainQuery->Close();
-       DataModule1->MainQuery->SQL->Clear();
-       DataModule1->MainQuery->SQL->Add(query);
-       DataModule1->MainQuery->Open();
-       DBColumnSizes();
-   }
-   catch (Exception &e)
-   {
-       ShowMessage("Помилка сортування: " + e.Message);
-   }
 }
 
 //---------------------------------------------------------------------------
@@ -302,7 +271,40 @@ void __fastcall TForm3::N9Click(TObject *Sender)
 
 void __fastcall TForm3::N5Click(TObject *Sender)
 {
-    Form11->ShowModal();
+	Form11->ShowModal();
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
+{
+    String columnName = Column->FieldName;
+    static bool sortAsc = true;
+    String sortOrder = sortAsc ? "ASC" : "DESC";
+    sortAsc = !sortAsc;
+
+    String query =
+        "SELECT s.PIB, "
+        "r.Attemp_date, "
+        "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Нездано' END AS Status, "
+        "subj.Name, "
+        "r.Reached_score "
+        "FROM Result r "
+        "JOIN Student s ON r.Student_id = s.Student_id "
+        "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
+		"ORDER BY " + columnName + " " + sortOrder;
+
+    try
+    {
+        DataModule1->MainQuery->Close();
+        DataModule1->MainQuery->SQL->Clear();
+        DataModule1->MainQuery->SQL->Add(query);
+        DataModule1->MainQuery->Open();
+		DBColumnSizes();
+	}
+	catch (Exception &e)
+    {
+        ShowMessage("Помилка сортування: " + e.Message);
+    }
+}
+
 
