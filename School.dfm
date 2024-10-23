@@ -1,6 +1,7 @@
 object Form6: TForm6
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1085#1072#1074#1095#1072#1083#1100#1085#1080#1084#1080' '#1079#1072#1082#1083#1072#1076#1072#1084#1080
   ClientHeight = 178
   ClientWidth = 666
@@ -11,6 +12,7 @@ object Form6: TForm6
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
+  Position = poDesktopCenter
   OnShow = FormShow
   TextHeight = 15
   object DBGrid1: TDBGrid

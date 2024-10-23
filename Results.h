@@ -49,6 +49,7 @@ __published:	// IDE-managed Components
 	void __fastcall ClearClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
+	void __fastcall N3Click(TObject *Sender);
 private:
 	void __fastcall DBColumnSizes();
 	//bool SortAscending;

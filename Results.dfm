@@ -1,9 +1,11 @@
 object Form11: TForm11
   Left = 0
   Top = 0
+  AutoSize = True
+  BorderStyle = bsSingle
   Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080
-  ClientHeight = 304
-  ClientWidth = 660
+  ClientHeight = 290
+  ClientWidth = 638
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,13 +13,13 @@ object Form11: TForm11
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
-  Position = poDesigned
+  Position = poDesktopCenter
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
   object GroupBox1: TGroupBox
-    Left = 7
-    Top = 181
+    Left = 0
+    Top = 173
     Width = 634
     Height = 116
     Caption = #1060#1110#1083#1100#1090#1088#1080' '#1076#1083#1103' '#1090#1072#1073#1083#1080#1094#1110
@@ -186,11 +188,12 @@ object Form11: TForm11
     end
   end
   object DBGrid1: TDBGrid
-    Left = 8
-    Top = 8
+    Left = 1
+    Top = 0
     Width = 633
     Height = 167
     DataSource = DataModule1.DataSource5
+    PopupMenu = PopupMenu1
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -269,6 +272,7 @@ object Form11: TForm11
     end
     object N3: TMenuItem
       Caption = #1056#1077#1076#1072#1075#1091#1074#1072#1090#1080
+      OnClick = N3Click
     end
   end
 end

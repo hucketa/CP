@@ -73,13 +73,15 @@ void __fastcall TForm11::FormShow(TObject *Sender)
 
 void __fastcall TForm11::N2Click(TObject *Sender)
 {
-    Form9->ShowModal();
+	Form9->set_id(0);
+	Form9->ShowModal();
+	DBColumnSizes();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm11::DatePicker1CloseUp(TObject *Sender)
 {
-    try
+	try
 	{
 		TDateTime selectedDate = DatePicker1->Date;
 		TDateTime currentDate = Now();
@@ -324,6 +326,18 @@ void __fastcall TForm11::DBGrid1TitleClick(TColumn *Column)
 	{
 		ShowMessage("Помилка сортування: " + e.Message);
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm11::N3Click(TObject *Sender)
+{
+   int selected_id = 0;
+   if (!DataModule1->DataSource5->DataSet->FieldByName("Res_id")->IsNull) {
+	   selected_id = DataModule1->DataSource5->DataSet->FieldByName("Res_id")->AsInteger;
+   }
+   Form9->set_id(selected_id);
+   Form9->ShowModal();
+   DBColumnSizes();
 }
 //---------------------------------------------------------------------------
 

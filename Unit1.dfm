@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poDesktopCenter
   OnShow = FormShow
   TextHeight = 15
   object GroupBox1: TGroupBox

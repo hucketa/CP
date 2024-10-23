@@ -13,6 +13,7 @@ object Form3: TForm3
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
+  Position = poDesktopCenter
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15

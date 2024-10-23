@@ -28,10 +28,21 @@ __published:	// IDE-managed Components
 	TDatePicker *DatePicker1;
 	TComboBox *ComboBox2;
 	TLabel *Label4;
-	void __fastcall FormShow(TObject *Sender);
-private:	// User declarations
+	TLabel *Label5;
+	TLabel *Label6;
+	TLabel *Label7;
+	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall LabeledEdit1Exit(TObject *Sender);
+	void __fastcall DatePicker2CloseUp(TObject *Sender);
+	void __fastcall DatePicker1CloseUp(TObject *Sender);
+	void __fastcall LabeledEdit4Exit(TObject *Sender);
+	void __fastcall ComboBox1CloseUp(TObject *Sender);
+	void __fastcall Button1Click(TObject *Sender);
+private:
+	int id;	// User declarations
 public:		// User declarations
 	__fastcall TForm9(TComponent* Owner);
+    void set_id(int k);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm9 *Form9;
