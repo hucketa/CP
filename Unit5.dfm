@@ -13,7 +13,6 @@ object Form5: TForm5
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
-  OnCreate = FormCreate
   TextHeight = 15
   object GroupBox1: TGroupBox
     Left = 0

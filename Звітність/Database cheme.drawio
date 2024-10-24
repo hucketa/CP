@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-09-23T14:41:22.684Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.0.4 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="pEz_l_nMJAem6qSL3bKH" version="24.0.4" type="device" pages="2">
+<mxfile host="Electron" modified="2024-10-24T05:46:40.179Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.0.4 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="ak85Jbc6EnQxAIxlgcWu" version="24.0.4" type="device" pages="2">
   <diagram name="Інформаційні об`єкти" id="DCKpMuIsc8wlyhslamDY">
     <mxGraphModel dx="1707" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -156,7 +156,7 @@
         <mxCell id="2sBwvjIQapzKRAw834ev-9" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Res_id&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Subj_id&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Condition_id&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;text-wrap: nowrap;&quot;&gt;Student_id&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Reached_score&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Status&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial; text-wrap: nowrap;&quot;&gt;School_id&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;text-wrap: nowrap;&quot;&gt;Attemp_date&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="2sBwvjIQapzKRAw834ev-7" vertex="1">
           <mxGeometry x="32" y="35" width="140" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="2sBwvjIQapzKRAw834ev-10" value="TestPlace" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="2sBwvjIQapzKRAw834ev-10" value="School" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" parent="1" vertex="1">
           <mxGeometry x="20" y="250" width="210" height="200" as="geometry" />
         </mxCell>
         <mxCell id="2sBwvjIQapzKRAw834ev-11" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;School_id&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;City&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Region&lt;/div&gt;&lt;div&gt;Type&lt;/div&gt;&lt;div&gt;E-mail&lt;/div&gt;&lt;div&gt;Teacher_PIB&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="2sBwvjIQapzKRAw834ev-10" vertex="1">

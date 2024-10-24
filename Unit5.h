@@ -28,7 +28,6 @@ __published:	// IDE-managed Components
 	TComboBox *ComboBox1;
 	TLabel *Label1;
 	void __fastcall DatePicker1CloseUp(TObject *Sender);
-	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
 private:
 	int id;	// User declarations
