@@ -254,3 +254,146 @@ void __fastcall TCertificates::N2Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
+{
+	try
+	{
+		// Отримуємо PIN-код з LabeledEdit1
+		String enteredPIN = LabeledEdit1->Text.Trim();
+
+		// Запит на отримання інформації про сертифікат
+		String query = "SELECT certificate.Cerf_num, student.PIB, certificate.PIN, certificate.Creation_date, certificate.Effect_time, "
+					   "CASE WHEN certificate.Status = 1 THEN 'Дійсний' ELSE 'Не дійсний' END AS Status "
+					   "FROM certificate "
+					   "JOIN student ON certificate.Student_id = student.Student_id "
+					   "WHERE certificate.PIN = :PIN";  // Використовуємо PIN замість Cerf_num
+
+		DataModule1->ADOQuery1->Close();
+		DataModule1->ADOQuery1->SQL->Clear();
+		DataModule1->ADOQuery1->SQL->Add(query);
+		DataModule1->ADOQuery1->Parameters->ParamByName("PIN")->Value = enteredPIN; // передаємо PIN з LabeledEdit1
+		DataModule1->ADOQuery1->Open();
+
+		if (DataModule1->ADOQuery1->RecordCount > 0)
+		{
+			// Отримуємо дані про сертифікат
+			String cerf_num = DataModule1->ADOQuery1->FieldByName("Cerf_num")->AsString;
+			String pib = DataModule1->ADOQuery1->FieldByName("PIB")->AsString;
+			String pin = DataModule1->ADOQuery1->FieldByName("PIN")->AsString;
+			String creation_date = DataModule1->ADOQuery1->FieldByName("Creation_date")->AsString;
+			String effect_time = DataModule1->ADOQuery1->FieldByName("Effect_time")->AsString;
+
+			// Запит для отримання результатів студента
+			String resultQuery = "SELECT subject.Name AS Subject, conditions.Date AS Attemp_date, "
+								"conditions.Max_point AS Max_point, conditions.Min_r_point AS Reached_score "
+								"FROM conditions "
+								"JOIN subject ON conditions.Subject_id = subject.Subject_id "
+								"WHERE conditions.Status = 1"; // Використовуємо умовні дані замість таблиці 'results'
+
+			DataModule1->ADOQuery2->Close();
+			DataModule1->ADOQuery2->SQL->Clear();
+			DataModule1->ADOQuery2->SQL->Add(resultQuery);
+			DataModule1->ADOQuery2->Open();
+
+			// Перевіряємо результати
+			TStringList *results = new TStringList();
+			while (!DataModule1->ADOQuery2->Eof)
+			{
+				String subject = DataModule1->ADOQuery2->FieldByName("Subject")->AsString;
+				String attemp_date = DataModule1->ADOQuery2->FieldByName("Attemp_date")->AsString;
+				String reached_score = DataModule1->ADOQuery2->FieldByName("Reached_score")->AsString;
+
+				results->Add("<div class='result-item'>");
+				results->Add("<p>Предмет: <span class='highlight'>" + subject + "</span></p>");
+				results->Add("<p>Дата спроби: <span class='highlight'>" + attemp_date + "</span></p>");
+				results->Add("<p>Набрані бали: <span class='highlight'>" + reached_score + "</span></p>");
+				results->Add("</div>");
+
+				DataModule1->ADOQuery2->Next();
+			}
+
+			// Відкриваємо SaveDialog для вибору місця збереження
+			SaveDialog1->Filter = "HTML files (*.html)|*.html";
+			SaveDialog1->DefaultExt = "html";
+			if (SaveDialog1->Execute())
+			{
+				String filePath = SaveDialog1->FileName;
+				TStringList *htmlFile = new TStringList();
+				htmlFile->Text = "";  // Очищаємо вміст перед додаванням
+
+				try
+				{
+					// Генерація HTML
+					htmlFile->Add("<!DOCTYPE html>");
+					htmlFile->Add("<html lang='uk'>");
+					htmlFile->Add("<head>");
+					htmlFile->Add("    <meta charset='UTF-8'>");
+					htmlFile->Add("    <meta name='viewport' content='width=device-width, initial-scale=1.0'>");
+					htmlFile->Add("    <title>Сертифікат НМТ</title>");
+					htmlFile->Add("    <style>");
+					htmlFile->Add("        body { font-family: Arial, sans-serif; margin: 20px; }");
+					htmlFile->Add("        .certificate { border: 5px solid #4CAF50; padding: 20px; max-width: 800px; margin: 0 auto; background-color: #f9f9f9; }");
+					htmlFile->Add("        .certificate-header { text-align: center; margin-bottom: 30px; }");
+					htmlFile->Add("        .certificate-header h1 { margin: 0; font-size: 28px; color: #333; }");
+					htmlFile->Add("        .certificate-header p { margin: 5px 0; font-size: 18px; color: #666; }");
+					htmlFile->Add("        .certificate-body { margin-bottom: 30px; }");
+					htmlFile->Add("        .certificate-body p { font-size: 18px; margin: 10px 0; }");
+					htmlFile->Add("        .certificate-footer { text-align: center; font-size: 16px; color: #777; }");
+					htmlFile->Add("        .highlight { font-weight: bold; color: #333; }");
+					htmlFile->Add("        .results { margin-top: 20px; padding: 15px; border: 2px solid #ddd; background-color: #f0f0f0; }");
+					htmlFile->Add("    </style>");
+					htmlFile->Add("</head>");
+					htmlFile->Add("<body>");
+					htmlFile->Add("    <div class='certificate'>");
+					htmlFile->Add("        <div class='certificate-header'>");
+					htmlFile->Add("            <h1>Сертифікат НМТ</h1>");
+					htmlFile->Add("            <p>Національний Мультипредметний Тест</p>");
+					htmlFile->Add("            <p>Дата створення: <span class='highlight'>" + creation_date + "</span></p>");
+					htmlFile->Add("        </div>");
+					htmlFile->Add("        <div class='certificate-body'>");
+					htmlFile->Add("            <p>Номер сертифіката: <span class='highlight'>" + cerf_num + "</span></p>");
+					htmlFile->Add("            <p>Прізвище, Ім'я, По батькові: <span class='highlight'>" + pib + "</span></p>");
+					htmlFile->Add("            <p>PIN-код: <span class='highlight'>" + pin + "</span></p>");
+					htmlFile->Add("            <p>Термін дії сертифіката: <span class='highlight'>" + effect_time + "</span></p>");
+					htmlFile->Add("        </div>");
+					htmlFile->Add("        <div class='results'>");
+					htmlFile->Add("            <h2>Результати за рік</h2>");
+					htmlFile->AddStrings(results);
+					htmlFile->Add("        </div>");
+					htmlFile->Add("    </div>");
+					htmlFile->Add("</body>");
+					htmlFile->Add("</html>");
+
+					// Запис у файл з кодуванням UTF-8
+					htmlFile->SaveToFile(filePath, TEncoding::UTF8);
+					ShowMessage("HTML-файл створено за адресою: " + filePath);
+				}
+				__finally
+				{
+					delete htmlFile;
+					delete results;
+				}
+			}
+			else
+			{
+				ShowMessage("Збереження було скасовано.");
+			}
+		}
+		else
+		{
+			ShowMessage("Дані про сертифікат не знайдено.");
+		}
+	}
+	catch (const Exception &e)
+	{
+		ShowMessage("Помилка при створенні HTML: " + e.Message);
+	}
+}
+
+
+
+
+
+
+//---------------------------------------------------------------------------
+

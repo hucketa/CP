@@ -4,8 +4,8 @@ object Certificates: TCertificates
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1047#1084#1110#1085#1072' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080'  '#1053#1052#1058
-  ClientHeight = 345
-  ClientWidth = 737
+  ClientHeight = 346
+  ClientWidth = 741
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -195,6 +195,7 @@ object Certificates: TCertificates
       Height = 41
       Caption = #1047#1075#1077#1085#1077#1088#1091#1074#1072#1090#1080
       TabOrder = 7
+      OnClick = BitBtn1Click
     end
   end
   object PopupMenu1: TPopupMenu
@@ -220,5 +221,9 @@ object Certificates: TCertificates
       Caption = #1055#1088#1086' '#1076#1086#1076#1072#1090#1086#1082
       OnClick = Lj1Click
     end
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 320
+    Top = 112
   end
 end

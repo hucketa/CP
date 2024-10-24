@@ -20,6 +20,7 @@
 #include "Main_Window.h"
 #include "Data.h"
 #include "Unit10.h"
+#include <Vcl.Dialogs.hpp>
 //---------------------------------------------------------------------------
 class TCertificates : public TForm
 {
@@ -41,6 +42,7 @@ __published:	// IDE-managed Components
 	TBitBtn *Execute;
 	TBitBtn *Clear;
 	TBitBtn *BitBtn1;
+	TSaveDialog *SaveDialog1;
 	void __fastcall N1Click(TObject *Sender);
 	void __fastcall Lj1Click(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
@@ -52,6 +54,7 @@ __published:	// IDE-managed Components
 	void __fastcall DBGrid2TitleClick(TColumn *Column);
 	void __fastcall N3Click(TObject *Sender);
 	void __fastcall N2Click(TObject *Sender);
+	void __fastcall BitBtn1Click(TObject *Sender);
 private:
 	void DBColumnSizes();
 	bool SortAscending;	// User declarations
