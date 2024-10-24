@@ -252,75 +252,98 @@ void __fastcall TCertificates::N2Click(TObject *Sender)
    Form10->ShowModal();
    DBColumnSizes();
 }
+
 //---------------------------------------------------------------------------
 
 void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 {
 	try
 	{
-		// Отримуємо PIN-код з LabeledEdit1
 		String enteredPIN = LabeledEdit1->Text.Trim();
-
-		// Запит на отримання інформації про сертифікат
 		String query = "SELECT certificate.Cerf_num, student.PIB, certificate.PIN, certificate.Creation_date, certificate.Effect_time, "
+					   "certificate.Student_id, "
 					   "CASE WHEN certificate.Status = 1 THEN 'Дійсний' ELSE 'Не дійсний' END AS Status "
 					   "FROM certificate "
 					   "JOIN student ON certificate.Student_id = student.Student_id "
-					   "WHERE certificate.PIN = :PIN";  // Використовуємо PIN замість Cerf_num
-
+					   "WHERE certificate.PIN = :PIN";
 		DataModule1->ADOQuery1->Close();
 		DataModule1->ADOQuery1->SQL->Clear();
 		DataModule1->ADOQuery1->SQL->Add(query);
-		DataModule1->ADOQuery1->Parameters->ParamByName("PIN")->Value = enteredPIN; // передаємо PIN з LabeledEdit1
+		DataModule1->ADOQuery1->Parameters->ParamByName("PIN")->Value = enteredPIN;
 		DataModule1->ADOQuery1->Open();
-
 		if (DataModule1->ADOQuery1->RecordCount > 0)
 		{
-			// Отримуємо дані про сертифікат
 			String cerf_num = DataModule1->ADOQuery1->FieldByName("Cerf_num")->AsString;
 			String pib = DataModule1->ADOQuery1->FieldByName("PIB")->AsString;
 			String pin = DataModule1->ADOQuery1->FieldByName("PIN")->AsString;
 			String creation_date = DataModule1->ADOQuery1->FieldByName("Creation_date")->AsString;
 			String effect_time = DataModule1->ADOQuery1->FieldByName("Effect_time")->AsString;
+			int student_id = DataModule1->ADOQuery1->FieldByName("Student_id")->AsInteger;
 
-			// Запит для отримання результатів студента
-			String resultQuery = "SELECT subject.Name AS Subject, conditions.Date AS Attemp_date, "
-								"conditions.Max_point AS Max_point, conditions.Min_r_point AS Reached_score "
-								"FROM conditions "
-								"JOIN subject ON conditions.Subject_id = subject.Subject_id "
-								"WHERE conditions.Status = 1"; // Використовуємо умовні дані замість таблиці 'results'
-
+			// Пошук результатів за student_id
+			String resultQuery = "SELECT result.Reached_score AS Reached_score, result.Subj_id AS SubjectID "
+								 "FROM result "
+								 "WHERE result.Student_id = :StudentID";
 			DataModule1->ADOQuery2->Close();
 			DataModule1->ADOQuery2->SQL->Clear();
 			DataModule1->ADOQuery2->SQL->Add(resultQuery);
+			DataModule1->ADOQuery2->Parameters->ParamByName("StudentID")->Value = student_id;
 			DataModule1->ADOQuery2->Open();
 
-			// Перевіряємо результати
 			TStringList *results = new TStringList();
 			while (!DataModule1->ADOQuery2->Eof)
 			{
-				String subject = DataModule1->ADOQuery2->FieldByName("Subject")->AsString;
-				String attemp_date = DataModule1->ADOQuery2->FieldByName("Attemp_date")->AsString;
-				String reached_score = DataModule1->ADOQuery2->FieldByName("Reached_score")->AsString;
+				int subject_id = DataModule1->ADOQuery2->FieldByName("SubjectID")->AsInteger;
+				double reached_score = DataModule1->ADOQuery2->FieldByName("Reached_score")->AsFloat;
 
-				results->Add("<div class='result-item'>");
-				results->Add("<p>Предмет: <span class='highlight'>" + subject + "</span></p>");
-				results->Add("<p>Дата спроби: <span class='highlight'>" + attemp_date + "</span></p>");
-				results->Add("<p>Набрані бали: <span class='highlight'>" + reached_score + "</span></p>");
-				results->Add("</div>");
+				// Пошук назви предмета за subject_id
+				String subjectQuery = "SELECT subject.Name AS Subject, conditions.Max_point AS Max_point, conditions.Min_r_point AS Min_r_point "
+									  "FROM subject "
+									  "JOIN conditions ON subject.Subject_id = conditions.Subject_id "
+									  "WHERE subject.Subject_id = :SubjectID";
+				DataModule1->ADOQuery3->Close();
+				DataModule1->ADOQuery3->SQL->Clear();
+				DataModule1->ADOQuery3->SQL->Add(subjectQuery);
+				DataModule1->ADOQuery3->Parameters->ParamByName("SubjectID")->Value = subject_id;
+				DataModule1->ADOQuery3->Open();
 
+				if (DataModule1->ADOQuery3->RecordCount > 0)
+				{
+					String subject = DataModule1->ADOQuery3->FieldByName("Subject")->AsString;
+					double max_point = DataModule1->ADOQuery3->FieldByName("Max_point")->AsFloat;
+					double min_r_point = DataModule1->ADOQuery3->FieldByName("Min_r_point")->AsFloat;
+					double score_200;
+
+					// Перетворення оцінки в 200-бальну шкалу
+					if (reached_score < min_r_point)
+					{
+						score_200 = 100.0;
+					}
+					else if (reached_score >= max_point)
+					{
+						score_200 = 200.0;
+					}
+					else
+					{
+						score_200 = 100.0 + ((reached_score - min_r_point) / (max_point - min_r_point)) * 100.0;
+					}
+
+					results->Add("<div class='result-item'>");
+					results->Add("<p>Предмет: <span class='highlight'>" + subject + "</span></p>");
+					results->Add("<p>Набрані бали (200-бальна шкала): <span class='highlight'>" + FloatToStrF(score_200, ffFixed, 7, 2) + "</span></п>");
+					results->Add("</div>");
+				}
 				DataModule1->ADOQuery2->Next();
 			}
 
-			// Відкриваємо SaveDialog для вибору місця збереження
+			// Збереження HTML-файлу
 			SaveDialog1->Filter = "HTML files (*.html)|*.html";
 			SaveDialog1->DefaultExt = "html";
 			if (SaveDialog1->Execute())
 			{
 				String filePath = SaveDialog1->FileName;
 				TStringList *htmlFile = new TStringList();
-				htmlFile->Text = "";  // Очищаємо вміст перед додаванням
-
+				htmlFile->Text = "";
 				try
 				{
 					// Генерація HTML
@@ -347,14 +370,14 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 					htmlFile->Add("    <div class='certificate'>");
 					htmlFile->Add("        <div class='certificate-header'>");
 					htmlFile->Add("            <h1>Сертифікат НМТ</h1>");
-					htmlFile->Add("            <p>Національний Мультипредметний Тест</p>");
-					htmlFile->Add("            <p>Дата створення: <span class='highlight'>" + creation_date + "</span></p>");
+					htmlFile->Add("            <p>Національний Мультипредметний Тест</п>");
+					htmlFile->Add("            <p>Дата створення: <span class='highlight'>" + creation_date + "</span></п>");
 					htmlFile->Add("        </div>");
 					htmlFile->Add("        <div class='certificate-body'>");
-					htmlFile->Add("            <p>Номер сертифіката: <span class='highlight'>" + cerf_num + "</span></p>");
-					htmlFile->Add("            <p>Прізвище, Ім'я, По батькові: <span class='highlight'>" + pib + "</span></p>");
-					htmlFile->Add("            <p>PIN-код: <span class='highlight'>" + pin + "</span></p>");
-					htmlFile->Add("            <p>Термін дії сертифіката: <span class='highlight'>" + effect_time + "</span></p>");
+					htmlFile->Add("            <p>Номер сертифіката: <span class='highlight'>" + cerf_num + "</span></п>");
+					htmlFile->Add("            <p>Прізвище, Ім'я, По батькові: <span class='highlight'>" + pib + "</span></п>");
+					htmlFile->Add("            <p>PIN-код: <span class='highlight'>" + pin + "</span></п>");
+					htmlFile->Add("            <p>Термін дії сертифіката: <span class='highlight'>" + effect_time + "</span></п>");
 					htmlFile->Add("        </div>");
 					htmlFile->Add("        <div class='results'>");
 					htmlFile->Add("            <h2>Результати за рік</h2>");
@@ -363,8 +386,6 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 					htmlFile->Add("    </div>");
 					htmlFile->Add("</body>");
 					htmlFile->Add("</html>");
-
-					// Запис у файл з кодуванням UTF-8
 					htmlFile->SaveToFile(filePath, TEncoding::UTF8);
 					ShowMessage("HTML-файл створено за адресою: " + filePath);
 				}
@@ -389,6 +410,18 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 		ShowMessage("Помилка при створенні HTML: " + e.Message);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
