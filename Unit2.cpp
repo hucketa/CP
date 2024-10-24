@@ -13,19 +13,16 @@ void __fastcall TForm2::Edit1Exit(TObject *Sender)
 {
 	if (Edit1->Text.Trim().IsEmpty())
     {
-        ShowMessage("Поле 'Шлях до зображення' не може бути порожнім.");
-		Edit1->SetFocus();
+		ShowMessage("Поле 'Шлях до зображення' не може бути порожнім.");
     }
 	else if (!FileExists(Edit1->Text))
     {
-        ShowMessage("Файл зображення не знайдено за вказаним шляхом.");
-		Edit1->SetFocus();
+		ShowMessage("Файл зображення не знайдено за вказаним шляхом.");
     }
 	else if (Edit1->Text.SubString(Edit1->Text.Length() - 3, 4).LowerCase() != ".jpg" &&
 			 Edit1->Text.SubString(Edit1->Text.Length() - 3, 4).LowerCase() != ".png")
 	{
-        ShowMessage("Файл зображення повинен мати розширення .jpg або .png.");
-		Edit1->SetFocus();
+		ShowMessage("Файл зображення повинен мати розширення .jpg або .png.");
     }
 }
 
@@ -33,13 +30,11 @@ void __fastcall TForm2::Edit2Exit(TObject *Sender)
 {
     if (Edit2->Text.Trim().IsEmpty())
     {
-        ShowMessage("Поле 'Назва предмету' не може бути порожнім.");
-        Edit2->SetFocus();
+		ShowMessage("Поле 'Назва предмету' не може бути порожнім.");
     }
     else if (Edit2->Text.Length() > 100)
     {
-        ShowMessage("Назва предмету не може перевищувати 100 символів.");
-        Edit2->SetFocus();
+		ShowMessage("Назва предмету не може перевищувати 100 символів.");
     }
     else
     {
@@ -55,16 +50,14 @@ void __fastcall TForm2::Edit2Exit(TObject *Sender)
 
             int count = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
 
-            if (count > 0 && id == 0)  // Перевірка для нового запису (id == 0)
-            {
-                ShowMessage("Назва предмету вже існує. Будь ласка, виберіть іншу назву.");
-                Edit2->SetFocus();
+			if (count > 0 && id == 0)
+			{
+				ShowMessage("Назва предмету вже існує. Будь ласка, виберіть іншу назву.");
             }
         }
         catch (const Exception &e)
         {
-            ShowMessage("Помилка перевірки унікальності: " + e.Message);
-            Edit2->SetFocus();
+			ShowMessage("Помилка перевірки унікальності: " + e.Message);
         }
     }
 }
@@ -75,7 +68,6 @@ void __fastcall TForm2::Edit4Exit(TObject *Sender)
 	if (Edit4->Text.Length() > 40)
     {
         ShowMessage("Опис не може перевищувати 40 символів.");
-		Edit4->SetFocus();
     }
 }
 

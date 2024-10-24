@@ -87,7 +87,6 @@ void __fastcall TForm8::LabeledEdit1Exit(TObject *Sender)
 	if (!IsValidUkrainianInput(input))
 	{
 		ShowMessage("Будь ласка, використовуйте тільки українські символи для назви міста.");
-		LabeledEdit1->SetFocus();
 		return;
 	}
 }
@@ -98,7 +97,6 @@ void __fastcall TForm8::LabeledEdit2Exit(TObject *Sender)
 	if (!IsValidUkrainianInput(input))
 	{
 		ShowMessage("Будь ласка, використовуйте тільки українські символи для назви області.");
-		LabeledEdit2->SetFocus();
 		return;
 	}
 }
@@ -110,13 +108,11 @@ void __fastcall TForm8::LabeledEdit4Exit(TObject *Sender)
 	if (!TRegEx::IsMatch(input, pattern))
 	{
 		ShowMessage("Введіть дійсний e-mail.");
-		LabeledEdit4->SetFocus();
 		return;
 	}
 	if (!IsUniqueValue("Email", input))
 	{
 		ShowMessage("Такий E-mail вже існує в базі даних.");
-		LabeledEdit4->SetFocus();
 	}
 }
 
@@ -126,7 +122,6 @@ void __fastcall TForm8::LabeledEdit5Exit(TObject *Sender)
 	if (!IsValidUkrainianInput(input))
 	{
 		ShowMessage("Будь ласка, використовуйте тільки українські символи для ПІБ.");
-		LabeledEdit5->SetFocus();
 		return;
 	}
 }
@@ -136,31 +131,26 @@ void __fastcall TForm8::Button1Click(TObject *Sender)
 	if (LabeledEdit1->Text.IsEmpty())
 	{
 		ShowMessage("Будь ласка, введіть назву міста.");
-		LabeledEdit1->SetFocus();
 		return;
 	}
 	if (LabeledEdit2->Text.IsEmpty())
 	{
 		ShowMessage("Будь ласка, введіть назву області.");
-		LabeledEdit2->SetFocus();
 		return;
 	}
 	if (LabeledEdit4->Text.IsEmpty())
 	{
 		ShowMessage("Будь ласка, введіть E-mail.");
-		LabeledEdit4->SetFocus();
 		return;
 	}
 	if (LabeledEdit5->Text.IsEmpty())
 	{
 		ShowMessage("Будь ласка, введіть ПІБ.");
-		LabeledEdit5->SetFocus();
 		return;
 	}
 	if (ComboBox1->ItemIndex == -1)
 	{
 		ShowMessage("Будь ласка, виберіть тип навчального закладу.");
-		ComboBox1->SetFocus();
 		return;
 	}
 	AnsiString queryStr;

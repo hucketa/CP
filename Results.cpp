@@ -108,7 +108,6 @@ void __fastcall TForm11::LabeledEdit1Exit(TObject *Sender)
 	UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
 	if (!TRegEx::IsMatch(pib, pattern)) {
 		ShowMessage("ПІБ повинен містити лише українські літери.");
-		LabeledEdit1->SetFocus();
 		return;
 	}
 }

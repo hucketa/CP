@@ -67,7 +67,6 @@ void __fastcall TForm1::Edit2Exit(TObject *Sender)
 {
 	if (Edit2->Text.Length() < 8 || Edit2->Text.Length() > 20) {
 		ShowMessage("Номер паспорта повинен бути від 8 до 20 символів.");
-		Edit2->SetFocus();
 		return;
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
@@ -79,7 +78,6 @@ void __fastcall TForm1::Edit2Exit(TObject *Sender)
 	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
 	{
 		ShowMessage("Цей номер паспорта вже існує.");
-		Edit2->SetFocus();
 	}
 	checkQuery->Close();
 	delete checkQuery;
@@ -89,7 +87,6 @@ void __fastcall TForm1::Edit3Exit(TObject *Sender)
 {
 	if (Edit3->Text.Length() < 10 || Edit3->Text.Length() > 15) {
 		ShowMessage("Номер телефону повинен бути від 10 до 15 символів.");
-		Edit3->SetFocus();
 		return;
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
@@ -101,7 +98,6 @@ void __fastcall TForm1::Edit3Exit(TObject *Sender)
 	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
 	{
 		ShowMessage("Цей номер телефону вже існує.");
-		Edit3->SetFocus();
 	}
 	checkQuery->Close();
 	delete checkQuery;
@@ -111,7 +107,6 @@ void __fastcall TForm1::Edit4Exit(TObject *Sender)
 {
 	if (Edit4->Text.Length() != 10) {
 		ShowMessage("ІПН повинен містити 10 цифр.");
-		Edit4->SetFocus();
 		return;
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
@@ -123,7 +118,6 @@ void __fastcall TForm1::Edit4Exit(TObject *Sender)
 	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
 	{
 		ShowMessage("Цей ІПН вже існує.");
-		Edit4->SetFocus();
 	}
 	checkQuery->Close();
 	delete checkQuery;
@@ -137,7 +131,6 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender)
 
     if (!TRegEx::IsMatch(email, pattern)) {
         ShowMessage("Введіть дійсний e-mail.");
-		Edit5->SetFocus();
 		return;
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
@@ -149,7 +142,6 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender)
 	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
 	{
 		ShowMessage("Цей e-mail вже існує.");
-		Edit5->SetFocus();
 	}
 	checkQuery->Close();
 	delete checkQuery;
@@ -158,8 +150,7 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender)
 void __fastcall TForm1::Edit6Exit(TObject *Sender)
 {
 	if (Edit6->Text.IsEmpty()) {
-        ShowMessage("Поле сертифікату освіти не може бути пустим.");
-        Edit6->SetFocus();
+		ShowMessage("Поле сертифікату освіти не може бути пустим.");
         return;
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
@@ -171,7 +162,6 @@ void __fastcall TForm1::Edit6Exit(TObject *Sender)
 	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
 	{
 		ShowMessage("Цей номер сертифіката про освіту вже існує.");
-		Edit6->SetFocus();
 	}
 	checkQuery->Close();
 	delete checkQuery;
@@ -217,7 +207,6 @@ void __fastcall TForm1::ComboBox1CloseUp(TObject *Sender)
 {
 	if (ComboBox1->Text.IsEmpty() || ComboBox1->ItemIndex == -1) {
 		ShowMessage("Будь ласка, оберіть тип паспорта.");
-        ComboBox1->SetFocus();
     }
 }
 
@@ -225,7 +214,6 @@ void __fastcall TForm1::RadioGroup1Exit(TObject *Sender)
 {
 	if (RadioGroup1->ItemIndex == -1) {
 		ShowMessage("Будь ласка, оберіть стать.");
-		RadioGroup1->SetFocus();
 	}
 }
 
@@ -319,7 +307,6 @@ void __fastcall TForm1::Edit1Exit(TObject *Sender)
     // Перевірка на коректність введених даних
     if (!TRegEx::IsMatch(pib, pattern)) {
         ShowMessage("ПІБ повинен містити лише українські літери.");
-		Edit1->SetFocus();
         return;
     }
 
@@ -335,8 +322,7 @@ void __fastcall TForm1::Edit1Exit(TObject *Sender)
     try {
         checkQuery->Open();
         if (checkQuery->FieldByName("Cnt")->AsInteger > 0) {
-            ShowMessage("Студент з таким ПІБ вже існує.");
-            Edit1->SetFocus();
+			ShowMessage("Студент з таким ПІБ вже існує.");
         }
     }
     __finally {

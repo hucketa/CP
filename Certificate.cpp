@@ -105,7 +105,6 @@ void __fastcall TCertificates::LabeledEdit1Exit(TObject *Sender)
 	catch (const Exception &e)
 	{
 		ShowMessage(e.Message);
-		LabeledEdit1->SetFocus();
 	}
 }
 

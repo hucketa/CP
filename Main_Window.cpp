@@ -257,7 +257,6 @@ void __fastcall TForm3::Edit1Exit(TObject *Sender)
     UnicodeString pattern = "^[À-ßà-ÿ¨¸²³¯¿ªº¥´'\\s-]+$";
 	if (!TRegEx::IsMatch(pib, pattern)) {
 		ShowMessage("Ââåä³òü ä³éñíèé Ï²Á óêðà¿íñüêîþ ìîâîþ ïîâí³ñòþ.");
-        Edit1->SetFocus();
     }
 }
 

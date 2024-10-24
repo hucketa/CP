@@ -54,7 +54,6 @@ void __fastcall TForm12::Button1Click(TObject *Sender)
 
 
 
-
 //---------------------------------------------------------------------------
 
 void TForm12::set_flag(bool k){

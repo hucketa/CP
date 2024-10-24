@@ -222,7 +222,6 @@ void __fastcall TForm14::Edit5Exit(TObject *Sender)
 	UnicodeString pattern = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 	if (!TRegEx::IsMatch(email, pattern)) {
 		ShowMessage("¬вед≥ть д≥йсний e-mail.");
-		Edit5->SetFocus();
 	}
 }
 //---------------------------------------------------------------------------

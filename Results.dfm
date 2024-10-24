@@ -4,8 +4,8 @@ object Form11: TForm11
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080
-  ClientHeight = 289
-  ClientWidth = 634
+  ClientHeight = 290
+  ClientWidth = 638
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

@@ -32,7 +32,6 @@ void __fastcall TForm10::LabeledEdit1Exit(TObject *Sender)
 	UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
 	if (!TRegEx::IsMatch(pib, pattern)) {
 		ShowMessage("ПІБ повинен містити лише українські літери.");
-		LabeledEdit1->SetFocus();
 		return;
 	}
 	TADOQuery *query = new TADOQuery(NULL);
@@ -43,7 +42,6 @@ void __fastcall TForm10::LabeledEdit1Exit(TObject *Sender)
 	int count = query->FieldByName("count")->AsInteger;
 	if (count == 0) {
 		ShowMessage("ПІБ не знайдений у базі даних.");
-		LabeledEdit1->SetFocus();
 		query->Close();
 		delete query;
 		return;
@@ -86,7 +84,6 @@ void __fastcall TForm10::LabeledEdit2Exit(TObject *Sender)
 	catch (const Exception &e)
 	{
 		ShowMessage(e.Message);
-		LabeledEdit2->SetFocus();
 	}
 }
 
@@ -109,7 +106,6 @@ void __fastcall TForm10::DatePicker2CloseUp(TObject *Sender)
 	catch (const Exception &e)
 	{
 		ShowMessage("Помилка: " + e.Message);
-		DatePicker2->Date = Now();
 	}
 
 
@@ -192,7 +188,6 @@ void __fastcall TForm10::DatePicker1CloseUp(TObject *Sender)
 	catch (const Exception &e)
 	{
 		ShowMessage("Помилка: " + e.Message);
-		DatePicker1->Date = Now();
 	}
 }
 

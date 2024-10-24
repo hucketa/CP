@@ -99,7 +99,6 @@ void __fastcall TForm9::LabeledEdit1Exit(TObject *Sender) {
 	UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
 	if (!TRegEx::IsMatch(pib, pattern)) {
 		ShowMessage("ПІБ повинен містити лише українські літери.");
-		LabeledEdit1->SetFocus();
 		return;
 	}
 	TADOQuery *query = new TADOQuery(NULL);
@@ -110,7 +109,6 @@ void __fastcall TForm9::LabeledEdit1Exit(TObject *Sender) {
 	int count = query->FieldByName("count")->AsInteger;
 	if (count == 0) {
 		ShowMessage("ПІБ не знайдений у базі даних.");
-		LabeledEdit1->SetFocus();
 		query->Close();
 		delete query;
 		return;
@@ -122,7 +120,6 @@ void __fastcall TForm9::LabeledEdit1Exit(TObject *Sender) {
 void __fastcall TForm9::DatePicker2CloseUp(TObject *Sender) {
 	if (ComboBox1->ItemIndex == -1) {
 		ShowMessage("Будь ласка, виберіть предмет.");
-		DatePicker2->SetFocus();
 		return;
 	}
 	int subject_id = ComboBox1->ItemIndex + 1;
@@ -192,7 +189,6 @@ void __fastcall TForm9::LabeledEdit4Exit(TObject *Sender) {
 
 	if (enteredScore == -1) {
 		ShowMessage("Будь ласка, введіть коректне значення балу.");
-		LabeledEdit4->SetFocus();
 		return;
 	}
 
@@ -213,10 +209,8 @@ void __fastcall TForm9::LabeledEdit4Exit(TObject *Sender) {
 
 		if (enteredScore < minPoint) {
 			ShowMessage("Введений бал менший за мінімальний.");
-			LabeledEdit4->SetFocus();
 		} else if (enteredScore > maxPoint) {
 			ShowMessage("Введений бал більший за максимальний.");
-			LabeledEdit4->SetFocus();
 		} else {
 			if (enteredScore >= minPassPoint) {
 				RadioGroup1->ItemIndex = 0;
@@ -226,7 +220,6 @@ void __fastcall TForm9::LabeledEdit4Exit(TObject *Sender) {
 		}
 	} else {
 		ShowMessage("Вимоги для цього предмета та дати не знайдені.");
-		LabeledEdit4->SetFocus();
 	}
 	query->Close();
 	delete query;
@@ -277,22 +270,18 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 {
 	if (LabeledEdit1->Text.Trim() == "") {
 		ShowMessage("Будь ласка, введіть ПІБ.");
-		LabeledEdit1->SetFocus();
 		return;
 	}
 	if (LabeledEdit4->Text.Trim() == "") {
 		ShowMessage("Будь ласка, введіть результат.");
-		LabeledEdit4->SetFocus();
 		return;
 	}
 	if (ComboBox1->ItemIndex == -1) {
 		ShowMessage("Будь ласка, виберіть навчальну дисципліну.");
-		ComboBox1->SetFocus();
 		return;
 	}
 	if (DatePicker2->Date == EncodeDate(1990, 1, 1)) {
 		ShowMessage("Будь ласка, виберіть дату укладання умов.");
-		DatePicker2->SetFocus();
 		return;
 	}
 	int subject_id = ComboBox1->ItemIndex + 1;
