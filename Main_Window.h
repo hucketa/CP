@@ -25,6 +25,7 @@
 #include "Results.h"
 #include "Certificate.h"
 #include "School.h"
+#include "Auth.h"
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -71,12 +72,13 @@ __published:	// IDE-managed Components
 	void __fastcall N5Click(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
 	void __fastcall N1Click(TObject *Sender);
+	void __fastcall StatusBar1Click(TObject *Sender);
 private:
 	void DBColumnSizes();
-	//bool sortAsc;	// User declarations
-	//bool SortAscending;
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
+	void __fastcall UpdateStatusBar(String role);
+	void ManageMenuItems(String role);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;

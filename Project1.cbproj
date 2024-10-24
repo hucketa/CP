@@ -122,6 +122,12 @@
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="Auth.cpp">
+            <Form>Form12</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Auth.h</DependentOn>
+            <BuildOrder>17</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Certificate.cpp">
             <Form>Certificates</Form>
             <FormType>dfm</FormType>
@@ -220,21 +226,22 @@
             <DependentOn>Unit9.h</DependentOn>
             <BuildOrder>15</BuildOrder>
         </CppCompile>
+        <FormResources Include="Unit10.dfm"/>
         <FormResources Include="Unit1.dfm"/>
         <FormResources Include="Subjects.dfm"/>
         <FormResources Include="Students.dfm"/>
-        <FormResources Include="School.dfm"/>
         <FormResources Include="Unit9.dfm"/>
         <FormResources Include="Unit8.dfm"/>
         <FormResources Include="Unit5.dfm"/>
         <FormResources Include="Unit2.dfm"/>
+        <FormResources Include="School.dfm"/>
         <FormResources Include="Help.dfm"/>
         <FormResources Include="Data.dfm"/>
         <FormResources Include="Conditions.dfm"/>
         <FormResources Include="Certificate.dfm"/>
         <FormResources Include="Results.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
-        <FormResources Include="Unit10.dfm"/>
+        <FormResources Include="Auth.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

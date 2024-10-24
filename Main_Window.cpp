@@ -33,6 +33,7 @@ void __fastcall TForm3::FormCreate(TObject *Sender)
 	ThisDate->OnClick = CheckFiltersFilled;
 	Status_check->OnClick = CheckFiltersFilled;
 	Edit1->OnChange = CheckFiltersFilled;
+	UpdateStatusBar("Користувач");
 }
 
 //---------------------------------------------------------------------------
@@ -63,9 +64,10 @@ void __fastcall TForm3::CheckFiltersFilled(TObject *Sender)
 void __fastcall TForm3::FormShow(TObject *Sender)
 {
 	DBColumnSizes();
-	//Application->MainFormOnTaskBar = true;
-	//Application->UpdateFormatSettings = false;
-	//Application->DefaultFont->Charset = DEFAULT_CHARSET;
+	String tmp_role = "User";
+	UpdateStatusBar(tmp_role);
+	ManageMenuItems(tmp_role);
+	Application->ProcessMessages();
 }
 
 void __fastcall TForm3::ClearClick(TObject *Sender)
@@ -314,4 +316,120 @@ void __fastcall TForm3::N1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm3::UpdateStatusBar(String role)
+{
+	if (role == "менеджер учнів")
+	{
+		StatusBar1->Panels->Items[2]->Text = "Менеджер учнів: Повний доступ до даних учнів";
+	}
+	else if (role == "менеджер предметів")
+	{
+		StatusBar1->Panels->Items[2]->Text = "Менеджер предметів: Доступ до навчальних дисциплін";
+	}
+	else if (role == "менеджер результатів")
+	{
+		StatusBar1->Panels->Items[2]->Text = "Менеджер результатів: Доступ до результатів і сертифікатів";
+	}
+	else
+	{
+		StatusBar1->Panels->Items[2]->Text = "Невідома роль: Обмежений доступ";
+	}
+}
+
+void __fastcall TForm3::StatusBar1Click(TObject *Sender)
+{
+	Form12->ShowModal();
+	if (Form12->get_flag())
+	{
+		UpdateStatusBar(Form12->get_role());
+		ManageMenuItems(Form12->get_role());
+		Application->ProcessMessages();
+	}
+	else
+	{
+		ShowMessage("Авторизація не вдалася. Доступ обмежено.");
+	}
+}
+
+
+void TForm3::ManageMenuItems(String role)
+{
+	if (role == "менеджер учнів")
+	{
+		Form7->N1->Enabled = false;//Предмети
+		Form7->N2->Enabled = false;//Предмети
+		Form7->N3->Enabled = false;//Предмети
+		Form14->N1->Enabled = true;//Учні
+		Form14->N2->Enabled = true;//Учні
+		Form4->N3->Enabled = false;//Умови
+		Form4->N2->Enabled = false;//Умови
+		Form6->N1->Enabled = false;//Школи
+		Form6->N2->Enabled = false;//Школи
+		Form6->N3->Enabled = false;//Школи
+		Form4->N2->Enabled = false;//Умови
+		Certificates->N3->Enabled = false;
+		Certificates->N2->Enabled = false;
+		Certificates->BitBtn1->Enabled = false;
+		Form11->N3->Enabled = false;//Результати
+		Form11->N2->Enabled = false;//Результати
+	}
+	else if (role == "менеджер предметів")
+	{
+		Form7->N1->Enabled = true;//Предмети
+		Form7->N2->Enabled = true;//Предмети
+		Form7->N3->Enabled = true;//Предмети
+		Form14->N1->Enabled = false;//Учні
+		Form14->N2->Enabled = false;//Учні
+		Form4->N3->Enabled = true;//Умови
+		Form4->N2->Enabled = true;//Умови
+		Form6->N1->Enabled = true;//Школи
+		Form6->N2->Enabled = true;//Школи
+		Form6->N3->Enabled = true;//Школи
+		Certificates->N3->Enabled = false;
+		Certificates->N2->Enabled = false;
+		Certificates->BitBtn1->Enabled = false;
+		Form11->N3->Enabled = false;//Результати
+		Form11->N2->Enabled = false;//Результати
+	}
+	else if (role == "менеджер результатів")
+	{
+		Form7->N1->Enabled = false;//Предмети
+		Form7->N2->Enabled = false;//Предмети
+		Form7->N3->Enabled = false;//Предмети
+		Form14->N1->Enabled = false;//Учні
+		Form14->N2->Enabled = false;//Учні
+		Form4->N3->Enabled = false;//Умови
+		Form4->N2->Enabled = false;//Умови
+		Form6->N1->Enabled = false;//Школи
+		Form6->N2->Enabled = false;//Школи
+		Form6->N3->Enabled = false;//Школи
+		Certificates->N3->Enabled = true;
+		Certificates->N2->Enabled = true;
+		Certificates->BitBtn1->Enabled = true;
+		Form11->N3->Enabled = true;//Результати
+		Form11->N2->Enabled = true;//Результати
+	}
+	else
+	{
+		Form7->N1->Enabled = false;//Предмети
+		Form7->N2->Enabled = false;//Предмети
+		Form7->N3->Enabled = false;//Предмети
+		Form14->N1->Enabled = false;//Учні
+		Form14->N2->Enabled = false;//Учні
+		Form4->N3->Enabled = false;//Умови
+		Form4->N2->Enabled = false;//Умови
+		Form6->N1->Enabled = false;//Школи
+		Form6->N2->Enabled = false;//Школи
+		Form6->N3->Enabled = false;//Школи
+		Certificates->N3->Enabled = false;
+		Certificates->N2->Enabled = false;
+		Certificates->BitBtn1->Enabled = false;
+		Form11->N3->Enabled = false;//Результати
+		Form11->N2->Enabled = false;//Результати
+	}
+}
+
+
+
+//---------------------------------------------------------------------------
 

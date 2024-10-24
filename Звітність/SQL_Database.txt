@@ -207,5 +207,12 @@ VALUES
 ('Одеса', 'Одеська область', 'Гімназія', 'school3@example.com', 'Наталія Бондар'),
 ('Харків', 'Харківська область', 'ВНЗ', 'school4@example.com', 'Дмитро Савченко');
 
+mysql> ALTER TABLE users DROP CONSTRAINT users_chk_1;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
 
+mysql> UPDATE users
+    -> SET Role = REPLACE(Role, '?', 'і');
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
 
