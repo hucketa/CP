@@ -1,11 +1,10 @@
 object Form3: TForm3
   Left = 0
   Top = 0
-  AutoSize = True
   BorderStyle = bsSingle
   Caption = #1054#1073#1083#1110#1082' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1110#1074' '#1085#1084#1090
-  ClientHeight = 356
-  ClientWidth = 821
+  ClientHeight = 344
+  ClientWidth = 879
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +18,8 @@ object Form3: TForm3
   TextHeight = 15
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 337
-    Width = 821
+    Top = 325
+    Width = 879
     Height = 19
     Panels = <
       item
@@ -39,10 +38,10 @@ object Form3: TForm3
         Text = #1051#1086#1075#1110#1085' '#1091#1095#1072#1089#1085#1080#1082#1072
         Width = 200
       end>
-    OnClick = StatusBar1Click
+    ExplicitWidth = 825
   end
   object GroupBox1: TGroupBox
-    Left = 566
+    Left = 646
     Top = 0
     Width = 227
     Height = 328
@@ -123,7 +122,7 @@ object Form3: TForm3
     end
   end
   object Clear: TBitBtn
-    Left = 691
+    Left = 769
     Top = 279
     Width = 90
     Height = 34
@@ -167,7 +166,7 @@ object Form3: TForm3
     OnClick = ClearClick
   end
   object Execute: TBitBtn
-    Left = 582
+    Left = 660
     Top = 279
     Width = 103
     Height = 34
@@ -213,9 +212,9 @@ object Form3: TForm3
     OnClick = ExecuteClick
   end
   object DBGrid1: TDBGrid
-    Left = 8
+    Left = 0
     Top = 8
-    Width = 552
+    Width = 640
     Height = 319
     DataSource = DataModule1.MainFormSource
     TabOrder = 4
@@ -268,6 +267,20 @@ object Form3: TForm3
     object Lj1: TMenuItem
       Caption = #1055#1088#1086' '#1076#1086#1076#1072#1090#1086#1082
       OnClick = Lj1Click
+    end
+    object N10: TMenuItem
+      Caption = '|'
+    end
+    object N11: TMenuItem
+      Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1110#1103
+      object N12: TMenuItem
+        Caption = #1059#1074#1110#1081#1090#1080
+        OnClick = N12Click
+      end
+      object N13: TMenuItem
+        Caption = #1042#1080#1081#1090#1080
+        OnClick = N13Click
+      end
     end
   end
   object Timer1: TTimer

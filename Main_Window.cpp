@@ -335,24 +335,23 @@ void __fastcall TForm3::UpdateStatusBar(String role)
 	}
 }
 
-void __fastcall TForm3::StatusBar1Click(TObject *Sender)
-{
-	Form12->ShowModal();
-	if (Form12->get_flag())
-	{
-		UpdateStatusBar(Form12->get_role());
-		ManageMenuItems(Form12->get_role());
-		Application->ProcessMessages();
-	}
-	else
-	{
-		ShowMessage("Авторизація не вдалася. Доступ обмежено.");
-	}
-}
-
-
 void TForm3::ManageMenuItems(String role)
 {
+    	Form7->N1->Enabled = false;//Предмети
+		Form7->N2->Enabled = false;//Предмети
+		Form7->N3->Enabled = false;//Предмети
+		Form14->N1->Enabled = false;//Учні
+		Form14->N2->Enabled = false;//Учні
+		Form4->N3->Enabled = false;//Умови
+		Form4->N2->Enabled = false;//Умови
+		Form6->N1->Enabled = false;//Школи
+		Form6->N2->Enabled = false;//Школи
+		Form6->N3->Enabled = false;//Школи
+		Certificates->N3->Enabled = false;
+		Certificates->N2->Enabled = false;
+		Certificates->BitBtn1->Enabled = false;
+		Form11->N3->Enabled = false;//Результати
+		Form11->N2->Enabled = false;//Результати
 	if (role == "менеджер учнів")
 	{
 		Form7->N1->Enabled = false;//Предмети
@@ -408,7 +407,7 @@ void TForm3::ManageMenuItems(String role)
 		Form11->N3->Enabled = true;//Результати
 		Form11->N2->Enabled = true;//Результати
 	}
-	else
+	/*else
 	{
 		Form7->N1->Enabled = false;//Предмети
 		Form7->N2->Enabled = false;//Предмети
@@ -425,10 +424,39 @@ void TForm3::ManageMenuItems(String role)
 		Certificates->BitBtn1->Enabled = false;
 		Form11->N3->Enabled = false;//Результати
 		Form11->N2->Enabled = false;//Результати
-	}
+	}*/
 }
 
 
 
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::N12Click(TObject *Sender)
+{
+	Form12->ShowModal();
+	if (Form12->get_flag())
+	{
+		UpdateStatusBar(Form12->get_role());
+		ManageMenuItems(Form12->get_role());
+		Application->ProcessMessages();
+	}
+	else
+	{
+		ShowMessage("Авторизація не вдалася. Доступ обмежено.");
+        String user = "user";
+		UpdateStatusBar(user);
+		ManageMenuItems(user);
+		Application->ProcessMessages();
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::N13Click(TObject *Sender)
+{
+		String user = "user";
+		UpdateStatusBar(user);
+		ManageMenuItems(user);
+		Application->ProcessMessages();
+}
 //---------------------------------------------------------------------------
 

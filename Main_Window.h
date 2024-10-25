@@ -55,6 +55,10 @@ __published:	// IDE-managed Components
 	TMenuItem *N8;
 	TMenuItem *N9;
 	TDBGrid *DBGrid1;
+	TMenuItem *N10;
+	TMenuItem *N11;
+	TMenuItem *N12;
+	TMenuItem *N13;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
@@ -72,7 +76,8 @@ __published:	// IDE-managed Components
 	void __fastcall N5Click(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
 	void __fastcall N1Click(TObject *Sender);
-	void __fastcall StatusBar1Click(TObject *Sender);
+	void __fastcall N12Click(TObject *Sender);
+	void __fastcall N13Click(TObject *Sender);
 private:
 	void DBColumnSizes();
 public:		// User declarations
