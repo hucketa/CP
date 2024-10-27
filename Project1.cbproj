@@ -202,6 +202,12 @@
             <DependentOn>Unit10.h</DependentOn>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Unit13.cpp">
+            <Form>Form13</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Unit13.h</DependentOn>
+            <BuildOrder>18</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Unit2.cpp">
             <Form>Form2</Form>
             <FormType>dfm</FormType>
@@ -226,22 +232,23 @@
             <DependentOn>Unit9.h</DependentOn>
             <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <FormResources Include="Unit10.dfm"/>
         <FormResources Include="Unit1.dfm"/>
         <FormResources Include="Subjects.dfm"/>
         <FormResources Include="Students.dfm"/>
+        <FormResources Include="School.dfm"/>
+        <FormResources Include="Unit10.dfm"/>
         <FormResources Include="Unit9.dfm"/>
         <FormResources Include="Unit8.dfm"/>
         <FormResources Include="Unit5.dfm"/>
         <FormResources Include="Unit2.dfm"/>
-        <FormResources Include="School.dfm"/>
-        <FormResources Include="Help.dfm"/>
         <FormResources Include="Data.dfm"/>
         <FormResources Include="Conditions.dfm"/>
         <FormResources Include="Certificate.dfm"/>
+        <FormResources Include="Auth.dfm"/>
+        <FormResources Include="Help.dfm"/>
         <FormResources Include="Results.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
-        <FormResources Include="Auth.dfm"/>
+        <FormResources Include="Unit13.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

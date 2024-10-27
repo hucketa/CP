@@ -38,7 +38,8 @@ object Form3: TForm3
         Text = #1051#1086#1075#1110#1085' '#1091#1095#1072#1089#1085#1080#1082#1072
         Width = 200
       end>
-    ExplicitWidth = 825
+    ExplicitTop = 324
+    ExplicitWidth = 875
   end
   object GroupBox1: TGroupBox
     Left = 646
