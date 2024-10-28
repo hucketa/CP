@@ -4,8 +4,8 @@ object Certificates: TCertificates
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1047#1084#1110#1085#1072' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080'  '#1053#1052#1058
-  ClientHeight = 346
-  ClientWidth = 741
+  ClientHeight = 345
+  ClientWidth = 737
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -220,6 +220,10 @@ object Certificates: TCertificates
     object Lj1: TMenuItem
       Caption = #1055#1088#1086' '#1076#1086#1076#1072#1090#1086#1082
       OnClick = Lj1Click
+    end
+    object N4: TMenuItem
+      Caption = #1047#1084#1110#1085#1080#1090#1080' '#1096#1072#1073#1083#1086#1085
+      OnClick = N4Click
     end
   end
   object SaveDialog1: TSaveDialog

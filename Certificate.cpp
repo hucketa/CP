@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "Certificate.h"
+#include <System.DateUtils.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -279,7 +280,6 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 			String effect_time = DataModule1->ADOQuery1->FieldByName("Effect_time")->AsString;
 			int student_id = DataModule1->ADOQuery1->FieldByName("Student_id")->AsInteger;
 
-			// Пошук результатів за student_id
 			String resultQuery = "SELECT result.Reached_score AS Reached_score, result.Subj_id AS SubjectID "
 								 "FROM result "
 								 "WHERE result.Student_id = :StudentID";
@@ -338,11 +338,15 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 			// Збереження HTML-файлу
 			SaveDialog1->Filter = "HTML files (*.html)|*.html";
 			SaveDialog1->DefaultExt = "html";
+			String currentDateTime = FormatDateTime("yyyy_mm_dd_hh_nn_ss", Now());
+			SaveDialog1->FileName = Form13->template_name + "_" + currentDateTime + ".html";
 			if (SaveDialog1->Execute())
 			{
 				String filePath = SaveDialog1->FileName;
 				TStringList *htmlFile = new TStringList();
 				htmlFile->Text = "";
+
+
 				try
 				{
 					// Генерація HTML
@@ -410,22 +414,11 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 	}
 }
 
+//---------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void __fastcall TCertificates::N4Click(TObject *Sender)
+{
+	Form13->ShowModal();
+}
 //---------------------------------------------------------------------------
 

@@ -28,8 +28,8 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 	{
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
-		Application->CreateForm(__classid(TForm3), &Form3);
 		Application->CreateForm(__classid(TForm13), &Form13);
+		Application->CreateForm(__classid(TForm3), &Form3);
 		Application->CreateForm(__classid(TForm11), &Form11);
 		Application->CreateForm(__classid(TForm7), &Form7);
 		Application->CreateForm(__classid(TForm4), &Form4);
