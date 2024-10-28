@@ -28,6 +28,7 @@ __published:	// IDE-managed Components
 	TMenuItem *N1;
 	TMenuItem *N2;
 	TMenuItem *N3;
+	TMenuItem *N4;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
 	void __fastcall DBGrid1CellClick(TColumn *Column);
@@ -36,6 +37,7 @@ __published:	// IDE-managed Components
 	void __fastcall N3Click(TObject *Sender);
 	void __fastcall Lj1Click(TObject *Sender);
 	void __fastcall N6Click(TObject *Sender);
+	void __fastcall N4Click(TObject *Sender);
 private:
 	bool SortAscending;	// User declarations
 public:

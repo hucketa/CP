@@ -7,6 +7,7 @@
 #include "Unit2.h"
 #include "Help.h"
 #include "Main_window.h"
+#include <ShellAPI.h>
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -27,6 +28,8 @@ void __fastcall TForm7::DBColumnSizes(){
 	DBGrid1->Columns->Items[2]->Title->Caption = "Опис предмету";
 	DBGrid1->Columns->Items[3]->Width = 240;
 	DBGrid1->Columns->Items[3]->Title->Caption = "Посилання на зразок";
+	DBGrid1->Columns->Items[4]->Width = 240;
+	DBGrid1->Columns->Items[4]->Title->Caption = "Тестовий екземпляр";
 }
 
 void __fastcall TForm7::FormCreate(TObject *Sender)
@@ -181,5 +184,49 @@ void __fastcall TForm7::N6Click(TObject *Sender)
     this->Close();
    Form3->Show();
 }
+//---------------------------------------------------------------------------
+
+
+
+
+//---------------------------------------------------------------------------
+
+void __fastcall TForm7::N4Click(TObject *Sender)
+{
+    try
+	{
+		String name = DBGrid1->DataSource->DataSet->FieldByName("Name")->AsString;
+		TADOQuery *query = new TADOQuery(this);
+        query->Connection = DataModule1->ADOConnection1;
+        query->SQL->Text = "SELECT Subject_id, Test_sample FROM subject WHERE Name = :Name";
+        query->Parameters->ParamByName("Name")->Value = name;
+		query->Open();
+        if (!query->Eof)
+		{
+			int id = query->FieldByName("Subject_id")->AsInteger;
+			String testSamplePath = query->FieldByName("Test_sample")->AsString;
+			if (!testSamplePath.IsEmpty() && FileExists(testSamplePath))
+			{
+				ShellExecute(0, L"open", testSamplePath.w_str(), NULL, NULL, SW_SHOWNORMAL);
+			}
+			else
+			{
+				ShowMessage("Файл не вказано або він відсутній. Шлях: " + testSamplePath);
+			}
+
+		}
+		else
+        {
+			ShowMessage("Предмет не знайдено в базі даних.");
+        }
+
+		delete query;
+    }
+	catch (const Exception &e)
+	{
+		ShowMessage("Помилка при відкритті файлу: " + e.Message);
+	}
+}
+
 //---------------------------------------------------------------------------
 

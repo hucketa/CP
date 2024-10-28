@@ -85,13 +85,13 @@ void __fastcall TForm2::Button2Click(TObject *Sender)
 
 void __fastcall TForm2::set_id(int k)
 {
-    id = k;
+id = k;
     if (id > 0)
     {
         try
         {
             DataModule1->ADOQuery1->Close();
-            DataModule1->ADOQuery1->SQL->Text = "SELECT Image_name, Name, Description FROM subject WHERE Subject_id = :id";
+            DataModule1->ADOQuery1->SQL->Text = "SELECT Image_name, Name, Description, Test_sample FROM subject WHERE Subject_id = :id";
             DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
             DataModule1->ADOQuery1->Open();
 
@@ -100,6 +100,7 @@ void __fastcall TForm2::set_id(int k)
                 Edit1->Text = DataModule1->ADOQuery1->FieldByName("Image_name")->AsString;
                 Edit2->Text = DataModule1->ADOQuery1->FieldByName("Name")->AsString;
                 Edit4->Text = DataModule1->ADOQuery1->FieldByName("Description")->AsString;
+                Edit3->Text = DataModule1->ADOQuery1->FieldByName("Test_sample")->AsString;
             }
             else
             {
@@ -116,56 +117,70 @@ void __fastcall TForm2::set_id(int k)
         Edit1->Clear();
         Edit2->Clear();
         Edit4->Clear();
-    }
+		Edit3->Clear();
+	}
 }
 
 void __fastcall TForm2::Button1Click(TObject *Sender)
 {
-    try
-    {
-        if (Edit1->Text.Trim().IsEmpty() || Edit2->Text.Trim().IsEmpty() || Edit4->Text.Trim().IsEmpty())
-        {
-            ShowMessage("Усі поля повинні бути заповнені перед додаванням або оновленням.");
-            return;
-        }
+	try
+	{
+		if (Edit1->Text.Trim().IsEmpty() || Edit2->Text.Trim().IsEmpty() || Edit4->Text.Trim().IsEmpty())
+		{
+			ShowMessage("Усі поля повинні бути заповнені перед додаванням або оновленням.");
+			return;
+		}
 
-        String imagePath = Edit1->Text.Trim();
-        String subjectName = Edit2->Text.Trim();
-        String description = Edit4->Text.Trim();
+		String imagePath = Edit1->Text.Trim();
+		String subjectName = Edit2->Text.Trim();
+		String description = Edit4->Text.Trim();
+		String testSamplePath = Edit3->Text.Trim();
 
-        if (id > 0)  // Якщо id більше 0, то оновлюємо запис
-        {
-            DataModule1->ADOQuery1->Close();
-            DataModule1->ADOQuery1->SQL->Text = "UPDATE subject SET Image_name = :imagePath, Name = :subjectName, Description = :description WHERE Subject_id = :id";
+		if (id > 0)
+		{
+			DataModule1->ADOQuery1->Close();
+            DataModule1->ADOQuery1->SQL->Text = "UPDATE subject SET Image_name = :imagePath, Name = :subjectName, Description = :description, Test_sample = :testSamplePath WHERE Subject_id = :id";
             DataModule1->ADOQuery1->Parameters->ParamByName("imagePath")->Value = imagePath;
-            DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
+			DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
             DataModule1->ADOQuery1->Parameters->ParamByName("description")->Value = description;
+
+            if (!testSamplePath.IsEmpty())
+                DataModule1->ADOQuery1->Parameters->ParamByName("testSamplePath")->Value = testSamplePath;
+			else
+				DataModule1->ADOQuery1->Parameters->ParamByName("testSamplePath")->Value = Variant();
+
             DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
             DataModule1->ADOQuery1->ExecSQL();
 
             ShowMessage("Запис успішно оновлено.");
         }
-        else  // Якщо id дорівнює 0, додаємо новий запис
+		else
         {
-            DataModule1->ADOQuery1->Close();
-            DataModule1->ADOQuery1->SQL->Text = "INSERT INTO subject (Image_name, Name, Description) VALUES (:imagePath, :subjectName, :description)";
+			DataModule1->ADOQuery1->Close();
+            DataModule1->ADOQuery1->SQL->Text = "INSERT INTO subject (Image_name, Name, Description, Test_sample) VALUES (:imagePath, :subjectName, :description, :testSamplePath)";
             DataModule1->ADOQuery1->Parameters->ParamByName("imagePath")->Value = imagePath;
             DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
             DataModule1->ADOQuery1->Parameters->ParamByName("description")->Value = description;
+
+            if (!testSamplePath.IsEmpty())
+                DataModule1->ADOQuery1->Parameters->ParamByName("testSamplePath")->Value = testSamplePath;
+            else
+				DataModule1->ADOQuery1->Parameters->ParamByName("testSamplePath")->Value = Variant();
+
             DataModule1->ADOQuery1->ExecSQL();
 
             ShowMessage("Новий запис успішно додано до бази даних.");
-        }
+		}
 
-		DataModule1->DataSource2->DataSet->Close();
-		DataModule1->DataSource2->DataSet->Open();
+        DataModule1->DataSource2->DataSet->Close();
+        DataModule1->DataSource2->DataSet->Open();
 
-		Close();
-	}
-	catch (const Exception &e)
-    {
-        ShowMessage("Помилка обробки запису: " + e.Message);
+        Close();
     }
+	catch (const Exception &e)
+	{
+		ShowMessage("Помилка обробки запису: " + e.Message);
+	}
 }
 
 
@@ -173,6 +188,40 @@ void __fastcall TForm2::FormShow(TObject *Sender)
 {
 	if(id>0) Button1->Caption = "Підтвердити";
 	else  Button1->Caption = "Додати";
+}
+//---------------------------------------------------------------------------
+
+
+
+
+//---------------------------------------------------------------------------
+
+void __fastcall TForm2::Button3Click(TObject *Sender)
+{
+    TOpenDialog *OpenDialog = new TOpenDialog(this);
+    OpenDialog->Filter = "Документи Word або PDF|*.docx;*.pdf";
+    if (OpenDialog->Execute())
+    {
+        Edit3->Text = OpenDialog->FileName;
+    }
+	delete OpenDialog;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm2::Edit3Exit(TObject *Sender)
+{
+    	String testSamplePath = Edit3->Text.Trim();
+
+	if (!testSamplePath.IsEmpty() && !FileExists(testSamplePath))
+	{
+		ShowMessage("Файл не знайдено за вказаним шляхом.");
+	}
+	else if (!testSamplePath.IsEmpty() &&
+			 !(testSamplePath.SubString(testSamplePath.Length() - 3, 4).LowerCase() == ".docx" ||
+			   testSamplePath.SubString(testSamplePath.Length() - 3, 4).LowerCase() == ".pdf"))
+	{
+		ShowMessage("Файл має бути у форматі .docx або .pdf.");
+	}
 }
 //---------------------------------------------------------------------------
 

@@ -17,8 +17,14 @@ __published:	// IDE-managed Components
 	TEdit *Login;
 	TEdit *Password;
 	TButton *Button1;
-	void __fastcall LoginExit(TObject *Sender);
-	void __fastcall PasswordExit(TObject *Sender);
+	TLabel *Label4;
+	TEdit *Edit1;
+	TEdit *Edit2;
+	TLabel *Label5;
+	TComboBox *ComboBox1;
+	TButton *Button2;
+	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall Button2Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm13(TComponent* Owner);

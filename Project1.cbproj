@@ -138,14 +138,14 @@
             <Form>Form4</Form>
             <FormType>dfm</FormType>
             <DependentOn>Conditions.h</DependentOn>
-            <BuildOrder>5</BuildOrder>
+            <BuildOrder>4</BuildOrder>
         </CppCompile>
         <CppCompile Include="Data.cpp">
             <Form>DataModule1</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
             <DependentOn>Data.h</DependentOn>
-            <BuildOrder>9</BuildOrder>
+            <BuildOrder>6</BuildOrder>
         </CppCompile>
         <CppCompile Include="Help.cpp">
             <Form>Help_m</Form>
@@ -160,7 +160,7 @@
             <BuildOrder>2</BuildOrder>
         </CppCompile>
         <CppCompile Include="Project1.cpp">
-            <BuildOrder>0</BuildOrder>
+            <BuildOrder>1</BuildOrder>
         </CppCompile>
         <PCHCompile Include="Project1PCH1.h">
             <BuildOrder>1</BuildOrder>
@@ -170,77 +170,78 @@
             <Form>Form11</Form>
             <FormType>dfm</FormType>
             <DependentOn>Results.h</DependentOn>
-            <BuildOrder>12</BuildOrder>
+            <BuildOrder>10</BuildOrder>
         </CppCompile>
         <CppCompile Include="School.cpp">
             <Form>Form6</Form>
             <FormType>dfm</FormType>
             <DependentOn>School.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
+            <BuildOrder>11</BuildOrder>
         </CppCompile>
         <CppCompile Include="Students.cpp">
             <Form>Form14</Form>
             <FormType>dfm</FormType>
             <DependentOn>Students.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
+            <BuildOrder>13</BuildOrder>
         </CppCompile>
         <CppCompile Include="Subjects.cpp">
             <Form>Form7</Form>
             <FormType>dfm</FormType>
             <DependentOn>Subjects.h</DependentOn>
-            <BuildOrder>8</BuildOrder>
+            <BuildOrder>5</BuildOrder>
         </CppCompile>
         <CppCompile Include="Unit1.cpp">
             <Form>Form1</Form>
             <FormType>dfm</FormType>
             <DependentOn>Unit1.h</DependentOn>
-            <BuildOrder>10</BuildOrder>
+            <BuildOrder>7</BuildOrder>
         </CppCompile>
         <CppCompile Include="Unit10.cpp">
             <Form>Form10</Form>
             <FormType>dfm</FormType>
             <DependentOn>Unit10.h</DependentOn>
-            <BuildOrder>16</BuildOrder>
+            <BuildOrder>15</BuildOrder>
         </CppCompile>
         <CppCompile Include="Unit13.cpp">
             <Form>Form13</Form>
             <FormType>dfm</FormType>
             <DependentOn>Unit13.h</DependentOn>
-            <BuildOrder>18</BuildOrder>
+            <BuildOrder>0</BuildOrder>
         </CppCompile>
         <CppCompile Include="Unit2.cpp">
             <Form>Form2</Form>
             <FormType>dfm</FormType>
             <DependentOn>Unit2.h</DependentOn>
-            <BuildOrder>11</BuildOrder>
+            <BuildOrder>8</BuildOrder>
         </CppCompile>
         <CppCompile Include="Unit5.cpp">
             <Form>Form5</Form>
             <FormType>dfm</FormType>
             <DependentOn>Unit5.h</DependentOn>
-            <BuildOrder>12</BuildOrder>
+            <BuildOrder>9</BuildOrder>
         </CppCompile>
         <CppCompile Include="Unit8.cpp">
             <Form>Form8</Form>
             <FormType>dfm</FormType>
             <DependentOn>Unit8.h</DependentOn>
-            <BuildOrder>14</BuildOrder>
+            <BuildOrder>12</BuildOrder>
         </CppCompile>
         <CppCompile Include="Unit9.cpp">
             <Form>Form9</Form>
             <FormType>dfm</FormType>
             <DependentOn>Unit9.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
+            <BuildOrder>14</BuildOrder>
         </CppCompile>
+        <FormResources Include="Unit10.dfm"/>
         <FormResources Include="Unit1.dfm"/>
         <FormResources Include="Subjects.dfm"/>
         <FormResources Include="Students.dfm"/>
-        <FormResources Include="School.dfm"/>
-        <FormResources Include="Unit10.dfm"/>
+        <FormResources Include="Unit13.dfm"/>
         <FormResources Include="Unit9.dfm"/>
         <FormResources Include="Unit8.dfm"/>
         <FormResources Include="Unit5.dfm"/>
         <FormResources Include="Unit2.dfm"/>
+        <FormResources Include="School.dfm"/>
         <FormResources Include="Data.dfm"/>
         <FormResources Include="Conditions.dfm"/>
         <FormResources Include="Certificate.dfm"/>
@@ -248,7 +249,6 @@
         <FormResources Include="Help.dfm"/>
         <FormResources Include="Results.dfm"/>
         <FormResources Include="Main_Window.dfm"/>
-        <FormResources Include="Unit13.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

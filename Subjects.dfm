@@ -57,6 +57,11 @@ object Form7: TForm7
         Expanded = False
         FieldName = 'Image_name'
         Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Test_sample'
+        Visible = True
       end>
   end
   object MainMenu1: TMainMenu
@@ -85,6 +90,10 @@ object Form7: TForm7
     object N3: TMenuItem
       Caption = #1042#1080#1076#1072#1083#1080#1090#1080
       OnClick = N3Click
+    end
+    object N4: TMenuItem
+      Caption = #1055#1086#1076#1080#1074#1080#1090#1080#1089#1103' '#1079#1088#1072#1079#1086#1082
+      OnClick = N4Click
     end
   end
 end
