@@ -102,9 +102,6 @@ void __fastcall TForm4::FormCreate(TObject *Sender)
 {
 	Execute->Enabled = false;
 	Clear->Enabled = false;
-	DatePicker2->OnChange = CheckFiltersFilled;
-	Earlier->OnClick = CheckFiltersFilled;
-	Later->OnClick = CheckFiltersFilled;
 	ThisDate->OnClick = CheckFiltersFilled;
 	ComboBox2->OnChange = CheckFiltersFilled;
 }
@@ -114,7 +111,7 @@ void __fastcall TForm4::FormCreate(TObject *Sender)
 void __fastcall TForm4::CheckFiltersFilled(TObject *Sender)
 {
 	bool isAnyFilterFilled = false;
-	if (Earlier->Checked || Later->Checked || ThisDate->Checked)
+	if (ThisDate->Checked)
 		isAnyFilterFilled = true;
 	if (ComboBox2->ItemIndex >= 0)
 		isAnyFilterFilled = true;
@@ -135,19 +132,12 @@ void __fastcall TForm4::ExecuteClick(TObject *Sender)
 
 	if (ThisDate->Checked)
 	{
-		conditions += "c.Date = :Date ";
-	}
-	else if (Earlier->Checked && Later->Checked)
-	{
+		if (DatePicker1->Date > DatePicker2->Date)
+		{
+			ShowMessage("Дата початку повинна бути раніше дати завершення!");
+			return;
+		}
 		conditions += "c.Date BETWEEN :DateStart AND :DateEnd ";
-	}
-	else if (Later->Checked)
-	{
-		conditions += "c.Date > :Date ";
-	}
-	else if (Earlier->Checked)
-	{
-		conditions += "c.Date < :Date ";
 	}
 
 	if (ComboBox2->ItemIndex >= 0)
@@ -169,20 +159,10 @@ void __fastcall TForm4::ExecuteClick(TObject *Sender)
 		DataModule1->ADOQuery2->SQL->Clear();
 		DataModule1->ADOQuery2->SQL->Add(query);
 
-		TDateTime selectedDate = DatePicker2->Date;
-
 		if (ThisDate->Checked)
 		{
-			DataModule1->ADOQuery2->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
-		}
-		else if (Earlier->Checked && Later->Checked)
-		{
-			DataModule1->ADOQuery2->Parameters->ParamByName("DateStart")->Value = selectedDate - 1;
-			DataModule1->ADOQuery2->Parameters->ParamByName("DateEnd")->Value = selectedDate + 1;
-		}
-		else if (Earlier->Checked || Later->Checked)
-		{
-			DataModule1->ADOQuery2->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
+			DataModule1->ADOQuery2->Parameters->ParamByName("DateStart")->Value = DatePicker1->Date.FormatString("yyyy-mm-dd");
+			DataModule1->ADOQuery2->Parameters->ParamByName("DateEnd")->Value = DatePicker2->Date.FormatString("yyyy-mm-dd");
 		}
 
 		if (ComboBox2->ItemIndex >= 0)
@@ -200,14 +180,13 @@ void __fastcall TForm4::ExecuteClick(TObject *Sender)
 }
 
 
+
 //---------------------------------------------------------------------------
 
 
 void __fastcall TForm4::ClearClick(TObject *Sender)
 {
 	DatePicker2->Date = Now();
-	Earlier->Checked = false;
-	Later->Checked = false;
 	ThisDate->Checked = false;
 	ComboBox2->ItemIndex = -1;
 
@@ -296,4 +275,27 @@ void TForm4::ToggleView()
 	}
 }
 
+
+void __fastcall TForm4::DatePicker1CloseUp(TObject *Sender)
+{
+    	try
+	{
+		TDateTime selectedDate = DatePicker1->Date;
+		TDateTime currentDate = Now();
+		if (selectedDate > currentDate)
+		{
+			throw Exception("Дата не може бути в майбутньому!");
+		}
+		else if (selectedDate < EncodeDate(1990, 1, 1))
+		{
+			throw Exception("Дата занадто стара! Виберіть пізнішу дату.");
+		}
+	}
+	catch (const Exception &e)
+	{
+		ShowMessage(e.Message);
+		DatePicker1->Date = Now();
+	}
+}
+//---------------------------------------------------------------------------
 
