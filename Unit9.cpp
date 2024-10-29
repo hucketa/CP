@@ -118,45 +118,33 @@ void __fastcall TForm9::LabeledEdit1Exit(TObject *Sender) {
 }
 
 void __fastcall TForm9::DatePicker2CloseUp(TObject *Sender) {
-	if (ComboBox1->ItemIndex == -1) {
-		ShowMessage("Будь ласка, виберіть предмет.");
-		return;
-	}
 	int subject_id = ComboBox1->ItemIndex + 1;
 	TDateTime selectedDate = DatePicker2->Date;
 	String formattedDate = selectedDate.FormatString("yyyy-mm-dd");
-
-	// Виведення значень для відладки
-	ShowMessage("Selected Subject ID: " + IntToStr(subject_id) + ", Selected Date: " + formattedDate);
-
 	TADOQuery *query = new TADOQuery(NULL);
 	query->Connection = DataModule1->ADOConnection1;
 	query->SQL->Text = "SELECT Max_point, Min_r_point, Min_point FROM conditions WHERE Date = :date AND Subject_id = :subject_id";
-	query->Parameters->ParamByName("date")->Value = selectedDate;
+	query->Parameters->ParamByName("date")->Value = formattedDate;
 	query->Parameters->ParamByName("subject_id")->Value = subject_id;
 	query->Open();
-
 	if (!query->Eof) {
 		int maxPoint = query->FieldByName("Max_point")->AsInteger;
 		int minPassPoint = query->FieldByName("Min_r_point")->AsInteger;
 		int minPoint = query->FieldByName("Min_point")->AsInteger;
-
-		// Виведення значень для відладки
-		ShowMessage("Max Point: " + IntToStr(maxPoint) + ", Min Passing Point: " + IntToStr(minPassPoint) + ", Min Point: " + IntToStr(minPoint));
-
 		Label5->Caption = "Максимальний: " + IntToStr(maxPoint);
 		Label7->Caption = "Прохідний: " + IntToStr(minPassPoint);
 		Label6->Caption = "Мінімальний: " + IntToStr(minPoint);
 	} else {
-		ShowMessage("Для вибраної дати та предмета немає даних у таблиці conditions.");
+		ShowMessage("Для вибраної дати та предмета немає даних у таблиці.");
 		Label5->Caption = "Максимальний: -";
 		Label7->Caption = "Прохідний: -";
 		Label6->Caption = "Мінімальний: -";
 	}
-
 	query->Close();
 	delete query;
 }
+
+
 
 void __fastcall TForm9::DatePicker1CloseUp(TObject *Sender) {
 	try {
@@ -183,17 +171,11 @@ void __fastcall TForm9::LabeledEdit4Exit(TObject *Sender) {
 	TDateTime conditionDate = DatePicker2->Date;
 	String enteredScoreStr = LabeledEdit4->Text;
 	int enteredScore = enteredScoreStr.ToIntDef(-1);
-
-	// Виведення значень для відладки
-	ShowMessage("Entered Score: " + IntToStr(enteredScore) + ", Subject ID: " + IntToStr(subject_id) + ", Condition Date: " + conditionDate.FormatString("yyyy-mm-dd"));
-
 	if (enteredScore == -1) {
 		ShowMessage("Будь ласка, введіть коректне значення балу.");
 		return;
 	}
-
 	String formattedDate = conditionDate.FormatString("yyyy-mm-dd");
-
 	TADOQuery *query = new TADOQuery(NULL);
 	query->Connection = DataModule1->ADOConnection1;
 	query->SQL->Text = "SELECT Max_point, Min_r_point, Min_point FROM conditions WHERE Subject_id = :subject_id AND Date = :date";
@@ -205,8 +187,6 @@ void __fastcall TForm9::LabeledEdit4Exit(TObject *Sender) {
 		int maxPoint = query->FieldByName("Max_point")->AsInteger;
 		int minPassPoint = query->FieldByName("Min_r_point")->AsInteger;
 		int minPoint = query->FieldByName("Min_point")->AsInteger;
-		ShowMessage("Max Point: " + IntToStr(maxPoint) + ", Min Passing Point: " + IntToStr(minPassPoint) + ", Min Point: " + IntToStr(minPoint));
-
 		if (enteredScore < minPoint) {
 			ShowMessage("Введений бал менший за мінімальний.");
 		} else if (enteredScore > maxPoint) {
@@ -230,38 +210,28 @@ void __fastcall TForm9::ComboBox1CloseUp(TObject *Sender) {
 		ShowMessage("Будь ласка, виберіть предмет.");
 		return;
 	}
-	if (DatePicker2->Date == EncodeDate(1990, 1, 1)) {
-		ShowMessage("Будь ласка, виберіть дату.");
-		return;
-	}
 	int subject_id = ComboBox1->ItemIndex + 1;
 	TDateTime selectedDate = DatePicker2->Date;
 	String formattedDate = selectedDate.FormatString("yyyy-mm-dd");
-	ShowMessage("Selected Subject ID: " + IntToStr(subject_id) + ", Selected Date: " + formattedDate);
-
 	TADOQuery *query = new TADOQuery(NULL);
 	query->Connection = DataModule1->ADOConnection1;
 	query->SQL->Text = "SELECT Max_point, Min_r_point, Min_point FROM conditions WHERE Date = :date AND Subject_id = :subject_id";
 	query->Parameters->ParamByName("date")->Value = formattedDate;
 	query->Parameters->ParamByName("subject_id")->Value = subject_id;
 	query->Open();
-
 	if (!query->Eof) {
 		int maxPoint = query->FieldByName("Max_point")->AsInteger;
 		int minPassPoint = query->FieldByName("Min_r_point")->AsInteger;
 		int minPoint = query->FieldByName("Min_point")->AsInteger;
-		ShowMessage("Max Point: " + IntToStr(maxPoint) + ", Min Passing Point: " + IntToStr(minPassPoint) + ", Min Point: " + IntToStr(minPoint));
-
 		Label5->Caption = "Максимальний: " + IntToStr(maxPoint);
 		Label7->Caption = "Прохідний: " + IntToStr(minPassPoint);
 		Label6->Caption = "Мінімальний: " + IntToStr(minPoint);
 	} else {
-		ShowMessage("Для вибраної дати та предмета немає даних у таблиці conditions.");
+		ShowMessage("Для вибраної дати та предмета немає даних у таблиці.");
 		Label5->Caption = "Максимальний: -";
 		Label7->Caption = "Прохідний: -";
 		Label6->Caption = "Мінімальний: -";
 	}
-
 	query->Close();
 	delete query;
 }

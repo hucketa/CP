@@ -92,7 +92,7 @@ void __fastcall TForm10::DatePicker2CloseUp(TObject *Sender)
 {
 	try
 	{
-		TDateTime creationDate = DatePicker2->Date;
+		TDateTime creationDate = DatePicker1->Date;
 		TDateTime registrationDate = DatePicker2->Date;
 		if (registrationDate < EncodeDate(1990, 1, 1))
 		{
@@ -209,8 +209,6 @@ void __fastcall TForm10::Button1Click(TObject *Sender)
 		TDateTime creationDate = DatePicker1->Date;
 		TDateTime effectTime = DatePicker2->Date;
 		int status = RadioGroup1->ItemIndex == 0 ? 1 : 0;
-
-		// Перевірка на коректність введених даних
 		if (pib.IsEmpty())
 		{
 			throw Exception("Поле ПІБ не може бути порожнім!");
@@ -219,12 +217,10 @@ void __fastcall TForm10::Button1Click(TObject *Sender)
 		{
 			throw Exception("Поле PIN не може бути порожнім!");
 		}
-		if (effectTime <= creationDate)
+		if (effectTime > creationDate)
 		{
 			throw Exception("Дата реєстрації повинна бути пізніше за дату створення!");
 		}
-
-		// Отримуємо Student_id за ПІБ
 		TADOQuery *query = new TADOQuery(NULL);
 		try
 		{

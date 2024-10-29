@@ -22,22 +22,18 @@ void __fastcall TForm12::Button1Click(TObject *Sender)
 		String login = LabeledEdit1->Text.Trim();
 		String password = LabeledEdit2->Text.Trim();
 		String query = "SELECT Role FROM users WHERE Login = :Login AND Password = :Password";
-
-		// Виконання запиту
 		DataModule1->ADOQuery1->Close();
 		DataModule1->ADOQuery1->SQL->Clear();
 		DataModule1->ADOQuery1->SQL->Add(query);
 		DataModule1->ADOQuery1->Parameters->ParamByName("Login")->Value = login;
 		DataModule1->ADOQuery1->Parameters->ParamByName("Password")->Value = password;
 		DataModule1->ADOQuery1->Open();
-
-		// Перевірка результату
 		if (DataModule1->ADOQuery1->RecordCount > 0)
 		{
 			String role = DataModule1->ADOQuery1->FieldByName("Role")->AsString;
 			role_s = role;
 			this->set_flag(true);
-			this->Close();  // Закриваємо форму після авторизації
+			this->Close();
 		}
 		else
 		{

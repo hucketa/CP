@@ -58,6 +58,7 @@ __published:	// IDE-managed Components
 	TMenuItem *N12;
 	TMenuItem *N13;
 	TDatePicker *DatePicker2;
+	TMenuItem *N14;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
@@ -79,6 +80,7 @@ __published:	// IDE-managed Components
 	void __fastcall N13Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall DatePicker2CloseUp(TObject *Sender);
+	void __fastcall N14Click(TObject *Sender);
 private:
 	void DBColumnSizes();
 public:		// User declarations

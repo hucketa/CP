@@ -296,7 +296,7 @@ void __fastcall TForm3::UpdateStatusBar(String role)
 {
 	if (role == "ìåíåäæåğ ó÷í³â")
 	{
-		StatusBar1->Panels->Items[2]->Text = "Ìåíåäæåğ ó÷í³â: Ïîâíèé äîñòóï äî äàíèõ ó÷í³â";
+		StatusBar1->Panels->Items[2]->Text = "Ìåíåäæåğ ó÷àñíèê³â: Ïîâíèé äîñòóï äî äàíèõ ó÷àñíèê³â";
 	}
 	else if (role == "ìåíåäæåğ ïğåäìåò³â")
 	{
@@ -450,6 +450,12 @@ void __fastcall TForm3::DatePicker2CloseUp(TObject *Sender)
 		ShowMessage(e.Message);
 		DatePicker2->Date = Now();
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::N14Click(TObject *Sender)
+{
+    Application->Terminate();
 }
 //---------------------------------------------------------------------------
 

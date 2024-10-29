@@ -4,8 +4,8 @@ object Form10: TForm10
   AutoSize = True
   BorderStyle = bsSingle
   Caption = 'Form10'
-  ClientHeight = 185
-  ClientWidth = 401
+  ClientHeight = 186
+  ClientWidth = 405
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

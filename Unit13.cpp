@@ -21,7 +21,6 @@ __fastcall TForm13::TForm13(TComponent* Owner)
 		}
 	} else {
 		this->Show();
-        ShowMessage("Підключення не вдалося.");
 	}
 	fromCertificate = false;
 }

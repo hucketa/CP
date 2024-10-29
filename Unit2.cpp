@@ -94,7 +94,6 @@ id = k;
             DataModule1->ADOQuery1->SQL->Text = "SELECT Image_name, Name, Description, Test_sample FROM subject WHERE Subject_id = :id";
             DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
             DataModule1->ADOQuery1->Open();
-
             if (!DataModule1->ADOQuery1->Eof)
             {
                 Edit1->Text = DataModule1->ADOQuery1->FieldByName("Image_name")->AsString;
@@ -130,12 +129,10 @@ void __fastcall TForm2::Button1Click(TObject *Sender)
 			ShowMessage("Усі поля повинні бути заповнені перед додаванням або оновленням.");
 			return;
 		}
-
 		String imagePath = Edit1->Text.Trim();
 		String subjectName = Edit2->Text.Trim();
 		String description = Edit4->Text.Trim();
 		String testSamplePath = Edit3->Text.Trim();
-
 		if (id > 0)
 		{
 			DataModule1->ADOQuery1->Close();
@@ -143,15 +140,12 @@ void __fastcall TForm2::Button1Click(TObject *Sender)
             DataModule1->ADOQuery1->Parameters->ParamByName("imagePath")->Value = imagePath;
 			DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
             DataModule1->ADOQuery1->Parameters->ParamByName("description")->Value = description;
-
             if (!testSamplePath.IsEmpty())
                 DataModule1->ADOQuery1->Parameters->ParamByName("testSamplePath")->Value = testSamplePath;
 			else
 				DataModule1->ADOQuery1->Parameters->ParamByName("testSamplePath")->Value = Variant();
-
             DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
             DataModule1->ADOQuery1->ExecSQL();
-
             ShowMessage("Запис успішно оновлено.");
         }
 		else
@@ -161,20 +155,15 @@ void __fastcall TForm2::Button1Click(TObject *Sender)
             DataModule1->ADOQuery1->Parameters->ParamByName("imagePath")->Value = imagePath;
             DataModule1->ADOQuery1->Parameters->ParamByName("subjectName")->Value = subjectName;
             DataModule1->ADOQuery1->Parameters->ParamByName("description")->Value = description;
-
             if (!testSamplePath.IsEmpty())
                 DataModule1->ADOQuery1->Parameters->ParamByName("testSamplePath")->Value = testSamplePath;
             else
 				DataModule1->ADOQuery1->Parameters->ParamByName("testSamplePath")->Value = Variant();
-
             DataModule1->ADOQuery1->ExecSQL();
-
             ShowMessage("Новий запис успішно додано до бази даних.");
 		}
-
         DataModule1->DataSource2->DataSet->Close();
         DataModule1->DataSource2->DataSet->Open();
-
         Close();
     }
 	catch (const Exception &e)
