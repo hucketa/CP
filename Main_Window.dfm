@@ -62,37 +62,21 @@ object Form3: TForm3
       TabOrder = 0
       OnCloseUp = DatePicker1CloseUp
     end
-    object Earlier: TCheckBox
-      Left = 20
-      Top = 63
-      Width = 97
+    object ThisDate: TCheckBox
+      Left = 32
+      Top = 99
+      Width = 153
       Height = 17
-      Caption = #1056#1072#1085#1110#1096#1077' '#1079#1072
+      Caption = #1060#1110#1083#1100#1090#1088#1091#1074#1072#1090#1080' '#1079#1072' '#1076#1072#1090#1086#1102
       TabOrder = 1
     end
-    object ThisDate: TCheckBox
-      Left = 20
-      Top = 86
-      Width = 97
-      Height = 17
-      Caption = #1062#1103' '#1076#1072#1090#1072
-      TabOrder = 2
-    end
-    object Later: TCheckBox
-      Left = 113
-      Top = 63
-      Width = 97
-      Height = 17
-      Caption = #1055#1110#1079#1085#1110#1096#1077
-      TabOrder = 3
-    end
     object Status: TGroupBox
-      Left = 16
-      Top = 109
+      Left = 18
+      Top = 117
       Width = 185
       Height = 84
       Caption = #1057#1090#1072#1090#1091#1089' '#1079#1076#1072#1095#1110
-      TabOrder = 4
+      TabOrder = 2
       object Status_check: TRadioGroup
         Left = 8
         Top = 14
@@ -112,7 +96,7 @@ object Form3: TForm3
       Width = 185
       Height = 66
       Caption = #1055#1030#1041' '#1091#1095#1085#1103
-      TabOrder = 5
+      TabOrder = 3
       object Edit1: TEdit
         Left = 16
         Top = 24
@@ -121,6 +105,19 @@ object Form3: TForm3
         TabOrder = 0
         OnExit = Edit1Exit
       end
+    end
+    object DatePicker2: TDatePicker
+      Left = 32
+      Top = 61
+      Date = 45563.000000000000000000
+      DateFormat = 'dd/mm/yyyy'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      TabOrder = 4
+      OnCloseUp = DatePicker2CloseUp
     end
   end
   object Clear: TBitBtn
