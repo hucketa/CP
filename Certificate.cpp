@@ -418,6 +418,9 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 
 void __fastcall TCertificates::N4Click(TObject *Sender)
 {
+
+	bool k =true;
+	Form13->setfromCertificate(k);
 	Form13->ShowModal();
 }
 //---------------------------------------------------------------------------

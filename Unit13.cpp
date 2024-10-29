@@ -10,26 +10,21 @@
 #pragma resource "*.dfm"
 TForm13 *Form13;
 
-
 //---------------------------------------------------------------------------
-
 __fastcall TForm13::TForm13(TComponent* Owner)
 	: TForm(Owner)
 {
 	if (LoadTemplateFromIni()) {
-        if (Form3 == NULL) {
-            Application->CreateForm(__classid(TForm3), &Form3);
-        }
-        this->Hide();
-    } else {
-        this->Show();
+		if (Form3 == NULL) {
+			Application->CreateForm(__classid(TForm3), &Form3);
+			this->Hide();
+		}
+	} else {
+		this->Show();
         ShowMessage("Підключення не вдалося.");
 	}
+	fromCertificate = false;
 }
-
-
-
-
 
 bool __fastcall TForm13::LoadTemplateFromIni()
 {
@@ -51,17 +46,20 @@ bool __fastcall TForm13::LoadTemplateFromIni()
 
 void __fastcall TForm13::Button1Click(TObject *Sender)
 {
-	if(!LabeledEdit1->Text.IsEmpty()) {
+	if (!LabeledEdit1->Text.IsEmpty()) {
 		template_name = LabeledEdit1->Text;
 		SaveTemplateToIni();
-		ShowMessage("Шаблон сертифікату оновлено та збережено успішно.");
-		this->Close();
-	}
-	else {
+		if (fromCertificate) {
+			this->Close();
+		} else {
+			Form3->Show();
+			fromCertificate = true;
+			this->Hide();
+		}
+	} else {
 		ShowMessage("Введіть шаблон для назви сертифікату");
 	}
 }
-
 
 
 void __fastcall TForm13::SaveTemplateToIni()
@@ -69,15 +67,12 @@ void __fastcall TForm13::SaveTemplateToIni()
 	TIniFile *IniFile = new TIniFile(ExtractFilePath(Application->ExeName) + "config.ini");
 	try {
 		IniFile->WriteString("Certificate", "TemplateName", template_name);
-		ShowMessage("Шаблон сертифікату збережено успішно.");
 	}
 	__finally {
 		delete IniFile;
 	}
 }
 //---------------------------------------------------------------------------
-
-
 
 void __fastcall TForm13::LabeledEdit1Exit(TObject *Sender)
 {
@@ -88,5 +83,7 @@ void __fastcall TForm13::LabeledEdit1Exit(TObject *Sender)
 	}
 }
 
-
+void TForm13::setfromCertificate(bool k){
+   fromCertificate = k;
+}
 

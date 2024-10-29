@@ -78,6 +78,7 @@ __published:	// IDE-managed Components
 	void __fastcall N1Click(TObject *Sender);
 	void __fastcall N12Click(TObject *Sender);
 	void __fastcall N13Click(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:
 	void DBColumnSizes();
 public:		// User declarations

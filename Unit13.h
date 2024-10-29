@@ -19,9 +19,11 @@ __published:	// IDE-managed Components
 	void __fastcall LabeledEdit1Exit(TObject *Sender);
 private:
 	bool __fastcall LoadTemplateFromIni();
-	void __fastcall SaveTemplateToIni();	// User declarations
+	void __fastcall SaveTemplateToIni();
+	bool fromCertificate;	// User declarations
 public:
-	String template_name;		// User declarations
+	String template_name;
+   void setfromCertificate(bool k);			// User declarations
 	__fastcall TForm13(TComponent* Owner);
 };
 //---------------------------------------------------------------------------

@@ -349,6 +349,7 @@ void TForm3::ManageMenuItems(String role)
 		Form6->N3->Enabled = false;//Øêîëè
 		Certificates->N3->Enabled = false;
 		Certificates->N2->Enabled = false;
+		Certificates->N4->Enabled = false;
 		Certificates->BitBtn1->Enabled = false;
 		Form11->N3->Enabled = false;//Ğåçóëüòàòè
 		Form11->N2->Enabled = false;//Ğåçóëüòàòè
@@ -367,6 +368,7 @@ void TForm3::ManageMenuItems(String role)
 		Form4->N2->Enabled = false;//Óìîâè
 		Certificates->N3->Enabled = false;
 		Certificates->N2->Enabled = false;
+		Certificates->N4->Enabled = false;
 		Certificates->BitBtn1->Enabled = false;
 		Form11->N3->Enabled = false;//Ğåçóëüòàòè
 		Form11->N2->Enabled = false;//Ğåçóëüòàòè
@@ -386,6 +388,7 @@ void TForm3::ManageMenuItems(String role)
 		Certificates->N3->Enabled = false;
 		Certificates->N2->Enabled = false;
 		Certificates->BitBtn1->Enabled = false;
+		Certificates->N4->Enabled = false;
 		Form11->N3->Enabled = false;//Ğåçóëüòàòè
 		Form11->N2->Enabled = false;//Ğåçóëüòàòè
 	}
@@ -403,28 +406,12 @@ void TForm3::ManageMenuItems(String role)
 		Form6->N3->Enabled = false;//Øêîëè
 		Certificates->N3->Enabled = true;
 		Certificates->N2->Enabled = true;
+		Certificates->N4->Enabled = true;
 		Certificates->BitBtn1->Enabled = true;
 		Form11->N3->Enabled = true;//Ğåçóëüòàòè
-		Form11->N2->Enabled = true;//Ğåçóëüòàòè
+		Form11->N2->Enabled = true;
+		//Ğåçóëüòàòè
 	}
-	/*else
-	{
-		Form7->N1->Enabled = false;//Ïğåäìåòè
-		Form7->N2->Enabled = false;//Ïğåäìåòè
-		Form7->N3->Enabled = false;//Ïğåäìåòè
-		Form14->N1->Enabled = false;//Ó÷í³
-		Form14->N2->Enabled = false;//Ó÷í³
-		Form4->N3->Enabled = false;//Óìîâè
-		Form4->N2->Enabled = false;//Óìîâè
-		Form6->N1->Enabled = false;//Øêîëè
-		Form6->N2->Enabled = false;//Øêîëè
-		Form6->N3->Enabled = false;//Øêîëè
-		Certificates->N3->Enabled = false;
-		Certificates->N2->Enabled = false;
-		Certificates->BitBtn1->Enabled = false;
-		Form11->N3->Enabled = false;//Ğåçóëüòàòè
-		Form11->N2->Enabled = false;//Ğåçóëüòàòè
-	}*/
 }
 
 
@@ -457,6 +444,12 @@ void __fastcall TForm3::N13Click(TObject *Sender)
 		UpdateStatusBar(user);
 		ManageMenuItems(user);
 		Application->ProcessMessages();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::FormClose(TObject *Sender, TCloseAction &Action)
+{
+	Application->Terminate();
 }
 //---------------------------------------------------------------------------
 

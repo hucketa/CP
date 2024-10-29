@@ -13,6 +13,7 @@ object Form3: TForm3
   Font.Style = []
   Menu = MainMenu1
   Position = poScreenCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
