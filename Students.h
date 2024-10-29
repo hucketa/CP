@@ -35,6 +35,8 @@ __published:	// IDE-managed Components
 	TMenuItem *N2;
 	TGroupBox *GroupBox1;
 	TLabel *Label1;
+	TLabel *Label2;
+	TDatePicker *DatePicker1;
 	TRadioGroup *RadioGroup1;
 	TButton *Button1;
 	TLabel *Label3;
@@ -42,11 +44,10 @@ __published:	// IDE-managed Components
 	TEdit *Edit5;
 	TBitBtn *Clear;
 	TBitBtn *Execute;
+	TCheckBox *Earlier;
+	TCheckBox *Later;
+	TCheckBox *ThisDate;
 	TComboBox *ComboBox1;
-	TDatePicker *DatePicker1;
-	TDatePicker *DatePicker2;
-	TLabel *Label4;
-	TLabel *Label2;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall N6Click(TObject *Sender);
 	void __fastcall Lj1Click(TObject *Sender);

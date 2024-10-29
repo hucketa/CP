@@ -3,8 +3,8 @@ object Form3: TForm3
   Top = 0
   BorderStyle = bsSingle
   Caption = #1054#1073#1083#1110#1082' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1110#1074' '#1085#1084#1090
-  ClientHeight = 358
-  ClientWidth = 909
+  ClientHeight = 344
+  ClientWidth = 879
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object Form3: TForm3
   TextHeight = 15
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 339
-    Width = 909
+    Top = 325
+    Width = 879
     Height = 19
     Panels = <
       item
@@ -39,33 +39,19 @@ object Form3: TForm3
         Text = #1051#1086#1075#1110#1085' '#1091#1095#1072#1089#1085#1080#1082#1072
         Width = 200
       end>
-    ExplicitTop = 358
-    ExplicitWidth = 905
+    ExplicitTop = 324
+    ExplicitWidth = 875
   end
   object GroupBox1: TGroupBox
     Left = 646
     Top = 0
     Width = 227
-    Height = 333
+    Height = 328
     Caption = #1060#1110#1083#1100#1090#1088#1072#1094#1110#1103
     TabOrder = 1
-    object Label1: TLabel
-      Left = 32
-      Top = 14
-      Width = 103
-      Height = 15
-      Caption = #1055#1086#1095#1072#1090#1086#1082' '#1110#1085#1090#1077#1088#1074#1072#1083#1091
-    end
-    object Label2: TLabel
-      Left = 33
-      Top = 69
-      Width = 92
-      Height = 15
-      Caption = #1050#1110#1085#1077#1094#1100' '#1110#1085#1090#1077#1088#1074#1072#1083#1091
-    end
     object DatePicker1: TDatePicker
-      Left = 31
-      Top = 35
+      Left = 32
+      Top = 23
       Date = 45563.000000000000000000
       DateFormat = 'dd/mm/yyyy'
       Font.Charset = DEFAULT_CHARSET
@@ -76,13 +62,37 @@ object Form3: TForm3
       TabOrder = 0
       OnCloseUp = DatePicker1CloseUp
     end
+    object Earlier: TCheckBox
+      Left = 20
+      Top = 63
+      Width = 97
+      Height = 17
+      Caption = #1056#1072#1085#1110#1096#1077' '#1079#1072
+      TabOrder = 1
+    end
+    object ThisDate: TCheckBox
+      Left = 20
+      Top = 86
+      Width = 97
+      Height = 17
+      Caption = #1062#1103' '#1076#1072#1090#1072
+      TabOrder = 2
+    end
+    object Later: TCheckBox
+      Left = 113
+      Top = 63
+      Width = 97
+      Height = 17
+      Caption = #1055#1110#1079#1085#1110#1096#1077
+      TabOrder = 3
+    end
     object Status: TGroupBox
       Left = 16
-      Top = 125
+      Top = 109
       Width = 185
       Height = 84
       Caption = #1057#1090#1072#1090#1091#1089' '#1079#1076#1072#1095#1110
-      TabOrder = 1
+      TabOrder = 4
       object Status_check: TRadioGroup
         Left = 8
         Top = 14
@@ -98,11 +108,11 @@ object Form3: TForm3
     end
     object Surname_student: TGroupBox
       Left = 16
-      Top = 215
+      Top = 207
       Width = 185
       Height = 66
       Caption = #1055#1030#1041' '#1091#1095#1085#1103
-      TabOrder = 2
+      TabOrder = 5
       object Edit1: TEdit
         Left = 16
         Top = 24
@@ -112,30 +122,10 @@ object Form3: TForm3
         OnExit = Edit1Exit
       end
     end
-    object DatePicker2: TDatePicker
-      Left = 32
-      Top = 85
-      Date = 45563.000000000000000000
-      DateFormat = 'dd/mm/yyyy'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      TabOrder = 3
-      OnCloseUp = DatePicker2CloseUp
-    end
-    object CheckBox1: TCheckBox
-      Left = 192
-      Top = 40
-      Width = 97
-      Height = 17
-      TabOrder = 4
-    end
   end
   object Clear: TBitBtn
     Left = 769
-    Top = 293
+    Top = 279
     Width = 90
     Height = 34
     Caption = #1054#1095#1080#1089#1090#1080#1090#1080
@@ -179,7 +169,7 @@ object Form3: TForm3
   end
   object Execute: TBitBtn
     Left = 660
-    Top = 293
+    Top = 279
     Width = 103
     Height = 34
     Caption = #1047#1072#1089#1090#1086#1089#1091#1074#1072#1090#1080
@@ -293,10 +283,6 @@ object Form3: TForm3
         Caption = #1042#1080#1081#1090#1080
         OnClick = N13Click
       end
-    end
-    object N14: TMenuItem
-      Caption = #1047#1072#1074#1077#1088#1096#1080#1090#1080' '#1088#1086#1073#1086#1090#1091
-      OnClick = N14Click
     end
   end
   object Timer1: TTimer

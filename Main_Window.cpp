@@ -28,7 +28,9 @@ void __fastcall TForm3::FormCreate(TObject *Sender)
 	Clear->Enabled = false;
 	Execute->Enabled = false;
 	DatePicker1->OnChange = CheckFiltersFilled;
-    DatePicker2->OnChange = CheckFiltersFilled;
+	Earlier->OnClick = CheckFiltersFilled;
+    Later->OnClick = CheckFiltersFilled;
+	ThisDate->OnClick = CheckFiltersFilled;
 	Status_check->OnClick = CheckFiltersFilled;
 	Edit1->OnChange = CheckFiltersFilled;
 	UpdateStatusBar("Користувач");
@@ -52,7 +54,7 @@ void TForm3::DBColumnSizes(){
 void __fastcall TForm3::CheckFiltersFilled(TObject *Sender)
 {
 	bool isAnyFilterFilled = false;
-	isAnyFilterFilled = true;
+	if (Earlier->Checked || Later->Checked || ThisDate->Checked) isAnyFilterFilled = true;
 	if (Status_check->ItemIndex >= 0) isAnyFilterFilled = true;
 	if (!Edit1->Text.Trim().IsEmpty()) isAnyFilterFilled = true;
 	Execute->Enabled = isAnyFilterFilled;
@@ -70,7 +72,10 @@ void __fastcall TForm3::FormShow(TObject *Sender)
 
 void __fastcall TForm3::ClearClick(TObject *Sender)
 {
-	DatePicker1->Date = Now();
+  	DatePicker1->Date = Now();
+	Earlier->Checked = false;
+	Later->Checked = false;
+	ThisDate->Checked = false;
 	Status_check->ItemIndex = -1;
 	Edit1->Text = "";
 	Execute->Enabled = false;
@@ -102,74 +107,95 @@ void __fastcall TForm3::ClearClick(TObject *Sender)
 
 void __fastcall TForm3::ExecuteClick(TObject *Sender)
 {
-    String query = "SELECT s.PIB, "
-                   "r.Attemp_date, "
-                   "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END AS Status, "
+  String query = "SELECT s.PIB, "
+				   "r.Attemp_date, "
+                   "CASE WHEN r.Status = 1 THEN 'Здано' ELSE 'Не здано' END, "
                    "subj.Name, "
                    "r.Reached_score "
-                   "FROM Result r "
+				   "FROM Result r "
                    "JOIN Student s ON r.Student_id = s.Student_id "
                    "JOIN Subject subj ON r.Subj_id = subj.Subject_id ";
 	String conditions = "";
-	if (CheckBox1->Checked && DatePicker1->Date != TDateTime() && DatePicker2->Date != TDateTime())
-    {
-        if (DatePicker1->Date <= DatePicker2->Date)
-        {
-            conditions += "r.Attemp_date BETWEEN :DateStart AND :DateEnd ";
-        }
-        else
-        {
-            ShowMessage("Дата кінця має бути більше!");
-            return;
-        }
-	}
-    if (Status_check->ItemIndex == 0)
-    {
-        if (!conditions.IsEmpty()) conditions += " AND ";
-        conditions += "r.Status = 1 ";
-    }
-    else if (Status_check->ItemIndex == 1)
-    {
-        if (!conditions.IsEmpty()) conditions += " AND ";
-        conditions += "r.Status = 0 ";
-	}
-    if (!Edit1->Text.Trim().IsEmpty())
-    {
-        if (!conditions.IsEmpty()) conditions += " AND ";
-        conditions += "s.PIB LIKE :Surname ";
-	}
-    if (!conditions.IsEmpty())
-    {
-        query += " WHERE " + conditions;
-	}
-	query += " ORDER BY r.Attemp_date DESC";
-    try
-    {
-        DataModule1->MainQuery->Close();
-        DataModule1->MainQuery->SQL->Clear();
-		DataModule1->MainQuery->SQL->Add(query);
-		if (CheckBox1->Checked && DatePicker1->Date != TDateTime() && DatePicker2->Date != TDateTime())
-        {
-            DataModule1->MainQuery->Parameters->ParamByName("DateStart")->Value = DatePicker1->Date.FormatString("yyyy-mm-dd");
-            DataModule1->MainQuery->Parameters->ParamByName("DateEnd")->Value = DatePicker2->Date.FormatString("yyyy-mm-dd");
+	if (Earlier->Checked || Later->Checked || ThisDate->Checked)
+	{
+		if (ThisDate->Checked)
+		{
+			conditions += "r.Attemp_date = :Date ";
 		}
-        if (!Edit1->Text.Trim().IsEmpty())
-        {
-            DataModule1->MainQuery->Parameters->ParamByName("Surname")->Value = "%" + Edit1->Text.Trim() + "%";
-        }
+		else if (Earlier->Checked && Later->Checked)
+		{
+			conditions += "r.Attemp_date BETWEEN :DateStart AND :DateEnd ";
+		}
+		else if (Earlier->Checked)
+		{
+			conditions += "r.Attemp_date < :Date ";
+		}
+		else if (Later->Checked)
+		{
+			conditions += "r.Attemp_date > :Date ";
+		}
+	}
 
-        DataModule1->MainQuery->Open();
-        DBColumnSizes();
-    }
-    catch (Exception &e)
-    {
-        ShowMessage("Помилка при фільтрації: " + e.Message);
-    }
+	if (Status_check->ItemIndex == 0)
+	{
+		if (!conditions.IsEmpty()) conditions += " AND ";
+		conditions += "r.Status = 1 ";
+	}
+	else if (Status_check->ItemIndex == 1)
+	{
+		if (!conditions.IsEmpty()) conditions += " AND ";
+		conditions += "r.Status = 0 ";
+	}
+
+	if (!Edit1->Text.Trim().IsEmpty())
+	{
+		if (!conditions.IsEmpty()) conditions += " AND ";
+		conditions += "s.PIB LIKE :Surname ";
+	}
+
+	if (!conditions.IsEmpty())
+	{
+		query += " WHERE " + conditions;
+	}
+
+	query += " ORDER BY r.Attemp_date DESC";
+	try
+	{
+		DataModule1->MainQuery->Close();
+		DataModule1->MainQuery->SQL->Clear();
+		DataModule1->MainQuery->SQL->Add(query);
+
+		if (ThisDate->Checked || Earlier->Checked || Later->Checked)
+		{
+			TDateTime selectedDate = DatePicker1->Date;
+			if (ThisDate->Checked)
+			{
+				DataModule1->MainQuery->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
+			}
+			else if (Earlier->Checked && Later->Checked)
+			{
+				DataModule1->MainQuery->Parameters->ParamByName("DateStart")->Value = selectedDate - 1;
+				DataModule1->MainQuery->Parameters->ParamByName("DateEnd")->Value = selectedDate + 1;
+			}
+			else
+			{
+				DataModule1->MainQuery->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
+			}
+		}
+
+		if (!Edit1->Text.Trim().IsEmpty())
+		{
+			DataModule1->MainQuery->Parameters->ParamByName("Surname")->Value = "%" + Edit1->Text.Trim() + "%";
+		}
+
+		DataModule1->MainQuery->Open();
+		DBColumnSizes();
+	}
+	catch (Exception &e)
+	{
+		ShowMessage("Помилка при фільтрації: " + e.Message);
+	}
 }
-
-
-
-
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::Lj1Click(TObject *Sender)
@@ -424,35 +450,6 @@ void __fastcall TForm3::N13Click(TObject *Sender)
 void __fastcall TForm3::FormClose(TObject *Sender, TCloseAction &Action)
 {
 	Application->Terminate();
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm3::N14Click(TObject *Sender)
-{
-    Application->Terminate();
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm3::DatePicker2CloseUp(TObject *Sender)
-{
-      try
-	{
-		TDateTime selectedDate = DatePicker1->Date;
-		TDateTime currentDate = Now();
-		if (selectedDate > currentDate)
-		{
-			throw Exception("Дата не може бути в майбутньому!");
-		}
-		else if(selectedDate < EncodeDate(1925, 1, 1))
-		{
-			throw Exception("Дата занадто стара! Виберіть пізнішу дату.");
-		}
-	}
-	catch (const Exception &e)
-	{
-		ShowMessage(e.Message);
-		DatePicker1->Date = Now();
-	}
 }
 //---------------------------------------------------------------------------
 

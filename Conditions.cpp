@@ -103,7 +103,9 @@ void __fastcall TForm4::FormCreate(TObject *Sender)
 	Execute->Enabled = false;
 	Clear->Enabled = false;
 	DatePicker2->OnChange = CheckFiltersFilled;
-    DatePicker1->OnChange = CheckFiltersFilled;
+	Earlier->OnClick = CheckFiltersFilled;
+	Later->OnClick = CheckFiltersFilled;
+	ThisDate->OnClick = CheckFiltersFilled;
 	ComboBox2->OnChange = CheckFiltersFilled;
 }
 
@@ -112,6 +114,8 @@ void __fastcall TForm4::FormCreate(TObject *Sender)
 void __fastcall TForm4::CheckFiltersFilled(TObject *Sender)
 {
 	bool isAnyFilterFilled = false;
+	if (Earlier->Checked || Later->Checked || ThisDate->Checked)
+		isAnyFilterFilled = true;
 	if (ComboBox2->ItemIndex >= 0)
 		isAnyFilterFilled = true;
 	Execute->Enabled = isAnyFilterFilled;
@@ -128,14 +132,28 @@ void __fastcall TForm4::ExecuteClick(TObject *Sender)
 				   "JOIN subject s ON c.Subject_id = s.Subject_id ";
 
 	String conditions = "";
-	if (DatePicker1->Date <= DatePicker2->Date)
+
+	if (ThisDate->Checked)
+	{
+		conditions += "c.Date = :Date ";
+	}
+	else if (Earlier->Checked && Later->Checked)
 	{
 		conditions += "c.Date BETWEEN :DateStart AND :DateEnd ";
 	}
-	else
+	else if (Later->Checked)
 	{
-		ShowMessage("ƒата к≥нц€ маЇ бути б≥льща за початок!");
-		return;
+		conditions += "c.Date > :Date ";
+	}
+	else if (Earlier->Checked)
+	{
+		conditions += "c.Date < :Date ";
+	}
+
+	if (ComboBox2->ItemIndex >= 0)
+	{
+		if (!conditions.IsEmpty()) conditions += " AND ";
+		conditions += "c.Subject_id = :SubjectID ";
 	}
 
 	if (!conditions.IsEmpty())
@@ -151,8 +169,26 @@ void __fastcall TForm4::ExecuteClick(TObject *Sender)
 		DataModule1->ADOQuery2->SQL->Clear();
 		DataModule1->ADOQuery2->SQL->Add(query);
 
-		DataModule1->ADOQuery2->Parameters->ParamByName("DateStart")->Value = DatePicker1->Date.FormatString("yyyy-mm-dd");
-		DataModule1->ADOQuery2->Parameters->ParamByName("DateEnd")->Value = DatePicker2->Date.FormatString("yyyy-mm-dd");
+		TDateTime selectedDate = DatePicker2->Date;
+
+		if (ThisDate->Checked)
+		{
+			DataModule1->ADOQuery2->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
+		}
+		else if (Earlier->Checked && Later->Checked)
+		{
+			DataModule1->ADOQuery2->Parameters->ParamByName("DateStart")->Value = selectedDate - 1;
+			DataModule1->ADOQuery2->Parameters->ParamByName("DateEnd")->Value = selectedDate + 1;
+		}
+		else if (Earlier->Checked || Later->Checked)
+		{
+			DataModule1->ADOQuery2->Parameters->ParamByName("Date")->Value = selectedDate.FormatString("yyyy-mm-dd");
+		}
+
+		if (ComboBox2->ItemIndex >= 0)
+		{
+			DataModule1->ADOQuery2->Parameters->ParamByName("SubjectID")->Value = (int)ComboBox2->Items->Objects[ComboBox2->ItemIndex];
+		}
 
 		DataModule1->ADOQuery2->Open();
 		DBColumnSizes();
@@ -164,13 +200,15 @@ void __fastcall TForm4::ExecuteClick(TObject *Sender)
 }
 
 
-
 //---------------------------------------------------------------------------
 
 
 void __fastcall TForm4::ClearClick(TObject *Sender)
 {
 	DatePicker2->Date = Now();
+	Earlier->Checked = false;
+	Later->Checked = false;
+	ThisDate->Checked = false;
 	ComboBox2->ItemIndex = -1;
 
 	Execute->Enabled = false;

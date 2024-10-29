@@ -29,7 +29,7 @@ Coordinates=308,10,78,58
 Coordinates=339,489,40,36
 
 []
-Coordinates=184,10,114,58
+Coordinates=99,256,64,36
 Visible=True
 
 [DataModule1.MainQuery]
@@ -49,4 +49,13 @@ Coordinates=10,256,79,58
 
 [Surname_student]
 Coordinates=134,188,79,58
+
+[ThisDate]
+Coordinates=223,188,114,58
+
+[Earlier]
+Coordinates=10,188,114,58
+
+[Later]
+Coordinates=184,10,114,58
 
