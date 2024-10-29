@@ -3,7 +3,7 @@ object Form14: TForm14
   Top = 0
   AutoSize = True
   BorderStyle = bsSingle
-  Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1108#1102' '#1087#1088#1086' '#1091#1095#1085#1110#1074
+  Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1108#1102' '#1087#1088#1086' '#1091#1095#1072#1089#1085#1080#1082#1110#1074' '#1053#1052#1058
   ClientHeight = 369
   ClientWidth = 897
   Color = clBtnFace
@@ -102,13 +102,6 @@ object Form14: TForm14
       Width = 58
       Height = 15
       Caption = #1055#1086#1084#1110#1090#1082#1072'(*)'
-    end
-    object Label2: TLabel
-      Left = 430
-      Top = 18
-      Width = 96
-      Height = 15
-      Caption = #1044#1072#1090#1072' '#1085#1072#1088#1086#1076#1078#1077#1085#1085#1103
     end
     object Label3: TLabel
       Left = 63
@@ -255,36 +248,33 @@ object Form14: TForm14
       TabOrder = 5
       OnClick = ExecuteClick
     end
-    object Earlier: TCheckBox
-      Left = 400
-      Top = 77
-      Width = 97
-      Height = 17
-      Caption = #1056#1072#1085#1110#1096#1077' '#1079#1072
-      TabOrder = 6
-    end
-    object Later: TCheckBox
-      Left = 493
-      Top = 77
-      Width = 97
-      Height = 17
-      Caption = #1055#1110#1079#1085#1110#1096#1077
-      TabOrder = 7
-    end
     object ThisDate: TCheckBox
-      Left = 400
-      Top = 100
-      Width = 97
+      Left = 375
+      Top = 16
+      Width = 218
       Height = 17
-      Caption = #1062#1103' '#1076#1072#1090#1072
-      TabOrder = 8
+      Caption = #1060#1110#1083#1100#1090#1088#1091#1074#1072#1090#1080' '#1079#1072' '#1076#1072#1090#1086#1102' '#1085#1072#1088#1086#1076#1078#1077#1085#1085#1103
+      TabOrder = 6
     end
     object ComboBox1: TComboBox
       Left = 40
       Top = 38
       Width = 145
       Height = 23
-      TabOrder = 9
+      TabOrder = 7
+    end
+    object DatePicker2: TDatePicker
+      Left = 400
+      Top = 77
+      Date = 45563.000000000000000000
+      DateFormat = 'dd/mm/yyyy'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      TabOrder = 8
+      OnCloseUp = DatePicker2CloseUp
     end
   end
   object MainMenu1: TMainMenu

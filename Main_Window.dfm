@@ -228,7 +228,7 @@ object Form3: TForm3
     Left = 264
     Top = 256
     object N2: TMenuItem
-      Caption = #1059#1095#1085#1110
+      Caption = #1059#1095#1072#1089#1085#1080#1082#1080
       OnClick = N2Click
     end
     object N6: TMenuItem

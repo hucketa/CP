@@ -24,8 +24,6 @@ void __fastcall TForm14::FormCreate(TObject *Sender)
 	ComboBox1->Items->Add("ID-карта");
 	ComboBox1->Items->Add("Паперовий");
 	DatePicker1->OnChange = CheckFiltersFilled;
-	Earlier->OnClick = CheckFiltersFilled;
-	Later->OnClick = CheckFiltersFilled;
 	ThisDate->OnClick = CheckFiltersFilled;
 	Edit5->OnChange = CheckFiltersFilled;
 	ComboBox1->OnChange = CheckFiltersFilled;
@@ -64,7 +62,7 @@ void __fastcall TForm14::DBColumnSizes(){
 	DBGrid1->Columns->Items[3]->Width = 100;
 	DBGrid1->Columns->Items[3]->Title->Caption = "ПІБ";
 	DBGrid1->Columns->Items[4]->Width = 100;
-	DBGrid1->Columns->Items[5]->Title->Caption = "Дата народження";
+	DBGrid1->Columns->Items[4]->Title->Caption = "Дата народження";
 	DBGrid1->Columns->Items[5]->Width = 60;
 	DBGrid1->Columns->Items[5]->Title->Caption = "Стать";
 	DBGrid1->Columns->Items[6]->Width = 85;
@@ -130,72 +128,79 @@ void __fastcall TForm14::N2Click(TObject *Sender)
 
 void __fastcall TForm14::CheckFiltersFilled(TObject *Sender)
 {
-    bool isAnyFilterFilled = false;
-    if (Earlier->Checked || Later->Checked || ThisDate->Checked) isAnyFilterFilled = true;
-    if (RadioGroup1->ItemIndex >= 0) isAnyFilterFilled = true;
+	bool isAnyFilterFilled = false;
+	if (ThisDate->Checked) isAnyFilterFilled = true;
+	if (RadioGroup1->ItemIndex >= 0) isAnyFilterFilled = true;
 	if (!Edit5->Text.Trim().IsEmpty()) isAnyFilterFilled = true;
-    if (ComboBox1->ItemIndex >= 0) isAnyFilterFilled = true;
-    Execute->Enabled = isAnyFilterFilled;
-    Clear->Enabled = isAnyFilterFilled;
+	if (ComboBox1->ItemIndex >= 0) isAnyFilterFilled = true;
+	Execute->Enabled = isAnyFilterFilled;
+	Clear->Enabled = isAnyFilterFilled;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm14::ExecuteClick(TObject *Sender)
 {
 	DataModule1->ADOTable1->Filtered = false;
-	if (Earlier->Checked)
+	if (ThisDate->Checked && DatePicker1->Date != TDateTime() && DatePicker2->Date != TDateTime())
     {
-		DataModule1->ADOTable1->Filter = "Birth_date < '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
-    }
-    else if (Later->Checked)
-    {
-        DataModule1->ADOTable1->Filter = "Birth_date > '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
-    }
-    else if (ThisDate->Checked)
-    {
-        DataModule1->ADOTable1->Filter = "Birth_date = '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
+        if ((double)DatePicker1->Date <= (double)DatePicker2->Date)
+        {
+			String dateStart = "#" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "#";
+            String dateEnd = "#" + DatePicker2->Date.FormatString("yyyy-mm-dd") + "#";
+            DataModule1->ADOTable1->Filter = "Birth_date >= " + dateStart + " AND Birth_date <= " + dateEnd;
+        }
+		else
+        {
+            ShowMessage("Дата початку повинна бути раніше дати завершення!");
+            return;
+		}
 	}
     if (ComboBox1->ItemIndex >= 0)
-    {
+	{
         if (!DataModule1->ADOTable1->Filter.IsEmpty())
             DataModule1->ADOTable1->Filter += " AND ";
         DataModule1->ADOTable1->Filter += "Passport_type = '" + ComboBox1->Items->Strings[ComboBox1->ItemIndex] + "'";
 	}
-	if (!Edit5->Text.Trim().IsEmpty())
+    if (!Edit5->Text.Trim().IsEmpty())
 	{
-	if (!DataModule1->ADOTable1->Filter.IsEmpty())
-        DataModule1->ADOTable1->Filter += " AND ";
-    DataModule1->ADOTable1->Filter += "Email LIKE '%" + Edit5->Text.Trim() + "%'";
+		if (!DataModule1->ADOTable1->Filter.IsEmpty())
+			DataModule1->ADOTable1->Filter += " AND ";
+		DataModule1->ADOTable1->Filter += "Email LIKE '*" + Edit5->Text.Trim() + "*'";
 	}
-    if (RadioGroup1->ItemIndex >= 0)
-    {
+	if (RadioGroup1->ItemIndex >= 0)
+	{
 		String genderFilter = (RadioGroup1->ItemIndex == 0) ? "M" : "F";
-        if (!DataModule1->ADOTable1->Filter.IsEmpty())
-            DataModule1->ADOTable1->Filter += " AND ";
-        DataModule1->ADOTable1->Filter += "Gender = '" + genderFilter + "'";
+		if (!DataModule1->ADOTable1->Filter.IsEmpty())
+			DataModule1->ADOTable1->Filter += " AND ";
+		DataModule1->ADOTable1->Filter += "Gender = '" + genderFilter + "'";
 	}
 	DataModule1->ADOTable1->Filtered = true;
+	DBColumnSizes();
 }
+
+
+
+
+
+
 //---------------------------------------------------------------------------
 void __fastcall TForm14::ClearClick(TObject *Sender)
 {
-    Earlier->Checked = false;
-    Later->Checked = false;
-    ThisDate->Checked = false;
-    RadioGroup1->ItemIndex = -1;
+	ThisDate->Checked = false;
+	RadioGroup1->ItemIndex = -1;
 	Edit5->Clear();
-    ComboBox1->ItemIndex = -1;
+	ComboBox1->ItemIndex = -1;
 	DatePicker1->Date = TDateTime();
-    DataModule1->ADOTable1->Filtered = false;
-	DataModule1->ADOTable1->Filter = "";
+	DataModule1->ADOTable1->Filtered = false;
+    DataModule1->ADOTable1->Filter = "";
     Execute->Enabled = false;
-	Clear->Enabled = false;
+    Clear->Enabled = false;
 }
 
 
 
 void __fastcall TForm14::DatePicker1CloseUp(TObject *Sender)
 {
-     try
+	 try
 	{
 		TDateTime selectedDate = DatePicker1->Date;
 		TDateTime currentDate = Now();
@@ -230,13 +235,12 @@ void TForm14::ToggleView()
 {
 	if (isMinimalView)
 	{
-		// Вмикаємо AutoSize та залишаємо лише DBGrid, відключаємо меню
 		Form14->AutoSize = true;
 		for (int i = 0; i < Form14->MainMenu1->Items->Count; i++)
 		{
-			Form14->MainMenu1->Items->Items[i]->Enabled = false; // Вимикаємо всі пункти меню
+			Form14->MainMenu1->Items->Items[i]->Enabled = false;
 		}
-		Form14->Caption = "Студенти";
+		Form14->Caption = "Учасники НМТ";
 
         for (int i = 0; i < Form14->ControlCount; i++)
 		{
@@ -248,13 +252,12 @@ void TForm14::ToggleView()
     }
     else
 	{
-		// Вимикаємо AutoSize, повертаємо всі компоненти та включаємо меню
 		Form14->AutoSize = false;
 		for (int i = 0; i < Form14->MainMenu1->Items->Count; i++)
 		{
-			Form14->MainMenu1->Items->Items[i]->Enabled = true; // Вмикаємо всі пункти меню
+			Form14->MainMenu1->Items->Items[i]->Enabled = true;
 		}
-		Form14->Caption = "Робота з інформацією про учнів";
+		Form14->Caption = "Робота з інформацією про учасників НМТ";
 
         for (int i = 0; i < Form14->ControlCount; i++)
         {
@@ -267,4 +270,27 @@ void TForm14::ToggleView()
 
 
 
+
+void __fastcall TForm14::DatePicker2CloseUp(TObject *Sender)
+{
+     try
+	{
+		TDateTime selectedDate = DatePicker2->Date;
+		TDateTime currentDate = Now();
+		if (selectedDate > currentDate)
+		{
+			throw Exception("Дата не може бути в майбутньому!");
+		}
+		else if(selectedDate < EncodeDate(1925, 1, 1))
+		{
+			throw Exception("Дата занадто стара! Виберіть пізнішу дату.");
+		}
+	}
+	catch (const Exception &e)
+	{
+		ShowMessage(e.Message);
+		DatePicker2->Date = Now();
+	}
+}
+//---------------------------------------------------------------------------
 

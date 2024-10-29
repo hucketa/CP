@@ -190,7 +190,7 @@ void __fastcall TForm3::N11Click(TObject *Sender)
 
 void __fastcall TForm3::N2Click(TObject *Sender)
 {
-	Form14->ShowModal();;
+	Form14->ShowModal();
 }
 
 void __fastcall TForm3::N4Click(TObject *Sender)
