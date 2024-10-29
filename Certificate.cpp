@@ -285,8 +285,6 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 			{
 				int subject_id = DataModule1->ADOQuery2->FieldByName("SubjectID")->AsInteger;
 				double reached_score = DataModule1->ADOQuery2->FieldByName("Reached_score")->AsFloat;
-
-				// Пошук назви предмета за subject_id
 				String subjectQuery = "SELECT subject.Name AS Subject, conditions.Max_point AS Max_point, conditions.Min_r_point AS Min_r_point "
 									  "FROM subject "
 									  "JOIN conditions ON subject.Subject_id = conditions.Subject_id "
@@ -303,8 +301,6 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 					double max_point = DataModule1->ADOQuery3->FieldByName("Max_point")->AsFloat;
 					double min_r_point = DataModule1->ADOQuery3->FieldByName("Min_r_point")->AsFloat;
 					double score_200;
-
-					// Перетворення оцінки в 200-бальну шкалу
 					if (reached_score < min_r_point)
 					{
 						score_200 = 100.0;
@@ -317,7 +313,6 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 					{
 						score_200 = 100.0 + ((reached_score - min_r_point) / (max_point - min_r_point)) * 100.0;
 					}
-
 					results->Add("<div class='result-item'>");
 					results->Add("<p>Предмет: <span class='highlight'>" + subject + "</span></p>");
 					results->Add("<p>Набрані бали (200-бальна шкала): <span class='highlight'>" + FloatToStrF(score_200, ffFixed, 7, 2) + "</span></п>");
@@ -325,8 +320,6 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 				}
 				DataModule1->ADOQuery2->Next();
 			}
-
-			// Збереження HTML-файлу
 			SaveDialog1->Filter = "HTML files (*.html)|*.html";
 			SaveDialog1->DefaultExt = "html";
 			String currentDateTime = FormatDateTime("yyyy_mm_dd_hh_nn_ss", Now());
@@ -336,11 +329,8 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 				String filePath = SaveDialog1->FileName;
 				TStringList *htmlFile = new TStringList();
 				htmlFile->Text = "";
-
-
 				try
 				{
-					// Генерація HTML
 					htmlFile->Add("<!DOCTYPE html>");
 					htmlFile->Add("<html lang='uk'>");
 					htmlFile->Add("<head>");
