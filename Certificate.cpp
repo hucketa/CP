@@ -118,18 +118,14 @@ void __fastcall TCertificates::FormCreate(TObject *Sender)
 	Execute->Enabled = false;
 	Clear->Enabled = false;
 	DatePicker1->OnChange = CheckFiltersFilled;
-	Earlier->OnClick = CheckFiltersFilled;
-	Later->OnClick = CheckFiltersFilled;
-	ThisDate->OnClick = CheckFiltersFilled;
+	DatePicker2->OnChange = CheckFiltersFilled;
 }
 
 //---------------------------------------------------------------------------
 
 void __fastcall TCertificates::CheckFiltersFilled(TObject *Sender)
 {
-	bool isAnyFilterFilled = false;
-	if (Earlier->Checked || Later->Checked || ThisDate->Checked)
-		isAnyFilterFilled = true;
+	bool isAnyFilterFilled = true;
 	Execute->Enabled = isAnyFilterFilled;
 	Clear->Enabled = isAnyFilterFilled;
 }
@@ -143,14 +139,15 @@ void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 				   "JOIN student ON certificate.Student_id = student.Student_id ";
 
 	String conditions = "";
-	if (ThisDate->Checked)
-		conditions += "certificate.Creation_date = :SelectedDate ";
-	else if (Earlier->Checked && Later->Checked)
+	if (DatePicker1->Date <= DatePicker2->Date)
+	{
 		conditions += "certificate.Creation_date BETWEEN :DateStart AND :DateEnd ";
-	else if (Later->Checked)
-		conditions += "certificate.Creation_date > :SelectedDate ";
-	else if (Earlier->Checked)
-		conditions += "certificate.Creation_date < :SelectedDate ";
+	}
+	else
+	{
+		ShowMessage("Інтервал не коректний!");
+		return;
+	}
 
 	if (!conditions.IsEmpty())
 		query += " WHERE " + conditions;
@@ -163,17 +160,8 @@ void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 		DataModule1->ADOQuery4->SQL->Clear();
 		DataModule1->ADOQuery4->SQL->Add(query);
 
-		TDateTime selectedDate = DatePicker1->Date;
-
-		if (ThisDate->Checked)
-			DataModule1->ADOQuery4->Parameters->ParamByName("SelectedDate")->Value = selectedDate.FormatString("yyyy-mm-dd");
-		else if (Earlier->Checked && Later->Checked)
-		{
-			DataModule1->ADOQuery4->Parameters->ParamByName("DateStart")->Value = selectedDate - 1;
-			DataModule1->ADOQuery4->Parameters->ParamByName("DateEnd")->Value = selectedDate + 1;
-		}
-		else if (Earlier->Checked || Later->Checked)
-			DataModule1->ADOQuery4->Parameters->ParamByName("SelectedDate")->Value = selectedDate.FormatString("yyyy-mm-dd");
+		DataModule1->ADOQuery4->Parameters->ParamByName("DateStart")->Value = DatePicker1->Date.FormatString("yyyy-mm-dd");
+		DataModule1->ADOQuery4->Parameters->ParamByName("DateEnd")->Value = DatePicker2->Date.FormatString("yyyy-mm-dd");
 
 		DataModule1->ADOQuery4->Open();
 		DBColumnSizes();
@@ -185,14 +173,12 @@ void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 }
 
 
+
 //---------------------------------------------------------------------------
 
 void __fastcall TCertificates::ClearClick(TObject *Sender)
 {
 	DatePicker1->Date = Now();
-	Earlier->Checked = false;
-	Later->Checked = false;
-	ThisDate->Checked = false;
 
 	Execute->Enabled = false;
 	Clear->Enabled = false;

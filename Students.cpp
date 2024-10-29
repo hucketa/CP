@@ -24,9 +24,6 @@ void __fastcall TForm14::FormCreate(TObject *Sender)
 	ComboBox1->Items->Add("ID-карта");
 	ComboBox1->Items->Add("Паперовий");
 	DatePicker1->OnChange = CheckFiltersFilled;
-	Earlier->OnClick = CheckFiltersFilled;
-	Later->OnClick = CheckFiltersFilled;
-	ThisDate->OnClick = CheckFiltersFilled;
 	Edit5->OnChange = CheckFiltersFilled;
 	ComboBox1->OnChange = CheckFiltersFilled;
 	RadioGroup1->OnClick = CheckFiltersFilled;
@@ -130,9 +127,8 @@ void __fastcall TForm14::N2Click(TObject *Sender)
 
 void __fastcall TForm14::CheckFiltersFilled(TObject *Sender)
 {
-    bool isAnyFilterFilled = false;
-    if (Earlier->Checked || Later->Checked || ThisDate->Checked) isAnyFilterFilled = true;
-    if (RadioGroup1->ItemIndex >= 0) isAnyFilterFilled = true;
+	bool isAnyFilterFilled = false;
+	if (RadioGroup1->ItemIndex >= 0) isAnyFilterFilled = true;
 	if (!Edit5->Text.Trim().IsEmpty()) isAnyFilterFilled = true;
     if (ComboBox1->ItemIndex >= 0) isAnyFilterFilled = true;
     Execute->Enabled = isAnyFilterFilled;
@@ -142,45 +138,44 @@ void __fastcall TForm14::CheckFiltersFilled(TObject *Sender)
 void __fastcall TForm14::ExecuteClick(TObject *Sender)
 {
 	DataModule1->ADOTable1->Filtered = false;
-	if (Earlier->Checked)
-    {
-		DataModule1->ADOTable1->Filter = "Birth_date < '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
-    }
-    else if (Later->Checked)
-    {
-        DataModule1->ADOTable1->Filter = "Birth_date > '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
-    }
-    else if (ThisDate->Checked)
-    {
-        DataModule1->ADOTable1->Filter = "Birth_date = '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "'";
+	DataModule1->ADOTable1->Filter = "";
+
+	if (DatePicker1->Date <= DatePicker2->Date)
+	{
+		DataModule1->ADOTable1->Filter = "Birth_date BETWEEN '" + DatePicker1->Date.FormatString("yyyy-mm-dd") + "' AND '" + DatePicker2->Date.FormatString("yyyy-mm-dd") + "'";
 	}
-    if (ComboBox1->ItemIndex >= 0)
-    {
-        if (!DataModule1->ADOTable1->Filter.IsEmpty())
-            DataModule1->ADOTable1->Filter += " AND ";
-        DataModule1->ADOTable1->Filter += "Passport_type = '" + ComboBox1->Items->Strings[ComboBox1->ItemIndex] + "'";
+	else
+	{
+		ShowMessage("Інтервал некорректний!");
+		return;
+	}
+	if (ComboBox1->ItemIndex >= 0)
+	{
+		if (!DataModule1->ADOTable1->Filter.IsEmpty())
+			DataModule1->ADOTable1->Filter += " AND ";
+		DataModule1->ADOTable1->Filter += "Passport_type = '" + ComboBox1->Items->Strings[ComboBox1->ItemIndex] + "'";
 	}
 	if (!Edit5->Text.Trim().IsEmpty())
 	{
-	if (!DataModule1->ADOTable1->Filter.IsEmpty())
-        DataModule1->ADOTable1->Filter += " AND ";
-    DataModule1->ADOTable1->Filter += "Email LIKE '%" + Edit5->Text.Trim() + "%'";
+		if (!DataModule1->ADOTable1->Filter.IsEmpty())
+			DataModule1->ADOTable1->Filter += " AND ";
+		DataModule1->ADOTable1->Filter += "Email LIKE '%" + Edit5->Text.Trim() + "%'";
 	}
-    if (RadioGroup1->ItemIndex >= 0)
-    {
+	if (RadioGroup1->ItemIndex >= 0)
+	{
 		String genderFilter = (RadioGroup1->ItemIndex == 0) ? "M" : "F";
-        if (!DataModule1->ADOTable1->Filter.IsEmpty())
-            DataModule1->ADOTable1->Filter += " AND ";
-        DataModule1->ADOTable1->Filter += "Gender = '" + genderFilter + "'";
+		if (!DataModule1->ADOTable1->Filter.IsEmpty())
+			DataModule1->ADOTable1->Filter += " AND ";
+		DataModule1->ADOTable1->Filter += "Gender = '" + genderFilter + "'";
 	}
+
 	DataModule1->ADOTable1->Filtered = true;
 }
+
+
 //---------------------------------------------------------------------------
 void __fastcall TForm14::ClearClick(TObject *Sender)
 {
-    Earlier->Checked = false;
-    Later->Checked = false;
-    ThisDate->Checked = false;
     RadioGroup1->ItemIndex = -1;
 	Edit5->Clear();
     ComboBox1->ItemIndex = -1;
@@ -230,11 +225,10 @@ void TForm14::ToggleView()
 {
 	if (isMinimalView)
 	{
-		// Вмикаємо AutoSize та залишаємо лише DBGrid, відключаємо меню
 		Form14->AutoSize = true;
 		for (int i = 0; i < Form14->MainMenu1->Items->Count; i++)
 		{
-			Form14->MainMenu1->Items->Items[i]->Enabled = false; // Вимикаємо всі пункти меню
+			Form14->MainMenu1->Items->Items[i]->Enabled = false;
 		}
 		Form14->Caption = "Студенти";
 
@@ -248,11 +242,10 @@ void TForm14::ToggleView()
     }
     else
 	{
-		// Вимикаємо AutoSize, повертаємо всі компоненти та включаємо меню
 		Form14->AutoSize = false;
 		for (int i = 0; i < Form14->MainMenu1->Items->Count; i++)
 		{
-			Form14->MainMenu1->Items->Items[i]->Enabled = true; // Вмикаємо всі пункти меню
+			Form14->MainMenu1->Items->Items[i]->Enabled = true;
 		}
 		Form14->Caption = "Робота з інформацією про учнів";
 

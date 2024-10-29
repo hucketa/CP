@@ -1,10 +1,9 @@
 object Certificates: TCertificates
   Left = 0
   Top = 0
-  AutoSize = True
   BorderStyle = bsSingle
   Caption = #1047#1084#1110#1085#1072' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080'  '#1053#1052#1058
-  ClientHeight = 346
+  ClientHeight = 370
   ClientWidth = 741
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,6 +16,13 @@ object Certificates: TCertificates
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
+  object Label1: TLabel
+    Left = 180
+    Top = 260
+    Width = 117
+    Height = 15
+    Caption = #1055#1086#1095#1072#1090#1082#1086#1074#1080#1081' '#1110#1085#1090#1077#1088#1074#1072#1083
+  end
   object DBGrid2: TDBGrid
     Left = 0
     Top = 0
@@ -36,19 +42,26 @@ object Certificates: TCertificates
     Left = 0
     Top = 248
     Width = 737
-    Height = 97
+    Height = 115
     Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1072#1084#1080
     TabOrder = 1
     object Label4: TLabel
-      Left = 345
+      Left = 348
       Top = 12
-      Width = 85
+      Width = 100
       Height = 15
-      Caption = #1044#1072#1090#1072' '#1089#1090#1074#1086#1088#1077#1085#1085#1103
+      Caption = #1050#1110#1085#1094#1077#1074#1080#1081' '#1110#1085#1090#1077#1088#1074#1072#1083
+    end
+    object Label2: TLabel
+      Left = 180
+      Top = 12
+      Width = 117
+      Height = 15
+      Caption = #1055#1086#1095#1072#1090#1082#1086#1074#1080#1081' '#1110#1085#1090#1077#1088#1074#1072#1083
     end
     object LabeledEdit1: TLabeledEdit
-      Left = 24
-      Top = 48
+      Left = 16
+      Top = 40
       Width = 121
       Height = 23
       EditLabel.Width = 112
@@ -60,10 +73,9 @@ object Certificates: TCertificates
       OnExit = LabeledEdit1Exit
     end
     object DatePicker1: TDatePicker
-      Left = 312
+      Left = 336
       Top = 33
       Width = 145
-      Height = 41
       Date = 45588.000000000000000000
       DateFormat = 'dd/mm/yyyy'
       Font.Charset = DEFAULT_CHARSET
@@ -73,30 +85,6 @@ object Certificates: TCertificates
       Font.Style = []
       TabOrder = 1
       OnCloseUp = DatePicker1CloseUp
-    end
-    object Later: TCheckBox
-      Left = 471
-      Top = 62
-      Width = 97
-      Height = 17
-      Caption = #1055#1110#1079#1085#1110#1096#1077
-      TabOrder = 2
-    end
-    object ThisDate: TCheckBox
-      Left = 471
-      Top = 39
-      Width = 97
-      Height = 17
-      Caption = #1062#1103' '#1076#1072#1090#1072
-      TabOrder = 3
-    end
-    object Earlier: TCheckBox
-      Left = 471
-      Top = 16
-      Width = 97
-      Height = 17
-      Caption = #1056#1072#1085#1110#1096#1077' '#1079#1072
-      TabOrder = 4
     end
     object Execute: TBitBtn
       Left = 558
@@ -141,7 +129,7 @@ object Certificates: TCertificates
         00034C7047004C7047004C7047004C7047004C7047004C7047004C7047004C70
         47004C7047004C7047004C7047004C7047004C7047004C7047004C7047004C70
         47004C704700}
-      TabOrder = 5
+      TabOrder = 2
       OnClick = ExecuteClick
     end
     object Clear: TBitBtn
@@ -185,17 +173,31 @@ object Certificates: TCertificates
         CEFF7A7A7AFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FEFEFEFFFFFF
         FF00D9D9D9FFC9C9C9FFFAFAFAFFE5E5E5FF737373FF828282FF797979FF8282
         82FFD4D4D4FFFDFDFDFFFCFCFCFFFEFEFEFFFFFFFF00FFFFFF00}
-      TabOrder = 6
+      TabOrder = 3
       OnClick = ClearClick
     end
     object BitBtn1: TBitBtn
-      Left = 158
-      Top = 32
-      Width = 138
-      Height = 41
+      Left = 16
+      Top = 69
+      Width = 121
+      Height = 28
       Caption = #1047#1075#1077#1085#1077#1088#1091#1074#1072#1090#1080
-      TabOrder = 7
+      TabOrder = 4
       OnClick = BitBtn1Click
+    end
+    object DatePicker2: TDatePicker
+      Left = 168
+      Top = 33
+      Width = 145
+      Date = 45588.000000000000000000
+      DateFormat = 'dd/mm/yyyy'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      TabOrder = 5
+      OnCloseUp = DatePicker1CloseUp
     end
   end
   object PopupMenu1: TPopupMenu

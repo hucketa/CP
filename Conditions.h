@@ -40,12 +40,11 @@ __published:	// IDE-managed Components
 	TLabel *Label4;
 	TBitBtn *Execute;
 	TBitBtn *Clear;
-	TCheckBox *Earlier;
-	TCheckBox *Later;
-	TCheckBox *ThisDate;
 	TPopupMenu *PopupMenu1;
 	TMenuItem *N2;
 	TMenuItem *N3;
+	TDatePicker *DatePicker1;
+	TLabel *Label1;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall Lj1Click(TObject *Sender);
 	void __fastcall N1Click(TObject *Sender);

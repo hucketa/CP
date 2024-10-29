@@ -38,9 +38,6 @@ __published:	// IDE-managed Components
 	TMenuItem *Lj1;
 	TGroupBox *GroupBox1;
 	TDatePicker *DatePicker1;
-	TCheckBox *Earlier;
-	TCheckBox *ThisDate;
-	TCheckBox *Later;
 	TGroupBox *Status;
 	TGroupBox *Surname_student;
 	TRadioGroup *Status_check;
@@ -59,6 +56,11 @@ __published:	// IDE-managed Components
 	TMenuItem *N11;
 	TMenuItem *N12;
 	TMenuItem *N13;
+	TMenuItem *N14;
+	TDatePicker *DatePicker2;
+	TLabel *Label1;
+	TLabel *Label2;
+	TCheckBox *CheckBox1;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
@@ -79,6 +81,8 @@ __published:	// IDE-managed Components
 	void __fastcall N12Click(TObject *Sender);
 	void __fastcall N13Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall N14Click(TObject *Sender);
+	void __fastcall DatePicker2CloseUp(TObject *Sender);
 private:
 	void DBColumnSizes();
 public:		// User declarations
