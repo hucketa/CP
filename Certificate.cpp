@@ -31,7 +31,7 @@ void __fastcall TCertificates::Lj1Click(TObject *Sender)
 void TCertificates::DBColumnSizes(){
 	DBGrid2->Columns->Items[0]->Visible = false;
 	DBGrid2->Columns->Items[1]->Width = 200;
-	DBGrid2->Columns->Items[1]->Title->Caption = "ПІБ cтудента";
+	DBGrid2->Columns->Items[1]->Title->Caption = "ПІБ учасника";
 	DBGrid2->Columns->Items[2]->Width = 100;
 	DBGrid2->Columns->Items[2]->Title->Caption = "PIN";
 	DBGrid2->Columns->Items[3]->Width = 100;
@@ -117,9 +117,6 @@ void __fastcall TCertificates::FormCreate(TObject *Sender)
 {
 	Execute->Enabled = false;
 	Clear->Enabled = false;
-	DatePicker1->OnChange = CheckFiltersFilled;
-	Earlier->OnClick = CheckFiltersFilled;
-	Later->OnClick = CheckFiltersFilled;
 	ThisDate->OnClick = CheckFiltersFilled;
 }
 
@@ -128,7 +125,7 @@ void __fastcall TCertificates::FormCreate(TObject *Sender)
 void __fastcall TCertificates::CheckFiltersFilled(TObject *Sender)
 {
 	bool isAnyFilterFilled = false;
-	if (Earlier->Checked || Later->Checked || ThisDate->Checked)
+	if (ThisDate->Checked)
 		isAnyFilterFilled = true;
 	Execute->Enabled = isAnyFilterFilled;
 	Clear->Enabled = isAnyFilterFilled;
@@ -143,14 +140,16 @@ void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 				   "JOIN student ON certificate.Student_id = student.Student_id ";
 
 	String conditions = "";
+
 	if (ThisDate->Checked)
-		conditions += "certificate.Creation_date = :SelectedDate ";
-	else if (Earlier->Checked && Later->Checked)
+	{
+		if (DatePicker1->Date > DatePicker2->Date)
+		{
+			ShowMessage("Дата початку повинна бути раніше дати завершення!");
+			return;
+		}
 		conditions += "certificate.Creation_date BETWEEN :DateStart AND :DateEnd ";
-	else if (Later->Checked)
-		conditions += "certificate.Creation_date > :SelectedDate ";
-	else if (Earlier->Checked)
-		conditions += "certificate.Creation_date < :SelectedDate ";
+	}
 
 	if (!conditions.IsEmpty())
 		query += " WHERE " + conditions;
@@ -163,17 +162,11 @@ void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 		DataModule1->ADOQuery4->SQL->Clear();
 		DataModule1->ADOQuery4->SQL->Add(query);
 
-		TDateTime selectedDate = DatePicker1->Date;
-
 		if (ThisDate->Checked)
-			DataModule1->ADOQuery4->Parameters->ParamByName("SelectedDate")->Value = selectedDate.FormatString("yyyy-mm-dd");
-		else if (Earlier->Checked && Later->Checked)
 		{
-			DataModule1->ADOQuery4->Parameters->ParamByName("DateStart")->Value = selectedDate - 1;
-			DataModule1->ADOQuery4->Parameters->ParamByName("DateEnd")->Value = selectedDate + 1;
+			DataModule1->ADOQuery4->Parameters->ParamByName("DateStart")->Value = DatePicker1->Date.FormatString("yyyy-mm-dd");
+			DataModule1->ADOQuery4->Parameters->ParamByName("DateEnd")->Value = DatePicker2->Date.FormatString("yyyy-mm-dd");
 		}
-		else if (Earlier->Checked || Later->Checked)
-			DataModule1->ADOQuery4->Parameters->ParamByName("SelectedDate")->Value = selectedDate.FormatString("yyyy-mm-dd");
 
 		DataModule1->ADOQuery4->Open();
 		DBColumnSizes();
@@ -190,8 +183,6 @@ void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 void __fastcall TCertificates::ClearClick(TObject *Sender)
 {
 	DatePicker1->Date = Now();
-	Earlier->Checked = false;
-	Later->Checked = false;
 	ThisDate->Checked = false;
 
 	Execute->Enabled = false;
@@ -422,6 +413,29 @@ void __fastcall TCertificates::N4Click(TObject *Sender)
 	bool k =true;
 	Form13->setfromCertificate(k);
 	Form13->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TCertificates::DatePicker2CloseUp(TObject *Sender)
+{
+	try
+	{
+		TDateTime selectedDate = DatePicker2->Date;
+		TDateTime currentDate = Now();
+		if (selectedDate > currentDate)
+		{
+			throw Exception("Дата не може бути в майбутньому!");
+		}
+		else if (selectedDate < EncodeDate(1990, 1, 1))
+		{
+			throw Exception("Дата занадто стара! Виберіть пізнішу дату.");
+		}
+	}
+	catch (const Exception &e)
+	{
+		ShowMessage("Помилка: " + e.Message);
+		DatePicker2->Date = Now();
+	}
 }
 //---------------------------------------------------------------------------
 

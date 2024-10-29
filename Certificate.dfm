@@ -39,13 +39,6 @@ object Certificates: TCertificates
     Height = 97
     Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1072#1084#1080
     TabOrder = 1
-    object Label4: TLabel
-      Left = 345
-      Top = 12
-      Width = 85
-      Height = 15
-      Caption = #1044#1072#1090#1072' '#1089#1090#1074#1086#1088#1077#1085#1085#1103
-    end
     object LabeledEdit1: TLabeledEdit
       Left = 24
       Top = 48
@@ -62,8 +55,8 @@ object Certificates: TCertificates
     object DatePicker1: TDatePicker
       Left = 312
       Top = 33
-      Width = 145
-      Height = 41
+      Width = 193
+      Height = 25
       Date = 45588.000000000000000000
       DateFormat = 'dd/mm/yyyy'
       Font.Charset = DEFAULT_CHARSET
@@ -74,29 +67,13 @@ object Certificates: TCertificates
       TabOrder = 1
       OnCloseUp = DatePicker1CloseUp
     end
-    object Later: TCheckBox
-      Left = 471
-      Top = 62
-      Width = 97
-      Height = 17
-      Caption = #1055#1110#1079#1085#1110#1096#1077
-      TabOrder = 2
-    end
     object ThisDate: TCheckBox
-      Left = 471
-      Top = 39
-      Width = 97
+      Left = 312
+      Top = 10
+      Width = 193
       Height = 17
-      Caption = #1062#1103' '#1076#1072#1090#1072
-      TabOrder = 3
-    end
-    object Earlier: TCheckBox
-      Left = 471
-      Top = 16
-      Width = 97
-      Height = 17
-      Caption = #1056#1072#1085#1110#1096#1077' '#1079#1072
-      TabOrder = 4
+      Caption = #1060#1110#1083#1100#1090#1088#1072#1094#1110#1103' '#1079#1072' '#1076#1072#1090#1086#1102' '#1089#1090#1074#1086#1088#1077#1085#1085#1103
+      TabOrder = 2
     end
     object Execute: TBitBtn
       Left = 558
@@ -141,7 +118,7 @@ object Certificates: TCertificates
         00034C7047004C7047004C7047004C7047004C7047004C7047004C7047004C70
         47004C7047004C7047004C7047004C7047004C7047004C7047004C7047004C70
         47004C704700}
-      TabOrder = 5
+      TabOrder = 3
       OnClick = ExecuteClick
     end
     object Clear: TBitBtn
@@ -185,7 +162,7 @@ object Certificates: TCertificates
         CEFF7A7A7AFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FEFEFEFFFFFF
         FF00D9D9D9FFC9C9C9FFFAFAFAFFE5E5E5FF737373FF828282FF797979FF8282
         82FFD4D4D4FFFDFDFDFFFCFCFCFFFEFEFEFFFFFFFF00FFFFFF00}
-      TabOrder = 6
+      TabOrder = 4
       OnClick = ClearClick
     end
     object BitBtn1: TBitBtn
@@ -194,8 +171,23 @@ object Certificates: TCertificates
       Width = 138
       Height = 41
       Caption = #1047#1075#1077#1085#1077#1088#1091#1074#1072#1090#1080
-      TabOrder = 7
+      TabOrder = 5
       OnClick = BitBtn1Click
+    end
+    object DatePicker2: TDatePicker
+      Left = 312
+      Top = 64
+      Width = 193
+      Height = 25
+      Date = 45588.000000000000000000
+      DateFormat = 'dd/mm/yyyy'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      TabOrder = 6
+      OnCloseUp = DatePicker2CloseUp
     end
   end
   object PopupMenu1: TPopupMenu

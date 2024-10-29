@@ -36,15 +36,13 @@ __published:	// IDE-managed Components
 	TGroupBox *GroupBox1;
 	TLabeledEdit *LabeledEdit1;
 	TDatePicker *DatePicker1;
-	TCheckBox *Later;
 	TCheckBox *ThisDate;
-	TCheckBox *Earlier;
-	TLabel *Label4;
 	TBitBtn *Execute;
 	TBitBtn *Clear;
 	TBitBtn *BitBtn1;
 	TSaveDialog *SaveDialog1;
 	TMenuItem *N4;
+	TDatePicker *DatePicker2;
 	void __fastcall N1Click(TObject *Sender);
 	void __fastcall Lj1Click(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
@@ -58,6 +56,7 @@ __published:	// IDE-managed Components
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall BitBtn1Click(TObject *Sender);
 	void __fastcall N4Click(TObject *Sender);
+	void __fastcall DatePicker2CloseUp(TObject *Sender);
 private:
 	void DBColumnSizes();
 	bool SortAscending;	// User declarations
