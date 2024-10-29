@@ -1,11 +1,10 @@
 object Form11: TForm11
   Left = 0
   Top = 0
-  AutoSize = True
   BorderStyle = bsSingle
   Caption = #1044#1086#1076#1072#1074#1072#1085#1085#1103' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080
-  ClientHeight = 290
-  ClientWidth = 638
+  ClientHeight = 299
+  ClientWidth = 645
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +20,7 @@ object Form11: TForm11
     Left = 0
     Top = 173
     Width = 634
-    Height = 116
+    Height = 124
     Caption = #1060#1110#1083#1100#1090#1088#1080' '#1076#1083#1103' '#1090#1072#1073#1083#1080#1094#1110
     TabOrder = 0
     object Label3: TLabel
@@ -31,13 +30,6 @@ object Form11: TForm11
       Height = 15
       Caption = #1053#1072#1074#1095#1072#1083#1100#1085#1072' '#1076#1080#1089#1094#1080#1087#1083#1110#1085#1072
       WordWrap = True
-    end
-    object Label4: TLabel
-      Left = 46
-      Top = 20
-      Width = 85
-      Height = 15
-      Caption = #1044#1072#1090#1072' '#1089#1082#1083#1072#1076#1072#1085#1085#1103
     end
     object ComboBox2: TComboBox
       Left = 285
@@ -137,33 +129,17 @@ object Form11: TForm11
       TabOrder = 2
       OnClick = ClearClick
     end
-    object Earlier: TCheckBox
-      Left = 180
-      Top = 24
-      Width = 97
-      Height = 17
-      Caption = #1056#1072#1085#1110#1096#1077' '#1079#1072
-      TabOrder = 3
-    end
-    object Later: TCheckBox
-      Left = 180
-      Top = 70
-      Width = 97
-      Height = 17
-      Caption = #1055#1110#1079#1085#1110#1096#1077
-      TabOrder = 4
-    end
     object ThisDate: TCheckBox
-      Left = 180
-      Top = 47
-      Width = 97
+      Left = 16
+      Top = 25
+      Width = 209
       Height = 17
-      Caption = #1062#1103' '#1076#1072#1090#1072
-      TabOrder = 5
+      Caption = #1060#1110#1083#1100#1090#1088#1072#1094#1110#1103' '#1079#1072' '#1076#1072#1090#1086#1102' '#1087#1088#1086#1093#1086#1076#1078#1077#1085#1085#1103
+      TabOrder = 3
     end
     object DatePicker1: TDatePicker
       Left = 16
-      Top = 41
+      Top = 48
       Date = 45587.000000000000000000
       DateFormat = 'dd/mm/yyyy'
       Font.Charset = DEFAULT_CHARSET
@@ -171,7 +147,7 @@ object Form11: TForm11
       Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = []
-      TabOrder = 6
+      TabOrder = 4
       OnCloseUp = DatePicker1CloseUp
     end
     object LabeledEdit1: TLabeledEdit
@@ -182,9 +158,22 @@ object Form11: TForm11
       EditLabel.Width = 71
       EditLabel.Height = 15
       EditLabel.Caption = #1055#1030#1041' '#1057#1090#1091#1076#1077#1085#1090#1072
-      TabOrder = 7
+      TabOrder = 5
       Text = ''
       OnExit = LabeledEdit1Exit
+    end
+    object DatePicker2: TDatePicker
+      Left = 16
+      Top = 86
+      Date = 45587.000000000000000000
+      DateFormat = 'dd/mm/yyyy'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      TabOrder = 6
+      OnCloseUp = DatePicker2CloseUp
     end
   end
   object DBGrid1: TDBGrid

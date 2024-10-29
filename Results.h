@@ -28,12 +28,9 @@ __published:	// IDE-managed Components
 	TMenuItem *N3;
 	TGroupBox *GroupBox1;
 	TLabel *Label3;
-	TLabel *Label4;
 	TComboBox *ComboBox2;
 	TBitBtn *Execute;
 	TBitBtn *Clear;
-	TCheckBox *Earlier;
-	TCheckBox *Later;
 	TCheckBox *ThisDate;
 	TDatePicker *DatePicker1;
 	TLabeledEdit *LabeledEdit1;
@@ -41,6 +38,7 @@ __published:	// IDE-managed Components
 	TMainMenu *MainMenu1;
 	TMenuItem *N6;
 	TMenuItem *Lj1;
+	TDatePicker *DatePicker2;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall DatePicker1CloseUp(TObject *Sender);
@@ -52,6 +50,7 @@ __published:	// IDE-managed Components
 	void __fastcall N3Click(TObject *Sender);
 	void __fastcall N6Click(TObject *Sender);
 	void __fastcall Lj1Click(TObject *Sender);
+	void __fastcall DatePicker2CloseUp(TObject *Sender);
 private:
 	void __fastcall DBColumnSizes();
 	//bool SortAscending;
