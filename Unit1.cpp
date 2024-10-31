@@ -67,6 +67,7 @@ void __fastcall TForm1::Edit2Exit(TObject *Sender)
 {
 	if (Edit2->Text.Length() < 8 || Edit2->Text.Length() > 20) {
 		ShowMessage("Номер паспорта повинен бути від 8 до 20 символів.");
+		Edit2->SetFocus();
 		return;
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
@@ -87,6 +88,7 @@ void __fastcall TForm1::Edit3Exit(TObject *Sender)
 {
 	if (Edit3->Text.Length() < 10 || Edit3->Text.Length() > 15) {
 		ShowMessage("Номер телефону повинен бути від 10 до 15 символів.");
+		Edit3->SetFocus();
 		return;
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
@@ -108,6 +110,7 @@ void __fastcall TForm1::Edit4Exit(TObject *Sender)
 	if (Edit4->Text.Length() != 10) {
 		ShowMessage("ІПН повинен містити 10 цифр.");
 		return;
+		Edit4->SetFocus();
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
 	checkQuery->Connection = DataModule1->ADOConnection1;
@@ -130,7 +133,8 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender)
     UnicodeString pattern = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 
     if (!TRegEx::IsMatch(email, pattern)) {
-        ShowMessage("Введіть дійсний e-mail.");
+		ShowMessage("Введіть дійсний e-mail.");
+		Edit5->SetFocus();
 		return;
 	}
 	TADOQuery *checkQuery = new TADOQuery(this);
@@ -162,6 +166,7 @@ void __fastcall TForm1::Edit6Exit(TObject *Sender)
 	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
 	{
 		ShowMessage("Цей номер сертифіката про освіту вже існує.");
+		Edit6->SetFocus();
 	}
 	checkQuery->Close();
 	delete checkQuery;
@@ -302,27 +307,21 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 void __fastcall TForm1::Edit1Exit(TObject *Sender)
 {
 	String pib = Edit1->Text;
-    UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
-
-    // Перевірка на коректність введених даних
+	UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
     if (!TRegEx::IsMatch(pib, pattern)) {
-        ShowMessage("ПІБ повинен містити лише українські літери.");
+		ShowMessage("ПІБ повинен містити лише українські літери.");
         return;
-    }
-
-    // Перевірка на унікальність ПІБ
+	}
     TADOQuery *checkQuery = new TADOQuery(this);
-    checkQuery->Connection = DataModule1->ADOConnection1;
-
-    // SQL-запит для перевірки наявності ПІБ в базі, виключаючи поточного студента
+	checkQuery->Connection = DataModule1->ADOConnection1;
     checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE PIB = :PIB AND (Student_id <> :Student_id OR :Student_id IS NULL)";
 	checkQuery->Parameters->ParamByName("PIB")->Value = Edit1->Text;
-    checkQuery->Parameters->ParamByName("Student_id")->Value = id; // Виключаємо поточного студента
-
+	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
     try {
         checkQuery->Open();
         if (checkQuery->FieldByName("Cnt")->AsInteger > 0) {
 			ShowMessage("Студент з таким ПІБ вже існує.");
+            Edit1->SetFocus();
         }
     }
     __finally {
