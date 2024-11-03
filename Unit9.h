@@ -13,6 +13,7 @@
 #include "Data.h"
 #include "Students.h"
 #include "Conditions.h"
+#include "Main_Window.h"
 //---------------------------------------------------------------------------
 class TForm9 : public TForm
 {
@@ -44,7 +45,7 @@ __published:	// IDE-managed Components
 	void __fastcall Label2Click(TObject *Sender);
 private:
 	int id;
-	void __fastcall ShowForm14Modal();	// User declarations
+	void __fastcall ShowForm14Modal();
 public:		// User declarations
 	__fastcall TForm9(TComponent* Owner);
     void set_id(int k);

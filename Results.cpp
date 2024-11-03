@@ -278,7 +278,7 @@ void __fastcall TForm11::DBGrid1TitleClick(TColumn *Column)
 		DataModule1->ADOQuery3->SQL->Clear();
 		DataModule1->ADOQuery3->SQL->Add(query);
 		DataModule1->ADOQuery3->Open();
-		DBColumnSizes(); // Оновлюємо розмір колонок, якщо потрібно
+		DBColumnSizes();
 	}
 	catch (Exception &e)
 	{
@@ -333,5 +333,7 @@ void __fastcall TForm11::DatePicker2CloseUp(TObject *Sender)
 		DatePicker1->Date = Now();
 	}
 }
+//---------------------------------------------------------------------------
+
 //---------------------------------------------------------------------------
 

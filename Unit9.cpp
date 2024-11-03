@@ -291,8 +291,6 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 	}
 	schoolQuery->Close();
 	delete schoolQuery;
-
-	// Одержуємо condition_id на основі предмету та дати
 	TADOQuery *conditionQuery = new TADOQuery(NULL);
 	conditionQuery->Connection = DataModule1->ADOConnection1;
 	conditionQuery->SQL->Text = "SELECT Condition_id FROM conditions WHERE Subject_id = :subject_id AND Date = :date";
@@ -332,14 +330,19 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 	try {
 		query->ExecSQL();
 		ShowMessage("Запис успішно збережено.");
+		this->Close();
 	} catch (Exception &e) {
 		ShowMessage("Помилка збереження запису: " + e.Message);
 	}
 	DataModule1->ADOQuery3->Close();
 	DataModule1->ADOQuery3->Open();
+	DataModule1->MainQuery->Close();
+	DataModule1->MainQuery->Open();
 	query->Close();
 	delete query;
 }
+
+
 
 
 

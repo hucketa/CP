@@ -18,6 +18,7 @@
 #include <Vcl.Buttons.hpp>
 #include "Data.h"
 #include "Unit9.h"
+#include "Main_Window.h"
 #include <System.RegularExpressions.hpp>
 //---------------------------------------------------------------------------
 class TForm11 : public TForm

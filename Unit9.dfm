@@ -4,8 +4,8 @@ object Form9: TForm9
   AutoSize = True
   BorderStyle = bsSingle
   Caption = 'Form9'
-  ClientHeight = 274
-  ClientWidth = 357
+  ClientHeight = 273
+  ClientWidth = 353
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

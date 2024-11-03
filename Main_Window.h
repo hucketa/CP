@@ -82,11 +82,12 @@ __published:	// IDE-managed Components
 	void __fastcall DatePicker2CloseUp(TObject *Sender);
 	void __fastcall N14Click(TObject *Sender);
 private:
-	void DBColumnSizes();
+
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
 	void __fastcall UpdateStatusBar(String role);
 	void ManageMenuItems(String role);
+	void DBColumnMainSizes();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;

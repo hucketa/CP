@@ -1,10 +1,11 @@
 object Form11: TForm11
   Left = 0
   Top = 0
+  AutoSize = True
   BorderStyle = bsSingle
   Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1108#1102' '#1087#1088#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1080' '#1090#1077#1089#1090#1091#1074#1072#1085#1085#1103
-  ClientHeight = 299
-  ClientWidth = 645
+  ClientHeight = 297
+  ClientWidth = 638
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +18,7 @@ object Form11: TForm11
   OnShow = FormShow
   TextHeight = 15
   object GroupBox1: TGroupBox
-    Left = 8
+    Left = 4
     Top = 173
     Width = 634
     Height = 124
@@ -177,7 +178,7 @@ object Form11: TForm11
     end
   end
   object DBGrid1: TDBGrid
-    Left = 1
+    Left = 0
     Top = 0
     Width = 633
     Height = 167

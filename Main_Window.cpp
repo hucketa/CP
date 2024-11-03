@@ -36,8 +36,8 @@ void __fastcall TForm3::FormCreate(TObject *Sender)
 
 //---------------------------------------------------------------------------
 
-void TForm3::DBColumnSizes(){
-	DBGrid1->Columns->Items[0]->Width = 150;
+void TForm3::DBColumnMainSizes(){
+	DBGrid1->Columns->Items[0]->Width = 200;
 	DBGrid1->Columns->Items[0]->Title->Caption = "Ï²Á";
 	DBGrid1->Columns->Items[1]->Width = 100;
 	DBGrid1->Columns->Items[1]->Title->Caption = "Äàòà ñêëàäàííÿ";
@@ -61,7 +61,7 @@ void __fastcall TForm3::CheckFiltersFilled(TObject *Sender)
 
 void __fastcall TForm3::FormShow(TObject *Sender)
 {
-	DBColumnSizes();
+	DBColumnMainSizes();
 	String tmp_role = "User";
 	UpdateStatusBar(tmp_role);
 	ManageMenuItems(tmp_role);
@@ -92,7 +92,7 @@ void __fastcall TForm3::ClearClick(TObject *Sender)
 		DataModule1->MainQuery->SQL->Clear();
 		DataModule1->MainQuery->SQL->Add(query);
 		DataModule1->MainQuery->Open();
-		DBColumnSizes();
+		DBColumnMainSizes();
 	}
 	catch (Exception &e)
 	{
@@ -165,7 +165,7 @@ void __fastcall TForm3::ExecuteClick(TObject *Sender)
         }
 
         DataModule1->MainQuery->Open();
-        DBColumnSizes();
+		DBColumnMainSizes();
     }
     catch (const Exception &e)
     {
@@ -191,11 +191,16 @@ void __fastcall TForm3::N11Click(TObject *Sender)
 void __fastcall TForm3::N2Click(TObject *Sender)
 {
 	Form14->ShowModal();
+    DataModule1->MainQuery->Open();
+	DBColumnMainSizes();
 }
+
 
 void __fastcall TForm3::N4Click(TObject *Sender)
 {
    Form7->ShowModal();
+   DataModule1->MainQuery->Open();
+   DBColumnMainSizes();
 }
 //---------------------------------------------------------------------------
 
@@ -251,34 +256,36 @@ void __fastcall TForm3::N9Click(TObject *Sender)
 void __fastcall TForm3::N5Click(TObject *Sender)
 {
 	Form11->ShowModal();
+    DataModule1->MainQuery->Open();
+	DBColumnMainSizes();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
 {
-    String columnName = Column->FieldName;
+	String columnName = Column->FieldName;
     static bool sortAsc = true;
     String sortOrder = sortAsc ? "ASC" : "DESC";
     sortAsc = !sortAsc;
 
-    String query =
-        "SELECT s.PIB, "
-        "r.Attemp_date, "
-        "CASE WHEN r.Status = 1 THEN 'Çäàíî' ELSE 'Íåçäàíî' END AS Status, "
-        "subj.Name, "
-        "r.Reached_score "
-        "FROM Result r "
-        "JOIN Student s ON r.Student_id = s.Student_id "
-        "JOIN Subject subj ON r.Subj_id = subj.Subject_id "
+	String query =
+		"SELECT s.PIB, "
+		"r.Attemp_date, "
+		"CASE WHEN r.Status = 1 THEN 'Çäàíî' ELSE 'Íåçäàíî' END AS Status, "
+		"subj.Name, "
+		"r.Reached_score "
+		"FROM Result r "
+		"JOIN Student s ON r.Student_id = s.Student_id "
+		"JOIN Subject subj ON r.Subj_id = subj.Subject_id "
 		"ORDER BY " + columnName + " " + sortOrder;
 
     try
     {
         DataModule1->MainQuery->Close();
-        DataModule1->MainQuery->SQL->Clear();
-        DataModule1->MainQuery->SQL->Add(query);
-        DataModule1->MainQuery->Open();
-		DBColumnSizes();
+		DataModule1->MainQuery->SQL->Clear();
+		DataModule1->MainQuery->SQL->Add(query);
+		DataModule1->MainQuery->Open();
+		DBColumnMainSizes();
 	}
 	catch (Exception &e)
     {
@@ -289,7 +296,7 @@ void __fastcall TForm3::DBGrid1TitleClick(TColumn *Column)
 
 void __fastcall TForm3::N1Click(TObject *Sender)
 {
-    Certificates->ShowModal();
+	Certificates->ShowModal();
 }
 //---------------------------------------------------------------------------
 
@@ -459,4 +466,5 @@ void __fastcall TForm3::N14Click(TObject *Sender)
     Application->Terminate();
 }
 //---------------------------------------------------------------------------
+
 
