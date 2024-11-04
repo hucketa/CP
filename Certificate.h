@@ -43,6 +43,8 @@ __published:	// IDE-managed Components
 	TSaveDialog *SaveDialog1;
 	TMenuItem *N4;
 	TDatePicker *DatePicker2;
+	TStatusBar *StatusBar1;
+	TRadioGroup *RadioGroup1;
 	void __fastcall N1Click(TObject *Sender);
 	void __fastcall Lj1Click(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);

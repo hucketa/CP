@@ -119,47 +119,55 @@ void __fastcall TCertificates::FormCreate(TObject *Sender)
 	Execute->Enabled = false;
 	Clear->Enabled = false;
 	ThisDate->OnClick = CheckFiltersFilled;
+	RadioGroup1->OnClick = CheckFiltersFilled;
 }
 
 //---------------------------------------------------------------------------
 
 void __fastcall TCertificates::CheckFiltersFilled(TObject *Sender)
 {
-	bool isAnyFilterFilled = false;
-	if (ThisDate->Checked)
-		isAnyFilterFilled = true;
+	bool isAnyFilterFilled = ThisDate->Checked || (RadioGroup1->ItemIndex != -1);
 	Execute->Enabled = isAnyFilterFilled;
 	Clear->Enabled = isAnyFilterFilled;
 }
 
 
+
 void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 {
-	String query = "SELECT certificate.Cerf_num, student.PIB, certificate.PIN, certificate.Creation_date, certificate.Effect_time, "
-				   "CASE WHEN certificate.Status = 1 THEN 'Дійсний' ELSE 'Не дійсний' END AS Status "
+    String query = "SELECT certificate.Cerf_num, student.PIB, certificate.PIN, certificate.Creation_date, certificate.Effect_time, "
+                   "CASE WHEN certificate.Status = 1 THEN 'Дійсний' ELSE 'Не дійсний' END AS Status "
 				   "FROM certificate "
-				   "JOIN student ON certificate.Student_id = student.Student_id ";
+                   "JOIN student ON certificate.Student_id = student.Student_id ";
 
 	String conditions = "";
 
-	if (ThisDate->Checked)
-	{
+    if (ThisDate->Checked)
+    {
 		if (DatePicker1->Date > DatePicker2->Date)
-		{
-			ShowMessage("Дата початку повинна бути раніше дати завершення!");
-			return;
+        {
+            ShowMessage("Дата початку повинна бути раніше дати завершення!");
+            return;
 		}
-		conditions += "certificate.Creation_date BETWEEN :DateStart AND :DateEnd ";
-	}
+        conditions += "certificate.Creation_date BETWEEN :DateStart AND :DateEnd ";
+    }
+
+	if (RadioGroup1->ItemIndex != -1)
+    {
+        if (!conditions.IsEmpty())
+            conditions += " AND ";
+		int statusValue = RadioGroup1->ItemIndex == 0 ? 1 : 0;
+        conditions += "certificate.Status = :Status";
+    }
 
 	if (!conditions.IsEmpty())
-		query += " WHERE " + conditions;
+        query += " WHERE " + conditions;
 
-	query += " ORDER BY certificate.Creation_date DESC";
+    query += " ORDER BY certificate.Creation_date DESC";
 
-	try
-	{
-		DataModule1->ADOQuery4->Close();
+    try
+    {
+        DataModule1->ADOQuery4->Close();
 		DataModule1->ADOQuery4->SQL->Clear();
 		DataModule1->ADOQuery4->SQL->Add(query);
 
@@ -169,14 +177,25 @@ void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 			DataModule1->ADOQuery4->Parameters->ParamByName("DateEnd")->Value = DatePicker2->Date.FormatString("yyyy-mm-dd");
 		}
 
+        if (RadioGroup1->ItemIndex != -1)
+		{
+			int statusValue = RadioGroup1->ItemIndex == 0 ? 1 : 0;
+			DataModule1->ADOQuery4->Parameters->ParamByName("Status")->Value = statusValue;
+		}
+
 		DataModule1->ADOQuery4->Open();
 		DBColumnSizes();
+
+		int recordCount = DataModule1->ADOQuery4->RecordCount;
+		StatusBar1->Panels->Items[0]->Text = "Кількість сертифікатів: " + IntToStr(recordCount);
 	}
 	catch (const Exception &e)
-	{
+    {
 		ShowMessage("Помилка при фільтрації: " + e.Message);
 	}
 }
+
+
 
 
 //---------------------------------------------------------------------------
@@ -185,6 +204,7 @@ void __fastcall TCertificates::ClearClick(TObject *Sender)
 {
 	DatePicker1->Date = Now();
 	ThisDate->Checked = false;
+	RadioGroup1->ItemIndex = -1;
 
 	Execute->Enabled = false;
 	Clear->Enabled = false;
@@ -201,7 +221,7 @@ void __fastcall TCertificates::ClearClick(TObject *Sender)
 		DataModule1->ADOQuery4->SQL->Clear();
 		DataModule1->ADOQuery4->SQL->Add(query);
 		DataModule1->ADOQuery4->Open();
-
+        StatusBar1->Panels->Items[0]->Text = " ";
 		DBColumnSizes();
 	}
 	catch (const Exception &e)

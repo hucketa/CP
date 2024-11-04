@@ -4,8 +4,8 @@ object Certificates: TCertificates
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1047#1084#1110#1085#1072' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080'  '#1053#1052#1058
-  ClientHeight = 346
-  ClientWidth = 741
+  ClientHeight = 368
+  ClientWidth = 745
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object Certificates: TCertificates
   OnShow = FormShow
   TextHeight = 15
   object DBGrid2: TDBGrid
-    Left = 0
+    Left = 7
     Top = 0
     Width = 737
     Height = 242
@@ -34,14 +34,14 @@ object Certificates: TCertificates
   end
   object GroupBox1: TGroupBox
     Left = 0
-    Top = 248
+    Top = 249
     Width = 737
     Height = 97
     Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1072#1084#1080
     TabOrder = 1
     object LabeledEdit1: TLabeledEdit
-      Left = 24
-      Top = 48
+      Left = 13
+      Top = 35
       Width = 121
       Height = 23
       EditLabel.Width = 112
@@ -166,10 +166,10 @@ object Certificates: TCertificates
       OnClick = ClearClick
     end
     object BitBtn1: TBitBtn
-      Left = 158
-      Top = 32
-      Width = 138
-      Height = 41
+      Left = 16
+      Top = 64
+      Width = 113
+      Height = 20
       Caption = #1047#1075#1077#1085#1077#1088#1091#1074#1072#1090#1080
       TabOrder = 5
       OnClick = BitBtn1Click
@@ -189,6 +189,27 @@ object Certificates: TCertificates
       TabOrder = 6
       OnCloseUp = DatePicker2CloseUp
     end
+    object RadioGroup1: TRadioGroup
+      Left = 152
+      Top = 16
+      Width = 137
+      Height = 63
+      Caption = #1057#1090#1072#1090#1091#1089
+      Items.Strings = (
+        #1044#1110#1081#1089#1085#1080#1081
+        #1053#1077' '#1076#1110#1081#1089#1085#1080#1081)
+      TabOrder = 7
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 7
+    Top = 352
+    Width = 738
+    Height = 16
+    Panels = <
+      item
+        Width = 50
+      end>
   end
   object PopupMenu1: TPopupMenu
     Left = 536
