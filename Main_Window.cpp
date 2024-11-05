@@ -31,7 +31,6 @@ void __fastcall TForm3::FormCreate(TObject *Sender)
 	ThisDate->OnClick = CheckFiltersFilled;
 	Status_check->OnClick = CheckFiltersFilled;
 	Edit1->OnChange = CheckFiltersFilled;
-	UpdateStatusBar("Користувач");
 }
 
 //---------------------------------------------------------------------------
@@ -62,9 +61,8 @@ void __fastcall TForm3::CheckFiltersFilled(TObject *Sender)
 void __fastcall TForm3::FormShow(TObject *Sender)
 {
 	DBColumnMainSizes();
-	String tmp_role = "User";
-	UpdateStatusBar(tmp_role);
-	ManageMenuItems(tmp_role);
+	UpdateStatusBar(Form12->get_role(), Form12->get_pib());
+	ManageMenuItems(Form12->get_role());
 	Application->ProcessMessages();
 }
 
@@ -184,7 +182,8 @@ void __fastcall TForm3::Lj1Click(TObject *Sender)
 
 void __fastcall TForm3::N11Click(TObject *Sender)
 {
-	Application->Terminate();
+	Form3->Hide();
+	Form12->Show();
 }
 //---------------------------------------------------------------------------
 
@@ -300,136 +299,61 @@ void __fastcall TForm3::N1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm3::UpdateStatusBar(String role)
+void TForm3::UpdateStatusBar(String role, String pib)
 {
-	if (role == "менеджер учнів")
-	{
-		StatusBar1->Panels->Items[2]->Text = "Менеджер учасників: Повний доступ до даних учасників";
-	}
-	else if (role == "менеджер предметів")
-	{
-		StatusBar1->Panels->Items[2]->Text = "Менеджер предметів: Доступ до навчальних дисциплін";
-	}
-	else if (role == "менеджер результатів")
-	{
-		StatusBar1->Panels->Items[2]->Text = "Менеджер результатів: Доступ до результатів і сертифікатів";
-	}
-	else
-	{
-		StatusBar1->Panels->Items[2]->Text = "Невідома роль: Обмежений доступ";
-	}
+	StatusBar1->Panels->Items[0]->Text = "ПІБ: " + pib;
+	StatusBar1->Panels->Items[1]->Text = DateTimeToStr(Now());
+	StatusBar1->Panels->Items[2]->Text = "Роль: " + role;
 }
+
 
 void TForm3::ManageMenuItems(String role)
 {
-    	Form7->N1->Enabled = false;//Предмети
-		Form7->N2->Enabled = false;//Предмети
-		Form7->N3->Enabled = false;//Предмети
-		Form14->N1->Enabled = false;//Учні
-		Form14->N2->Enabled = false;//Учні
-		Form4->N3->Enabled = false;//Умови
-		Form4->N2->Enabled = false;//Умови
-		Form6->N1->Enabled = false;//Школи
-		Form6->N2->Enabled = false;//Школи
-		Form6->N3->Enabled = false;//Школи
-		Certificates->N3->Enabled = false;
-		Certificates->N2->Enabled = false;
-		Certificates->N4->Enabled = false;
-		Certificates->BitBtn1->Enabled = false;
-		Form11->N3->Enabled = false;//Результати
-		Form11->N2->Enabled = false;//Результати
-	if (role == "менеджер учнів")
+	Form7->N1->Enabled = false;
+    Form7->N2->Enabled = false;
+    Form7->N3->Enabled = false;
+	Form14->N1->Enabled = false;
+    Form14->N2->Enabled = false;
+	Form4->N3->Enabled = false;
+    Form4->N2->Enabled = false;
+	Form6->N1->Enabled = false;
+    Form6->N2->Enabled = false;
+	Form6->N3->Enabled = false;
+	Certificates->N3->Enabled = false;
+    Certificates->N2->Enabled = false;
+    Certificates->N4->Enabled = false;
+	Certificates->BitBtn1->Enabled = false;
+	Form11->N3->Enabled = false;
+    Form11->N2->Enabled = false;
+	Form3->N15->Enabled = false;
+	if (role == "головний адміністратор" || role == "адміністратор")
 	{
-		Form7->N1->Enabled = false;//Предмети
-		Form7->N2->Enabled = false;//Предмети
-		Form7->N3->Enabled = false;//Предмети
-		Form14->N1->Enabled = true;//Учні
-		Form14->N2->Enabled = true;//Учні
-		Form4->N3->Enabled = false;//Умови
-		Form4->N2->Enabled = false;//Умови
-		Form6->N1->Enabled = false;//Школи
-		Form6->N2->Enabled = false;//Школи
-		Form6->N3->Enabled = false;//Школи
-		Form4->N2->Enabled = false;//Умови
-		Certificates->N3->Enabled = false;
-		Certificates->N2->Enabled = false;
-		Certificates->N4->Enabled = false;
-		Certificates->BitBtn1->Enabled = false;
-		Form11->N3->Enabled = false;//Результати
-		Form11->N2->Enabled = false;//Результати
-	}
-	else if (role == "менеджер предметів")
+        Form7->N1->Enabled = true;
+        Form7->N2->Enabled = true;
+        Form7->N3->Enabled = true;
+        Form14->N1->Enabled = true;
+        Form14->N2->Enabled = true;
+        Form4->N3->Enabled = true;
+        Form4->N2->Enabled = true;
+        Form6->N1->Enabled = true;
+        Form6->N2->Enabled = true;
+        Form6->N3->Enabled = true;
+        Certificates->N3->Enabled = true;
+        Certificates->N2->Enabled = true;
+        Certificates->N4->Enabled = true;
+        Certificates->BitBtn1->Enabled = true;
+        Form11->N3->Enabled = true;
+        Form11->N2->Enabled = true;
+        Form3->N15->Enabled = true;
+    }
+	else if (role == "відповідальний за сертифікати")
 	{
-		Form7->N1->Enabled = true;//Предмети
-		Form7->N2->Enabled = true;//Предмети
-		Form7->N3->Enabled = true;//Предмети
-		Form14->N1->Enabled = false;//Учні
-		Form14->N2->Enabled = false;//Учні
-		Form4->N3->Enabled = true;//Умови
-		Form4->N2->Enabled = true;//Умови
-		Form6->N1->Enabled = true;//Школи
-		Form6->N2->Enabled = true;//Школи
-		Form6->N3->Enabled = true;//Школи
-		Certificates->N3->Enabled = false;
-		Certificates->N2->Enabled = false;
-		Certificates->BitBtn1->Enabled = false;
-		Certificates->N4->Enabled = false;
-		Form11->N3->Enabled = false;//Результати
-		Form11->N2->Enabled = false;//Результати
-	}
-	else if (role == "менеджер результатів")
-	{
-		Form7->N1->Enabled = false;//Предмети
-		Form7->N2->Enabled = false;//Предмети
-		Form7->N3->Enabled = false;//Предмети
-		Form14->N1->Enabled = false;//Учні
-		Form14->N2->Enabled = false;//Учні
-		Form4->N3->Enabled = false;//Умови
-		Form4->N2->Enabled = false;//Умови
-		Form6->N1->Enabled = false;//Школи
-		Form6->N2->Enabled = false;//Школи
-		Form6->N3->Enabled = false;//Школи
 		Certificates->N3->Enabled = true;
 		Certificates->N2->Enabled = true;
-		Certificates->N4->Enabled = true;
 		Certificates->BitBtn1->Enabled = true;
-		Form11->N3->Enabled = true;//Результати
-		Form11->N2->Enabled = true;
-		//Результати
 	}
 }
 
-
-
-//---------------------------------------------------------------------------
-
-void __fastcall TForm3::N12Click(TObject *Sender)
-{
-	Form12->ShowModal();
-	if (Form12->get_flag())
-	{
-		UpdateStatusBar(Form12->get_role());
-		ManageMenuItems(Form12->get_role());
-		Application->ProcessMessages();
-	}
-	else
-	{
-		ShowMessage("Авторизація не вдалася. Доступ обмежено.");
-        String user = "user";
-		UpdateStatusBar(user);
-		ManageMenuItems(user);
-		Application->ProcessMessages();
-	}
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm3::N13Click(TObject *Sender)
-{
-		String user = "user";
-		UpdateStatusBar(user);
-		ManageMenuItems(user);
-		Application->ProcessMessages();
-}
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::FormClose(TObject *Sender, TCloseAction &Action)
@@ -467,4 +391,10 @@ void __fastcall TForm3::N14Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TForm3::N15Click(TObject *Sender)
+{
+    Form15->ShowModal();
+}
+//---------------------------------------------------------------------------
 

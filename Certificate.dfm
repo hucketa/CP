@@ -5,7 +5,7 @@ object Certificates: TCertificates
   BorderStyle = bsSingle
   Caption = #1047#1084#1110#1085#1072' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1111' '#1087#1088#1086' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1080'  '#1053#1052#1058
   ClientHeight = 368
-  ClientWidth = 745
+  ClientWidth = 748
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,13 +40,14 @@ object Certificates: TCertificates
     Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1072#1084#1080
     TabOrder = 1
     object LabeledEdit1: TLabeledEdit
-      Left = 13
+      Left = 8
       Top = 35
       Width = 121
       Height = 23
       EditLabel.Width = 112
       EditLabel.Height = 15
       EditLabel.Caption = #1055#1030#1053' '#1082#1086#1076' '#1089#1077#1088#1090#1080#1092#1110#1082#1072#1090#1091
+      MaxLength = 15
       NumbersOnly = True
       TabOrder = 0
       Text = ''
@@ -202,14 +203,16 @@ object Certificates: TCertificates
     end
   end
   object StatusBar1: TStatusBar
-    Left = 7
+    Left = 0
     Top = 352
-    Width = 738
+    Width = 748
     Height = 16
     Panels = <
       item
         Width = 50
       end>
+    ExplicitTop = 351
+    ExplicitWidth = 744
   end
   object PopupMenu1: TPopupMenu
     Left = 536

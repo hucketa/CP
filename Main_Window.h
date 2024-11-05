@@ -26,6 +26,7 @@
 #include "Certificate.h"
 #include "School.h"
 #include "Auth.h"
+#include "Unit15.h"
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -54,11 +55,10 @@ __published:	// IDE-managed Components
 	TMenuItem *N9;
 	TDBGrid *DBGrid1;
 	TMenuItem *N10;
-	TMenuItem *N11;
-	TMenuItem *N12;
-	TMenuItem *N13;
 	TDatePicker *DatePicker2;
 	TMenuItem *N14;
+	TMenuItem *N15;
+	TMenuItem *N11;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
@@ -76,16 +76,14 @@ __published:	// IDE-managed Components
 	void __fastcall N5Click(TObject *Sender);
 	void __fastcall DBGrid1TitleClick(TColumn *Column);
 	void __fastcall N1Click(TObject *Sender);
-	void __fastcall N12Click(TObject *Sender);
-	void __fastcall N13Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall DatePicker2CloseUp(TObject *Sender);
 	void __fastcall N14Click(TObject *Sender);
+	void __fastcall N15Click(TObject *Sender);
 private:
-
+	void UpdateStatusBar(String role, String pib);
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
-	void __fastcall UpdateStatusBar(String role);
 	void ManageMenuItems(String role);
 	void DBColumnMainSizes();
 };

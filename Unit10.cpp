@@ -16,7 +16,7 @@ __fastcall TForm10::TForm10(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TForm10::LabeledEdit1SubLabelClick(TObject *Sender)
 {
-    Form14->isMinimalView = true;
+	Form14->isMinimalView = true;
 	Form14->ToggleView();
 	Form14->Update();
 	Form14->ShowModal();
@@ -25,49 +25,53 @@ void __fastcall TForm10::LabeledEdit1SubLabelClick(TObject *Sender)
 	Form14->AutoSize = true;
 	Form14->Update();
 }
+
 //---------------------------------------------------------------------------
+
 void __fastcall TForm10::LabeledEdit1Exit(TObject *Sender)
 {
-    String pib = LabeledEdit1->Text;
+    String pib = LabeledEdit1->Text.Trim();
     UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
+
     if (!TRegEx::IsMatch(pib, pattern)) {
         ShowMessage("ПІБ повинен містити лише українські літери.");
         LabeledEdit1->SetFocus();
         return;
-    }
-    TADOQuery *query = new TADOQuery(NULL);
-    query->Connection = DataModule1->ADOConnection1;
-    query->SQL->Text = "SELECT COUNT(*) AS count FROM student WHERE PIB = :pib";
-    query->Parameters->ParamByName("pib")->Value = pib;
-    query->Open();
-    int count = query->FieldByName("count")->AsInteger;
-    if (count == 0) {
-		ShowMessage("ПІБ не знайдений у базі даних.");
-		LabeledEdit1->SetFocus();
-		query->Close();
-		delete query;
-		return;
 	}
-	query->Close();
-	delete query;
+	if (pib != previousPIB) {
+        TADOQuery *query = new TADOQuery(NULL);
+        query->Connection = DataModule1->ADOConnection1;
+        query->SQL->Text = "SELECT COUNT(*) AS count FROM student WHERE PIB = :pib";
+        query->Parameters->ParamByName("pib")->Value = pib;
+        query->Open();
+        int count = query->FieldByName("count")->AsInteger;
+        if (count == 0) {
+            ShowMessage("ПІБ не знайдений у базі даних.");
+            LabeledEdit1->SetFocus();
+            query->Close();
+            delete query;
+            return;
+		}
+		previousPIB = pib;
+        query->Close();
+        delete query;
+    }
 }
+
 //---------------------------------------------------------------------------
+
 void __fastcall TForm10::LabeledEdit2Exit(TObject *Sender)
 {
-    try
-    {
-        String enteredPIN = LabeledEdit2->Text.Trim();
+    String enteredPIN = LabeledEdit2->Text.Trim();
 
-        if (enteredPIN.IsEmpty())
-        {
-            ShowMessage("Поле PIN не може бути порожнім!");
-            LabeledEdit2->SetFocus();
-            return;
-        }
-
+    if (enteredPIN.IsEmpty()) {
+        ShowMessage("Поле PIN не може бути порожнім!");
+        LabeledEdit2->SetFocus();
+        return;
+	}
+    if (enteredPIN != previousPIN) {
         TADOQuery *query = new TADOQuery(NULL);
-        try
-        {
+        try {
             query->Connection = DataModule1->ADOConnection1;
             query->SQL->Text = "SELECT COUNT(*) AS Count FROM certificate WHERE PIN = :EnteredPIN";
             query->Parameters->ParamByName("EnteredPIN")->Value = enteredPIN;
@@ -75,25 +79,20 @@ void __fastcall TForm10::LabeledEdit2Exit(TObject *Sender)
 
             int count = query->FieldByName("Count")->AsInteger;
 
-            if (count > 0)
-            {
+            if (count > 0) {
                 ShowMessage("Цей PIN вже існує в базі даних! Введіть інший.");
                 LabeledEdit2->SetFocus();
             }
         }
-        __finally
-        {
+        __finally {
             delete query;
-        }
-    }
-    catch (const Exception &e)
-    {
-        ShowMessage(e.Message);
-        LabeledEdit2->SetFocus();
+		}
+		previousPIN = enteredPIN;
     }
 }
 
 //---------------------------------------------------------------------------
+
 void __fastcall TForm10::DatePicker2CloseUp(TObject *Sender)
 {
     try
@@ -119,6 +118,8 @@ void __fastcall TForm10::DatePicker2CloseUp(TObject *Sender)
         DatePicker2->SetFocus();
     }
 }
+
+//---------------------------------------------------------------------------
 
 void TForm10::set_id(int k)
 {
@@ -164,6 +165,8 @@ void TForm10::set_id(int k)
 
 				DatePicker2->Date = query->FieldByName("Effect_time")->AsDateTime;
 				DatePicker1->Date = query->FieldByName("Creation_date")->AsDateTime;
+				previousPIB = LabeledEdit1->Text;
+				previousPIN = LabeledEdit2->Text;
 			}
 		}
 		__finally
@@ -174,11 +177,8 @@ void TForm10::set_id(int k)
 	}
 }
 
-
-
-
-
 //---------------------------------------------------------------------------
+
 void __fastcall TForm10::DatePicker1CloseUp(TObject *Sender)
 {
     try
@@ -205,15 +205,17 @@ void __fastcall TForm10::DatePicker1CloseUp(TObject *Sender)
     }
 }
 
-
 //---------------------------------------------------------------------------
+
 void __fastcall TForm10::FormCreate(TObject *Sender)
 {
 	TDateTime date = EncodeDate(1990, 1, 1);
 	DatePicker1->Date = date;
 	DatePicker2->Date = date;
 }
+
 //---------------------------------------------------------------------------
+
 void __fastcall TForm10::Button1Click(TObject *Sender)
 {
     try
@@ -303,4 +305,5 @@ void __fastcall TForm10::Button1Click(TObject *Sender)
 }
 
 
-//---------------------------------------------------------------------------
+
+

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef AuthH
-#define AuthH
+#ifndef Unit15H
+#define Unit15H
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
@@ -9,30 +9,31 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Mask.hpp>
+#include <Data.DB.hpp>
+#include <Vcl.DBGrids.hpp>
+#include <Vcl.Grids.hpp>
+#include <Vcl.Menus.hpp>
 #include "Data.h"
-#include "Main_Window.h"
+#include "Unit16.h"
 //---------------------------------------------------------------------------
-class TForm12 : public TForm
+class TForm15 : public TForm
 {
 __published:	// IDE-managed Components
-	TLabeledEdit *LabeledEdit1;
-	TLabeledEdit *LabeledEdit2;
-	TButton *Button1;
-	void __fastcall Button1Click(TObject *Sender);
+	TDBGrid *DBGrid1;
+	TPopupMenu *PopupMenu1;
+	TMenuItem *N1;
+	TMenuItem *N2;
 	void __fastcall FormShow(TObject *Sender);
-	void __fastcall LabeledEdit1Exit(TObject *Sender);
-	void __fastcall LabeledEdit2Exit(TObject *Sender);
+	void __fastcall DBGrid1TitleClick(TColumn *Column);
+	void __fastcall N1Click(TObject *Sender);
+	void __fastcall N2Click(TObject *Sender);
 private:
-	String role_s;
-	String pib_s;
-	String login_s;	// User declarations
+    bool SortAscending;
+	void DBColumnSizes();	// User declarations
 public:		// User declarations
-	__fastcall TForm12(TComponent* Owner);
-	String get_role();
-	String get_pib();
-    String get_login();
+	__fastcall TForm15(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm12 *Form12;
+extern PACKAGE TForm15 *Form15;
 //---------------------------------------------------------------------------
 #endif

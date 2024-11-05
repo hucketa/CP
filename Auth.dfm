@@ -2,7 +2,7 @@ object Form12: TForm12
   Left = 0
   Top = 0
   AutoSize = True
-  Caption = #1047#1084#1110#1085#1072' '#1088#1086#1083#1110
+  Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1110#1103
   ClientHeight = 42
   ClientWidth = 405
   Color = clBtnFace
@@ -31,6 +31,7 @@ object Form12: TForm12
     EditLabel.ShowHint = True
     TabOrder = 0
     Text = ''
+    OnExit = LabeledEdit1Exit
   end
   object LabeledEdit2: TLabeledEdit
     Left = 144
@@ -45,6 +46,7 @@ object Form12: TForm12
     EditLabel.ShowHint = True
     TabOrder = 1
     Text = ''
+    OnExit = LabeledEdit2Exit
   end
   object Button1: TButton
     Left = 280

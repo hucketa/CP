@@ -33,6 +33,8 @@ __published:	// IDE-managed Components
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
 private:
+    String previousPIB;
+    String previousPIN;
 	int id;	// User declarations
 public:		// User declarations
 	__fastcall TForm10(TComponent* Owner);

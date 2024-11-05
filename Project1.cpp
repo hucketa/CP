@@ -21,6 +21,8 @@ USEFORM("Auth.cpp", Form12);
 USEFORM("Help.cpp", Help_m);
 USEFORM("Results.cpp", Form11);
 USEFORM("Main_Window.cpp", Form3);
+USEFORM("Unit15.cpp", Form15);
+USEFORM("Unit16.cpp", Form16);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -28,6 +30,9 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 	{
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
+		Application->CreateForm(__classid(TForm12), &Form12);
+		Application->CreateForm(__classid(TForm16), &Form16);
+		Application->CreateForm(__classid(TForm15), &Form15);
 		Application->CreateForm(__classid(TForm13), &Form13);
 		Application->CreateForm(__classid(TForm3), &Form3);
 		Application->CreateForm(__classid(TForm11), &Form11);
@@ -44,7 +49,6 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TForm8), &Form8);
 		Application->CreateForm(__classid(TForm9), &Form9);
 		Application->CreateForm(__classid(TForm10), &Form10);
-		Application->CreateForm(__classid(TForm12), &Form12);
 		Application->Run();
 	}
 	catch (Exception &exception)

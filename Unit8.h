@@ -32,6 +32,7 @@ private:
 	bool IsUniqueValue(String field, String value);
 	bool IsValidUkrainianInput(String input);
 	int id;
+    String originalEmail;
 public:
 	__fastcall TForm8(TComponent* Owner);
 	void set_id(int k);

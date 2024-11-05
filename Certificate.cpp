@@ -40,6 +40,8 @@ void TCertificates::DBColumnSizes(){
 	DBGrid2->Columns->Items[4]->Title->Caption = "Дата закінчення";
 	DBGrid2->Columns->Items[5]->Width = 150;
 	DBGrid2->Columns->Items[5]->Title->Caption = "Статус";
+	DBGrid2->Columns->Items[6]->Width = 150;
+	DBGrid2->Columns->Items[6]->Title->Caption = "ПІб, того хто видав";
 }
 
 void __fastcall TCertificates::FormShow(TObject *Sender)
@@ -135,10 +137,13 @@ void __fastcall TCertificates::CheckFiltersFilled(TObject *Sender)
 
 void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 {
-    String query = "SELECT certificate.Cerf_num, student.PIB, certificate.PIN, certificate.Creation_date, certificate.Effect_time, "
-                   "CASE WHEN certificate.Status = 1 THEN 'Дійсний' ELSE 'Не дійсний' END AS Status "
-				   "FROM certificate "
-                   "JOIN student ON certificate.Student_id = student.Student_id ";
+    String query = "SELECT certificate.Cerf_num, student.PIB AS Student_PIB, certificate.PIN, certificate.Creation_date, "
+                   "certificate.Effect_time, "
+                   "CASE WHEN certificate.Status = 1 THEN 'Дійсний' ELSE 'Не дійсний' END AS Status, "
+                   "users.PIB AS Issuer_PIB "
+                   "FROM certificate "
+                   "JOIN student ON certificate.Student_id = student.Student_id "
+                   "LEFT JOIN users ON certificate.Login = users.Login ";
 
 	String conditions = "";
 
@@ -190,10 +195,11 @@ void __fastcall TCertificates::ExecuteClick(TObject *Sender)
 		StatusBar1->Panels->Items[0]->Text = "Кількість сертифікатів: " + IntToStr(recordCount);
 	}
 	catch (const Exception &e)
-    {
+	{
 		ShowMessage("Помилка при фільтрації: " + e.Message);
 	}
 }
+
 
 
 
@@ -209,10 +215,13 @@ void __fastcall TCertificates::ClearClick(TObject *Sender)
 	Execute->Enabled = false;
 	Clear->Enabled = false;
 
-	String query = "SELECT certificate.Cerf_num, student.PIB, certificate.PIN, certificate.Creation_date, certificate.Effect_time, "
-				   "CASE WHEN certificate.Status = 1 THEN 'Дійсний' ELSE 'Не дійсний' END AS Status "
+	String query = "SELECT certificate.Cerf_num, student.PIB AS Student_PIB, certificate.PIN, certificate.Creation_date, "
+				   "certificate.Effect_time, "
+				   "CASE WHEN certificate.Status = 1 THEN 'Дійсний' ELSE 'Не дійсний' END AS Status, "
+                   "users.PIB AS Issuer_PIB "
 				   "FROM certificate "
 				   "JOIN student ON certificate.Student_id = student.Student_id "
+                   "LEFT JOIN users ON certificate.Login = users.Login "
 				   "ORDER BY certificate.Creation_date DESC";
 
 	try
@@ -229,6 +238,7 @@ void __fastcall TCertificates::ClearClick(TObject *Sender)
 		ShowMessage("Помилка при очищенні фільтрів: " + e.Message);
 	}
 }
+
 
 //---------------------------------------------------------------------------
 
@@ -288,17 +298,21 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 			String cerf_num = DataModule1->ADOQuery1->FieldByName("Cerf_num")->AsString;
 			String pib = DataModule1->ADOQuery1->FieldByName("PIB")->AsString;
 			String pin = DataModule1->ADOQuery1->FieldByName("PIN")->AsString;
-			String creation_date = DataModule1->ADOQuery1->FieldByName("Creation_date")->AsString;
+			TDateTime creation_date = DataModule1->ADOQuery1->FieldByName("Creation_date")->AsDateTime;
+			int creation_year = YearOf(creation_date); // Отримання року створення сертифіката
 			String effect_time = DataModule1->ADOQuery1->FieldByName("Effect_time")->AsString;
 			int student_id = DataModule1->ADOQuery1->FieldByName("Student_id")->AsInteger;
 
+			// Запит для вибору результатів на основі року Creation_date і ПІБ студента
 			String resultQuery = "SELECT result.Reached_score AS Reached_score, result.Subj_id AS SubjectID "
 								 "FROM result "
-								 "WHERE result.Student_id = :StudentID";
+								 "WHERE result.Student_id = :StudentID AND YEAR(result.Attemp_date) = :CreationYear";
 			DataModule1->ADOQuery2->Close();
 			DataModule1->ADOQuery2->SQL->Clear();
 			DataModule1->ADOQuery2->SQL->Add(resultQuery);
 			DataModule1->ADOQuery2->Parameters->ParamByName("StudentID")->Value = student_id;
+			DataModule1->ADOQuery2->Parameters->ParamByName("CreationYear")->Value = creation_year; // Фільтрація за роком
+
 			DataModule1->ADOQuery2->Open();
 
 			TStringList *results = new TStringList();
@@ -341,6 +355,8 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 				}
 				DataModule1->ADOQuery2->Next();
 			}
+
+			// Збереження результатів у HTML-файл
 			SaveDialog1->Filter = "HTML files (*.html)|*.html";
 			SaveDialog1->DefaultExt = "html";
 			String currentDateTime = FormatDateTime("yyyy_mm_dd_hh_nn_ss", Now());
@@ -376,7 +392,7 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 					htmlFile->Add("        <div class='certificate-header'>");
 					htmlFile->Add("            <h1>Сертифікат НМТ</h1>");
 					htmlFile->Add("            <p>Національний Мультипредметний Тест</п>");
-					htmlFile->Add("            <p>Дата створення: <span class='highlight'>" + creation_date + "</span></п>");
+					htmlFile->Add("            <p>Дата створення: <span class='highlight'>" + creation_date.FormatString("yyyy-mm-dd") + "</span></п>");
 					htmlFile->Add("        </div>");
 					htmlFile->Add("        <div class='certificate-body'>");
 					htmlFile->Add("            <p>Номер сертифіката: <span class='highlight'>" + cerf_num + "</span></п>");
@@ -415,6 +431,12 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 		ShowMessage("Помилка при створенні HTML: " + e.Message);
 	}
 }
+
+
+
+//---------------------------------------------------------------------------
+
+
 
 //---------------------------------------------------------------------------
 

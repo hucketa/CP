@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef AuthH
-#define AuthH
+#ifndef Unit16H
+#define Unit16H
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
@@ -10,29 +10,32 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Mask.hpp>
 #include "Data.h"
-#include "Main_Window.h"
 //---------------------------------------------------------------------------
-class TForm12 : public TForm
+class TForm16 : public TForm
 {
 __published:	// IDE-managed Components
 	TLabeledEdit *LabeledEdit1;
 	TLabeledEdit *LabeledEdit2;
+	TLabeledEdit *LabeledEdit3;
 	TButton *Button1;
-	void __fastcall Button1Click(TObject *Sender);
-	void __fastcall FormShow(TObject *Sender);
+	TLabel *Label1;
+	TComboBox *ComboBox1;
+	TRadioGroup *RadioGroup1;
+	void __fastcall LabeledEdit3Exit(TObject *Sender);
 	void __fastcall LabeledEdit1Exit(TObject *Sender);
 	void __fastcall LabeledEdit2Exit(TObject *Sender);
+	void __fastcall FormShow(TObject *Sender);
+	void __fastcall Button1Click(TObject *Sender);
 private:
-	String role_s;
-	String pib_s;
-	String login_s;	// User declarations
+	String originalLogin;
+	bool isEditMode;
+		// User declarations
 public:		// User declarations
-	__fastcall TForm12(TComponent* Owner);
-	String get_role();
-	String get_pib();
-    String get_login();
+	__fastcall TForm16(TComponent* Owner);
+	void __fastcall set_login(String login);
+
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm12 *Form12;
+extern PACKAGE TForm16 *Form16;
 //---------------------------------------------------------------------------
 #endif

@@ -236,7 +236,7 @@ object Form3: TForm3
       Enabled = False
     end
     object N4: TMenuItem
-      Caption = #1053#1072#1074#1095#1072#1083#1100#1085#1110' '#1076#1080#1089#1094#1080#1087#1083#1110#1085#1080
+      Caption = #1055#1088#1077#1076#1084#1077#1090#1080
       OnClick = N4Click
     end
     object N3: TMenuItem
@@ -246,6 +246,10 @@ object Form3: TForm3
     object N9: TMenuItem
       Caption = #1053#1072#1074#1095#1072#1083#1100#1085#1110' '#1079#1072#1082#1083#1072#1076#1080
       OnClick = N9Click
+    end
+    object N15: TMenuItem
+      Caption = #1050#1086#1088#1080#1089#1090#1091#1074#1072#1095#1110
+      OnClick = N15Click
     end
     object N7: TMenuItem
       Caption = '|'
@@ -270,20 +274,13 @@ object Form3: TForm3
     object N10: TMenuItem
       Caption = '|'
     end
-    object N11: TMenuItem
-      Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1110#1103
-      object N12: TMenuItem
-        Caption = #1059#1074#1110#1081#1090#1080
-        OnClick = N12Click
-      end
-      object N13: TMenuItem
-        Caption = #1042#1080#1081#1090#1080
-        OnClick = N13Click
-      end
-    end
     object N14: TMenuItem
       Caption = #1042#1080#1093#1110#1076
       OnClick = N14Click
+    end
+    object N11: TMenuItem
+      Caption = #1042#1080#1081#1090#1080' '#1079' '#1086#1073#1083#1110#1082#1086#1074#1086#1075#1086' '#1079#1072#1087#1080#1089#1091
+      OnClick = N11Click
     end
   end
   object Timer1: TTimer

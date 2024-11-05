@@ -37,9 +37,11 @@ __published:	// IDE-managed Components
 	void __fastcall Edit3Exit(TObject *Sender);
 private:
 	int id;	// User declarations
+    bool IsValidUkrainianText(const String &text);
 public:
 	void __fastcall set_id(int k);		// User declarations
 	__fastcall TForm2(TComponent* Owner);
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm2 *Form2;

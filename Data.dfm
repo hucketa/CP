@@ -152,16 +152,45 @@ object DataModule1: TDataModule1
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      
-        'SELECT certificate.Cerf_num, student.PIB, certificate.PIN, certi' +
-        'ficate.Creation_date, certificate.Effect_time,'
+      'SELECT certificate.Cerf_num, '
+      '       student.PIB AS Student_PIB, '
+      '       certificate.PIN, '
+      '       certificate.Creation_date, '
+      '       certificate.Effect_time, '
       '       CASE'
       '           WHEN certificate.Status = 1 THEN '#39#1044#1110#1081#1089#1085#1080#1081#39
       '           ELSE '#39#1053#1077' '#1076#1110#1081#1089#1085#1080#1081#39
-      '       END AS Status'
+      '       END AS Status,'
+      '       users.PIB AS Issuer_PIB'
       'FROM certificate'
-      'JOIN student ON certificate.Student_id = student.Student_id;')
+      'JOIN student ON certificate.Student_id = student.Student_id'
+      'LEFT JOIN users ON certificate.Login = users.Login;')
     Left = 232
     Top = 136
+  end
+  object ADOQuery5: TADOQuery
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT '
+      '    Login,'
+      '    Password,'
+      '    Role,'
+      '    PIB,'
+      '    CASE '
+      '        WHEN Status = 1 THEN '#39#1072#1082#1090#1080#1074#1085#1080#1081#39
+      '        WHEN  Status = 0 THEN '#39#1085#1077' '#1072#1082#1090#1080#1074#1085#1080#1081#39
+      '        ELSE '#39#1085#1077#1074#1110#1076#1086#1084#1080#1081' '#1089#1090#1072#1090#1091#1089#39
+      '    END AS `'#1057#1090#1072#1090#1091#1089'`'
+      'FROM users;')
+    Left = 416
+    Top = 224
+  end
+  object DataSource7: TDataSource
+    DataSet = ADOQuery5
+    Left = 528
+    Top = 200
   end
 end

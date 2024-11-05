@@ -14,15 +14,7 @@ TForm13 *Form13;
 __fastcall TForm13::TForm13(TComponent* Owner)
 	: TForm(Owner)
 {
-	if (LoadTemplateFromIni()) {
-		if (Form3 == NULL) {
-			Application->CreateForm(__classid(TForm3), &Form3);
-			this->Hide();
-		}
-	} else {
-		this->Show();
-	}
-	fromCertificate = false;
+   bool k = LoadTemplateFromIni();
 }
 
 bool __fastcall TForm13::LoadTemplateFromIni()

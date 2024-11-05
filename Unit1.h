@@ -46,6 +46,12 @@ __published:	// IDE-managed Components
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall Edit1Exit(TObject *Sender);
 private:
+    String previousPassportNum;
+    String previousPhoneNum;
+    String previousPN;
+    String previousEmail;
+	String previousPIB;
+    String previousEduCerfNum;
 	int id;
 	void ClearFields();
 	bool IsAllDigits(const String& str);	// User declarations

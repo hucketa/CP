@@ -6,18 +6,25 @@
 #include <DateUtils.hpp>
 #include <System.RegularExpressions.hpp>
 //---------------------------------------------------------------------------
+
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
+
 //---------------------------------------------------------------------------
+
 __fastcall TForm1::TForm1(TComponent* Owner)
-	: TForm(Owner)
+	: TForm(Owner), previousPassportNum(""), previousPhoneNum(""), previousPN(""), previousEmail(""), previousPIB("")
 {
 }
+
 //---------------------------------------------------------------------------
+
 void TForm1::set_id(int k) {
     id = k;
 }
+
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::LoadStudentData(int student_id)
 {
@@ -41,6 +48,13 @@ void __fastcall TForm1::LoadStudentData(int student_id)
             Edit6->Text = query->FieldByName("EduCerf_num")->AsString;
             Edit4->Text = query->FieldByName("PN")->AsString;
             Edit7->Text = query->FieldByName("Additional")->AsString;
+
+            // Сохранение предыдущих значений
+            previousPassportNum = Edit2->Text;
+            previousPhoneNum = Edit3->Text;
+            previousPN = Edit4->Text;
+            previousEmail = Edit5->Text;
+            previousPIB = Edit1->Text;
         } else {
             ShowMessage("Студента з вказаним ID не знайдено.");
         }
@@ -50,6 +64,8 @@ void __fastcall TForm1::LoadStudentData(int student_id)
         delete query;
     }
 }
+
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::FormShow(TObject *Sender)
 {
@@ -63,6 +79,8 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	}
 }
 
+//---------------------------------------------------------------------------
+
 void __fastcall TForm1::Edit2Exit(TObject *Sender)
 {
 	if (Edit2->Text.Length() < 8 || Edit2->Text.Length() > 20) {
@@ -70,19 +88,26 @@ void __fastcall TForm1::Edit2Exit(TObject *Sender)
 		Edit2->SetFocus();
 		return;
 	}
-	TADOQuery *checkQuery = new TADOQuery(this);
-	checkQuery->Connection = DataModule1->ADOConnection1;
-	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Passport_num = :Passport_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
-	checkQuery->Parameters->ParamByName("Passport_num")->Value = Edit2->Text;
-	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
-	checkQuery->Open();
-	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
-	{
-		ShowMessage("Цей номер паспорта вже існує.");
+
+	// Проверка уникальности, если значение изменилось
+	if (Edit2->Text != previousPassportNum) {
+		TADOQuery *checkQuery = new TADOQuery(this);
+		checkQuery->Connection = DataModule1->ADOConnection1;
+		checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Passport_num = :Passport_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+		checkQuery->Parameters->ParamByName("Passport_num")->Value = Edit2->Text;
+		checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+		checkQuery->Open();
+		if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+		{
+			ShowMessage("Цей номер паспорта вже існує.");
+		}
+		checkQuery->Close();
+		delete checkQuery;
+		previousPassportNum = Edit2->Text; // Обновление предыдущего значения
 	}
-	checkQuery->Close();
-	delete checkQuery;
 }
+
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Edit3Exit(TObject *Sender)
 {
@@ -91,41 +116,54 @@ void __fastcall TForm1::Edit3Exit(TObject *Sender)
 		Edit3->SetFocus();
 		return;
 	}
-	TADOQuery *checkQuery = new TADOQuery(this);
-	checkQuery->Connection = DataModule1->ADOConnection1;
-	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Phone_num = :Phone_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
-	checkQuery->Parameters->ParamByName("Phone_num")->Value = Edit3->Text;
-	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
-	checkQuery->Open();
-	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
-	{
-		ShowMessage("Цей номер телефону вже існує.");
+
+	// Проверка уникальности, если значение изменилось
+	if (Edit3->Text != previousPhoneNum) {
+		TADOQuery *checkQuery = new TADOQuery(this);
+		checkQuery->Connection = DataModule1->ADOConnection1;
+		checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Phone_num = :Phone_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+		checkQuery->Parameters->ParamByName("Phone_num")->Value = Edit3->Text;
+		checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+		checkQuery->Open();
+		if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+		{
+			ShowMessage("Цей номер телефону вже існує.");
+		}
+		checkQuery->Close();
+		delete checkQuery;
+		previousPhoneNum = Edit3->Text; // Обновление предыдущего значения
 	}
-	checkQuery->Close();
-	delete checkQuery;
 }
+
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Edit4Exit(TObject *Sender)
 {
 	if (Edit4->Text.Length() != 10) {
 		ShowMessage("ІПН повинен містити 10 цифр.");
-		return;
 		Edit4->SetFocus();
+		return;
 	}
-	TADOQuery *checkQuery = new TADOQuery(this);
-	checkQuery->Connection = DataModule1->ADOConnection1;
-	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE PN = :PN AND (Student_id <> :Student_id OR :Student_id IS NULL)";
-	checkQuery->Parameters->ParamByName("PN")->Value = Edit4->Text;
-	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
-	checkQuery->Open();
-	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
-	{
-		ShowMessage("Цей ІПН вже існує.");
+
+	// Проверка уникальности, если значение изменилось
+	if (Edit4->Text != previousPN) {
+		TADOQuery *checkQuery = new TADOQuery(this);
+		checkQuery->Connection = DataModule1->ADOConnection1;
+		checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE PN = :PN AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+		checkQuery->Parameters->ParamByName("PN")->Value = Edit4->Text;
+		checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+		checkQuery->Open();
+		if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+		{
+			ShowMessage("Цей ІПН вже існує.");
+		}
+		checkQuery->Close();
+		delete checkQuery;
+		previousPN = Edit4->Text; // Обновление предыдущего значения
 	}
-	checkQuery->Close();
-	delete checkQuery;
 }
 
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Edit5Exit(TObject *Sender)
 {
@@ -137,19 +175,26 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender)
 		Edit5->SetFocus();
 		return;
 	}
-	TADOQuery *checkQuery = new TADOQuery(this);
-	checkQuery->Connection = DataModule1->ADOConnection1;
-	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Email = :Email AND (Student_id <> :Student_id OR :Student_id IS NULL)";
-	checkQuery->Parameters->ParamByName("Email")->Value = Edit5->Text;
-	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
-	checkQuery->Open();
-	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
-	{
-		ShowMessage("Цей e-mail вже існує.");
+
+	// Проверка уникальности, если значение изменилось
+	if (email != previousEmail) {
+		TADOQuery *checkQuery = new TADOQuery(this);
+		checkQuery->Connection = DataModule1->ADOConnection1;
+		checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE Email = :Email AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+		checkQuery->Parameters->ParamByName("Email")->Value = email;
+		checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+		checkQuery->Open();
+		if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+		{
+			ShowMessage("Цей e-mail вже існує.");
+		}
+		checkQuery->Close();
+		delete checkQuery;
+		previousEmail = email; // Обновление предыдущего значения
 	}
-	checkQuery->Close();
-	delete checkQuery;
 }
+
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Edit6Exit(TObject *Sender)
 {
@@ -157,21 +202,27 @@ void __fastcall TForm1::Edit6Exit(TObject *Sender)
 		ShowMessage("Поле сертифікату освіти не може бути пустим.");
         return;
 	}
-	TADOQuery *checkQuery = new TADOQuery(this);
-	checkQuery->Connection = DataModule1->ADOConnection1;
-	checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE EduCerf_num = :EduCerf_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
-	checkQuery->Parameters->ParamByName("EduCerf_num")->Value = Edit6->Text;
-	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
-	checkQuery->Open();
-	if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
-	{
-		ShowMessage("Цей номер сертифіката про освіту вже існує.");
-		Edit6->SetFocus();
+
+	// Проверка уникальности, если значение изменилось
+	if (Edit6->Text != previousEduCerfNum) {
+		TADOQuery *checkQuery = new TADOQuery(this);
+		checkQuery->Connection = DataModule1->ADOConnection1;
+		checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE EduCerf_num = :EduCerf_num AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+		checkQuery->Parameters->ParamByName("EduCerf_num")->Value = Edit6->Text;
+		checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+		checkQuery->Open();
+		if (checkQuery->FieldByName("Cnt")->AsInteger > 0)
+		{
+			ShowMessage("Цей номер сертифіката про освіту вже існує.");
+			Edit6->SetFocus();
+		}
+		checkQuery->Close();
+		delete checkQuery;
+		previousEduCerfNum = Edit6->Text; // Обновление предыдущего значения
 	}
-	checkQuery->Close();
-	delete checkQuery;
 }
 
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender)
 {
@@ -206,7 +257,7 @@ void __fastcall TForm1::DatePicker1CloseUp(TObject *Sender)
 	}
 }
 
-
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::ComboBox1CloseUp(TObject *Sender)
 {
@@ -215,12 +266,16 @@ void __fastcall TForm1::ComboBox1CloseUp(TObject *Sender)
     }
 }
 
+//---------------------------------------------------------------------------
+
 void __fastcall TForm1::RadioGroup1Exit(TObject *Sender)
 {
 	if (RadioGroup1->ItemIndex == -1) {
 		ShowMessage("Будь ласка, оберіть стать.");
 	}
 }
+
+//---------------------------------------------------------------------------
 
 bool TForm1::IsAllDigits(const String& str)
 {
@@ -231,6 +286,8 @@ bool TForm1::IsAllDigits(const String& str)
 	}
     return true;
 }
+
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
@@ -251,6 +308,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		ShowMessage("Телефонний номер повинен містити тільки цифри.");
         return;
 	}
+
 	TADOQuery *query = new TADOQuery(this);
 	query->Connection = DataModule1->ADOConnection1;
 	try {
@@ -288,9 +346,9 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	Close();
 }
 
+//---------------------------------------------------------------------------
 
-
- void TForm1::ClearFields()
+void TForm1::ClearFields()
 {
 	Edit1->Text = "";
 	Edit2->Text = "";
@@ -304,6 +362,8 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
     RadioGroup1->ItemIndex = -1;
 }
 
+//---------------------------------------------------------------------------
+
 void __fastcall TForm1::Edit1Exit(TObject *Sender)
 {
 	String pib = Edit1->Text;
@@ -312,23 +372,29 @@ void __fastcall TForm1::Edit1Exit(TObject *Sender)
 		ShowMessage("ПІБ повинен містити лише українські літери.");
         return;
 	}
-    TADOQuery *checkQuery = new TADOQuery(this);
-	checkQuery->Connection = DataModule1->ADOConnection1;
-    checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE PIB = :PIB AND (Student_id <> :Student_id OR :Student_id IS NULL)";
-	checkQuery->Parameters->ParamByName("PIB")->Value = Edit1->Text;
-	checkQuery->Parameters->ParamByName("Student_id")->Value = id;
-    try {
-        checkQuery->Open();
-        if (checkQuery->FieldByName("Cnt")->AsInteger > 0) {
-			ShowMessage("Студент з таким ПІБ вже існує.");
-            Edit1->SetFocus();
-        }
-    }
-    __finally {
-        checkQuery->Close();
-        delete checkQuery;
-    }
+
+    // Проверка уникальности, если значение изменилось
+	if (pib != previousPIB) {
+		TADOQuery *checkQuery = new TADOQuery(this);
+		checkQuery->Connection = DataModule1->ADOConnection1;
+		checkQuery->SQL->Text = "SELECT COUNT(*) AS Cnt FROM student WHERE PIB = :PIB AND (Student_id <> :Student_id OR :Student_id IS NULL)";
+		checkQuery->Parameters->ParamByName("PIB")->Value = pib;
+		checkQuery->Parameters->ParamByName("Student_id")->Value = id;
+		try {
+			checkQuery->Open();
+			if (checkQuery->FieldByName("Cnt")->AsInteger > 0) {
+				ShowMessage("Студент з таким ПІБ вже існує.");
+				Edit1->SetFocus();
+			}
+		}
+		__finally {
+			checkQuery->Close();
+			delete checkQuery;
+		}
+		previousPIB = pib; // Обновление предыдущего значения
+	}
 }
 
 //---------------------------------------------------------------------------
+
 

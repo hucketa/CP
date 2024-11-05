@@ -92,6 +92,7 @@ object Form10: TForm10
       EditLabel.Width = 45
       EditLabel.Height = 15
       EditLabel.Caption = #1055#1030#1053'-'#1082#1086#1076
+      MaxLength = 15
       NumbersOnly = True
       TabOrder = 4
       Text = ''
