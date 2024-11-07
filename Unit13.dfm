@@ -11,6 +11,7 @@ object Form13: TForm13
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poDesktopCenter
   TextHeight = 15
   object LabeledEdit1: TLabeledEdit
     Left = 0

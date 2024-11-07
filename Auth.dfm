@@ -11,6 +11,7 @@ object Form12: TForm12
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poDesktopCenter
   OnShow = FormShow
   TextHeight = 15
   object LabeledEdit1: TLabeledEdit
@@ -29,6 +30,7 @@ object Form12: TForm12
     EditLabel.Caption = #1051#1086#1075#1110#1085
     EditLabel.ParentShowHint = False
     EditLabel.ShowHint = True
+    MaxLength = 50
     TabOrder = 0
     Text = ''
     OnExit = LabeledEdit1Exit
@@ -44,6 +46,8 @@ object Form12: TForm12
     EditLabel.Caption = #1055#1072#1088#1086#1083#1100
     EditLabel.ParentShowHint = False
     EditLabel.ShowHint = True
+    MaxLength = 50
+    PasswordChar = '*'
     TabOrder = 1
     Text = ''
     OnExit = LabeledEdit2Exit

@@ -72,12 +72,10 @@ void __fastcall TForm16::set_login(String login)
 void __fastcall TForm16::LabeledEdit3Exit(TObject *Sender)
 {
 	String pib = LabeledEdit3->Text.Trim();
-	UnicodeString pattern = L"^[А-ЯІЇЄҐа-яіїєґ'\\s]+$";
-
-	if (!TRegEx::IsMatch(pib, pattern))
-	{
-		ShowMessage("Поле 'ПІБ' повинно містити тільки українські літери, пробіли та апострофи.");
-		LabeledEdit3->SetFocus();
+	if (TRegEx::IsMatch(pib, L"[A-Za-z0-9ЁЫЭёыэ!\"#$%&()*,./:;<=>?@[\\]^_{|}~]")) {
+	ShowMessage("Будь ласка, вводьте ПІБ українською мовою!");
+	return;
+	LabeledEdit3->SetFocus();
 	}
 }
 
@@ -184,6 +182,7 @@ void __fastcall TForm16::Button1Click(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
+
 
 
 

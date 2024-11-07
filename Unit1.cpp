@@ -203,7 +203,6 @@ void __fastcall TForm1::Edit6Exit(TObject *Sender)
         return;
 	}
 
-	// Проверка уникальности, если значение изменилось
 	if (Edit6->Text != previousEduCerfNum) {
 		TADOQuery *checkQuery = new TADOQuery(this);
 		checkQuery->Connection = DataModule1->ADOConnection1;
@@ -366,14 +365,12 @@ void TForm1::ClearFields()
 
 void __fastcall TForm1::Edit1Exit(TObject *Sender)
 {
-	String pib = Edit1->Text;
-	UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
-    if (!TRegEx::IsMatch(pib, pattern)) {
-		ShowMessage("ПІБ повинен містити лише українські літери.");
-        return;
-	}
-
-    // Проверка уникальности, если значение изменилось
+		String pib = Edit1->Text.Trim();
+		if (TRegEx::IsMatch(pib, L"[A-Za-z0-9ЁЫЭёыэ!\"#$%&()*,./:;<=>?@[\\]^_{|}~]")) {
+		ShowMessage("Будь ласка, вводьте ПІБ українською мовою!");
+		return;
+		Edit1->SetFocus();
+		}
 	if (pib != previousPIB) {
 		TADOQuery *checkQuery = new TADOQuery(this);
 		checkQuery->Connection = DataModule1->ADOConnection1;

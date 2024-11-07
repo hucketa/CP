@@ -104,12 +104,11 @@ void __fastcall TForm11::DatePicker1CloseUp(TObject *Sender)
 
 void __fastcall TForm11::LabeledEdit1Exit(TObject *Sender)
 {
-	String pib = LabeledEdit1->Text;
-	UnicodeString pattern = "^[А-ЯІЇЄҐа-яіїєґ' ]+$";
-	if (!TRegEx::IsMatch(pib, pattern)) {
-		ShowMessage("ПІБ повинен містити лише українські літери.");
-        LabeledEdit1->SetFocus();
+	String pib = LabeledEdit1->Text.Trim();
+		if (TRegEx::IsMatch(pib, L"[A-Za-z0-9ЁЫЭёыэ!\"#$%&()*,./:;<=>?@[\\]^_{|}~]")) {
+		ShowMessage("Будь ласка, вводьте ПІБ українською мовою!");
 		return;
+		LabeledEdit1->SetFocus();
 	}
 }
 

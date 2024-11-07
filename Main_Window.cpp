@@ -190,7 +190,8 @@ void __fastcall TForm3::N11Click(TObject *Sender)
 void __fastcall TForm3::N2Click(TObject *Sender)
 {
 	Form14->ShowModal();
-    DataModule1->MainQuery->Open();
+    DataModule1->MainQuery->Close();
+	DataModule1->MainQuery->Open();
 	DBColumnMainSizes();
 }
 
@@ -234,12 +235,12 @@ void __fastcall TForm3::DatePicker1CloseUp(TObject *Sender)
 
 void __fastcall TForm3::Edit1Exit(TObject *Sender)
 {
-    String pib = Edit1->Text;
-    UnicodeString pattern = "^[А-Яа-яЁёІіЇїЄєҐґ'\\s-]+$";
-	if (!TRegEx::IsMatch(pib, pattern)) {
-		ShowMessage("Введіть дійсний ПІБ українською мовою повністю.");
-        Edit1->SetFocus();
-    }
+	String pib = Edit1->Text.Trim();
+		if (TRegEx::IsMatch(pib, L"[A-Za-z0-9ЁЫЭёыэ!\"#$%&()*,./:;<=>?@[\\]^_{|}~]")) {
+		ShowMessage("Будь ласка, вводьте ПІБ українською мовою!");
+		return;
+		Edit1->SetFocus();
+		}
 }
 
 //---------------------------------------------------------------------------
