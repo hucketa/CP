@@ -54,7 +54,6 @@ __published:	// IDE-managed Components
 	void __fastcall DatePicker2CloseUp(TObject *Sender);
 private:
 	void __fastcall DBColumnSizes();
-	//bool SortAscending;
 	void __fastcall CheckFiltersFilled(TObject *Sender);	// User declarations
 public:		// User declarations
 	__fastcall TForm11(TComponent* Owner);

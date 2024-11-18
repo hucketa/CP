@@ -53,7 +53,7 @@ void __fastcall TForm7::DBGrid1CellClick(TColumn *Column)
 		String subjectName = DataModule1->DataSource2->DataSet->FieldByName("Name")->AsString;
         DataModule1->ADOQuery1->Close();
         DataModule1->ADOQuery1->SQL->Text = "SELECT Image_name FROM subject WHERE Name = :name";
-        DataModule1->ADOQuery1->Parameters->ParamByName("name")->Value = subjectName;  // Використовуємо назву предмета
+		DataModule1->ADOQuery1->Parameters->ParamByName("name")->Value = subjectName;
 		DataModule1->ADOQuery1->Open();
         if (!DataModule1->ADOQuery1->FieldByName("Image_name")->IsNull)
         {
@@ -117,8 +117,6 @@ void __fastcall TForm7::N3Click(TObject *Sender)
 			ShowMessage("Виберіть запис для видалення.");
 			return;
 		}
-
-		// Перевіряємо на наявність залежностей в інших таблицях
 		DataModule1->ADOQuery1->Close();
 		DataModule1->ADOQuery1->SQL->Text = "SELECT COUNT(*) AS Count FROM result WHERE Subj_id = :id";
 		DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
@@ -131,26 +129,19 @@ void __fastcall TForm7::N3Click(TObject *Sender)
 		DataModule1->ADOQuery1->Open();
 		int conditionsDependentCount = DataModule1->ADOQuery1->FieldByName("Count")->AsInteger;
 		DataModule1->ADOQuery1->Close();
-
-		// Якщо є залежні записи, показуємо повідомлення
 		if (resultDependentCount > 0 || conditionsDependentCount > 0)
 		{
 			ShowMessage("Цей запис не може бути видалений, оскільки він використовується в інших таблицях.");
 			return;
 		}
-
-		// Підтвердження видалення
 		if (MessageDlg("Ви впевнені, що хочете видалити цей запис?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo, 0) == mrYes)
 		{
 			try
 			{
-				// Видалення запису
 				DataModule1->ADOQuery1->Close();
 				DataModule1->ADOQuery1->SQL->Text = "DELETE FROM subject WHERE Subject_id = :id";
 				DataModule1->ADOQuery1->Parameters->ParamByName("id")->Value = id;
 				DataModule1->ADOQuery1->ExecSQL();
-
-				// Оновлюємо дані після видалення
 				DataModule1->DataSource2->DataSet->Close();
 				DataModule1->DataSource2->DataSet->Open();
 

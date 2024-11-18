@@ -299,11 +299,9 @@ void __fastcall TCertificates::BitBtn1Click(TObject *Sender)
 			String pib = DataModule1->ADOQuery1->FieldByName("PIB")->AsString;
 			String pin = DataModule1->ADOQuery1->FieldByName("PIN")->AsString;
 			TDateTime creation_date = DataModule1->ADOQuery1->FieldByName("Creation_date")->AsDateTime;
-			int creation_year = YearOf(creation_date); // Отримання року створення сертифіката
+			int creation_year = YearOf(creation_date);
 			String effect_time = DataModule1->ADOQuery1->FieldByName("Effect_time")->AsString;
 			int student_id = DataModule1->ADOQuery1->FieldByName("Student_id")->AsInteger;
-
-			// Запит для вибору результатів на основі року Creation_date і ПІБ студента
 			String resultQuery = "SELECT result.Reached_score AS Reached_score, result.Subj_id AS SubjectID "
 								 "FROM result "
 								 "WHERE result.Student_id = :StudentID AND YEAR(result.Attemp_date) = :CreationYear";

@@ -47,9 +47,7 @@ void __fastcall TForm1::LoadStudentData(int student_id)
             Edit3->Text = query->FieldByName("Phone_num")->AsString;
             Edit6->Text = query->FieldByName("EduCerf_num")->AsString;
             Edit4->Text = query->FieldByName("PN")->AsString;
-            Edit7->Text = query->FieldByName("Additional")->AsString;
-
-            // Сохранение предыдущих значений
+			Edit7->Text = query->FieldByName("Additional")->AsString;
             previousPassportNum = Edit2->Text;
             previousPhoneNum = Edit3->Text;
             previousPN = Edit4->Text;
@@ -88,8 +86,6 @@ void __fastcall TForm1::Edit2Exit(TObject *Sender)
 		Edit2->SetFocus();
 		return;
 	}
-
-	// Проверка уникальности, если значение изменилось
 	if (Edit2->Text != previousPassportNum) {
 		TADOQuery *checkQuery = new TADOQuery(this);
 		checkQuery->Connection = DataModule1->ADOConnection1;
@@ -103,7 +99,7 @@ void __fastcall TForm1::Edit2Exit(TObject *Sender)
 		}
 		checkQuery->Close();
 		delete checkQuery;
-		previousPassportNum = Edit2->Text; // Обновление предыдущего значения
+		previousPassportNum = Edit2->Text;
 	}
 }
 
@@ -116,8 +112,6 @@ void __fastcall TForm1::Edit3Exit(TObject *Sender)
 		Edit3->SetFocus();
 		return;
 	}
-
-	// Проверка уникальности, если значение изменилось
 	if (Edit3->Text != previousPhoneNum) {
 		TADOQuery *checkQuery = new TADOQuery(this);
 		checkQuery->Connection = DataModule1->ADOConnection1;
@@ -131,7 +125,7 @@ void __fastcall TForm1::Edit3Exit(TObject *Sender)
 		}
 		checkQuery->Close();
 		delete checkQuery;
-		previousPhoneNum = Edit3->Text; // Обновление предыдущего значения
+		previousPhoneNum = Edit3->Text;
 	}
 }
 
@@ -144,8 +138,6 @@ void __fastcall TForm1::Edit4Exit(TObject *Sender)
 		Edit4->SetFocus();
 		return;
 	}
-
-	// Проверка уникальности, если значение изменилось
 	if (Edit4->Text != previousPN) {
 		TADOQuery *checkQuery = new TADOQuery(this);
 		checkQuery->Connection = DataModule1->ADOConnection1;
@@ -159,7 +151,7 @@ void __fastcall TForm1::Edit4Exit(TObject *Sender)
 		}
 		checkQuery->Close();
 		delete checkQuery;
-		previousPN = Edit4->Text; // Обновление предыдущего значения
+		previousPN = Edit4->Text;
 	}
 }
 
@@ -175,8 +167,6 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender)
 		Edit5->SetFocus();
 		return;
 	}
-
-	// Проверка уникальности, если значение изменилось
 	if (email != previousEmail) {
 		TADOQuery *checkQuery = new TADOQuery(this);
 		checkQuery->Connection = DataModule1->ADOConnection1;
@@ -190,7 +180,7 @@ void __fastcall TForm1::Edit5Exit(TObject *Sender)
 		}
 		checkQuery->Close();
 		delete checkQuery;
-		previousEmail = email; // Обновление предыдущего значения
+		previousEmail = email;
 	}
 }
 
@@ -217,7 +207,7 @@ void __fastcall TForm1::Edit6Exit(TObject *Sender)
 		}
 		checkQuery->Close();
 		delete checkQuery;
-		previousEduCerfNum = Edit6->Text; // Обновление предыдущего значения
+		previousEduCerfNum = Edit6->Text;
 	}
 }
 
@@ -388,7 +378,7 @@ void __fastcall TForm1::Edit1Exit(TObject *Sender)
 			checkQuery->Close();
 			delete checkQuery;
 		}
-		previousPIB = pib; // Обновление предыдущего значения
+		previousPIB = pib;
 	}
 }
 

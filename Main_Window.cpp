@@ -341,7 +341,9 @@ void TForm3::ManageMenuItems(String role)
         Form6->N3->Enabled = true;
         Certificates->N3->Enabled = true;
         Certificates->N2->Enabled = true;
-        Certificates->N4->Enabled = true;
+		if(role == "головний адміністратор"){
+			Certificates->N4->Enabled = true;
+		}
         Certificates->BitBtn1->Enabled = true;
         Form11->N3->Enabled = true;
         Form11->N2->Enabled = true;

@@ -4,8 +4,8 @@ object Form7: TForm7
   AutoSize = True
   BorderStyle = bsSingle
   Caption = #1056#1086#1073#1086#1090#1072' '#1079' '#1110#1085#1092#1086#1088#1084#1072#1094#1110#1108#1102' '#1087#1088#1086' '#1087#1088#1077#1076#1084#1077#1090#1080
-  ClientHeight = 169
-  ClientWidth = 798
+  ClientHeight = 168
+  ClientWidth = 794
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
